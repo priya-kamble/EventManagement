@@ -8,9 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\**" />
+    <Compile Remove="Controller\**" />
+    <Compile Remove="Data\**" />
     <Content Remove="Controllers\**" />
+    <Content Remove="Controller\**" />
+    <Content Remove="Data\**" />
     <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <EmbeddedResource Remove="Data\**" />
     <None Remove="Controllers\**" />
+    <None Remove="Controller\**" />
+    <None Remove="Data\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Data\" />
+	<Folder Include="Domain\" />
   </ItemGroup>
 
 

@@ -15,10 +15,14 @@ namespace EventAPI.Domain
         public int MaxTicketsPerUser { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool isPaidEvent { get; set; }
-        public bool isOnlineEvent { get; set; }
-        public bool isCancelled { get; set; }
+        public bool IsPaidEvent { get; set; }
+        public bool IsOnlineEvent { get; set; }
+        public bool IsCancelled { get; set; }
         public string EventLinkUrl { get; set; }
+        public int CategoryId { get; set; }
+        public int UserId { get; set; }
+        public int LocationId { get; set; }
+
         public virtual Category Category { get; set; }
         
         //Need to uncomment these FK fields once corresponding classes are ready.
