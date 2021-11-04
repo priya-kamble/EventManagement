@@ -7,26 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
-    <Compile Remove="Controller\**" />
-    <Compile Remove="Data\**" />
-    <Content Remove="Controllers\**" />
-    <Content Remove="Controller\**" />
-    <Content Remove="Data\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <EmbeddedResource Remove="Controller\**" />
-    <EmbeddedResource Remove="Data\**" />
-    <None Remove="Controllers\**" />
-    <None Remove="Controller\**" />
-    <None Remove="Data\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>
-	<Folder Include="Domain\" />
+	<Folder Include="Controllers\" />
   </ItemGroup>
 
 
