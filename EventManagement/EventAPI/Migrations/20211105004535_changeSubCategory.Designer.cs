@@ -4,14 +4,16 @@ using EventAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    partial class EventCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20211105004535_changeSubCategory")]
+    partial class changeSubCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,8 @@ namespace EventAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -84,6 +87,8 @@ namespace EventAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.HasIndex("UserEmailId");
 
@@ -170,7 +175,7 @@ namespace EventAPI.Migrations
                 {
                     b.HasOne("EventAPI.Domain.SubCategory", "SubCategory")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

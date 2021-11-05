@@ -1,0 +1,33 @@
+using EventAPI.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace EventAPI.Data
+{
+    public class EventSeed
+    {
+        public static void Seed(EventContext context)
+        {
+            context.Database.Migrate();
+
+            if (!context.CatalogTypes.Any())
+            {
+                context.CatalogTypes.AddRange(GetCatalogTypes());
+                context.SaveChanges();
+            }
+            if (!context.CatalogBrands.Any())
+            {
+                context.CatalogBrands.AddRange(GetCatalogBrands());
+                context.SaveChanges();
+            }
+            if (!context.Catalog.Any())
+            {
+                context.Catalog.AddRange(GetCatalogItems());
+                context.SaveChanges();
+            }
+        }
+
+    }
+}

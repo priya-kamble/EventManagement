@@ -4,14 +4,16 @@ using EventAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    partial class EventCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20211104233028_nextOne")]
+    partial class nextOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,8 @@ namespace EventAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -85,6 +88,8 @@ namespace EventAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SubCategoryId");
+
                     b.HasIndex("UserEmailId");
 
                     b.ToTable("EventCatalog");
@@ -117,7 +122,7 @@ namespace EventAPI.Migrations
 
             modelBuilder.Entity("EventAPI.Domain.SubCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SubCategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -130,7 +135,7 @@ namespace EventAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SubCategoryId");
 
                     b.HasIndex("CategoryId");
 
@@ -170,7 +175,7 @@ namespace EventAPI.Migrations
                 {
                     b.HasOne("EventAPI.Domain.SubCategory", "SubCategory")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

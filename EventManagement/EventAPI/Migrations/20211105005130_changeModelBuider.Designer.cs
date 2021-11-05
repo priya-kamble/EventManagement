@@ -4,14 +4,16 @@ using EventAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    partial class EventCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20211105005130_changeModelBuider")]
+    partial class changeModelBuider
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
