@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventAPI.Migrations
 {
-    public partial class initial : Migration
+    public partial class initial13 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,17 +24,18 @@ namespace EventAPI.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserEmailId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserId = table.Column<int>(type: "int", maxLength: 100, nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserEmailId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizerId = table.Column<int>(type: "int", nullable: false)
+                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserEmailId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,19 +64,20 @@ namespace EventAPI.Migrations
                 {
                     OrganizerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserEmailId = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Organizations", x => x.OrganizerId);
                     table.ForeignKey(
-                        name: "FK_Organizations_Users_UserEmailId",
-                        column: x => x.UserEmailId,
+                        name: "FK_Organizations_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserEmailId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,7 +98,7 @@ namespace EventAPI.Migrations
                     IsCancelled = table.Column<bool>(type: "bit", nullable: false),
                     EventLinkUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserEmailId = table.Column<string>(type: "nvarchar(100)", nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,11 +110,11 @@ namespace EventAPI.Migrations
                         principalColumn: "SubCategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventCatalog_Users_UserEmailId",
-                        column: x => x.UserEmailId,
+                        name: "FK_EventCatalog_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserEmailId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -121,16 +123,15 @@ namespace EventAPI.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventCatalog_UserEmailId",
+                name: "IX_EventCatalog_UserId",
                 table: "EventCatalog",
-                column: "UserEmailId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Organizations_UserEmailId",
+                name: "IX_Organizations_UserId",
                 table: "Organizations",
-                column: "UserEmailId",
-                unique: true,
-                filter: "[UserEmailId] IS NOT NULL");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_CategoryId",

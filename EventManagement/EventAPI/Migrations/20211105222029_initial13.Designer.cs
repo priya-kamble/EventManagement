@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    [Migration("20211104052032_initial")]
-    partial class initial
+    [Migration("20211105222029_initial13")]
+    partial class initial13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,14 +83,14 @@ namespace EventAPI.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("UserEmailId")
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SubCategoryId");
 
-                    b.HasIndex("UserEmailId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("EventCatalog");
                 });
@@ -108,14 +108,16 @@ namespace EventAPI.Migrations
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserEmailId")
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<string>("OrganizationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("OrganizerId");
 
-                    b.HasIndex("UserEmailId")
-                        .IsUnique()
-                        .HasFilter("[UserEmailId] IS NOT NULL");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Organizations");
                 });
@@ -144,9 +146,11 @@ namespace EventAPI.Migrations
 
             modelBuilder.Entity("EventAPI.Domain.User", b =>
                 {
-                    b.Property<string>("UserEmailId")
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -160,13 +164,13 @@ namespace EventAPI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrganizerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserEmailId");
+                    b.Property<string>("UserEmailId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
@@ -181,7 +185,9 @@ namespace EventAPI.Migrations
 
                     b.HasOne("EventAPI.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserEmailId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SubCategory");
 
@@ -192,7 +198,9 @@ namespace EventAPI.Migrations
                 {
                     b.HasOne("EventAPI.Domain.User", "User")
                         .WithOne("Organization")
-                        .HasForeignKey("EventAPI.Domain.Organization", "UserEmailId");
+                        .HasForeignKey("EventAPI.Domain.Organization", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
