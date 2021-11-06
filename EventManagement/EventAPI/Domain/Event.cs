@@ -20,7 +20,7 @@ namespace EventAPI.Domain
         public bool IsCancelled { get; set; }
         public string EventLinkUrl { get; set; }
         public int SubCategoryId { get; set; }       
-        public string UserEmailId { get; set; }
+        public int UserId { get; set; }
         //ToDo: Location
 
         public virtual SubCategory SubCategory { get; set; }

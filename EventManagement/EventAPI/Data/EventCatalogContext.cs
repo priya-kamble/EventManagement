@@ -25,7 +25,7 @@ namespace EventAPI.Data
                 e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
                 e.Property(p => p.Title).IsRequired().HasMaxLength(200);
                 e.HasOne(p => p.SubCategory).WithMany().HasForeignKey(p => p.SubCategoryId);
-                e.HasOne(p => p.User).WithMany().HasForeignKey(c => c.UserEmailId);
+                e.HasOne(p => p.User).WithMany().HasForeignKey(c => c.UserId);
             });
 
             modelBuilder.Entity<Category>(e =>
@@ -45,13 +45,16 @@ namespace EventAPI.Data
             {
                 e.HasKey(o => o.OrganizerId);
                 e.Property(o => o.OrganizerId).IsRequired().ValueGeneratedOnAdd();
-                e.HasOne(o => o.User).WithOne(u=>u.Organization).HasForeignKey<Organization>(o => o.UserEmailId);
+           
             });
 
             modelBuilder.Entity<User>(e =>
             {
-               e.HasKey(u => u.UserEmailId);
-               e.Property(u => u.UserEmailId).IsRequired().HasMaxLength(100);
+               e.HasKey(u => u.UserId);
+               e.Property(u => u.UserId).IsRequired().HasMaxLength(100);
+               e.HasOne(u => u.Organization).WithOne(u => u.User).HasForeignKey<Organization>(U => U.UserId);
+
+             
             });
             
         }

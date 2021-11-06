@@ -16,13 +16,13 @@ namespace EventAPI
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            
             using (var scope = host.Services.CreateScope())
             {
-                var serviceProviders = scope.ServiceProvider;
-                var context = serviceProviders.GetRequiredService<EventCatalogContext>();
+                var serviceProvider = scope.ServiceProvider;
+                var context = serviceProvider.GetRequiredService<EventCatalogContext>();
                 EventCatalogSeed.Seed(context);
             }
+
             host.Run();
         }
 
