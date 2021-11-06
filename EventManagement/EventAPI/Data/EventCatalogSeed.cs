@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace EventAPI.Data
 {
     public static class EventCatalogSeed
@@ -69,6 +68,7 @@ namespace EventAPI.Data
                 new Category { CategoryName = "Performing & Visual Arts" },
                 new Category { CategoryName = "Religion & Spirituality" },
                 new Category { CategoryName = "Science & Technology" },
+                new Category { CategoryName = "School Activities" },
                 new Category { CategoryName = "Seasonal & Holiday" },
                 new Category { CategoryName = "Sports & Fitness" },
                 new Category { CategoryName = "Travel & Outdoor" }
