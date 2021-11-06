@@ -14,8 +14,8 @@ namespace EventAPI.Domain
         public string LastName { get; set; }
         public string Address { get; set; }
         public string CellPhone { get; set; }
-       
 
+        public string CellPhone2 { get; set; }
         public virtual Organization Organization { get; set; }
     }
 }

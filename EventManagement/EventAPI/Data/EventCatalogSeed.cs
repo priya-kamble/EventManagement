@@ -5,16 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-//namespace EventAPI.Data
-//{
-//    public static class EventCatalogSeed
-//    {
-//        public static void Seed(EventCatalogContext context)
-//        {
-//            context.Database.Migrate();
-//        }
-//    }
-//}
 
 namespace EventAPI.Data
 {
@@ -116,7 +106,7 @@ namespace EventAPI.Data
                 new Organization { UserId = 8 ,OrganizationName=" Festivals Arrangement Comapny"},
                 new Organization { UserId = 9 ,OrganizationName=" Running Supplies"},
                 new Organization { UserId = 10 ,OrganizationName=" Private Art Exhibition Arrangement Company "},
-               new Organization { UserId = 10 ,OrganizationName=" Private Art Exhibition Arrangement Company "}
+                
             };
         }
         private static IEnumerable<User> GetUsers()
