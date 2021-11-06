@@ -16,7 +16,8 @@ namespace EventAPI.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<User> Users { get; set; }       
+        public DbSet<User> Users { get; set; }
+        public DbSet<Format> Formats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,7 +46,6 @@ namespace EventAPI.Data
             {
                 e.HasKey(o => o.OrganizerId);
                 e.Property(o => o.OrganizerId).IsRequired().ValueGeneratedOnAdd();
-           
             });
 
             modelBuilder.Entity<User>(e =>
@@ -53,10 +53,13 @@ namespace EventAPI.Data
                e.HasKey(u => u.UserId);
                e.Property(u => u.UserId).IsRequired().HasMaxLength(100);
                e.HasOne(u => u.Organization).WithOne(u => u.User).HasForeignKey<Organization>(U => U.UserId);
-
-             
             });
-            
+
+            modelBuilder.Entity<Format>(e =>
+            {
+                e.Property(f => f.FormatId).IsRequired().ValueGeneratedOnAdd();
+                e.Property(f => f.FormatName).IsRequired().HasMaxLength(100);
+            });
         }
     }
 }

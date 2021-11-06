@@ -23,7 +23,13 @@ namespace EventAPI.Data
                 context.SubCategories.AddRange(GetSubCategories());
                 context.SaveChanges();
             }
-           
+
+            if (!context.Formats.Any())
+            {
+                context.Formats.AddRange(GetFormats());
+                context.SaveChanges();
+            }
+
             if (!context.Users.Any())
             {
                 context.Users.AddRange(GetUsers());
@@ -94,6 +100,32 @@ namespace EventAPI.Data
                 new SubCategory { SubCategoryName = "Travel & Outdoor", CategoryId = 4 }
             };
         }
+        private static IEnumerable<Format> GetFormats()
+        {
+            return new List<Format>
+            {
+                new Format { FormatName = "Appearance or Signing" },
+                new Format { FormatName = "Attraction" },
+                new Format { FormatName = "Camp, Trip, or Retreat" },
+                new Format { FormatName = "Class, Training, or Workshop" },
+                new Format { FormatName = "Concert or Performance" },
+                new Format { FormatName = "Conference" },
+                new Format { FormatName = "Convention" },
+                new Format { FormatName = "Dinner or Gala" },
+                new Format { FormatName = "Festival or Fair" },
+                new Format { FormatName = "Game or Competition" },
+                new Format { FormatName = "Meeting or Networking Event" },
+                new Format { FormatName = "Other" },
+                new Format { FormatName = "Party or Social Gathering" },
+                new Format { FormatName = "Race or Endurance Event" },
+                new Format { FormatName = "Rally" },
+                new Format { FormatName = "Screening" },
+                new Format { FormatName = "Seminar or Talk" },
+                new Format { FormatName = "Tour" },
+                new Format { FormatName = "Tournament" },
+                new Format { FormatName = "Tradeshow, Consumer Show, or Expo" }
+            };
+        }
         private static IEnumerable<Organization> GetOrganizations()
         {
             return new List<Organization>
@@ -106,7 +138,6 @@ namespace EventAPI.Data
                 new Organization { UserId = 8 ,OrganizationName=" Festivals Arrangement Comapny"},
                 new Organization { UserId = 9 ,OrganizationName=" Running Supplies"},
                 new Organization { UserId = 10 ,OrganizationName=" Private Art Exhibition Arrangement Company "},
-                
             };
         }
         private static IEnumerable<User> GetUsers()
@@ -141,30 +172,30 @@ namespace EventAPI.Data
         {
             return new List<Event>
             {
-                new Event { SubCategoryId = 1, UserId = 21, Title = "Women's Self Defense Seminar"  },
-                new Event { SubCategoryId = 17, UserId = 3, Title = "West Seattle April Art Walk" },
-                new Event { SubCategoryId = 4, UserId = 22, Title = "Seattle Job Fair - Seattle Career Fair" },
-                new Event { SubCategoryId = 1, UserId = 19, Title = "2nd Saturday Work Party in Volunteer Park" },
-                new Event { SubCategoryId = 16, UserId = 18, Title = "The Market Experience" },
-                new Event { SubCategoryId = 12, UserId = 9, Title = "Online Speed Dating (3 age groups) - Seattle" },
-                new Event { SubCategoryId = 1, UserId = 3, Title = "Waterfront Birding for Beginners with Seattle Audubon" },
-                new Event { SubCategoryId = 11, UserId = 11, Title = "2021 Pioneer Square Business Improvement Area Annual Meeting" },
-                new Event { SubCategoryId = 18, UserId = 17, Title = "Ballard Comedy Club Presents Open Mic" },
-                new Event { SubCategoryId = 3, UserId = 3, Title = "Photowalk: Seattle Center with Nikon" },
-                new Event { SubCategoryId = 8, UserId = 15, Title = "ONLINE: Seattle --Saturday Free Guided Meditation. Experience the joy!" },
-                new Event { SubCategoryId = 15, UserId = 12, Title = "Introduction to the Commitment to Educational Equity" },
-                new Event { SubCategoryId = 6, UserId = 4, Title = "Introduction to Projects & Grants" },
-                new Event { SubCategoryId = 14, UserId = 5, Title = "Real Estate Investing for Entrepreneurs - Seattle Online" },
-                new Event { SubCategoryId = 19, UserId = 6, Title = "Cathedral Yoga at Saint Marks" },
-                new Event { SubCategoryId = 20, UserId = 15, Title = "Lighting Demo: Creative Lighting featuring Nanlite Pavotubes" },
-                new Event { SubCategoryId = 11, UserId = 3, Title = "Seattle Climate Strike 2021" },
-                new Event { SubCategoryId = 17, UserId =9, Title = "Meet Your Local Running Groups" },
-                new Event { SubCategoryId = 4, UserId = 7, Title = "Alki Beach Clean Up" },
-                new Event { SubCategoryId = 13, UserId = 4, Title = "Spiritual Happy Hour / Crystals" },
-                new Event { SubCategoryId = 2, UserId = 21, Title = "New Homebuyer Workshop" },
-                new Event { SubCategoryId = 5, UserId = 21, Title = "Maker Chat / Open House / Show & Tell" },
-                new Event { SubCategoryId = 10, UserId = 8, Title = "SYML live @ St Mark's Cathedral, Seattle (Abbey Arts Presents)" },
-                new Event { SubCategoryId = 9, UserId = 7, Title = "Shaina Shepherd w/ Maya Marie, Oh Rose, Charity Thielen & Matty Gervais" }
+                new Event { SubCategoryId = 1, FormatId = 12, UserId = 21, Title = "Women's Self Defense Seminar"  },
+                new Event { SubCategoryId = 17, FormatId = 1, UserId = 3, Title = "West Seattle April Art Walk" },
+                new Event { SubCategoryId = 4, FormatId = 19, UserId = 22, Title = "Seattle Job Fair - Seattle Career Fair" },
+                new Event { SubCategoryId = 1, FormatId = 7, UserId = 19, Title = "2nd Saturday Work Party in Volunteer Park" },
+                new Event { SubCategoryId = 16, FormatId = 2, UserId = 18, Title = "The Market Experience" },
+                new Event { SubCategoryId = 12, FormatId = 18, UserId = 9, Title = "Online Speed Dating (3 age groups) - Seattle" },
+                new Event { SubCategoryId = 1, FormatId = 6, UserId = 3, Title = "Waterfront Birding for Beginners with Seattle Audubon" },
+                new Event { SubCategoryId = 11, FormatId = 13, UserId = 11, Title = "2021 Pioneer Square Business Improvement Area Annual Meeting" },
+                new Event { SubCategoryId = 18, FormatId = 8, UserId = 17, Title = "Ballard Comedy Club Presents Open Mic" },
+                new Event { SubCategoryId = 3, FormatId = 17, UserId = 3, Title = "Photowalk: Seattle Center with Nikon" },
+                new Event { SubCategoryId = 8, FormatId = 14, UserId = 15, Title = "ONLINE: Seattle --Saturday Free Guided Meditation. Experience the joy!" },
+                new Event { SubCategoryId = 15, FormatId = 2, UserId = 12, Title = "Introduction to the Commitment to Educational Equity" },
+                new Event { SubCategoryId = 6, FormatId = 2, UserId = 4, Title = "Introduction to Projects & Grants" },
+                new Event { SubCategoryId = 14, FormatId = 15, UserId = 5, Title = "Real Estate Investing for Entrepreneurs - Seattle Online" },
+                new Event { SubCategoryId = 19, FormatId = 10, UserId = 6, Title = "Cathedral Yoga at Saint Marks" },
+                new Event { SubCategoryId = 20, FormatId = 4, UserId = 15, Title = "Lighting Demo: Creative Lighting featuring Nanlite Pavotubes" },
+                new Event { SubCategoryId = 11, FormatId = 5, UserId = 3, Title = "Seattle Climate Strike 2021" },
+                new Event { SubCategoryId = 17, FormatId = 1, UserId =9, Title = "Meet Your Local Running Groups" },
+                new Event { SubCategoryId = 4, FormatId = 1, UserId = 7, Title = "Alki Beach Clean Up" },
+                new Event { SubCategoryId = 13, FormatId = 9, UserId = 4, Title = "Spiritual Happy Hour / Crystals" },
+                new Event { SubCategoryId = 2, FormatId = 10, UserId = 21, Title = "New Homebuyer Workshop" },
+                new Event { SubCategoryId = 5, FormatId = 7, UserId = 21, Title = "Maker Chat / Open House / Show & Tell" },
+                new Event { SubCategoryId = 10, FormatId = 16, UserId = 8, Title = "SYML live @ St Mark's Cathedral, Seattle (Abbey Arts Presents)" },
+                new Event { SubCategoryId = 9, FormatId = 11, UserId = 7, Title = "Shaina Shepherd w/ Maya Marie, Oh Rose, Charity Thielen & Matty Gervais" }
             };
         }
     }
