@@ -21,10 +21,12 @@ namespace EventAPI.Domain
         public string EventLinkUrl { get; set; }
         public int SubCategoryId { get; set; }       
         public int UserId { get; set; }
+        public int FormatId { get; set; }
         //ToDo: Location
 
         public virtual SubCategory SubCategory { get; set; }
         public virtual User User { get; set; }
+        public virtual Format Format { get; set; }
       
     }
 }
