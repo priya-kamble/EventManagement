@@ -43,22 +43,22 @@ namespace EventAPI.Controllers
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventDates(
-                                                    [FromQuery] DateTime? startDate,
-                                                    [FromQuery] DateTime? endDate,
-                                                    [FromQuery] int pageIndex = 0,
-                                                    [FromQuery] int pageSize = 6)
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
         {
 
             var query = (IQueryable<Event>)_context.EventCatalog;
             if (startDate.HasValue)
-                {
-                    query = query.Where(e => e.StartDate == startDate);
-                }
+            {
+                query = query.Where(e => e.StartDate == startDate);
+            }
 
             if (endDate.HasValue)
-                {
-                    query = query.Where(e => e.EndDate == endDate);
-                }
+            {
+                query = query.Where(e => e.EndDate == endDate);
+            }
 
             var eventsCount = query.LongCountAsync();
             var events = await query
@@ -67,15 +67,16 @@ namespace EventAPI.Controllers
                                     .Take(pageSize)
                                     .ToListAsync();
             var model = new PaginatedEventsViewModel
-                {
-                    Data = events,
-                    PageIndex = pageIndex,
-                    PageSize = events.Count,
-                    Count = eventsCount.Result
-                };
+            {
+                Data = events,
+                PageIndex = pageIndex,
+                PageSize = events.Count,
+                Count = eventsCount.Result
+            };
 
             return Ok(model);
         }
+
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventByCategory(
@@ -92,10 +93,11 @@ namespace EventAPI.Controllers
 
             if (ValidDate.HasValue)
             {
-                query = query.Where(e => e.StartDate >= ValidDate);
+               query = query.Where(e => e.StartDate >= ValidDate);
             }
 
-             
+            
+
             var eventsCount = query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
@@ -104,6 +106,7 @@ namespace EventAPI.Controllers
                                     .ToListAsync();
             var model = new PaginatedEventsViewModel
             {
+               
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
@@ -112,7 +115,8 @@ namespace EventAPI.Controllers
 
             return Ok(model);
         }
-
+        
+        [HttpGet("[Action]")]
         public async Task<IActionResult> EventByFormat(
                                                         [FromQuery] DateTime? ValidDate,
                                                         [FromQuery] int FormatId,
@@ -123,7 +127,7 @@ namespace EventAPI.Controllers
 
             var query = (IQueryable<Event>)_context.EventCatalog;
 
-            query = query.Where(e => e.FormatId== FormatId);
+            query = query.Where(e => e.FormatId == FormatId);
 
             if (ValidDate.HasValue)
             {
@@ -139,6 +143,7 @@ namespace EventAPI.Controllers
                                     .ToListAsync();
             var model = new PaginatedEventsViewModel
             {
+
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
@@ -146,6 +151,7 @@ namespace EventAPI.Controllers
             };
 
             return Ok(model);
+
         }
-    }
 }
+    }
