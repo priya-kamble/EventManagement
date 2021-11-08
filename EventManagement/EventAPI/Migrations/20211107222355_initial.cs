@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventAPI.Migrations
 {
-    public partial class initial13 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,19 @@ namespace EventAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Formats",
+                columns: table => new
+                {
+                    FormatId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormatName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Formats", x => x.FormatId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -31,7 +44,8 @@ namespace EventAPI.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CellPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CellPhone2 = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,11 +112,18 @@ namespace EventAPI.Migrations
                     IsCancelled = table.Column<bool>(type: "bit", nullable: false),
                     EventLinkUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FormatId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventCatalog", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventCatalog_Formats_FormatId",
+                        column: x => x.FormatId,
+                        principalTable: "Formats",
+                        principalColumn: "FormatId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EventCatalog_SubCategories_SubCategoryId",
                         column: x => x.SubCategoryId,
@@ -116,6 +137,11 @@ namespace EventAPI.Migrations
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventCatalog_FormatId",
+                table: "EventCatalog",
+                column: "FormatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventCatalog_SubCategoryId",
@@ -146,6 +172,9 @@ namespace EventAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Organizations");
+
+            migrationBuilder.DropTable(
+                name: "Formats");
 
             migrationBuilder.DropTable(
                 name: "SubCategories");
