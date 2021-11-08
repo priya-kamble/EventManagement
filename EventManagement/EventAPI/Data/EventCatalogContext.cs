@@ -26,7 +26,7 @@ namespace EventAPI.Data
                 e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
                 e.Property(p => p.Title).IsRequired().HasMaxLength(200);
                 e.HasOne(p => p.SubCategory).WithMany().HasForeignKey(p => p.SubCategoryId);
-                e.HasOne(p => p.User).WithMany().HasForeignKey(c => c.UserId);
+                e.HasOne(p => p.User).WithMany().HasForeignKey(p => p.UserId);
                 e.HasOne(p => p.Format).WithMany().HasForeignKey(p => p.FormatId);
             });
 
