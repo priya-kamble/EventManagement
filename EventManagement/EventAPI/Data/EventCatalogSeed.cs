@@ -41,6 +41,12 @@ namespace EventAPI.Data
                 context.SaveChanges();
             }
 
+            if (!context.Locations.Any())
+            {
+                context.Locations.AddRange(GetLocations());
+                context.SaveChanges();
+            }
+
             if (!context.EventCatalog.Any())
             {
                 context.EventCatalog.AddRange(GetEvents());
@@ -361,34 +367,73 @@ namespace EventAPI.Data
                 new User { UserEmailId = "tatyana@gmail.com" },
             };
         }
+        private static IEnumerable<Location> GetLocations()
+        {
+            return new List<Location>
+            {
+                new Location { City = "Redmond", State = "WA" },
+                new Location { City = "Redmond", State = "OR" },
+                new Location { City = "Seattle", State = "WA" },
+                new Location { City = "Portland", State = "OR" },
+                new Location { City = "Bellevue", State = "WA" },
+                new Location { City = "Kirkland", State = "WA" },
+                new Location { City = "Shoreline", State = "WA" },
+                new Location { City = "Everett", State = "WA" },
+                new Location { City = "Tacoma", State = "WA" },
+                new Location { City = "Auburn", State = "WA" },
+                new Location { City = "Renton", State = "WA" },
+                new Location { City = "Kent", State = "WA" },
+                new Location { City = "Federal Way", State = "WA" },
+                new Location { City = "Edmonds", State = "WA" },
+                new Location { City = "Lynnwood", State = "WA" },
+                new Location { City = "Burien", State = "WA" },
+                new Location { City = "Bremerton", State = "WA" },
+                new Location { City = "Des Moines", State = "WA" },
+                new Location { City = "Puyallup", State = "WA" },
+                new Location { City = "Lake Stevens", State = "WA" },
+                new Location { City = "Bothell", State = "WA" },
+                new Location { City = "Issaquah", State = "WA" },
+                new Location { City = "Lakewood", State = "WA" },
+                new Location { City = "Bellingham", State = "WA" },
+                new Location { City = "Olympia", State = "WA" },
+                new Location { City = "Port Townsend", State = "WA" },
+                new Location { City = "Arlington", State = "WA" },
+                new Location { City = "Mount Vernon", State = "WA" },
+                new Location { City = "Atlanta", State = "GA" },
+                new Location { City = "El Paso", State = "TX" },
+                new Location { City = "San Francisco", State = "CA" },
+                new Location { City = "Boise", State = "ID" },
+                new Location { City = "Vancouver", State = "BC"}
+            };
+        }
         private static IEnumerable<Event> GetEvents()
         {
             return new List<Event>
             {
-                new Event { SubCategoryId = 1, FormatId = 12, UserId = 21, Title = "Women's Self Defense Seminar"  },
-                new Event { SubCategoryId = 17, FormatId = 1, UserId = 3, Title = "West Seattle April Art Walk" },
-                new Event { SubCategoryId = 4, FormatId = 19, UserId = 22, Title = "Seattle Job Fair - Seattle Career Fair" },
-                new Event { SubCategoryId = 1, FormatId = 7, UserId = 19, Title = "2nd Saturday Work Party in Volunteer Park" },
-                new Event { SubCategoryId = 16, FormatId = 2, UserId = 18, Title = "The Market Experience" },
-                new Event { SubCategoryId = 12, FormatId = 18, UserId = 9, Title = "Online Speed Dating (3 age groups) - Seattle" },
-                new Event { SubCategoryId = 1, FormatId = 6, UserId = 3, Title = "Waterfront Birding for Beginners with Seattle Audubon" },
-                new Event { SubCategoryId = 11, FormatId = 13, UserId = 11, Title = "2021 Pioneer Square Business Improvement Area Annual Meeting" },
-                new Event { SubCategoryId = 18, FormatId = 8, UserId = 17, Title = "Ballard Comedy Club Presents Open Mic" },
-                new Event { SubCategoryId = 3, FormatId = 17, UserId = 3, Title = "Photowalk: Seattle Center with Nikon" },
-                new Event { SubCategoryId = 8, FormatId = 14, UserId = 15, Title = "ONLINE: Seattle --Saturday Free Guided Meditation. Experience the joy!" },
-                new Event { SubCategoryId = 15, FormatId = 2, UserId = 12, Title = "Introduction to the Commitment to Educational Equity" },
-                new Event { SubCategoryId = 6, FormatId = 2, UserId = 4, Title = "Introduction to Projects & Grants" },
-                new Event { SubCategoryId = 14, FormatId = 15, UserId = 5, Title = "Real Estate Investing for Entrepreneurs - Seattle Online" },
-                new Event { SubCategoryId = 19, FormatId = 10, UserId = 6, Title = "Cathedral Yoga at Saint Marks" },
-                new Event { SubCategoryId = 20, FormatId = 4, UserId = 15, Title = "Lighting Demo: Creative Lighting featuring Nanlite Pavotubes" },
-                new Event { SubCategoryId = 11, FormatId = 5, UserId = 3, Title = "Seattle Climate Strike 2021" },
-                new Event { SubCategoryId = 17, FormatId = 1, UserId =9, Title = "Meet Your Local Running Groups" },
-                new Event { SubCategoryId = 4, FormatId = 1, UserId = 7, Title = "Alki Beach Clean Up" },
-                new Event { SubCategoryId = 13, FormatId = 9, UserId = 4, Title = "Spiritual Happy Hour / Crystals" },
-                new Event { SubCategoryId = 2, FormatId = 10, UserId = 21, Title = "New Homebuyer Workshop" },
-                new Event { SubCategoryId = 5, FormatId = 7, UserId = 21, Title = "Maker Chat / Open House / Show & Tell" },
-                new Event { SubCategoryId = 10, FormatId = 16, UserId = 8, Title = "SYML live @ St Mark's Cathedral, Seattle (Abbey Arts Presents)" },
-                new Event { SubCategoryId = 9, FormatId = 11, UserId = 7, Title = "Shaina Shepherd w/ Maya Marie, Oh Rose, Charity Thielen & Matty Gervais" }
+                new Event { SubCategoryId = 1, FormatId = 12, UserId = 21, LocationId = 1, Address = "1000 1st Ave", Title = "Women's Self Defense Seminar"  },
+                new Event { SubCategoryId = 17, FormatId = 1, UserId = 3, LocationId = 5, Address = "1000 1st Ave", Title = "West Seattle April Art Walk" },
+                new Event { SubCategoryId = 4, FormatId = 19, UserId = 22, LocationId = 3, Address = "1000 1st Ave", Title = "Seattle Job Fair - Seattle Career Fair" },
+                new Event { SubCategoryId = 1, FormatId = 7, UserId = 19, LocationId = 4, Address = "1000 1st Ave", Title = "2nd Saturday Work Party in Volunteer Park" },
+                new Event { SubCategoryId = 16, FormatId = 2, UserId = 18, LocationId = 6, Address = "1000 1st Ave", Title = "The Market Experience" },
+                new Event { SubCategoryId = 12, FormatId = 18, UserId = 9, LocationId = 7, Address = "1000 1st Ave", Title = "Online Speed Dating (3 age groups) - Seattle" },
+                new Event { SubCategoryId = 1, FormatId = 6, UserId = 3, LocationId = 8, Address = "1000 1st Ave", Title = "Waterfront Birding for Beginners with Seattle Audubon" },
+                new Event { SubCategoryId = 11, FormatId = 13, UserId = 11, LocationId = 9, Address = "1000 1st Ave", Title = "2021 Pioneer Square Business Improvement Area Annual Meeting" },
+                new Event { SubCategoryId = 18, FormatId = 8, UserId = 17, LocationId = 10, Address = "1000 1st Ave", Title = "Ballard Comedy Club Presents Open Mic" },
+                new Event { SubCategoryId = 3, FormatId = 17, UserId = 3, LocationId = 11, Address = "1000 1st Ave", Title = "Photowalk: Seattle Center with Nikon" },
+                new Event { SubCategoryId = 8, FormatId = 14, UserId = 15, LocationId = 12, Address = "1000 1st Ave", Title = "ONLINE: Seattle --Saturday Free Guided Meditation. Experience the joy!" },
+                new Event { SubCategoryId = 15, FormatId = 2, UserId = 12, LocationId = 13, Address = "1000 1st Ave", Title = "Introduction to the Commitment to Educational Equity" },
+                new Event { SubCategoryId = 6, FormatId = 2, UserId = 4, LocationId = 14, Address = "1000 1st Ave", Title = "Introduction to Projects & Grants" },
+                new Event { SubCategoryId = 14, FormatId = 15, UserId = 5, LocationId = 15, Address = "1000 1st Ave", Title = "Real Estate Investing for Entrepreneurs - Seattle Online" },
+                new Event { SubCategoryId = 19, FormatId = 10, UserId = 6, LocationId = 16, Address = "1000 1st Ave", Title = "Cathedral Yoga at Saint Marks" },
+                new Event { SubCategoryId = 20, FormatId = 4, UserId = 15, LocationId = 17, Address = "1000 1st Ave", Title = "Lighting Demo: Creative Lighting featuring Nanlite Pavotubes" },
+                new Event { SubCategoryId = 11, FormatId = 5, UserId = 3, LocationId = 18, Address = "1000 1st Ave", Title = "Seattle Climate Strike 2021" },
+                new Event { SubCategoryId = 17, FormatId = 1, UserId = 9, LocationId = 11, Address = "1000 1st Ave", Title = "Meet Your Local Running Groups" },
+                new Event { SubCategoryId = 4, FormatId = 1, UserId = 7, LocationId = 9, Address = "1000 1st Ave", Title = "Alki Beach Clean Up" },
+                new Event { SubCategoryId = 13, FormatId = 9, UserId = 4, LocationId = 8, Address = "1000 1st Ave", Title = "Spiritual Happy Hour / Crystals" },
+                new Event { SubCategoryId = 2, FormatId = 10, UserId = 21, LocationId = 7, Address = "1000 1st Ave", Title = "New Homebuyer Workshop" },
+                new Event { SubCategoryId = 5, FormatId = 7, UserId = 21, LocationId = 6, Address = "1000 1st Ave", Title = "Maker Chat / Open House / Show & Tell" },
+                new Event { SubCategoryId = 10, FormatId = 16, UserId = 8, LocationId = 5, Address = "1000 1st Ave", Title = "SYML live @ St Mark's Cathedral, Seattle (Abbey Arts Presents)" },
+                new Event { SubCategoryId = 9, FormatId = 11, UserId = 7, LocationId = 4, Address = "1000 1st Ave", Title = "Shaina Shepherd w/ Maya Marie, Oh Rose, Charity Thielen & Matty Gervais" }
             };
         }
     }
