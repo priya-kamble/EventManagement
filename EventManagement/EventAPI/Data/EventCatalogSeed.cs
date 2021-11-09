@@ -82,7 +82,7 @@ namespace EventAPI.Data
                 new SubCategory { SubCategoryName = "Medical", CategoryId = 4 },
                 new SubCategory { SubCategoryName = "Classical", CategoryId = 5 },
                 new SubCategory { SubCategoryName = "Robotics", CategoryId = 6 },
-                new SubCategory { SubCategoryName = "Hiking", CategoryId = 7 }
+                new SubCategory { SubCategoryName = "Hiking", CategoryId = 7 },
                 new SubCategory { SubCategoryName = "League", CategoryId = 7 },
                 new SubCategory { SubCategoryName = "Travel", CategoryId = 8 }
             };
