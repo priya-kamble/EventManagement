@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    [Migration("20211105222029_initial13")]
-    partial class initial13
+    [Migration("20211108235325_withDifferentName")]
+    partial class withDifferentName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,8 +45,13 @@ namespace EventAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -57,6 +62,9 @@ namespace EventAPI.Migrations
                     b.Property<string>("EventLinkUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FormatId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("bit");
 
@@ -65,6 +73,9 @@ namespace EventAPI.Migrations
 
                     b.Property<bool>("IsPaidEvent")
                         .HasColumnType("bit");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaxOccupancy")
                         .HasColumnType("int");
@@ -88,11 +99,54 @@ namespace EventAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormatId");
+
+                    b.HasIndex("LocationId");
+
                     b.HasIndex("SubCategoryId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("EventCatalog");
+                });
+
+            modelBuilder.Entity("EventAPI.Domain.Format", b =>
+                {
+                    b.Property<int>("FormatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FormatName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("FormatId");
+
+                    b.ToTable("Formats");
+                });
+
+            modelBuilder.Entity("EventAPI.Domain.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("EventAPI.Domain.Organization", b =>
@@ -158,6 +212,9 @@ namespace EventAPI.Migrations
                     b.Property<string>("CellPhone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CellPhone2")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -177,6 +234,18 @@ namespace EventAPI.Migrations
 
             modelBuilder.Entity("EventAPI.Domain.Event", b =>
                 {
+                    b.HasOne("EventAPI.Domain.Format", "Format")
+                        .WithMany()
+                        .HasForeignKey("FormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EventAPI.Domain.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EventAPI.Domain.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
@@ -188,6 +257,10 @@ namespace EventAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Format");
+
+                    b.Navigation("Location");
 
                     b.Navigation("SubCategory");
 

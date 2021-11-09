@@ -2,7 +2,7 @@
 
 namespace EventAPI.Migrations
 {
-    public partial class addSeedsForFormat : Migration
+    public partial class withDifferentName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

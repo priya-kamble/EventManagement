@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    [Migration("20211106213201_initial")]
+    [Migration("20211107222355_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,9 @@ namespace EventAPI.Migrations
                     b.Property<string>("EventLinkUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FormatId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("bit");
 
@@ -88,11 +91,30 @@ namespace EventAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormatId");
+
                     b.HasIndex("SubCategoryId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("EventCatalog");
+                });
+
+            modelBuilder.Entity("EventAPI.Domain.Format", b =>
+                {
+                    b.Property<int>("FormatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FormatName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("FormatId");
+
+                    b.ToTable("Formats");
                 });
 
             modelBuilder.Entity("EventAPI.Domain.Organization", b =>
@@ -180,6 +202,12 @@ namespace EventAPI.Migrations
 
             modelBuilder.Entity("EventAPI.Domain.Event", b =>
                 {
+                    b.HasOne("EventAPI.Domain.Format", "Format")
+                        .WithMany()
+                        .HasForeignKey("FormatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EventAPI.Domain.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
@@ -191,6 +219,8 @@ namespace EventAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Format");
 
                     b.Navigation("SubCategory");
 
