@@ -117,6 +117,7 @@ namespace EventAPI.Controllers
         }
         
         [HttpGet("[Action]")]
+      
         public async Task<IActionResult> EventByFormat(
                                                         [FromQuery] DateTime? ValidDate,
                                                         [FromQuery] int FormatId,
@@ -132,6 +133,8 @@ namespace EventAPI.Controllers
             if (ValidDate.HasValue)
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
+                query = query.Where(e => e.IsCancelled==false);
+
             }
 
 
