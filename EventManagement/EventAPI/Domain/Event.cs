@@ -19,14 +19,17 @@ namespace EventAPI.Domain
         public bool IsOnlineEvent { get; set; }
         public bool IsCancelled { get; set; }
         public string EventLinkUrl { get; set; }
+        public string Address { get; set; }
         public int SubCategoryId { get; set; }       
         public int UserId { get; set; }
         public int FormatId { get; set; }
-        //ToDo: Location
+        public int LocationId { get; set; }
+        
 
         public virtual SubCategory SubCategory { get; set; }
         public virtual User User { get; set; }
         public virtual Format Format { get; set; }
-      
+        public virtual Location Location { get; set; }
+
     }
 }
