@@ -25,18 +25,26 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> AllEvents([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
+        public async Task<IActionResult> AllEvents(
+            [FromQuery] DateTime? ValidDate, 
+            [FromQuery] int pageIndex = 0, 
+            [FromQuery] int pageSize = 6)
         {
+            var query = (IQueryable<Event>)_context.EventCatalog;
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
             var eventsCount = await _context.EventCatalog.LongCountAsync();
-            
+
             var events = await _context.EventCatalog
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
-            
             events = ChangePictureUrl(events);
-            
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -44,7 +52,6 @@ namespace EventAPI.Controllers
                 PageSize = events.Count,
                 Count = eventsCount
             };
-
             return Ok(model);
         }
 
@@ -52,11 +59,18 @@ namespace EventAPI.Controllers
         public async Task<IActionResult> EventDates(
             [FromQuery] DateTime? startDate,
             [FromQuery] DateTime? endDate,
+            [FromQuery] DateTime? ValidDate,
             [FromQuery] int pageIndex = 0,
             [FromQuery] int pageSize = 6)
         {
-
             var query = (IQueryable<Event>)_context.EventCatalog;
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
+            
             if (startDate.HasValue)
             {
                 query = query.Where(e => e.StartDate == startDate);
@@ -86,23 +100,32 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> PaidEvents([FromQuery] bool? isPaid,
-                                                    [FromQuery] int pageIndex = 0,
-                                                    [FromQuery] int pageSize = 6)
+        public async Task<IActionResult> PaidEvents(
+            [FromQuery] bool? isPaid,
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
-            
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
+           
             if (isPaid.HasValue)
             {
                 query = query.Where(e => e.IsPaidEvent == isPaid);
             }
-            
+
             var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -114,23 +137,32 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> OnlineEvents([FromQuery] bool? isOnline,
-                                                      [FromQuery] int pageIndex = 0,
-                                                      [FromQuery] int pageSize = 6)
+        public async Task<IActionResult> OnlineEvents(
+            [FromQuery] bool? isOnline,
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
 
             if (isOnline.HasValue)
             {
                 query = query.Where(e => e.IsOnlineEvent == isOnline);
             }
 
-            var eventsCount = await query.LongCountAsync();
+            var eventsCount = await query.LongCountAsync();            
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -143,12 +175,20 @@ namespace EventAPI.Controllers
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventLocations(
-           [FromQuery] string city,
-           [FromQuery] string state,
-           [FromQuery] int pageIndex = 0,
-           [FromQuery] int pageSize = 6)
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] string city,
+            [FromQuery] string state,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
+
             if (!String.IsNullOrEmpty(city))
             {
                 query = query.Where(e => e.Location.City == city);
@@ -165,6 +205,7 @@ namespace EventAPI.Controllers
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -172,7 +213,6 @@ namespace EventAPI.Controllers
                 PageSize = events.Count,
                 Count = eventsCount
             };
-
             return Ok(model);
         }
 
@@ -184,20 +224,21 @@ namespace EventAPI.Controllers
             [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
-
-            query = query.Where(e => (_context.SubCategories.Any(s => s.SubCategoryId == e.SubCategoryId && s.CategoryId == CategoryId)));
+            query = query.Where(e => e.IsCancelled == false);
 
             if (ValidDate.HasValue)
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
             }
-
+            query = query.Where(e => (_context.SubCategories.Any(s => s.SubCategoryId == e.SubCategoryId && s.CategoryId == CategoryId)));
+            
             var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -205,7 +246,6 @@ namespace EventAPI.Controllers
                 PageSize = events.Count,
                 Count = eventsCount
             };
-
             return Ok(model);
         }
 
@@ -217,21 +257,22 @@ namespace EventAPI.Controllers
             [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
-
-            query = query.Where(e => e.FormatId == FormatId);
+            query = query.Where(e => e.IsCancelled == false);
 
             if (ValidDate.HasValue)
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
-                query = query.Where(e => e.IsCancelled == false);
             }
 
+            query = query.Where(e => e.FormatId == FormatId);
+            
             var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
@@ -244,11 +285,26 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> Events([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate,
-                                                [FromQuery] bool? ispaid, [FromQuery] bool? isonline,
-                                                [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
-        { 
+        public async Task<IActionResult> Events(
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] DateTime? startDate, 
+            [FromQuery] DateTime? endDate,
+            [FromQuery] string city,
+            [FromQuery] string state,
+            [FromQuery] int FormatId,
+            [FromQuery] int CategoryId,
+            [FromQuery] bool? ispaid, 
+            [FromQuery] bool? isonline,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
+        {
             var query = (IQueryable<Event>)_context.EventCatalog;
+            query = query.Where(e => e.IsCancelled == false);
+
+            if (ValidDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= ValidDate);
+            }
 
             if (startDate.HasValue)
             {
@@ -258,6 +314,16 @@ namespace EventAPI.Controllers
             if (endDate.HasValue)
             {
                 query = query.Where(e => e.EndDate <= endDate);
+            }
+
+            if (!String.IsNullOrEmpty(city))
+            {
+                query = query.Where(e => e.Location.City == city);
+            }
+
+            if (!String.IsNullOrEmpty(state))
+            {
+                query = query.Where(e => e.Location.State == state);
             }
 
             if (ispaid.HasValue)
@@ -270,12 +336,17 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.IsOnlineEvent == isonline);
             }
 
+            query = query.Where(e => e.FormatId == FormatId);
+
+            query = query.Where(e => (_context.SubCategories.Any(s => s.SubCategoryId == e.SubCategoryId && s.CategoryId == CategoryId)));
+
             var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,

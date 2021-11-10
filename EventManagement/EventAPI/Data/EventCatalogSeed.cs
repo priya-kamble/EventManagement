@@ -294,17 +294,17 @@ namespace EventAPI.Data
 
                 new Event { Title = "Family.Life.Education", Description = "Learn-Grow-Fulfill your Potential", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/12",
                     MaxOccupancy = 6, MaxTicketsPerUser = 4, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = false ,
-                    IsOnlineEvent = true, IsCancelled = true, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
                     SubCategoryId = 4 , UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Education Foundation", Description = "Education for All", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/13",
                     MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2021, 4, 4) , IsPaidEvent = false ,
-                    IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 8, Address = "8352 Marvon Dr.",
+                    IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 8, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 3 },
 
                 new Event { Title = "After School Enrichment Programs", Description = "S.T.E.M", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/14",
                     MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = false ,
-                    IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = "http://google.com", LocationId = 8, Address = "219 Madison Ave",
+                    IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 8, Address = "219 Madison Ave",
                     SubCategoryId = 8, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "Seattle Job Fair", Description = "Seattle Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/15",
@@ -324,7 +324,7 @@ namespace EventAPI.Data
 
                 new Event { Title = "Pro Club", Description = "A complete sports league", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/18",
                     MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 4, 4) , IsPaidEvent = true ,
-                    IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 1, Address = "220 Madison Ave",
+                    IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "220 Madison Ave",
                     SubCategoryId = 10, UserId = 3, FormatId = 5 },
 
                 new Event { Title = "Mind, Heart & Soul", Description = "A complete You!!", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/19",
