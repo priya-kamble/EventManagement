@@ -79,13 +79,48 @@ namespace EventAPI.Controllers
 
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> EventByCategory(
-                                                        [FromQuery] DateTime? ValidDate,
-                                                        [FromQuery] int CategoryId,
-                                                        [FromQuery] int pageIndex = 0,
-                                                        [FromQuery] int pageSize = 6)
+        public async Task<IActionResult> EventLocations(
+           [FromQuery] string? city,
+           [FromQuery] string? state,
+           [FromQuery] int pageIndex = 0,
+           [FromQuery] int pageSize = 6)
         {
+            var query = (IQueryable<Event>)_context.EventCatalog;
+            if (!String.IsNullOrEmpty(city))
+            {
+                query = query.Where(e => e.Location.City == city);
+            }
 
+            if (!String.IsNullOrEmpty(state))
+            {
+                query = query.Where(e => e.Location.State == state);
+            }
+
+            var eventsCount = await query.LongCountAsync();
+            var events = await query
+                                    .OrderBy(e => e.Id)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            var model = new PaginatedEventsViewModel
+            {
+                Data = events,
+                PageIndex = pageIndex,
+                PageSize = events.Count,
+                Count = eventsCount
+            };
+
+            return Ok(model);
+        }
+
+
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> EventByCategory(
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] int CategoryId,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
+        {
 
             var query = (IQueryable<Event>)_context.EventCatalog;
 
@@ -96,8 +131,6 @@ namespace EventAPI.Controllers
                query = query.Where(e => e.StartDate >= ValidDate);
             }
 
-            
-
             var eventsCount = query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
@@ -106,7 +139,6 @@ namespace EventAPI.Controllers
                                     .ToListAsync();
             var model = new PaginatedEventsViewModel
             {
-               
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
@@ -119,12 +151,11 @@ namespace EventAPI.Controllers
         [HttpGet("[Action]")]
       
         public async Task<IActionResult> EventByFormat(
-                                                        [FromQuery] DateTime? ValidDate,
-                                                        [FromQuery] int FormatId,
-                                                        [FromQuery] int pageIndex = 0,
-                                                        [FromQuery] int pageSize = 6)
+            [FromQuery] DateTime? ValidDate,
+            [FromQuery] int FormatId,
+            [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 6)
         {
-
 
             var query = (IQueryable<Event>)_context.EventCatalog;
 
@@ -134,9 +165,7 @@ namespace EventAPI.Controllers
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
                 query = query.Where(e => e.IsCancelled==false);
-
             }
-
 
             var eventsCount = query.LongCountAsync();
             var events = await query
@@ -146,7 +175,6 @@ namespace EventAPI.Controllers
                                     .ToListAsync();
             var model = new PaginatedEventsViewModel
             {
-
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
@@ -154,7 +182,6 @@ namespace EventAPI.Controllers
             };
 
             return Ok(model);
-
         }
-}
+      }
     }
