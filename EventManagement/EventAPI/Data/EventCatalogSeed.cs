@@ -15,18 +15,18 @@ namespace EventAPI.Data
             if (!context.Categories.Any())
             {
                 SaveCategoryData(context);
-               
+
             }
             if (!context.SubCategories.Any())
             {
 
                 SaveSubCategoryData(context);
-                
+
             }
 
             if (!context.Formats.Any())
             {
-                SaveFormatsData( context);
+                SaveFormatsData(context);
             }
 
             if (!context.Users.Any())
@@ -54,16 +54,16 @@ namespace EventAPI.Data
             }
         }
 
-    
 
-        private static void SaveCategoryData (EventCatalogContext context)
+
+        private static void SaveCategoryData(EventCatalogContext context)
         {
 
             List<Category> CategoryData;
-           
-            CategoryData = new List<Category>             
+
+            CategoryData = new List<Category>
             {
-               
+
                 new Category { CategoryName = "Business & Professional" },
                 new Category { CategoryName = "Charity & Causes" },
                 new Category { CategoryName = "Food & Drink" },
@@ -83,7 +83,7 @@ namespace EventAPI.Data
         private static void SaveSubCategoryData(EventCatalogContext context)
         {
             List<SubCategory> SubCategoryData;
-            SubCategoryData= new List<SubCategory>
+            SubCategoryData = new List<SubCategory>
             {
 
                 new SubCategory { SubCategoryName = "Career", CategoryId = 1 },
@@ -111,8 +111,8 @@ namespace EventAPI.Data
 
             List<Format> EventFormat;
 
-            EventFormat= new List<Format>
-            {           
+            EventFormat = new List<Format>
+            {
                 new Format { FormatName = "Camp, Trip, or Retreat" },
                 new Format { FormatName = "Class, Training, or Workshop" },
                 new Format { FormatName = "Conference" },
