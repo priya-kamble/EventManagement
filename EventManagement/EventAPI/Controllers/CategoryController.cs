@@ -14,7 +14,7 @@ namespace EventAPI.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly EventCatalogContext _Context;
-        public  CategoryController(EventCatalogContext context)
+        public CategoryController(EventCatalogContext context)
         {
             _Context = context;
         }
@@ -24,11 +24,11 @@ namespace EventAPI.Controllers
         {
             var category = await _Context.Categories.ToListAsync();
             return Ok(category);
-        
+
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> SubCategory([FromQuery] int CategoryId )
+        public async Task<IActionResult> SubCategory([FromQuery] int CategoryId)
         {
             var subcategory = await _Context.SubCategories.Where(s => s.CategoryId == CategoryId).ToListAsync();
             return Ok(subcategory);

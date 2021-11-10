@@ -4,6 +4,7 @@ using EventAPI.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,26 +17,32 @@ namespace EventAPI.Controllers
     public class EventController : ControllerBase
     {
         public readonly EventCatalogContext _context;
-        public EventController(EventCatalogContext context)
+        public readonly IConfiguration _config;
+        public EventController(EventCatalogContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> Events([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
         {
-            var eventsCount = _context.EventCatalog.LongCountAsync();
+            var eventsCount = await _context.EventCatalog.LongCountAsync();
+            
             var events = await _context.EventCatalog
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            
+            events = ChangePictureUrl(events);
+            
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
-                Count = eventsCount.Result
+                Count = eventsCount
             };
 
             return Ok(model);
@@ -60,23 +67,23 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.EndDate == endDate);
             }
 
-            var eventsCount = query.LongCountAsync();
+            var eventsCount =  await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
                                     .ToListAsync();
+            events = ChangePictureUrl(events);
             var model = new PaginatedEventsViewModel
             {
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
-                Count = eventsCount.Result
+                Count = eventsCount
             };
 
             return Ok(model);
         }
-
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventLocations(
@@ -113,7 +120,6 @@ namespace EventAPI.Controllers
             return Ok(model);
         }
 
-
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventByCategory(
             [FromQuery] DateTime? ValidDate,
@@ -121,7 +127,6 @@ namespace EventAPI.Controllers
             [FromQuery] int pageIndex = 0,
             [FromQuery] int pageSize = 6)
         {
-
             var query = (IQueryable<Event>)_context.EventCatalog;
 
             query = query.Where(e => (_context.SubCategories.Any(s => s.SubCategoryId == e.SubCategoryId && s.CategoryId == CategoryId)));
@@ -149,14 +154,12 @@ namespace EventAPI.Controllers
         }
         
         [HttpGet("[Action]")]
-      
         public async Task<IActionResult> EventByFormat(
             [FromQuery] DateTime? ValidDate,
             [FromQuery] int FormatId,
             [FromQuery] int pageIndex = 0,
             [FromQuery] int pageSize = 6)
         {
-
             var query = (IQueryable<Event>)_context.EventCatalog;
 
             query = query.Where(e => e.FormatId == FormatId);
@@ -165,9 +168,10 @@ namespace EventAPI.Controllers
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
                 query = query.Where(e => e.IsCancelled==false);
+
             }
 
-            var eventsCount = query.LongCountAsync();
+            var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
@@ -178,10 +182,18 @@ namespace EventAPI.Controllers
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
-                Count = eventsCount.Result
+                Count = eventsCount
             };
 
             return Ok(model);
+
         }
-      }
+
+        private List<Event> ChangePictureUrl(List<Event> events)
+        {
+            events.ForEach(eventItem =>
+                eventItem.EventImageUrl = eventItem.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
+            return events;
+        }
     }
+}
