@@ -18,6 +18,7 @@ namespace EventAPI.Data
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Format> Formats { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,9 +26,12 @@ namespace EventAPI.Data
             {
                 e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
                 e.Property(p => p.Title).IsRequired().HasMaxLength(200);
+                e.Property(p => p.Description).HasMaxLength(200);
+                e.Property(p => p.Address).HasMaxLength(200);
                 e.HasOne(p => p.SubCategory).WithMany().HasForeignKey(p => p.SubCategoryId);
                 e.HasOne(p => p.User).WithMany().HasForeignKey(p => p.UserId);
                 e.HasOne(p => p.Format).WithMany().HasForeignKey(p => p.FormatId);
+                e.HasOne(p => p.Location).WithMany().HasForeignKey(p => p.LocationId);
             });
 
             modelBuilder.Entity<Category>(e =>
@@ -60,6 +64,13 @@ namespace EventAPI.Data
             {
                 e.Property(f => f.FormatId).IsRequired().ValueGeneratedOnAdd();
                 e.Property(f => f.FormatName).IsRequired().HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Location>(e =>
+            {
+                e.Property(l => l.LocationId).IsRequired().ValueGeneratedOnAdd();
+                e.Property(l => l.City).IsRequired().HasMaxLength(100);
+                e.Property(l => l.State).IsRequired().HasMaxLength(100);
             });
         }
     }
