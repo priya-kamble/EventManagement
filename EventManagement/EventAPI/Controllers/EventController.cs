@@ -119,9 +119,6 @@ namespace EventAPI.Controllers
             };
             return Ok(model);
         }
-    }
-}
-
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventLocations(
@@ -173,7 +170,7 @@ namespace EventAPI.Controllers
 
             if (ValidDate.HasValue)
             {
-               query = query.Where(e => e.StartDate >= ValidDate);
+                query = query.Where(e => e.StartDate >= ValidDate);
             }
 
             var eventsCount = query.LongCountAsync();
@@ -192,9 +189,9 @@ namespace EventAPI.Controllers
 
             return Ok(model);
         }
-        
+
         [HttpGet("[Action]")]
-      
+
         public async Task<IActionResult> EventByFormat(
             [FromQuery] DateTime? ValidDate,
             [FromQuery] int FormatId,
@@ -209,7 +206,7 @@ namespace EventAPI.Controllers
             if (ValidDate.HasValue)
             {
                 query = query.Where(e => e.StartDate >= ValidDate);
-                query = query.Where(e => e.IsCancelled==false);
+                query = query.Where(e => e.IsCancelled == false);
             }
 
             var eventsCount = query.LongCountAsync();
@@ -228,5 +225,7 @@ namespace EventAPI.Controllers
 
             return Ok(model);
         }
-      }
     }
+}
+
+
