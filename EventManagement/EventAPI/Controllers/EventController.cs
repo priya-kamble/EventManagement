@@ -76,5 +76,48 @@ namespace EventAPI.Controllers
 
             return Ok(model);
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Events([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate,
+                                                [FromQuery] bool? ispaid, [FromQuery] bool? isonline,
+                                                [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
+        {
+            var query = (IQueryable<Event>)_context.EventCatalog;
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= startDate);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(e => e.EndDate <= endDate);
+            }
+
+            if (ispaid.HasValue)
+            {
+                query = query.Where(e => e.IsPaidEvent == ispaid);
+            }
+
+            if (isonline.HasValue)
+            {
+                query = query.Where(e => e.IsOnlineEvent == isonline);
+            }
+
+            var eventsCount = await query.LongCountAsync();
+            var events = await query
+                                    .OrderBy(e => e.Id)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            var model = new PaginatedEventsViewModel
+            {
+                Data = events,
+                PageIndex = pageIndex,
+                PageSize = events.Count,
+                Count = eventsCount
+            };
+            return Ok(model);
+        }
     }
 }
