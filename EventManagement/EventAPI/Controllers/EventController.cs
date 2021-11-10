@@ -25,7 +25,7 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
-        public async Task<IActionResult> Events([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
+        public async Task<IActionResult> AllEvents([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
         {
             var eventsCount = await _context.EventCatalog.LongCountAsync();
             
@@ -67,7 +67,7 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.EndDate == endDate);
             }
 
-            var eventsCount =  await query.LongCountAsync();
+            var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
@@ -85,31 +85,44 @@ namespace EventAPI.Controllers
             return Ok(model);
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> Events([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate,
-                                                [FromQuery] bool? ispaid, [FromQuery] bool? isonline,
-                                                [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> PaidEvents([FromQuery] bool? isPaid,
+                                                    [FromQuery] int pageIndex = 0,
+                                                    [FromQuery] int pageSize = 6)
+        {
+            var query = (IQueryable<Event>)_context.EventCatalog;
+            
+            if (isPaid.HasValue)
+            {
+                query = query.Where(e => e.IsPaidEvent == isPaid);
+            }
+            
+            var eventsCount = await query.LongCountAsync();
+            var events = await query
+                                    .OrderBy(e => e.Id)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            var model = new PaginatedEventsViewModel
+            {
+                Data = events,
+                PageIndex = pageIndex,
+                PageSize = events.Count,
+                Count = eventsCount
+            };
+            return Ok(model);
+        }
+
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> OnlineEvents([FromQuery] bool? isOnline,
+                                                      [FromQuery] int pageIndex = 0,
+                                                      [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
 
-            if (startDate.HasValue)
+            if (isOnline.HasValue)
             {
-                query = query.Where(e => e.StartDate >= startDate);
-            }
-
-            if (endDate.HasValue)
-            {
-                query = query.Where(e => e.EndDate <= endDate);
-            }
-
-            if (ispaid.HasValue)
-            {
-                query = query.Where(e => e.IsPaidEvent == ispaid);
-            }
-
-            if (isonline.HasValue)
-            {
-                query = query.Where(e => e.IsOnlineEvent == isonline);
+                query = query.Where(e => e.IsOnlineEvent == isOnline);
             }
 
             var eventsCount = await query.LongCountAsync();
@@ -130,8 +143,8 @@ namespace EventAPI.Controllers
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventLocations(
-           [FromQuery] string? city,
-           [FromQuery] string? state,
+           [FromQuery] string city,
+           [FromQuery] string state,
            [FromQuery] int pageIndex = 0,
            [FromQuery] int pageSize = 6)
         {
@@ -179,7 +192,7 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.StartDate >= ValidDate);
             }
 
-            var eventsCount = query.LongCountAsync();
+            var eventsCount = await query.LongCountAsync();
             var events = await query
                                     .OrderBy(e => e.Id)
                                     .Skip(pageSize * pageIndex)
@@ -190,7 +203,7 @@ namespace EventAPI.Controllers
                 Data = events,
                 PageIndex = pageIndex,
                 PageSize = events.Count,
-                Count = eventsCount.Result
+                Count = eventsCount
             };
 
             return Ok(model);
@@ -227,6 +240,49 @@ namespace EventAPI.Controllers
                 Count = eventsCount
             };
 
+            return Ok(model);
+        }
+
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> Events([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate,
+                                                [FromQuery] bool? ispaid, [FromQuery] bool? isonline,
+                                                [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 6)
+        { 
+            var query = (IQueryable<Event>)_context.EventCatalog;
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(e => e.StartDate >= startDate);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(e => e.EndDate <= endDate);
+            }
+
+            if (ispaid.HasValue)
+            {
+                query = query.Where(e => e.IsPaidEvent == ispaid);
+            }
+
+            if (isonline.HasValue)
+            {
+                query = query.Where(e => e.IsOnlineEvent == isonline);
+            }
+
+            var eventsCount = await query.LongCountAsync();
+            var events = await query
+                                    .OrderBy(e => e.Id)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            var model = new PaginatedEventsViewModel
+            {
+                Data = events,
+                PageIndex = pageIndex,
+                PageSize = events.Count,
+                Count = eventsCount
+            };
             return Ok(model);
 
         }
