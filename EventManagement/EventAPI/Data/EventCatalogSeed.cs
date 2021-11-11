@@ -259,7 +259,7 @@ namespace EventAPI.Data
 
                 new Event { Title = "Taste Maker", Description = "Cooking Classes", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/5",
                     MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 12) , IsPaidEvent = true ,
-                    IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 9, Address = "1800 12th Ave",
+                    IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 9, Address = "1800 12th Ave",
                     SubCategoryId = 5, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "The Market Experience", Description = "Classic Italian Cuisine", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/6",
@@ -269,7 +269,7 @@ namespace EventAPI.Data
 
                 new Event { Title = "Know your options", Description = "How to choose right insurance plan workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/7",
                     MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 1, 1) , IsPaidEvent = false ,
-                    IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 13, Address = "8352 Marvon Dr.",
+                    IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 13, Address = "8352 Marvon Dr.",
                     SubCategoryId = 6, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "Karaoke Event", Description = "A melodious night", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/8",
