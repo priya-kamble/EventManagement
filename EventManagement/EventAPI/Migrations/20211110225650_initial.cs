@@ -34,6 +34,20 @@ namespace EventAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    LocationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.LocationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -101,7 +115,7 @@ namespace EventAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     EventImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaxOccupancy = table.Column<int>(type: "int", nullable: false),
                     MaxTicketsPerUser = table.Column<int>(type: "int", nullable: false),
@@ -111,9 +125,11 @@ namespace EventAPI.Migrations
                     IsOnlineEvent = table.Column<bool>(type: "bit", nullable: false),
                     IsCancelled = table.Column<bool>(type: "bit", nullable: false),
                     EventLinkUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    FormatId = table.Column<int>(type: "int", nullable: false)
+                    FormatId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,6 +139,12 @@ namespace EventAPI.Migrations
                         column: x => x.FormatId,
                         principalTable: "Formats",
                         principalColumn: "FormatId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventCatalog_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "LocationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EventCatalog_SubCategories_SubCategoryId",
@@ -142,6 +164,11 @@ namespace EventAPI.Migrations
                 name: "IX_EventCatalog_FormatId",
                 table: "EventCatalog",
                 column: "FormatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventCatalog_LocationId",
+                table: "EventCatalog",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventCatalog_SubCategoryId",
@@ -175,6 +202,9 @@ namespace EventAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Formats");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "SubCategories");
