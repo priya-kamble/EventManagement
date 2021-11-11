@@ -33,9 +33,7 @@ namespace EventAPI
             var dbUser = Configuration["DatabaseUser"];
             var dbPwd = Configuration["DatabasePassword"];
             var ConnectionString = $"Data Source={dbServer};Initial Catalog={dbName};User Id={dbUser};Password={dbPwd};Connect Timeout=30;";
-
-
-
+            
             services.AddDbContext<EventCatalogContext>(options => options.UseSqlServer(ConnectionString));
             services.AddSwaggerGen(options =>
                             {
