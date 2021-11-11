@@ -28,17 +28,24 @@ namespace EventAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<EventCatalogContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionString"]));
+            var dbServer = Configuration["DatabaseServer"];
+            var dbName = Configuration["DatabaseName"];
+            var dbUser = Configuration["DatabaseUser"];
+            var dbPwd = Configuration["DatabasePassword"];
+            var ConnectionString = $"Data Source={dbServer};Initial Catalog={dbName};User Id={dbUser};Password={dbPwd};Connect Timeout=30;";
+
+
+
+            services.AddDbContext<EventCatalogContext>(options => options.UseSqlServer(ConnectionString));
             services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "EventManagement - Event API",
-                    Version = "v1",
-                    Description = "Event API Microservice"
-                });
-            });
+                            {
+                                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                                {
+                                    Title = "EventManagement - Event API",
+                                    Version = "v1",
+                                    Description = "Event API Microservice"
+                                });
+                            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
