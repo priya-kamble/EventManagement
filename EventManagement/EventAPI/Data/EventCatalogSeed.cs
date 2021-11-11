@@ -298,7 +298,7 @@ namespace EventAPI.Data
                     SubCategoryId = 4 , UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Education Foundation", Description = "Education for All", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/13",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2021, 4, 4) , IsPaidEvent = false ,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 4, 4) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 8, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 3 },
 
