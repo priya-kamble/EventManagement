@@ -37,11 +37,11 @@ namespace WebMvc.Infrastructure
             {
                 var filterQs = string.Empty;
               
-                if (!string.IsNullOrWhiteSpace(city))
+                if (!string.IsNullOrEmpty(city))
                     {
                         filterQs = $"&city={city}";
                     }
-                if (!string.IsNullOrWhiteSpace(state))
+                if (!string.IsNullOrEmpty(state))
                     {
                         filterQs = filterQs + $"&state={state}";
                     }
@@ -62,8 +62,16 @@ namespace WebMvc.Infrastructure
                     {
                         filterQs = filterQs + $"&isonline={isonline}";
                     }
+                if (startDate.HasValue)
+                {
+                    filterQs = filterQs + $"&startDate={startDate}";
+                }
+                if (endDate.HasValue)
+                {
+                    filterQs = filterQs + $"&endDate={endDate}";
+                }
 
-               return $"{baseUri}Event/Events?"+ $"pageindex={PageIndex}&PageSize={PageSize}"+ filterQs;
+                return $"{baseUri}Event/Events?"+ $"pageindex={PageIndex}&PageSize={PageSize}"+ filterQs;
             }
         }
 
