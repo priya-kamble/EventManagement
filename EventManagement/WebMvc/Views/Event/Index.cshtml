@@ -10,7 +10,7 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
+       
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
@@ -29,15 +29,7 @@
                 </p>
             </div>
         </div>
-        <div class="item">
-            <img src="~/images/banner-3.png" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Engagement rings are epitome of luxury.
-                </p>
-            </div>
-        </div>
-
+      
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -49,41 +41,41 @@
     </a>
 </div>
 
-<section class="esh-catalog-filters">
+<section class="esh-Event-filters">
     <div class="container">
-        <form asp-action="Index" asp-controller="Catalog" method="post">
-            <label class="esh-catalog-label" data-title="Isonline">
-                <input type="checkbox" asp-for="@Model.EventFilterApplied" asp-items="@Model.isonline" class="esh-catalog-filter" />
+        <form asp-action="Index" asp-controller="Event" method="post">
+            <label class="esh-Event-label" data-title="Isonline">
+                <input type="checkbox" asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />
             </label>
-            <label class="esh-catalog-label" data-title="IsPaid">
-                <select asp-for="@Model.IsPaidFilterApplied" asp-items="@Model.IsPaid" class="esh-catalog-filter"></select>
+            <label class="esh-Event-label" data-title="IsPaid">
+                <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-Event-filter"></select>
             </label>
-            <label class="esh-catalog-label" data-title="Date">
-                <select asp-for="@Model.DateFilterApplied" asp-items="@Model.date" class="esh-catalog-filter"></select>
+            <label class="esh-Event-label" data-title="Date">
+                <select asp-for="@Model.DateFilterApplied" asp-items="@Model.Date" class="esh-Event-filter"></select>
             </label>
-            <label class="esh-catalog-label" data-title="Categorytype">
-                <select asp-for="@Model.CategorytypeFilterApplied" asp-items="@Model.Categorytype" class="esh-catalog-filter"></select>
+            <label class="esh-Event-label" data-title="Category">
+                <select asp-for="@Model.CategoryFilterApplied" asp-items="@Model.Category" class="esh-Event-filter"></select>
             </label>
-            <label class="esh-catalog-label" data-title="Format">
-                <select asp-for="@Model.FormatFilterApplied" asp-items="@Model.Format" class="esh-catalog-filter"></select>
+            <label class="esh-Event-label" data-title="Format">
+                <select asp-for="@Model.FormatFilterApplied" asp-items="@Model.Format" class="esh-Event-filter"></select>
             </label>
-            <label class="esh-catalog-label" data-title="Location">
-                <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Location" class="esh-catalog-filter"></select>
+            <label class="esh-Event-label" data-title="Location">
+                <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Location" class="esh-Event-filter"></select>
             </label>
-            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+            <input class="esh-Event-send" type="image" src="~/images/arrow-right.svg" />
         </form>
     </div>
 </section>
 <div class="container">
-    @if (Model.CatalogItems.Count() > 0)
+    @if (Model.Events.Count() > 0)
     {
         @Html.Partial("_pagination", Model.PaginationInfo)
 
-        <div class="esh-catalog-items row">
-            @foreach (var catalogItem in Model.CatalogItems)
+        <div class="esh-Event-items row">
+            @foreach (var Event in Model.Events)
             {
-                <div class="esh-catalog-item col-md-4">
-                    @Html.Partial("_product", catalogItem)
+                <div class="esh-Event-item col-md-4">
+                    @Html.Partial("_EventInfo", Event)
                 </div>
             }
         </div>

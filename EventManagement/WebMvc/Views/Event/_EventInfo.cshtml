@@ -1,0 +1,23 @@
+﻿
+@model WebMvc.Models.Event
+
+
+
+
+<form asp-controller="EventBrowser" asp-action="">
+    <img class="esh-Event-thumbnail" src="@Model.EventImageUrl" />
+    
+    <div class="esh-Event-name">
+        <span>@Model.Title</span>
+    </div>
+    <div class="esh-Event-Description">
+        <span>@Model.Description</span>
+    </div>
+    <input type="hidden" asp-for="@Model.Address" name="Address" />
+    <input type="hidden" asp-for="@Model.MaxOccupancy" name="MaxOccupancy" />
+    <input type="hidden" asp-for="@Model.MaxTicketsPerUser" name="MaxTicketsPerUser" />
+    <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
+    <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
+    <input type="hidden" asp-for="@Model.EventLinkUrl" name="EventLinkUrl" />
+    
+</form>
