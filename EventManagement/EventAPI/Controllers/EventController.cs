@@ -80,12 +80,12 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.EndDate <= endDate);
             }
 
-            if (!String.IsNullOrEmpty(city))
+            if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(e => e.Location.City == city);
             }
 
-            if (!String.IsNullOrEmpty(state))
+            if (!string.IsNullOrEmpty(state))
             {
                 query = query.Where(e => e.Location.State == state);
             }
