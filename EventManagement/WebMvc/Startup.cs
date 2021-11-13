@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Infrastructure;
+using WebMvc.Services;
 
 namespace WebMvc
 {
@@ -26,6 +27,7 @@ namespace WebMvc
         {
             services.AddControllersWithViews();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
+            services.AddTransient<IEventService, EventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
