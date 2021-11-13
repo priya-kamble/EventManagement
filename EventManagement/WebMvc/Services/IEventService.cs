@@ -24,5 +24,8 @@ namespace WebMvc.Services
         Task<IEnumerable<SelectListItem>> GetFormatAsync();
         Task<IEnumerable<SelectListItem>> GetLocationsAsync();
         Task<IEnumerable<SelectListItem>> GetCategoriesAsync();
+        IEnumerable<SelectListItem> GetDates();
+        IEnumerable<SelectListItem> GetPrice();
+
     }
 }

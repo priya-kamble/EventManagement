@@ -14,15 +14,15 @@ namespace WebMvc.ViewModels
         public IEnumerable<SelectListItem> Category { get; set; }
         public IEnumerable<SelectListItem> Date { get; set; }
         public IEnumerable<SelectListItem> Price { get; set; }
-        public bool Online { get; set; }
+        public bool? Online { get; set; }
         public IEnumerable<Event> Events { get; set; }
         public PaginationInfo PaginationInfo { get; set; }
 
         public int? LocationFilterApplied { get; set; }
         public int? FormatFilterApplied { get; set; }
         public int? CategoryFilterApplied { get; set; }
-        public DateTime? DateFilterApplied { get; set; }
-        public bool? PriceFilterApplied { get; set; }
+        public string DateFilterApplied { get; set; }
+        public string PriceFilterApplied { get; set; }
         public bool? OnlineFilterApplied { get; set; }
     }
 }
