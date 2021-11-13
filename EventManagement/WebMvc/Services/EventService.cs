@@ -23,7 +23,9 @@ namespace WebMvc.Services
         public async Task<IEnumerable<SelectListItem>> GetCategoriesAsync()
         {
             var categoryUri = ApiPaths.Event.GetAllCategory(_baseUrl);
+
             var dataString = await _client.GetStringAsync(categoryUri);
+
             var items = new List<SelectListItem>
             {
                 new SelectListItem
@@ -33,6 +35,7 @@ namespace WebMvc.Services
                     Selected = true
                 }
             };
+
             var categories = JArray.Parse(dataString);
             foreach (var category in categories)
             {
@@ -45,9 +48,50 @@ namespace WebMvc.Services
             }
             return items;
         }
-        public async Task<PaginatedEvents> GetEventsAsync(int page, int size, DateTime? startDate, DateTime? endDate, string? city, string? state, int? categoryId, int? formatId, int? locationId, bool? isOnline, bool? isPaid)
+
+        public IEnumerable<SelectListItem> GetDates()
         {
-            var eventsUri = ApiPaths.Event.GetAllEvent(_baseUrl, page, size, startDate, endDate, city, state, formatId, categoryId, isPaid, isOnline );
+            var dates = new List<SelectListItem>();
+            dates.Add(new SelectListItem()
+            {
+                Value = DateFilterEnum.Today.ToString(),
+                Text = "Today"
+            });
+
+            dates.Add(new SelectListItem()
+            {
+                Value = DateFilterEnum.Tomorrow.ToString(),
+                Text = "Tomorrow"
+            });
+
+            dates.Add(new SelectListItem()
+            {
+                Value = DateFilterEnum.ThisWeek.ToString(),
+                Text = "This Week"
+            });
+
+            dates.Add(new SelectListItem()
+            {
+                Value = DateFilterEnum.NextMonth.ToString(),
+                Text = "Next Month"
+            });
+            return dates;
+        }
+
+        public async Task<PaginatedEvents> GetEventsAsync(
+            int page,
+            int size,
+            DateTime? startDate,
+            DateTime? endDate,
+            string city,
+            string state,
+            int? categoryId,
+            int? formatId,
+            int? locationId,
+            bool? isOnline,
+            bool? isPaid)
+        {
+            var eventsUri = ApiPaths.Event.GetAllEvent(_baseUrl, page, size, startDate, endDate, city, state, formatId, categoryId, isPaid, isOnline);
             var dataString = await _client.GetStringAsync(eventsUri);
             return JsonConvert.DeserializeObject<PaginatedEvents>(dataString);
         }
@@ -100,6 +144,29 @@ namespace WebMvc.Services
                     });
             }
             return items;
+        }
+
+        public IEnumerable<SelectListItem> GetPrice()
+        {
+            var price = new List<SelectListItem>();
+            price.Add(new SelectListItem()
+            {
+                Value = PriceFilterEnum.All.ToString(),
+                Text = "All"
+            });
+
+            price.Add(new SelectListItem()
+            {
+                Value = PriceFilterEnum.Free.ToString(),
+                Text = "Free"
+            });
+
+            price.Add(new SelectListItem()
+            {
+                Value = PriceFilterEnum.Paid.ToString(),
+                Text = "Paid"
+            });
+            return price;
         }
     }
 }
