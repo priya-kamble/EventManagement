@@ -6,21 +6,23 @@
             <nav>
                 <a class="esh-pager-item esh-pager-item--navigable @Model.Previous"
                    id="Previous"
-                   asp-controller="Catalog"
+                   asp-controller="Event"
                    asp-action="Index"
+
                    asp-route-page="@(Model.ActualPage -1)"
                    aria-label="Previous">
                     Previous
                 </a>
 
                 <span class="esh-pager-item">
-                    Showing @Model.ItemsPerPage of @Model.TotalItems products - Page @(Model.ActualPage + 1) - @Model.TotalPages
+                    Showing @Model.ItemsPerPage of @Model.TotalItems Events - Page @(Model.ActualPage + 1) - @Model.TotalPages
                 </span>
 
                 <a class="esh-pager-item esh-pager-item--navigable @Model.Next"
                    id="Next"
-                   asp-controller="Catalog"
+                   asp-controller="Event"
                    asp-action="Index"
+
                    asp-route-page="@(Model.ActualPage + 1)"
                    aria-label="Next">
                     Next
