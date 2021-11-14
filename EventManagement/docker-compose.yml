@@ -43,10 +43,10 @@ services:
       context: .\WebMvc
       dockerfile: Dockerfile
     environment:
-      CatalogUrl: http://eventbrite
+      CatalogUrl: http://event
     ports:
       - "7500:80"
-    container_name: webshop
+    container_name: eventbrowing
     networks:
       - frontend
     depends_on:
