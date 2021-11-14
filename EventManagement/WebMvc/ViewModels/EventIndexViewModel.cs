@@ -15,6 +15,7 @@ namespace WebMvc.ViewModels
         public IEnumerable<SelectListItem> Date { get; set; }
         public IEnumerable<SelectListItem> Price { get; set; }
         public bool? Online { get; set; }
+       // public bool? OnlineClinetId { get; set; }
         public IEnumerable<Event> Events { get; set; }
         public PaginationInfo PaginationInfo { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Browsing Event";
-   
+
     @model WebMvc.ViewModels.EventIndexViewModel
 }
 
@@ -53,10 +53,15 @@
     <div class="container">
         <form asp-action="Index" asp-controller="Event" method="post">
 
-            @*<label class="esh-Event-label" data-title="Isonline">
-            <input type="checkbox"   asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />
-            </label>*@
-           <label class="esh-Event-label" data-title="IsPaid">
+            <label class="esh-Event-label" data-title="Isonline">
+                @*<input type="checkbox" asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />*@
+
+
+               @* <input type="checkbox"  name="isonline" id="isonline"  is    value="@Model.OnlineFilterApplied" class="esh-Event-filter"/>*@
+
+                @*<input type="hidden" asp-for="OnlineClinetId" value="@Model.OnlineFilterApplied" />*@
+            </label>
+            <label class="esh-Event-label" data-title="IsPaid">
             <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-Event-filter"></select>
            </label>
             <label class="esh-Event-label" data-title="Date">
