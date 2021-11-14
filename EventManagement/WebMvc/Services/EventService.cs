@@ -53,6 +53,14 @@ namespace WebMvc.Services
         public IEnumerable<SelectListItem> GetDates()
         {
             var dates = new List<SelectListItem>();
+
+            dates.Add(new SelectListItem()
+            {
+                Value = DateFilterEnum.All.ToString(),
+                Text = "All",
+                Selected= true
+
+            });
             dates.Add(new SelectListItem()
             {
                 Value = DateFilterEnum.Today.ToString(),
@@ -153,7 +161,8 @@ namespace WebMvc.Services
             price.Add(new SelectListItem()
             {
                 Value = PriceFilterEnum.All.ToString(),
-                Text = "All"
+                Text = "All",
+                Selected= true
             });
 
             price.Add(new SelectListItem()
