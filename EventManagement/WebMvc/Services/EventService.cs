@@ -43,8 +43,8 @@ namespace WebMvc.Services
                 items.Add(
                     new SelectListItem
                     {
-                        Value = category.Value<string>("CategoryId"),
-                        Text = category.Value<string>("CategoryName")
+                        Value = category.Value<string>("categoryId"),
+                        Text = category.Value<string>("categoryName")
                     });
             }
             return items;
@@ -115,8 +115,8 @@ namespace WebMvc.Services
                 items.Add(
                     new SelectListItem
                     {
-                        Value = format.Value<string>("FormatId"),
-                        Text = format.Value<string>("FormatName")
+                        Value = format.Value<string>("formatId"),
+                        Text = format.Value<string>("formatName")
                     });
             }
             return items;
@@ -140,8 +140,8 @@ namespace WebMvc.Services
                 items.Add(
                     new SelectListItem
                     {
-                        Value = location.Value<string>("LocationId"),
-                        Text = $"{location.Value<string>("City")}, {location.Value<string>("State")}"
+                        Value = location.Value<string>("locationId"),
+                        Text = $"{location.Value<string>("city")}, {location.Value<string>("state")}"
                     });
             }
             return items;
