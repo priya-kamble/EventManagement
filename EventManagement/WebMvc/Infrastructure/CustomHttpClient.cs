@@ -30,8 +30,16 @@ namespace WebMvc.Infrastructure
                     authorizationToken);
             }
 
-            var response = await _client.SendAsync(requestMessage);
-            return await response.Content.ReadAsStringAsync();
+            try
+            {
+                var response = await _client.SendAsync(requestMessage);
+
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")

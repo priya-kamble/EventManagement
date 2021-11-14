@@ -17,7 +17,7 @@
             <img src="~/images/banner.png" alt="ASP.NET" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Browsing Latest Events
+                    Browsing Latest Events!
                 </p>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <img src="~/images/banner-2.png" alt="Visual Studio" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Diamond Engagement Rings are a thing!
+                    Exciting Events in Your Area and Online!  !
                 </p>
             </div>
         </div>
@@ -69,8 +69,7 @@
 <div class="container">
     @if (Model.Events.Count() > 0)
     {
-        @Html.Partial("_pagination", Model.PaginationInfo)
-
+       
         <div class="esh-Event-items row">
             @foreach (var Event in Model.Events)
             {
@@ -84,7 +83,7 @@
     }
     else
     {
-        <div class="esh-catalog-items row">
+        <div class="esh-Event-items row">
             THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
         </div>
     }

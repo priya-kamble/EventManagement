@@ -17,6 +17,7 @@ namespace WebMvc.Services
         private readonly IHttpClient _client;
         public EventService(IConfiguration config, IHttpClient client)
         {
+            
             _baseUrl = $"{config["CatalogUrl"]}/api/";
             _client = client;
         }
