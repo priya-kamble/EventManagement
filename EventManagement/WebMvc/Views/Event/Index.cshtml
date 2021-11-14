@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Event";
+    ViewData["Title"] = "Browsing Event";
+   
     @model WebMvc.ViewModels.EventIndexViewModel
 }
 
@@ -29,7 +30,14 @@
                 </p>
             </div>
         </div>
-      
+        <div class="item">
+            <img src="~/images/banner-3.png" alt="Visual Studio" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Exciting Events in Your Area and Online!  !
+                </p>
+            </div>
+        </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -44,12 +52,13 @@
 <section class="esh-Event-filters">
     <div class="container">
         <form asp-action="Index" asp-controller="Event" method="post">
-            <label class="esh-Event-label" data-title="Isonline">
-                <input type="checkbox" asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />
-            </label>
-            <label class="esh-Event-label" data-title="IsPaid">
-                <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-Event-filter"></select>
-            </label>
+
+            @*<label class="esh-Event-label" data-title="Isonline">
+            <input type="checkbox"   asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />
+            </label>*@
+           <label class="esh-Event-label" data-title="IsPaid">
+            <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-Event-filter"></select>
+           </label>
             <label class="esh-Event-label" data-title="Date">
                 <select asp-for="@Model.DateFilterApplied" asp-items="@Model.Date" class="esh-Event-filter"></select>
             </label>
