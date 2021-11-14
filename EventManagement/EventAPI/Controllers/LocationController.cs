@@ -47,7 +47,7 @@ namespace EventAPI.Controllers
             return Ok(states);
         }
 
-        [HttpGet("")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> Locations()
         {
             var locations = await _context.Locations.ToListAsync();

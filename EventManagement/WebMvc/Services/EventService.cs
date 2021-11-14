@@ -17,7 +17,8 @@ namespace WebMvc.Services
         private readonly IHttpClient _client;
         public EventService(IConfiguration config, IHttpClient client)
         {
-            _baseUrl = $"{config["CatalogUrl"]}/api/event/";
+            
+            _baseUrl = $"{config["CatalogUrl"]}/api/";
             _client = client;
         }
         public async Task<IEnumerable<SelectListItem>> GetCategoriesAsync()

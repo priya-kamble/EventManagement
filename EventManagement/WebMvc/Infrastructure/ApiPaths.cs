@@ -22,7 +22,7 @@ namespace WebMvc.Infrastructure
 
             public static string GetAllLocation(string baseUri)
             {
-                return $"{baseUri}Location/Location";
+                return $"{baseUri}Location/Locations";
             }
 
             public static string GetAllEvent(string baseUri , int PageIndex, int PageSize,

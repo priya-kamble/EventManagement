@@ -17,7 +17,7 @@ services:
     networks:
       - backend
 
-  Catalog:
+  event:
     image: eventmanagement/eventapi
     build:
       context: .\EventAPI
@@ -36,3 +36,18 @@ services:
       - backend
     depends_on:
       - mssqlserver
+
+  webmvc:
+    image: events/webmvc
+    build:
+      context: .\WebMvc
+      dockerfile: Dockerfile
+    environment:
+      CatalogUrl: http://event
+    ports:
+      - "7500:80"
+    container_name: eventbrowsing
+    networks:
+      - frontend
+    depends_on:
+      - event
