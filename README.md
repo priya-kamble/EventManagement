@@ -1,19 +1,16 @@
 # EventManagement
 
-## Kal Academy Deep Stack Program - November 2021
+### Kal Academy Deep Stack Program - November 2021
 
-### Microservices Assignment 3A
-
+#### Microservices Assignment 3A
 #### Web Application built using 
 - Microsoft Entity Framework Core 3.1 
 - Docker
 - Microsoft SQL Server
 - ASP.Net Core MVC
 
-[See a demo of this application on YouTube]()
-
+[See a demo of this application on YouTube]() 
 ---
-
 Details of EventManagement project:
 - As a part of Assignment 3a, we have built web application for users to browse events using multiple filters.
 - We have built EventAPI microservice. Within which we have written multiple APIs as below
