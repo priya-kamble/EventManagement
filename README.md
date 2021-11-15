@@ -21,7 +21,7 @@ Details of EventManagement project:
   - Event API
 
 - For UI, we have used ASP.Net Web app MVC project as our client. 
-- We have used Docker containers for microservice, MSSQL Database and WebMVC client.
+- We have used Docker containers for EventAPI microservice, MSSQL Database and WebMVC client.
 
 Swagger document for Event API Microservice will be available at: http://localhost:7000/swagger/index.html
 
