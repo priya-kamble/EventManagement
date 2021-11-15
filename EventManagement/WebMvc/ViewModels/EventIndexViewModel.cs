@@ -24,6 +24,6 @@ namespace WebMvc.ViewModels
         public int? CategoryFilterApplied { get; set; }
         public string DateFilterApplied { get; set; }
         public string PriceFilterApplied { get; set; }
-        public bool? OnlineFilterApplied { get; set; }
+        public bool? OnlineFilterApplied { get; set; }= false
     }
 }

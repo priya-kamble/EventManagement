@@ -53,9 +53,9 @@
     <div class="container">
         <form asp-action="Index" asp-controller="Event" method="post">
 
-            @*<label class="esh-Event-label" data-title="Isonline">
-            <input type="checkbox"   asp-for="@Model.OnlineFilterApplied" asp-items="@Model.Online" class="esh-Event-filter" />
-            </label>*@
+            <label class="esh-Event-label" data-title="Isonline">
+            <input type="checkbox"   asp-for="@Model.Price" asp-items="@Model.Online" class="esh-Event-filter" />
+            </label>
            <label class="esh-event-label" data-title="IsPaid">
             <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-event-filter"></select>
            </label>
@@ -79,7 +79,7 @@
     @if (Model.Events.Count() > 0)
     {
         @Html.Partial("_pagination", Model.PaginationInfo)
-        @*<partial name="_pagination" for="PaginationInfo" />*@
+  
 
         <div class="esh-Event-items row">
             @foreach (var eventItem in Model.Events)
@@ -87,13 +87,12 @@
             <div class="esh-Event-item col-md-4">
 
                 @Html.Partial("_EventInfo", eventItem)
-                @*<partial name="_EventInfo" model="eventItem" />*@
-
+              
             </div>
             }
         </div>
         @Html.Partial("_pagination", Model.PaginationInfo)
-        @*<partial name="_pagination" for="PaginationInfo" />*@
+      
     }
     else
     {

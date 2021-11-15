@@ -22,8 +22,8 @@ namespace WebMvc.Controllers
             int? CategoryFilterApplied,
             string DateFilterApplied,
             string PriceFilterApplied,
-            bool? OnlineFilterApplied,
-            bool? IsckeckedOnlineFilterApplied)
+            bool? OnlineFilterApplied
+           )
         {
             var eventsOnPage = 10;
             DateTime? startDate = null, endDate = null;
@@ -122,7 +122,7 @@ namespace WebMvc.Controllers
                 CategoryFilterApplied = CategoryFilterApplied,
                 DateFilterApplied = DateFilterApplied,
                 PriceFilterApplied = PriceFilterApplied,
-                OnlineFilterApplied = OnlineFilterApplied,
+                OnlineFilterApplied = false,
             };
 
             return View(eventIndexViewModel);
