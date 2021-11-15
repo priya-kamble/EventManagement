@@ -22,7 +22,7 @@ namespace WebMvc.Controllers
             int? CategoryFilterApplied,
             string DateFilterApplied,
             string PriceFilterApplied,
-            bool? OnlineFilterApplied)
+            bool OnlineFilterApplied)
         {
             var eventsOnPage = 10;
             DateTime? startDate = null, endDate = null;
