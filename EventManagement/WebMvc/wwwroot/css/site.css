@@ -48,3 +48,34 @@ textarea {
         display: none;
     }
 }
+
+/* set image size for main panel */
+.event_image {
+    height: 220px;
+    width: 293px;
+}
+
+.event_name {
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.event_intro {
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+}
+
+.main_title {
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.view_link {
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+}
+
+ul.fix_nav {
+    list-style-type: none;
+}
