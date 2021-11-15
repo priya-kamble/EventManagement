@@ -9,7 +9,7 @@
 - Microsoft SQL Server
 - ASP.Net Core MVC
 
-[See a demo of this application on YouTube]() 
+[See a demo of this application on YouTube](https://youtu.be/6cUGzwwzMZ0) 
 ---
 Details of EventManagement project:
 - As a part of Assignment 3a, we have built web application for users to browse events using multiple filters.
