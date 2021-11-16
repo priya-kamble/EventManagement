@@ -28,8 +28,7 @@ namespace WebMvc.Infrastructure
             public static string GetAllEvent(string baseUri , int PageIndex, int PageSize,
                                               DateTime? startDate,
                                               DateTime? endDate,
-                                             string city, 
-                                             string state,
+                                             int? locationId,
                                              int? formatId,
                                              int? categoryId,
                                              bool? ispaid,
@@ -37,13 +36,9 @@ namespace WebMvc.Infrastructure
             {
                 var filterQs = string.Empty;
               
-                if (!string.IsNullOrEmpty(city))
+                if (locationId.HasValue)
                     {
-                        filterQs = $"&city={city}";
-                    }
-                if (!string.IsNullOrEmpty(state))
-                    {
-                        filterQs = filterQs + $"&state={state}";
+                        filterQs = $"&locationid={locationId}";
                     }
 
                 if (formatId.HasValue)
