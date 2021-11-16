@@ -22,8 +22,7 @@ namespace WebMvc.Controllers
             int? CategoryFilterApplied,
             string DateFilterApplied,
             string PriceFilterApplied,
-            bool? OnlineFilterApplied
-           )
+            bool OnlineFilterApplied)
         {
             var eventsOnPage = 10;
             DateTime? startDate = null, endDate = null;
@@ -77,15 +76,6 @@ namespace WebMvc.Controllers
                         break;
                 }
             }
-            //if (!(bool)OnlineFilterApplied)
-            //{
-            //    // clearing the client id
-            //    OnlineFilterApplied = false;
-            //}
-            //else
-            //{
-            //    OnlineFilterApplied = true;
-            //}
 
             PaginatedEvents paginatedEvents = await _eventService.GetEventsAsync(
                 page ?? 0,
@@ -122,7 +112,7 @@ namespace WebMvc.Controllers
                 CategoryFilterApplied = CategoryFilterApplied,
                 DateFilterApplied = DateFilterApplied,
                 PriceFilterApplied = PriceFilterApplied,
-                OnlineFilterApplied = false,
+                OnlineFilterApplied = OnlineFilterApplied,
             };
 
             return View(eventIndexViewModel);

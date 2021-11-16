@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Browsing Event";
-   
+
     @model WebMvc.ViewModels.EventIndexViewModel
+
 }
 
 
@@ -11,11 +12,11 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-       
+
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="~/images/banner.png" alt="ASP.NET" class="img-responsive" />
+            <img src="~/images/festival.jpg" alt="ASP.NET" class="img-responsive stretch_img" />
             <div class="carousel-caption" role="option">
                 <p>
                     Browsing Latest Events!
@@ -23,18 +24,18 @@
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner-2.png" alt="Visual Studio" class="img-responsive" />
+            <img src="~/images/banner-2.png" alt="Visual Studio" class="img-responsive stretch_img" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Exciting Events in Your Area and Online!  !
+                    Exciting Events in Your Area and Online!
                 </p>
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner-3.png" alt="Visual Studio" class="img-responsive" />
+            <img src="~/images/banner-3.png" alt="Visual Studio" class="img-responsive stretch_img" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Exciting Events in Your Area and Online!  !
+                    Exciting Events in Your Area and Online!
                 </p>
             </div>
         </div>
@@ -50,28 +51,34 @@
 </div>
 
 <section class="esh-event-filters">
-    <div class="container">
+    <div class="subtitle">SEARCH FOR EVENTS USING FILTERS:</div>
+    <div class="container filter_container">
         <form asp-action="Index" asp-controller="Event" method="post">
+            <label class="online_label" for="IsOnline">Online</label>
+            <label class="esh-event-label2">
+                <input asp-for="@Model.OnlineFilterApplied" type="checkbox" class="dropdown_label" />
+            </label>
 
-            <label class="esh-Event-label" data-title="Isonline">
-            <input type="checkbox"   asp-for="@Model.Price" asp-items="@Model.Online" class="esh-Event-filter" />
+            <label class="esh-event-label" data-title="Price">
+                <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-event-filter dropdown_label"></select>
             </label>
-           <label class="esh-event-label" data-title="IsPaid">
-            <select asp-for="@Model.PriceFilterApplied" asp-items="@Model.Price" class="esh-event-filter"></select>
-           </label>
+
             <label class="esh-event-label" data-title="Date">
-                <select asp-for="@Model.DateFilterApplied" asp-items="@Model.Date" class="esh-event-filter"></select>
+                <select asp-for="@Model.DateFilterApplied" asp-items="@Model.Date" class="esh-event-filter dropdown_label"></select>
             </label>
+
             <label class="esh-event-label" data-title="Category">
-                <select asp-for="@Model.CategoryFilterApplied" asp-items="@Model.Category" class="esh-event-filter"></select>
+                <select asp-for="@Model.CategoryFilterApplied" asp-items="@Model.Category" class="esh-event-filter dropdown_label"></select>
             </label>
-            <label class="esh-catalog-label" data-title="Format">
-                <select asp-for="@Model.FormatFilterApplied" asp-items="@Model.Format" class="esh-event-filter"></select>
+
+            <label class="esh-event-label" data-title="Format">
+                <select asp-for="@Model.FormatFilterApplied" asp-items="@Model.Format" class="esh-event-filter dropdown_label"></select>
             </label>
+
             <label class="esh-event-label" data-title="Location">
-                <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Location" style="width:auto;" class="esh-event-filter"></select>
+                <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Location" style="width:auto;" class="esh-event-filter dropdown_label"></select>
             </label>
-           <input class="esh-event-send" type="image" src="~/images/b-arrow.png" />
+            <input class="esh-event-send " type="image" src="~/images/arrow-right.svg" />
         </form>
     </div>
 </section>
@@ -79,20 +86,21 @@
     @if (Model.Events.Count() > 0)
     {
         @Html.Partial("_pagination", Model.PaginationInfo)
-  
+        @*<partial name="_pagination" for="PaginationInfo" />*@
 
         <div class="esh-Event-items row">
             @foreach (var eventItem in Model.Events)
             {
-            <div class="esh-Event-item col-md-4">
+                <div class="esh-Event-item col-md-4">
 
-                @Html.Partial("_EventInfo", eventItem)
-              
-            </div>
+                    @Html.Partial("_EventInfo", eventItem)
+                    @*<partial name="_EventInfo" model="eventItem" />*@
+
+                </div>
             }
         </div>
         @Html.Partial("_pagination", Model.PaginationInfo)
-      
+        @*<partial name="_pagination" for="PaginationInfo" />*@
     }
     else
     {

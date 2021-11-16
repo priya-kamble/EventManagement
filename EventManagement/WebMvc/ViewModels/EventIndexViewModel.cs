@@ -14,8 +14,7 @@ namespace WebMvc.ViewModels
         public IEnumerable<SelectListItem> Category { get; set; }
         public IEnumerable<SelectListItem> Date { get; set; }
         public IEnumerable<SelectListItem> Price { get; set; }
-        public bool? Online { get; set; }
-       // public bool? OnlineClinetId { get; set; }
+        public bool Online { get; set; }
         public IEnumerable<Event> Events { get; set; }
         public PaginationInfo PaginationInfo { get; set; }
 
@@ -24,6 +23,6 @@ namespace WebMvc.ViewModels
         public int? CategoryFilterApplied { get; set; }
         public string DateFilterApplied { get; set; }
         public string PriceFilterApplied { get; set; }
-        public bool? OnlineFilterApplied { get; set; }= false
+        public bool OnlineFilterApplied { get; set; } = false;
     }
 }
