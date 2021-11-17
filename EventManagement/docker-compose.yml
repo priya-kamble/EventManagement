@@ -13,7 +13,7 @@ services:
       SA_PASSWORD: Sa!Event
     ports:
       - "5040:1433"
-    container_name: EventApiContainer   
+    container_name: MSSQL-Container   
     networks:
       - backend
 
@@ -30,7 +30,7 @@ services:
       ExternalCatalogUrl: http://localhost:7000
     ports:
       - "7000:80"
-    container_name: eventcatalogapi  
+    container_name: EventCatalogAPI-Container  
     networks:
       - frontend
       - backend
@@ -46,7 +46,7 @@ services:
       CatalogUrl: http://event
     ports:
       - "7500:80"
-    container_name: eventbrowsing
+    container_name: WebMVC-Container
     networks:
       - frontend
     depends_on:
