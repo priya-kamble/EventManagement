@@ -58,8 +58,7 @@ namespace EventAPI.Controllers
         public async Task<IActionResult> Events(
             [FromQuery] DateTime? startDate, 
             [FromQuery] DateTime? endDate,
-            [FromQuery] string city,
-            [FromQuery] string state,
+            [FromQuery] int? locationId,
             [FromQuery] int? formatId,
             [FromQuery] int? categoryId,
             [FromQuery] bool? ispaid, 
@@ -80,14 +79,9 @@ namespace EventAPI.Controllers
                 query = query.Where(e => e.EndDate <= endDate);
             }
 
-            if (!string.IsNullOrEmpty(city))
+            if (locationId.HasValue)
             {
-                query = query.Where(e => e.Location.City == city);
-            }
-
-            if (!string.IsNullOrEmpty(state))
-            {
-                query = query.Where(e => e.Location.State == state);
+                query = query.Where(e => e.LocationId == locationId);
             }
 
             if (formatId.HasValue)
