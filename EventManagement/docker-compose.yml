@@ -11,9 +11,10 @@ services:
     environment:
       ACCEPT_EULA: Y 
       SA_PASSWORD: Sa!Event
+      TZ: "America/Los_Angeles"
     ports:
       - "5040:1433"
-    container_name: MSSQL-Container   
+    container_name: MSSQLContainer   
     networks:
       - backend
 
@@ -28,9 +29,10 @@ services:
       DatabaseUser: sa
       DatabasePassword: Sa!Event
       ExternalCatalogUrl: http://localhost:7000
+      TZ: "America/Los_Angeles"
     ports:
       - "7000:80"
-    container_name: EventCatalogAPI-Container  
+    container_name: EventCatalogAPIContainer  
     networks:
       - frontend
       - backend
@@ -44,9 +46,10 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://event
+      TZ: "America/Los_Angeles"
     ports:
       - "7500:80"
-    container_name: WebMVC-Container
+    container_name: WebMVCContainer
     networks:
       - frontend
     depends_on:
