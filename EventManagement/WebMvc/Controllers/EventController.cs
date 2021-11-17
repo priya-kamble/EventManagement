@@ -17,18 +17,18 @@ namespace WebMvc.Controllers
 
         public async Task<IActionResult> Index(
             int? page,
-            int? LocationFilterApplied,
-            int? FormatFilterApplied,
-            int? CategoryFilterApplied,
-            string DateFilterApplied,
-            string PriceFilterApplied,
-            bool OnlineFilterApplied)
+            int? locationFilterApplied,
+            int? formatFilterApplied,
+            int? categoryFilterApplied,
+            string dateFilterApplied,
+            string priceFilterApplied,
+            bool onlineFilterApplied)
         {
-            var eventsOnPage = 10;
+            var eventsOnPage = 5;
             DateTime? startDate = null, endDate = null;
-            if (!string.IsNullOrWhiteSpace(DateFilterApplied))
+            if (!string.IsNullOrWhiteSpace(dateFilterApplied))
             {
-                DateFilterEnum selectedDateFilter = (DateFilterEnum)Enum.Parse(typeof(DateFilterEnum), DateFilterApplied);
+                DateFilterEnum selectedDateFilter = (DateFilterEnum)Enum.Parse(typeof(DateFilterEnum), dateFilterApplied);
                 switch (selectedDateFilter)
                 {
 
@@ -59,9 +59,9 @@ namespace WebMvc.Controllers
 
             bool? ispaid = null;
 
-            if (!string.IsNullOrWhiteSpace(PriceFilterApplied))
+            if (!string.IsNullOrWhiteSpace(priceFilterApplied))
             {
-                PriceFilterEnum priceFilterEnum = (PriceFilterEnum)Enum.Parse(typeof(PriceFilterEnum), PriceFilterApplied);
+                PriceFilterEnum priceFilterEnum = (PriceFilterEnum)Enum.Parse(typeof(PriceFilterEnum), priceFilterApplied);
                 switch (priceFilterEnum)
                 {
                     case PriceFilterEnum.Free:
@@ -81,11 +81,11 @@ namespace WebMvc.Controllers
                 page ?? 0,
                 eventsOnPage,
                 startDate,
-                endDate: endDate,
-                categoryId: CategoryFilterApplied,
-                FormatFilterApplied,
-                locationId: LocationFilterApplied,
-                OnlineFilterApplied,
+                endDate,
+                categoryFilterApplied,
+                formatFilterApplied,
+                locationFilterApplied,
+                onlineFilterApplied,
                 ispaid);
             var locationsData = await _eventService.GetLocationsAsync();
 
@@ -96,7 +96,7 @@ namespace WebMvc.Controllers
                 Category = await _eventService.GetCategoriesAsync(),
                 Date = _eventService.GetDates(),
                 Price = _eventService.GetPrice(),
-                Online = OnlineFilterApplied,
+                Online = onlineFilterApplied,
                 Events = paginatedEvents.Data,
                 PaginationInfo = new PaginationInfo
                 {
@@ -105,12 +105,12 @@ namespace WebMvc.Controllers
                     ActualPage = paginatedEvents.PageIndex,
                     TotalPages = (int)Math.Ceiling((decimal)paginatedEvents.Count / eventsOnPage)
                 },
-                LocationFilterApplied = LocationFilterApplied,
-                FormatFilterApplied = FormatFilterApplied,
-                CategoryFilterApplied = CategoryFilterApplied,
-                DateFilterApplied = DateFilterApplied,
-                PriceFilterApplied = PriceFilterApplied,
-                OnlineFilterApplied = OnlineFilterApplied,
+                LocationFilterApplied = locationFilterApplied,
+                FormatFilterApplied = formatFilterApplied,
+                CategoryFilterApplied = categoryFilterApplied,
+                DateFilterApplied = dateFilterApplied,
+                PriceFilterApplied = priceFilterApplied,
+                OnlineFilterApplied = onlineFilterApplied,
             };
 
             return View(eventIndexViewModel);
