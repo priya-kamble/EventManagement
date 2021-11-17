@@ -92,15 +92,13 @@ namespace WebMvc.Services
             int size,
             DateTime? startDate,
             DateTime? endDate,
-            string city,
-            string state,
             int? categoryId,
             int? formatId,
             int? locationId,
             bool? isOnline,
             bool? isPaid)
         {
-            var eventsUri = ApiPaths.Event.GetAllEvent(_baseUrl, page, size, startDate, endDate, city, state, formatId, categoryId, isPaid, isOnline);
+            var eventsUri = ApiPaths.Event.GetAllEvent(_baseUrl, page, size, startDate, endDate, locationId, formatId, categoryId, isPaid, isOnline);
             var dataString = await _client.GetStringAsync(eventsUri);
             return JsonConvert.DeserializeObject<PaginatedEvents>(dataString);
         }

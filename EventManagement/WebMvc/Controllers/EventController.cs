@@ -82,11 +82,9 @@ namespace WebMvc.Controllers
                 eventsOnPage,
                 startDate,
                 endDate: endDate,
-                city: null,
-                state: null,
                 categoryId: CategoryFilterApplied,
                 FormatFilterApplied,
-                LocationFilterApplied,
+                locationId: LocationFilterApplied,
                 OnlineFilterApplied,
                 ispaid);
             var locationsData = await _eventService.GetLocationsAsync();
