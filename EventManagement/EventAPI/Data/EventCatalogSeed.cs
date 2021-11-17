@@ -238,17 +238,17 @@ namespace EventAPI.Data
             {
 
                 new Event { Title = "Diversity Career Group", Description = "Tech Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1",
-                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 3, 3), EndDate = new DateTime(2021, 3, 3) , IsPaidEvent = false ,
+                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021,11,16), EndDate = new DateTime(2021,11,16) , IsPaidEvent = false ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Photowalk", Description = "Seattle Center with Nikon", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/2",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 3, 3), EndDate = new DateTime(2021, 4, 4) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 11, 18), EndDate = new DateTime(2021, 11, 18) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 3, Address = "1000 1st Ave",
                     SubCategoryId = 3, UserId = 3, FormatId = 9 },
 
                 new Event { Title = "Dream House", Description = "New Homebuyer Workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/3",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 3, 3), EndDate = new DateTime(2021, 3, 3) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 11, 17), EndDate = new DateTime(2021, 11, 17) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 5, Address = "1000 1st Ave",
                     SubCategoryId = 2, UserId = 3, FormatId = 6 },
 
@@ -273,12 +273,12 @@ namespace EventAPI.Data
                     SubCategoryId = 6, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "Karaoke Event", Description = "A melodious night", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/8",
-                    MaxOccupancy = 40, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 1, 1) , IsPaidEvent = true ,
+                    MaxOccupancy = 40, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 11, 19), EndDate = new DateTime(2021, 11, 19) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 2, Address = "12 00 21st Ave",
                     SubCategoryId = 7, UserId = 3, FormatId = 7 },
 
                 new Event { Title = "Harmony", Description = "A musical workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/9",
-                    MaxOccupancy = 15, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 1, 1) , IsPaidEvent = true ,
+                    MaxOccupancy = 15, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 11, 19), EndDate = new DateTime(2022, 11, 19) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 4, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 2 },
 
@@ -288,7 +288,7 @@ namespace EventAPI.Data
                     SubCategoryId = 11, UserId = 3, FormatId = 11 },
 
                 new Event { Title = "Park & Hike Event", Description = "Hike in the woods", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/11",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = true,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 11, 23), EndDate = new DateTime(2021, 11, 23) , IsPaidEvent = true,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "8352 Marvon Dr.",
                     SubCategoryId = 9, UserId = 3, FormatId = 6 },
 
@@ -323,7 +323,7 @@ namespace EventAPI.Data
                     SubCategoryId = 6, UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Pro Club", Description = "A complete sports league", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/18",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 4, 4) , IsPaidEvent = true ,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 3), EndDate = new DateTime(2021, 12, 3) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "220 Madison Ave",
                     SubCategoryId = 10, UserId = 3, FormatId = 5 },
 

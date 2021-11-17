@@ -21,8 +21,8 @@ namespace WebMvc.Controllers
             int? formatFilterApplied,
             int? categoryFilterApplied,
             string dateFilterApplied,
-            string priceFilterApplied,
-            bool onlineFilterApplied)
+            bool onlineFilterApplied,
+            string priceFilterApplied)
         {
             var eventsOnPage = 5;
             DateTime? startDate = null, endDate = null;
@@ -33,19 +33,19 @@ namespace WebMvc.Controllers
                 {
 
                     case DateFilterEnum.Today:
-                        startDate = DateTime.Today;
-                        endDate = DateTime.Today;
+                        startDate = DateTime.Now.Date;
+                        endDate = DateTime.Now.Date;
                         break;
                     case DateFilterEnum.Tomorrow:
-                        startDate = DateTime.Today.AddDays(1);
-                        endDate = DateTime.Today.AddDays(1);
+                        startDate = DateTime.Today.AddDays(1).Date;
+                        endDate = DateTime.Today.AddDays(1).Date;
                         break;
                     case DateFilterEnum.ThisWeek:
-                        startDate = DateTime.Today;
-                        endDate = DateTime.Today.AddDays(7);
+                        startDate = DateTime.Now.Date;
+                        endDate = DateTime.Now.AddDays(7).Date;
                         break;
                     case DateFilterEnum.NextMonth:
-                        var nextMonthDate = DateTime.Today.AddMonths(1);
+                        var nextMonthDate = DateTime.Now.AddMonths(1);
                         startDate = new DateTime(nextMonthDate.Year, nextMonthDate.Month, 1);
                         endDate = new DateTime(nextMonthDate.Year, nextMonthDate.Month, DateTime.DaysInMonth(nextMonthDate.Year, nextMonthDate.Month));
                         break;
@@ -57,7 +57,7 @@ namespace WebMvc.Controllers
                 }
             }
 
-            bool? ispaid = null;
+            bool? isPaid = null;
 
             if (!string.IsNullOrWhiteSpace(priceFilterApplied))
             {
@@ -65,14 +65,14 @@ namespace WebMvc.Controllers
                 switch (priceFilterEnum)
                 {
                     case PriceFilterEnum.Free:
-                       ispaid = false;
+                       isPaid = false;
                         break;
                     case PriceFilterEnum.Paid:
-                        ispaid = true;
+                        isPaid = true;
                         break;
                     case PriceFilterEnum.All:
                     default:
-                        ispaid = null;
+                        isPaid = null;
                         break;
                 }
             }
@@ -86,7 +86,7 @@ namespace WebMvc.Controllers
                 formatFilterApplied,
                 locationFilterApplied,
                 onlineFilterApplied,
-                ispaid);
+                isPaid);
             var locationsData = await _eventService.GetLocationsAsync();
 
             var eventIndexViewModel = new EventIndexViewModel
