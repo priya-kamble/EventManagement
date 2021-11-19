@@ -2,7 +2,7 @@
 @using WebMvc.Services
 @using WebMvc.Models
 
-@inject IIdentityService<ApplicationUser> UserManager
+@*@inject IIdentityService<ApplicationUser> UserManager*@
 @if (User.FindFirst(x => x.Type == "preferred_username") != null)
 {
 
