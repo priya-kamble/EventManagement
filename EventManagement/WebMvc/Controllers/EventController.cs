@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using WebMvc.Models;
@@ -114,6 +115,14 @@ namespace WebMvc.Controllers
             };
 
             return View(eventIndexViewModel);
+        }
+
+        [Authorize]
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your Application Description Page";
+
+            return View();
         }
     }
 }
