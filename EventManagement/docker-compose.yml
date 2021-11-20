@@ -18,6 +18,17 @@ services:
     networks:
       - backend
 
+  tokensqlserver:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Sa!Event
+    ports:
+      - "1449:1433"
+    container_name: eventstokensqlserver
+    networks:
+      - backend
+
   event:
     image: eventmanagement/eventapi
     build:
@@ -46,6 +57,8 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://event
+      IdentityUrl: http://192.168.1.13:7800
+      CallBackUrl: http://localhost:7500
       TZ: "America/Los_Angeles"
     ports:
       - "7500:80"
@@ -54,3 +67,21 @@ services:
       - frontend
     depends_on:
       - event
+      - tokenserver
+
+  tokenserver:
+    build:
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile
+    image: events/tokenapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      MvcClient: http://localhost:7500
+    ports:
+      - "7800:80"
+    container_name: tokenserviceapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - tokensqlserver
