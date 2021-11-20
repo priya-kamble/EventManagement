@@ -28,6 +28,46 @@ namespace WebMvc
             services.AddControllersWithViews();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+
+            var IdentityUrl = Configuration.GetValue<string>("IdentityUrl");
+            var callBackUrl = Configuration.GetValue<string>("CallBackUrl");
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = "Cookies";
+                    options.DefaultChallengeScheme = "oidc";
+                })
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
+                        {
+                            options.SignInScheme = "Cookies";
+                            options.Authority = identityUrl.ToString();
+                            options.SignedOutRedirectUri = callBackUrl.ToString();
+                            options.ClientId = "mvc";
+                            options.ClientSecret = "secret";
+                            options.ResponseType = "code id_token";
+                            options.SaveTokens = true;
+                            options.GetClaimsFromUserInfoEndpoint = true;
+                            options.RequireHttpsMetadata = false;
+                            options.Scope.Add("openid");
+                            options.Scope.Add("profile");
+                            options.Scope.Add("offline_access");
+                            //options.Scope.Add("basket");
+                           // options.Scope.Add("order");
+                            options.TokenValidationParameters = new TokenValidationParameters()
+                            {
+
+                                NameClaimType = "name",
+                                RoleClaimType = "role"
+                            };
+
+
+
+               });
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,13 +88,14 @@ namespace WebMvc
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Event}/{action=Index}/{id?}");
             });
         }
     }
