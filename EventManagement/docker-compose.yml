@@ -22,7 +22,8 @@ services:
     image: "mcr.microsoft.com/mssql/server:latest"
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD : Sa!Event
+      MSSQL_SA_PASSWORD: Sa!Event
+      TZ: "America/Los_Angeles"
     ports:
       - "5041:1433"
     container_name: eventstokensqlserver
@@ -77,6 +78,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       MvcClient: http://localhost:7500
+      TZ: "America/Los_Angeles"
     ports:
       - "7800:80"
     container_name: tokenserviceapi
