@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,10 +21,10 @@ namespace WebMvc.Controllers
 
             var token = await HttpContext.GetTokenAsync("access_token");
             var idToken = await HttpContext.GetTokenAsync("id_token");
-            //foreach (var claim in user.Claims)
-            //{
-            //    Debug.WriteLine($"Claim Type: {claim.Type} - Claim Value : {claim.Value}");
-            //}
+            foreach (var claim in user.Claims)
+            {
+                Debug.WriteLine($"Claim Type: {claim.Type} - Claim Value : {claim.Value}");
+            }
 
             if (token != null)
             {
