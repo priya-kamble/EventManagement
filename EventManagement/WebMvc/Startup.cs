@@ -30,7 +30,7 @@ namespace WebMvc
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
 
-            var IdentityUrl = Configuration.GetValue<string>("IdentityUrl");
+            var identityUrl = Configuration.GetValue<string>("IdentityUrl");
             var callBackUrl = Configuration.GetValue<string>("CallBackUrl");
             services.AddAuthentication(options =>
                 {
