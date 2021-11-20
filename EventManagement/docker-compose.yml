@@ -22,9 +22,9 @@ services:
     image: "mcr.microsoft.com/mssql/server:latest"
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Sa!Event
+      SA_PASSWORD : Sa!Event
     ports:
-      - "1449:1433"
+      - "5041:1433"
     container_name: eventstokensqlserver
     networks:
       - backend
