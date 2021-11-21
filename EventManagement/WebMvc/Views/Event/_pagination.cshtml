@@ -2,30 +2,30 @@
 
 <div class="esh-pager">
     <div class="container">
-        <article class="esh-pager-wrapper row">
-            <nav>
-                <a class="esh-pager-item esh-pager-item--navigable @Model.Previous"
+        <article class="esh-pager-wrapper row pager_row">
+            <nav class="pager_box">
+                <a class="esh-pager-item esh-pager-item--navigable pager_item @Model.Previous"
                    id="Previous"
                    asp-controller="Event"
                    asp-action="Index"
 
                    asp-route-page="@(Model.ActualPage -1)"
                    aria-label="Previous">
-                    Previous
+                    <span class="lighter"><< Previous Page</span> 
                 </a>
 
-                <span class="esh-pager-item">
-                    Showing @Model.ItemsPerPage of @Model.TotalItems Events - Page @(Model.ActualPage + 1) - @Model.TotalPages
+                <span class="esh-pager-item pager_item">
+                     Showing @Model.ItemsPerPage of @Model.TotalItems Events <span class="lighter2">||</span> Page @(Model.ActualPage + 1) of @Model.TotalPages  
                 </span>
 
-                <a class="esh-pager-item esh-pager-item--navigable @Model.Next"
+                <a class="esh-pager-item esh-pager-item--navigable pager_item @Model.Next"
                    id="Next"
                    asp-controller="Event"
                    asp-action="Index"
 
                    asp-route-page="@(Model.ActualPage + 1)"
                    aria-label="Next">
-                    Next
+                    <span class="lighter">Next Page >></span>
                 </a>
             </nav>
         </article>

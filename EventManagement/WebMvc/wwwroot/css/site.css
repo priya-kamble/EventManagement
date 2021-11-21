@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 0;
 }
 
 /* Wrapping element */
@@ -66,10 +66,39 @@ textarea {
 }
 
 .main_title {
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
-    font-size: 30px;
-    font-weight: bold;
+    font-family: Impact, Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 100;
     font-style: italic;
+    color: #00a69c;
+}
+.event_navbar {
+    background-color: #e3f2fd;
+    margin-bottom: 0;
+    border-bottom: none;
+    z-index: 99;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid skyblue;
+}
+.new_nav_link {
+    margin-left: 15px;
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 17px;
+    color: #00a69c;
+    font-weight: 500;
+}
+
+.nav_ul_spacing {
+    padding: 15px;
+}
+
+.hello_user {
+    margin: 10px 15px 0 0;
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 17px;
+    color: #00a69c;
+    font-weight: 500;
 }
 
 .view_link {
@@ -78,6 +107,10 @@ textarea {
 
 ul.fix_nav {
     list-style-type: none;
+}
+
+.drop_bg_color {
+    background-color: #e3f2fd;
 }
 
 .filter_container {
@@ -101,6 +134,68 @@ ul.fix_nav {
     overflow: hidden;
 }
 
+.arrow_button {
+    padding: 0;
+    height: 38px;
+}
+
+footer.footer {
+    background-color: #e3f2fd;
+    font-size: 17px;
+    height: 50px;
+    margin-top: 5px;
+    border-top: 1px solid skyblue;
+}
+
+.footer_content {
+    padding: 10px;
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    color: #00a69c;
+    font-weight: 500;
+}
+
+.pager_row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.pager_item {
+    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 17px;
+    color: green;
+    font-weight: 500;
+    margin: 0 5px 0 5px;
+}
+.lighter, .lighter2 {
+    color: lightseagreen;
+}
+
+.lighter:hover {
+    color: darkgreen;
+}
+
+.pager_box {
+    border: 1px blue solid;
+    display: inline;
+    padding: 5px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+}
+
+.event_zone {
+    margin-top: 5px;
+}
+
+.event_container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.new_hover:hover {
+    color: darkgreen;
+}
+
 .esh-event-title {
     position: relative;
     top: 74.28571px
@@ -108,7 +203,7 @@ ul.fix_nav {
 
 .esh-event-filters {
     background-color: #00a69c;
-    height: 90px
+    min-height: 90px
 }
 
 .esh-event-filter {
