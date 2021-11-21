@@ -78,17 +78,17 @@
             <label class="esh-event-label" data-title="Location">
                 <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Location" style="width:auto;" class="esh-event-filter dropdown_label"></select>
             </label>
-            <input class="esh-event-send " type="image" src="~/images/arrow-right.svg" />
+            <input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
         </form>
     </div>
 </section>
-<div class="container">
+<div class="container event_container">
     @if (Model.Events.Count() > 0)
     {
         @Html.Partial("_pagination", Model.PaginationInfo)
         @*<partial name="_pagination" for="PaginationInfo" />*@
 
-        <div class="esh-Event-items row">
+        <div class="esh-Event-items row event_zone">
             @foreach (var eventItem in Model.Events)
             {
                 <div class="esh-Event-item col-md-4">
