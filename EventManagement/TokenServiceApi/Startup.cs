@@ -37,9 +37,17 @@ namespace TokenServiceApi
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+
+         
+            var dbServer = Configuration["DatabaseServer"];
+            var dbName = Configuration["DatabaseName"];
+            var dbUser = Configuration["DatabaseUser"];
+            var dbPwd = Configuration["DatabasePassword"];
+            var ConnectionString = $"Data Source={dbServer};Initial Catalog={dbName};User Id={dbUser};Password={dbPwd};Connect Timeout=30;";
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ConnectionString));
+
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
