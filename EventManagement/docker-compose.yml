@@ -78,6 +78,10 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       MvcClient: http://localhost:7500
+      DatabaseServer: tokensqlserver
+      DatabaseName: TokenServiceDb
+      DatabaseUser: sa
+      DatabasePassword: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
       - "7800:80"
