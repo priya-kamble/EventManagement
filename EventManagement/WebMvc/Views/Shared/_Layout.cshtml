@@ -19,28 +19,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto list-unstyled nav_ul_spacing">
                         <li class="nav-item active">
-                            <a class="nav-link new_nav_link" asp-area="" 
-                               asp-controller="Event" 
+                            <a class="nav-link new_nav_link" asp-area=""
+                               asp-controller="Event"
                                asp-action="Index">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link new_nav_link" asp-area="" 
-                               asp-controller="Event" 
+                            <a class="nav-link new_nav_link" asp-area=""
+                               asp-controller="Event"
                                asp-action="About">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link new_nav_link" asp-area="" 
-                               asp-controller="Event" 
-                               asp-action="Index">Testing</a>
-                        </li>
-
+                        <li class="nav-item"></li>
                     </ul>
                     <div class="hello_user float-right">
                         @await Html.PartialAsync("_LoginPartial")
                     </div>                   
                 </div>
             </nav>
-
         </header>
     </div>
 

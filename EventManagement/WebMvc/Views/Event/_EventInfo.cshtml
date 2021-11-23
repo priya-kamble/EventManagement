@@ -4,13 +4,13 @@
 
 
 
-<form asp-controller="EventBrowser" asp-action="">
-    <img class="esh-Event-thumbnail event_image" src="@Model.EventImageUrl" />
+<form class="img_spacer" asp-controller="EventBrowser" asp-action="">
+    <img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
     
-    <div class="esh-Event-name event_name">
+    <div class="event_name">
         <span>@Model.Title</span>
     </div>
-    <div class="esh-Event-Description event_intro">
+    <div class="event_intro">
         <span>@Model.Description</span>
     </div>
     <input type="hidden" asp-for="@Model.Address" name="Address" />

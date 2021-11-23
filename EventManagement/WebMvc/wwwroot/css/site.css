@@ -70,23 +70,29 @@ textarea {
     font-size: 34px;
     font-weight: 100;
     font-style: italic;
-    color: #00a69c;
+    color: white;
+    letter-spacing: 0.02em;
 }
+
 .event_navbar {
-    background-color: #e3f2fd;
+    background-color: #00a69c;
     margin-bottom: 0;
     border-bottom: none;
     z-index: 99;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border: 1px solid skyblue;
+    border-radius: 5px 5px 0 0;
 }
+
 .new_nav_link {
     margin-left: 15px;
     font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 17px;
-    color: #00a69c;
+    color: white;
     font-weight: 500;
+    padding: 0;
+}
+
+.new_nav_link:hover {
+ 
 }
 
 .nav_ul_spacing {
@@ -114,7 +120,7 @@ ul.fix_nav {
 }
 
 .filter_container {
-    padding-top:,5rem;
+    padding-top: .5rem;
     padding-right: 0;
 }
 
@@ -140,23 +146,22 @@ ul.fix_nav {
 }
 
 footer.footer {
-    background-color: #e3f2fd;
+    background-color: #00a69c;
     font-size: 17px;
     height: 50px;
     margin-top: 5px;
-    border-top: 1px solid skyblue;
 }
 
 .footer_content {
     padding: 10px;
     font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
-    color: #00a69c;
+    color: white;
     font-weight: 500;
 }
 
 .pager_row {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 8px;
     text-align: center;
 }
 
@@ -167,6 +172,7 @@ footer.footer {
     font-weight: 500;
     margin: 0 5px 0 5px;
 }
+
 .lighter, .lighter2 {
     color: lightseagreen;
 }
@@ -178,7 +184,7 @@ footer.footer {
 .pager_box {
     border: 1px blue solid;
     display: inline;
-    padding: 5px;
+    padding: 7px 5px 5px 5px;
     background-color: #e3f2fd;
     border-radius: 5px;
 }
@@ -194,6 +200,10 @@ footer.footer {
 
 .new_hover:hover {
     color: darkgreen;
+}
+
+.img_spacer {
+    margin-bottom: 12px;
 }
 
 .esh-event-title {
@@ -312,7 +322,6 @@ input[type=checkbox]:checked {
     z-index: 1
 }
 
-
 .esh-event-send {
     background-color: #83d01b;
     color: #fff;
@@ -397,4 +406,20 @@ input[type=checkbox]:checked {
 
 .esh-event-price::before {
     content: '$'
+}
+
+section.esh-identity-section {
+    max-width: 200px;
+}
+
+a.esh-identity-name {
+    color: white;
+}
+
+.esh-event-filters {
+    border-radius: 0 0 5px 5px;
+}
+
+.carousel-control {
+    border-radius: 0;
 }
