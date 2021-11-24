@@ -44,7 +44,7 @@ namespace WebMvc.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-
+            
             var homeUrl = Url.Action(nameof(EventController.Index), "Event");
             return new SignOutResult(OpenIdConnectDefaults.AuthenticationScheme,
             new AuthenticationProperties { RedirectUri = homeUrl });
