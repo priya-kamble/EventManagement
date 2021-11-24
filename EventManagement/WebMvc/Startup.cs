@@ -58,18 +58,10 @@ namespace WebMvc
                            // options.Scope.Add("order");
                             options.TokenValidationParameters = new TokenValidationParameters()
                             {
-
                                 NameClaimType = "name",
                                 RoleClaimType = "role"
                             };
-
-
-
                });
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,11 +79,9 @@ namespace WebMvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

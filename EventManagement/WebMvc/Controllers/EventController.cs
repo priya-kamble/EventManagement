@@ -25,7 +25,7 @@ namespace WebMvc.Controllers
             bool onlineFilterApplied,
             string priceFilterApplied)
         {
-            var eventsOnPage = 5;
+            var eventsOnPage = 6;
             DateTime? startDate = null, endDate = null;
             if (!string.IsNullOrWhiteSpace(dateFilterApplied))
             {
@@ -117,7 +117,6 @@ namespace WebMvc.Controllers
             return View(eventIndexViewModel);
         }
 
-        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your Application Description Page";
