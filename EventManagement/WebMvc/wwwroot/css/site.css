@@ -412,7 +412,7 @@ section.esh-identity-section {
     max-width: 200px;
 }
 
-a.esh-identity-name {
+.esh-identity-name {
     color: white;
 }
 
@@ -422,4 +422,13 @@ a.esh-identity-name {
 
 .carousel-control {
     border-radius: 0;
+}
+
+.aboutinfo {
+    background-color: #24569f;
+    font-family: Arial;
+    font-size: x-large;
+    margin-bottom: 300px;
+    color: white;
+    padding: 30px;
 }
