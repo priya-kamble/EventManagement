@@ -12,17 +12,8 @@
                 <section class="esh-identity-section">
 
                     <div class="esh-identity-name">@User.FindFirst(x => x.Type == "preferred_username").Value</div>
-                    @*<div class="esh-identity-name">@User.Identity.Name</div>*@
-                    <img class="esh-identity-image" src="~/images/arrow-down.png">
-                </section>
-
-                <section class="esh-identity-drop drop_bg_color">
-
-                    <a class="esh-identity-item"
-                       href="javascript:document.getElementById('logoutForm').submit()">
-                        <div class="esh-identity-name new_hover">Log Out</div>
-                        <img class="esh-identity-image" src="~/images/logout.png">
-                    </a>
+                      <a class="esh-identity-item" href="javascript:document.getElementById('logoutForm').submit()">
+                    <div class="esh-identity-name new_hover">Log Out</div></a>
                 </section>
             </form>
         </div>
