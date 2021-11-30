@@ -8,7 +8,7 @@ namespace EventAPI.Domain
     public class Ticket
     {
         public int TicketId { get; set; }
-        public string TicketCategoryId { get; set; }
+        public int TicketCategoryId { get; set; }
         public decimal Price { get; set; }
         public DateTime SalesStartDate { get; set; }
         public DateTime SalesEndDate { get; set; }
