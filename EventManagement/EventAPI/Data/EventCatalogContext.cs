@@ -19,6 +19,9 @@ namespace EventAPI.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Format> Formats { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketCategory> TicketCategories { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,6 +74,21 @@ namespace EventAPI.Data
                 e.Property(l => l.LocationId).IsRequired().ValueGeneratedOnAdd();
                 e.Property(l => l.City).IsRequired().HasMaxLength(100);
                 e.Property(l => l.State).IsRequired().HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Ticket>(e =>
+            {
+                e.Property(t => t.TicketId).IsRequired().ValueGeneratedOnAdd();
+                e.Property(t => t.Price).IsRequired();
+                e.Property(t => t.Quantity).IsRequired();
+                e.HasOne(t => t.TicketCategory).WithMany().HasForeignKey(t => t.TicketCategoryId);
+                e.HasOne(t => t.Event).WithMany().HasForeignKey(t => t.EventId);
+            });
+
+            modelBuilder.Entity<TicketCategory>(e =>
+            {
+                e.Property(t => t.TicketCategoryId).IsRequired().ValueGeneratedOnAdd();
+                e.Property(t => t.CategoryName).IsRequired().HasMaxLength(200);
             });
         }
     }
