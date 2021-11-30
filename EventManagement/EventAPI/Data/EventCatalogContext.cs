@@ -79,7 +79,7 @@ namespace EventAPI.Data
             modelBuilder.Entity<Ticket>(e =>
             {
                 e.Property(t => t.TicketId).IsRequired().ValueGeneratedOnAdd();
-                e.Property(t => t.Price).IsRequired();
+                e.Property(t => t.Price).IsRequired().HasColumnType("decimal(18,2)");
                 e.Property(t => t.Quantity).IsRequired();
                 e.HasOne(t => t.TicketCategory).WithMany().HasForeignKey(t => t.TicketCategoryId);
                 e.HasOne(t => t.Event).WithMany().HasForeignKey(t => t.EventId);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace EventAPI.Domain
     {
         public int TicketId { get; set; }
         public int TicketCategoryId { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public DateTime SalesStartDate { get; set; }
         public DateTime SalesEndDate { get; set; }
