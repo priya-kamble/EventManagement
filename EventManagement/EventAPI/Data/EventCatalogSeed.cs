@@ -11,7 +11,9 @@ namespace EventAPI.Data
     {
         public static void Seed(EventCatalogContext context)
         {
+           
             context.Database.Migrate();
+
             if (!context.Categories.Any())
             {
                 SaveCategoryData(context);
@@ -47,29 +49,42 @@ namespace EventAPI.Data
                 context.SaveChanges();
             }
 
-            var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
-            var events = GetEvents();
-            if (naLocation != null && naLocation.LocationId > 0)
-            {
-                var onlineevents = events.Where(item => item.IsOnlineEvent == true);
-                if (onlineevents != null && onlineevents.Any())
-                {
-                    foreach (var item in onlineevents)
-                    {
-                        item.LocationId = naLocation.LocationId;
-                    }
-                }
+            //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
+            //var events = GetEvents();
+            //if (naLocation != null && naLocation.LocationId > 0)
+            //{
+            //    var onlineevents = events.Where(item => item.IsOnlineEvent == true);
+            //    if (onlineevents != null && onlineevents.Any())
+            //    {
+            //        foreach (var item in onlineevents)
+            //        {
+            //            item.LocationId = naLocation.LocationId;
+            //        }
+            //    }
 
-            }
-            else
-            {
-                events = events.Where(item => item.IsOnlineEvent != true);
-            }
+            //}
+            //else
+            //{
+            //    events = events.Where(item => item.IsOnlineEvent != true);
+            //}
 
             if (!context.EventCatalog.Any())
             {
-                context.EventCatalog.AddRange(events);
-                context.SaveChanges();
+                SaveEventsData(context);
+               
+            }
+
+            if (!context.TicketCategories.Any())
+            {
+
+                SaveTicketCategoryData(context);
+
+            }
+            if (!context.Tickets.Any())
+            {
+
+                SaveTicketData(context);
+
             }
         }
 
@@ -232,29 +247,32 @@ namespace EventAPI.Data
                 new Location { City = "N/A", State = "N/A"}
             };
         }
-        private static IEnumerable<Event> GetEvents()
+
+
+       
+        private static void SaveEventsData(EventCatalogContext context)
         {
-            return new List<Event>
+            List< Event >  EventsData=new List<Event>
             {
 
                 new Event { Title = "Diversity Career Group", Description = "Tech Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1",
-                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021,11,16), EndDate = new DateTime(2021,11,16) , IsPaidEvent = false ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
+                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021,12,16), EndDate = new DateTime(2021,12,16) , IsPaidEvent = false ,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Photowalk", Description = "Seattle Center with Nikon", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/2",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 11, 18), EndDate = new DateTime(2021, 11, 18) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 18), EndDate = new DateTime(2021, 12, 18) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 3, Address = "1000 1st Ave",
                     SubCategoryId = 3, UserId = 3, FormatId = 9 },
 
                 new Event { Title = "Dream House", Description = "New Homebuyer Workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/3",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 11, 17), EndDate = new DateTime(2021, 11, 17) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 12, 17), EndDate = new DateTime(2021, 12, 17) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 5, Address = "1000 1st Ave",
                     SubCategoryId = 2, UserId = 3, FormatId = 6 },
 
                 new Event { Title = "Tech Carrier Fair ", Description = "Exclusive Tech Hiring", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/4",
                     MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 3, 3), EndDate = new DateTime(2021, 4, 4) , IsPaidEvent = false ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Taste Maker", Description = "Cooking Classes", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/5",
@@ -266,7 +284,7 @@ namespace EventAPI.Data
                     MaxOccupancy = 10, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 12) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 11, Address = "8352 Marvon Dr.",
                     SubCategoryId = 5, UserId = 3, FormatId = 10 },
-
+                
                 new Event { Title = "Know your options", Description = "How to choose right insurance plan workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/7",
                     MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 1, 1) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 13, Address = "8352 Marvon Dr.",
@@ -281,20 +299,20 @@ namespace EventAPI.Data
                     MaxOccupancy = 15, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 11, 19), EndDate = new DateTime(2022, 11, 19) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 4, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 2 },
-
+                
                 new Event { Title = "Cruise Away", Description = "Exploring the sea together", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/10",
                     MaxOccupancy = 150, MaxTicketsPerUser = 6, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = true,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 6, Address = "1000 1st Ave",
                     SubCategoryId = 11, UserId = 3, FormatId = 11 },
 
                 new Event { Title = "Park & Hike Event", Description = "Hike in the woods", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/11",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 11, 23), EndDate = new DateTime(2021, 11, 23) , IsPaidEvent = true,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 12, 23), EndDate = new DateTime(2021, 12, 23) , IsPaidEvent = true,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "8352 Marvon Dr.",
                     SubCategoryId = 9, UserId = 3, FormatId = 6 },
 
                 new Event { Title = "Family.Life.Education", Description = "Learn-Grow-Fulfill your Potential", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/12",
                     MaxOccupancy = 6, MaxTicketsPerUser = 4, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = false ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", Address = null,
                     SubCategoryId = 4 , UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Education Foundation", Description = "Education for All", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/13",
@@ -309,7 +327,7 @@ namespace EventAPI.Data
 
                 new Event { Title = "Seattle Job Fair", Description = "Seattle Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/15",
                     MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 2, 2), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = true ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Meet us at the sky", Description = "Hot Air Balloon adventure ride", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/16",
@@ -323,15 +341,163 @@ namespace EventAPI.Data
                     SubCategoryId = 6, UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Pro Club", Description = "A complete sports league", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/18",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 3), EndDate = new DateTime(2021, 12, 3) , IsPaidEvent = true ,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 3), EndDate = new DateTime(2022, 1, 3) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "220 Madison Ave",
                     SubCategoryId = 10, UserId = 3, FormatId = 5 },
 
                 new Event { Title = "Mind, Heart & Soul", Description = "A complete You!!", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/19",
                     MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = false ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 0, Address = null,
-                    SubCategoryId = 6, UserId = 3, FormatId = 8 },
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
+                    SubCategoryId = 6, UserId = 3, FormatId = 8 }
             };
+
+
+            //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
+            foreach (var data in EventsData)
+            {
+
+                //    if (naLocation != null && naLocation.LocationId > 0)
+                //    {
+
+
+                //        if (data.LocationId == 0 )
+                //        {
+
+                //            data.LocationId = naLocation.LocationId;
+                //        }
+
+
+                //    }
+
+                context.EventCatalog.Add(data);
+                context.SaveChanges();
+            }
+
         }
+
+
+        private static void SaveTicketCategoryData(EventCatalogContext context)
+        {
+            List<TicketCategory> TicketCategoryData;
+            TicketCategoryData = new List<TicketCategory>
+            {
+                new TicketCategory { TicketCategoryName = "Student" },
+                new TicketCategory { TicketCategoryName = "General Admission" },
+                new TicketCategory { TicketCategoryName = "Senior" },
+                new TicketCategory { TicketCategoryName = "Child" },
+                new TicketCategory { TicketCategoryName = "EarlyBird-Child" },
+                new TicketCategory { TicketCategoryName = "EarlyBird-Adult" },
+                new TicketCategory { TicketCategoryName = "EarlyBird-Senior"},
+                new TicketCategory { TicketCategoryName = "Military" }
+               
+            };
+            foreach (var data in TicketCategoryData)
+            {
+                context.TicketCategories.Add(data);
+                context.SaveChanges();
+            }
+
+        }
+
+
+        private static void SaveTicketData(EventCatalogContext context)
+        {
+            List<Ticket> TicketsData;
+            TicketsData = new List<Ticket>
+            {
+    
+
+                
+                
+                //Free Ticket Based on Event Data - Description = "Tech Career Fair"
+                new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 13), SalesEndDate= new DateTime(2021, 12, 15), Price =0, TicketCategoryId = 2 ,Quantity=30},
+                
+               //Paid  Ticket Based on Event Data -Description = "Seattle Center with Nikon"
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =12, TicketCategoryId = 6 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =10, TicketCategoryId = 1 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =15, TicketCategoryId = 2 ,Quantity=4},
+               
+                //Paid  Ticket Based on Event Data - Description = "New Homebuyer Workshop"
+                new Ticket { EventId=3, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 16), Price =15, TicketCategoryId = 2 ,Quantity=8},
+                new Ticket { EventId=3, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 16), Price =5, TicketCategoryId = 8 ,Quantity=2},
+             
+                //Free Ticket Based on Event Data-Description = "Exclusive Tech Hiring"
+                new Ticket { EventId=4 , SalesStartDate= new DateTime(2021, 2, 28), SalesEndDate= new DateTime(2021, 3, 1), Price =0, TicketCategoryId = 2 ,Quantity=30},
+
+                //Paid-Cancelled  Ticket Based on Event Data - Description = "Cooking Classes"
+                new Ticket { EventId=5, SalesStartDate= new DateTime(2022, 12, 10), SalesEndDate= new DateTime(2022, 12, 11), Price =10, TicketCategoryId = 2 ,Quantity=10},
+               
+                //Free Ticket Based on Event Data-"Classic Italian Cuisine"
+                new Ticket { EventId=6, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2021, 12, 11), Price =0, TicketCategoryId = 2 ,Quantity=10},
+               
+                //Free-Cancelled  Ticket Based on Event Data-Description = "How to choose right insurance plan workshop"
+                new Ticket { EventId=7, SalesStartDate= new DateTime(2021, 12, 28), SalesEndDate= new DateTime(2021, 12, 29), Price =0, TicketCategoryId = 2 ,Quantity=10},
+ 
+                //Paid  Ticket Based on Event Data-  Description =A melodious night
+                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 11, 16), SalesEndDate= new DateTime(2021, 11, 18), Price =20, TicketCategoryId = 2 ,Quantity=25},
+                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 11, 15), SalesEndDate= new DateTime(2021, 11, 16), Price =12, TicketCategoryId = 6 ,Quantity=15},
+
+                //Paid  Ticket Based on Event Data- Description = "A musical workshop"
+                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 11, 1), SalesEndDate= new DateTime(2022, 11, 6), Price =30, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 11, 6), SalesEndDate= new DateTime(2022, 1, 18), Price =50, TicketCategoryId = 2 ,Quantity=10},
+                
+                //Paid  Ticket Based on Event Data- Description = "A musical workshop"
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 1), SalesEndDate= new DateTime(2022, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 10), SalesEndDate= new DateTime(2022, 12, 10), Price =120, TicketCategoryId = 6 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 20), SalesEndDate= new DateTime(2022, 12, 29), Price =120, TicketCategoryId = 4 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 20), SalesEndDate= new DateTime(2022, 12, 29), Price =160, TicketCategoryId = 2 ,Quantity=60},
+
+                //Paid  Ticket Based on Event Data- Description = "Hike in the woods"
+                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 12, 19), SalesEndDate= new DateTime(2022, 12, 22), Price =10, TicketCategoryId = 4 ,Quantity=10},
+                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 12, 19), SalesEndDate= new DateTime(2022, 12, 22), Price =20, TicketCategoryId = 2 ,Quantity=10},
+
+                //Paid  Ticket Based on Event Data- Description = "Learn-Grow-Fulfill your Potential"
+                new Ticket { EventId=12, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =20, TicketCategoryId = 2 ,Quantity=6},
+
+
+                //Paid  Ticket Based on Event Data- Description = "Learn-Grow-Fulfill your Potential"
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 22), SalesEndDate= new DateTime(2022, 2, 26), Price =20, TicketCategoryId = 2 ,Quantity=14},
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =10, TicketCategoryId = 6 ,Quantity=6},
+
+
+                 //Paid  Ticket Based on Event Data- Description = "S.T.E.M"
+                new Ticket { EventId=14, SalesStartDate= new DateTime(2021, 12, 22), SalesEndDate= new DateTime(2021, 12, 26), Price =10, TicketCategoryId = 1 ,Quantity=15},
+               
+                //Paid  Ticket Based on Event Data- Description = "Seattle Career Fair"
+                new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 22), SalesEndDate= new DateTime(2022, 1, 26), Price =22, TicketCategoryId = 2 ,Quantity=25},
+                new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=15},
+
+                //Paid  Ticket Based on Event Data- Description =  "Hot Air Balloon adventure ride"
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2021, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2021, 12, 10), Price =120, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =120, TicketCategoryId = 4 ,Quantity=7},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =160, TicketCategoryId = 2 ,Quantity=8},
+
+
+                 //Paid  Ticket Based on Event Data- Description = "A complete wellness guide"
+                new Ticket { EventId=17, SalesStartDate= new DateTime(2022, 1, 22), SalesEndDate= new DateTime(2022, 1, 26), Price =30, TicketCategoryId = 2 ,Quantity=5},
+                new Ticket { EventId=17, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=5},
+
+ 
+               //Paid  Ticket Based on Event Data- Description = "A complete sports league"
+                new Ticket { EventId=18, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2021, 12, 17), Price =80, TicketCategoryId = 2 ,Quantity=13},
+                new Ticket { EventId=18, SalesStartDate= new DateTime(2021, 12, 12), SalesEndDate= new DateTime(2021, 12, 14), Price =50, TicketCategoryId = 6 ,Quantity=7},
+
+                //Paid  Ticket Based on Event Data- Description = "A complete You!!"
+                new Ticket { EventId=19, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2021, 12, 17), Price =50, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=19, SalesStartDate= new DateTime(2021, 12, 12), SalesEndDate= new DateTime(2021, 12, 14), Price =35, TicketCategoryId = 6 ,Quantity=5}
+             };
+            foreach (var data in TicketsData)
+            {
+                context.Tickets.Add(data);
+                context.SaveChanges();
+            }
+
+        }
+
+
+
+
+
     }
 }

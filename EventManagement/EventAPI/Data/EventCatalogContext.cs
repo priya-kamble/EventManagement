@@ -35,6 +35,7 @@ namespace EventAPI.Data
                 e.HasOne(p => p.User).WithMany().HasForeignKey(p => p.UserId);
                 e.HasOne(p => p.Format).WithMany().HasForeignKey(p => p.FormatId);
                 e.HasOne(p => p.Location).WithMany().HasForeignKey(p => p.LocationId);
+
             });
 
             modelBuilder.Entity<Category>(e =>
@@ -88,7 +89,7 @@ namespace EventAPI.Data
             modelBuilder.Entity<TicketCategory>(e =>
             {
                 e.Property(t => t.TicketCategoryId).IsRequired().ValueGeneratedOnAdd();
-                e.Property(t => t.CategoryName).IsRequired().HasMaxLength(200);
+                e.Property(t => t.TicketCategoryName).IsRequired().HasMaxLength(200);
             });
         }
     }
