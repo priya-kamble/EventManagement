@@ -327,7 +327,7 @@ namespace EventAPI.Data
 
                 new Event { Title = "Seattle Job Fair", Description = "Seattle Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/15",
                     MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 2, 2), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = true ,
-                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
+                    IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Meet us at the sky", Description = "Hot Air Balloon adventure ride", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/16",
@@ -351,53 +351,23 @@ namespace EventAPI.Data
                     SubCategoryId = 6, UserId = 3, FormatId = 8 }
             };
 
-            var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
+
+            //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
             foreach (var data in EventsData)
             {
 
-                
-               
-                
-                //if (naLocation != null && naLocation.LocationId > 0)
-                //{
-
-
-                //            foreach (var item in onlineevents)
-                //            {
-                //                item.LocationId = naLocation.LocationId;
-                //                data.LocationId = naLocation.LocationId;
-                //            }
-                       
-
-                //}
-                //else
-                //{
-                //    events = events.Where(item => item.IsOnlineEvent != true);
-                //}
-
-
-                //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
-                //var events = GetEvents();
-                //if (naLocation != null && naLocation.LocationId > 0)
-                //{
-                //    var onlineevents = events.Where(item => item.IsOnlineEvent == true);
-                //    if (onlineevents != null && onlineevents.Any())
+                //    if (naLocation != null && naLocation.LocationId > 0)
                 //    {
-                //        foreach (var item in onlineevents)
+
+
+                //        if (data.LocationId == 0 )
                 //        {
-                //            item.LocationId = naLocation.LocationId;
+
+                //            data.LocationId = naLocation.LocationId;
                 //        }
+
+
                 //    }
-
-                //}
-                //else
-                //{
-                //    events = events.Where(item => item.IsOnlineEvent != true);
-                //}
-
-
-
-
 
                 context.EventCatalog.Add(data);
                 context.SaveChanges();
@@ -437,7 +407,7 @@ namespace EventAPI.Data
             {
     
 
-                new Ticket { TicketCategoryId = 1 },
+                
                 
                 //Free Ticket Based on Event Data - Description = "Tech Career Fair"
                 new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 13), SalesEndDate= new DateTime(2021, 12, 15), Price =0, TicketCategoryId = 2 ,Quantity=30},
@@ -452,7 +422,7 @@ namespace EventAPI.Data
                 new Ticket { EventId=3, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 16), Price =5, TicketCategoryId = 8 ,Quantity=2},
              
                 //Free Ticket Based on Event Data-Description = "Exclusive Tech Hiring"
-                new Ticket { EventId=4, SalesStartDate= new DateTime(2021, 2, 29), SalesEndDate= new DateTime(2021, 3, 1), Price =0, TicketCategoryId = 2 ,Quantity=30},
+                new Ticket { EventId=4 , SalesStartDate= new DateTime(2021, 2, 28), SalesEndDate= new DateTime(2021, 3, 1), Price =0, TicketCategoryId = 2 ,Quantity=30},
 
                 //Paid-Cancelled  Ticket Based on Event Data - Description = "Cooking Classes"
                 new Ticket { EventId=5, SalesStartDate= new DateTime(2022, 12, 10), SalesEndDate= new DateTime(2022, 12, 11), Price =10, TicketCategoryId = 2 ,Quantity=10},
@@ -498,7 +468,7 @@ namespace EventAPI.Data
                 new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=15},
 
                 //Paid  Ticket Based on Event Data- Description =  "Hot Air Balloon adventure ride"
-                 new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2021, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2021, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
                 new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2021, 12, 10), Price =120, TicketCategoryId = 6 ,Quantity=5},
                 new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =120, TicketCategoryId = 4 ,Quantity=7},
                 new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =160, TicketCategoryId = 2 ,Quantity=8},

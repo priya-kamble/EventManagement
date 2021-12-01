@@ -31,11 +31,10 @@ namespace EventAPI.Data
                 e.Property(p => p.Title).IsRequired().HasMaxLength(200);
                 e.Property(p => p.Description).HasMaxLength(200);
                 e.Property(p => p.Address).HasMaxLength(200);
-                e.Property(p => p.Locationname).HasMaxLength(200);
                 e.HasOne(p => p.SubCategory).WithMany().HasForeignKey(p => p.SubCategoryId);
                 e.HasOne(p => p.User).WithMany().HasForeignKey(p => p.UserId);
                 e.HasOne(p => p.Format).WithMany().HasForeignKey(p => p.FormatId);
-               // e.HasOne(p => p.Location).WithMany().HasForeignKey(p => p.LocationId);
+                e.HasOne(p => p.Location).WithMany().HasForeignKey(p => p.LocationId);
 
             });
 

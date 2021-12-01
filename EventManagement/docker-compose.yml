@@ -13,7 +13,7 @@ services:
       SA_PASSWORD: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
-      - "5042:1433"
+      - "5040:1433"
     container_name: MSSQLContainer   
     networks:
       - backend
@@ -37,7 +37,7 @@ services:
       dockerfile: Dockerfile
     environment:
       DatabaseServer: mssqlserver
-      DatabaseName: EventCatalogDb12
+      DatabaseName: EventCatalogDb1
       DatabaseUser: sa
       DatabasePassword: Sa!Event
       ExternalCatalogUrl: http://localhost:7000
