@@ -23,7 +23,7 @@ namespace EventAPI.Domain
         public int SubCategoryId { get; set; }       
         public int UserId { get; set; }
         public int FormatId { get; set; }
-        public int?  LocationId { get; set; }
+        public int? LocationId { get; set; }
        
       
 
