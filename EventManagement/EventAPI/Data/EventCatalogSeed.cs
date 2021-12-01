@@ -49,25 +49,6 @@ namespace EventAPI.Data
                 context.SaveChanges();
             }
 
-            //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
-            //var events = GetEvents();
-            //if (naLocation != null && naLocation.LocationId > 0)
-            //{
-            //    var onlineevents = events.Where(item => item.IsOnlineEvent == true);
-            //    if (onlineevents != null && onlineevents.Any())
-            //    {
-            //        foreach (var item in onlineevents)
-            //        {
-            //            item.LocationId = naLocation.LocationId;
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-            //    events = events.Where(item => item.IsOnlineEvent != true);
-            //}
-
             if (!context.EventCatalog.Any())
             {
                 SaveEventsData(context);
@@ -113,6 +94,8 @@ namespace EventAPI.Data
                 context.SaveChanges();
             }
         }
+
+
         private static void SaveSubCategoryData(EventCatalogContext context)
         {
             List<SubCategory> SubCategoryData;
@@ -138,6 +121,8 @@ namespace EventAPI.Data
             }
 
         }
+
+
         private static void SaveFormatsData(EventCatalogContext context)
         {
 
@@ -165,6 +150,8 @@ namespace EventAPI.Data
             }
 
         }
+
+
         private static IEnumerable<Organization> GetOrganizations()
         {
             return new List<Organization>
@@ -179,6 +166,8 @@ namespace EventAPI.Data
                 new Organization { UserId = 10, OrganizationName = "Private Art Exhibition Arrangement Company" },
             };
         }
+
+
         private static IEnumerable<User> GetUsers()
         {
             return new List<User>
@@ -207,6 +196,7 @@ namespace EventAPI.Data
                 new User { UserEmailId = "tatyana@gmail.com" },
             };
         }
+
         private static IEnumerable<Location> GetLocations()
         {
             return new List<Location>
@@ -244,10 +234,8 @@ namespace EventAPI.Data
                 new Location { City = "San Francisco", State = "CA" },
                 new Location { City = "Boise", State = "ID" },
                 new Location { City = "Vancouver", State = "BC"},
-                new Location { City = "N/A", State = "N/A"}
             };
         }
-
 
        
         private static void SaveEventsData(EventCatalogContext context)
@@ -351,24 +339,8 @@ namespace EventAPI.Data
                     SubCategoryId = 6, UserId = 3, FormatId = 8 }
             };
 
-
-            //var naLocation = context.Locations.Where(item => item.City == "N/A" && item.State == "N/A").FirstOrDefault();
             foreach (var data in EventsData)
             {
-
-                //    if (naLocation != null && naLocation.LocationId > 0)
-                //    {
-
-
-                //        if (data.LocationId == 0 )
-                //        {
-
-                //            data.LocationId = naLocation.LocationId;
-                //        }
-
-
-                //    }
-
                 context.EventCatalog.Add(data);
                 context.SaveChanges();
             }
@@ -405,10 +377,6 @@ namespace EventAPI.Data
             List<Ticket> TicketsData;
             TicketsData = new List<Ticket>
             {
-    
-
-                
-                
                 //Free Ticket Based on Event Data - Description = "Tech Career Fair"
                 new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 13), SalesEndDate= new DateTime(2021, 12, 15), Price =0, TicketCategoryId = 2 ,Quantity=30},
                 
@@ -494,10 +462,5 @@ namespace EventAPI.Data
             }
 
         }
-
-
-
-
-
     }
 }
