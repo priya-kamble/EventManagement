@@ -23,8 +23,9 @@ namespace EventAPI.Domain
         public int SubCategoryId { get; set; }       
         public int UserId { get; set; }
         public int FormatId { get; set; }
-        public int LocationId { get; set; }
-        
+        public System.Nullable<int>  LocationId { get; set; }
+        public string Locationname { get; set; }
+      
 
         public virtual SubCategory SubCategory { get; set; }
         public virtual User User { get; set; }

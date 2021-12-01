@@ -8,6 +8,6 @@ namespace EventAPI.Domain
     public class TicketCategory
     {
         public int TicketCategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public string TicketCategoryName { get; set; }
     }
 }
