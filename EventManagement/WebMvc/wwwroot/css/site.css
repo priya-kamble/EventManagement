@@ -55,6 +55,16 @@ textarea {
     width: 293px;
 }
 
+.event_big_img {
+    width: 720px;
+    height: 360px;
+    margin: auto;
+}
+
+.event_box {
+
+}
+
 .event_name {
     font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 16px;
@@ -89,10 +99,6 @@ textarea {
     color: white;
     font-weight: 500;
     padding: 0;
-}
-
-.new_nav_link:hover {
- 
 }
 
 .nav_ul_spacing {
@@ -201,10 +207,39 @@ footer.footer {
 .new_hover:hover {
     color: darkgreen;
 }
-
 .img_spacer {
     margin-bottom: 12px;
 }
+.img_spacer2 {
+    margin-bottom: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.img_spacer {
+    margin-bottom: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.custom_button {
+    background-color: #83d01b;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    height: 48px;
+    margin-top: 1rem;
+    transition: all 0.35s;
+    width: 80%;
+    border-radius: 4px;
+}
+
+    .custom_button:hover {
+        background-color: #4a760f;
+        transition: all 0.35s;
+    }
 
 .esh-event-title {
     position: relative;

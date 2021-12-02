@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Event details are here";
+
+    @model WebMvc.Models.Event
+}
+
+
+<div class="container">
+
+    <form class="img_spacer2" asp-controller="Event" asp-action="EventDetails">
+        <img class="event_big_img" src="@Model.EventImageUrl" />
+
+        <div class="event_name">
+            <span>@Model.Title</span>
+        </div>
+        <div class="event_intro">
+            <span>@Model.Description</span>
+        </div>
+        <div class="event_intro">
+            Address : <span>@Model.Address</span>
+        </div>
+        <div class="event_intro">
+            City and State : <span>@Model.Location</span>
+        </div>
+        <div class="event_intro">
+            Starting time for this event : <span>@Model.StartDate</span>
+        </div>
+        <div class="event_intro">
+            Ending time for this event : <span>@Model.EndDate</span>
+        </div>
+        <div class="event_intro">
+            Event capacity : <span>@Model.MaxOccupancy</span> people
+        </div>
+        <div class="event_intro">
+            For more information : <a href="@Model.EventLinkUrl">@Model.EventLinkUrl</a>
+        </div>
+        <input type="hidden" asp-for="@Model.Address" name="Address" />
+        <input type="hidden" asp-for="@Model.MaxOccupancy" name="MaxOccupancy" />
+        <input type="hidden" asp-for="@Model.MaxTicketsPerUser" name="MaxTicketsPerUser" />
+        <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
+        <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
+        <input type="hidden" asp-for="@Model.EventLinkUrl" name="EventLinkUrl" />
+        <input class="custom_button" type="submit" value="TICKETS" />
+    </form>
+</div>
