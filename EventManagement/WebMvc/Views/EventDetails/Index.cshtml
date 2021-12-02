@@ -1,0 +1,35 @@
+﻿
+@model WebMvc.ViewModels.EventDetail
+
+
+
+
+<form class="img_spacer" asp-controller="EventDetails" asp-action="Index" method="post">
+
+    <label> This is an Event Details Page!!! </label>
+    <label> EventId  is @Model.Id </label>
+    <label> Start Date is @Model.StartDate </label>
+    <label> End Date is @Model.EndDate </label>
+
+    <label class="esh-event-label" data-title="Date">
+        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" ></select>
+    </label>
+    <input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
+    <label>The selected date is: "@Model.DateSelected" </label>
+
+    @*<img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
+
+
+        <div class="event_name">
+            <span>@Model.Title</span>
+        </div>
+        <div class="event_intro">
+            <span>@Model.Description</span>
+        </div>
+        <input type="hidden" asp-for="@Model.Address" name="Address" />
+        <input type="hidden" asp-for="@Model.MaxOccupancy" name="MaxOccupancy" />
+        <input type="hidden" asp-for="@Model.MaxTicketsPerUser" name="MaxTicketsPerUser" />
+        <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
+        <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
+        <input type="hidden" asp-for="@Model.EventLinkUrl" name="EventLinkUrl" />*@
+</form>
