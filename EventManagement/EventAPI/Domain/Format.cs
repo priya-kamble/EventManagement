@@ -9,5 +9,6 @@ namespace EventAPI.Domain
     {
         public int FormatId { get; set; }
         public string FormatName { get; set; }
+        
     }
 }
