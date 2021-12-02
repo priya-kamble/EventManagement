@@ -27,5 +27,8 @@ namespace WebMvc.Services
         IEnumerable<SelectListItem> GetDates();
         IEnumerable<SelectListItem> GetPrice();
 
+        // Temporary method for development only:
+        Event GetEvent();
+
     }
 }
