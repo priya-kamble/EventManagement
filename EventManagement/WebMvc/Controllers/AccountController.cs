@@ -42,9 +42,7 @@ namespace WebMvc.Controllers
 
         public async Task<IActionResult> Signout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            //await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-            //await HttpContext.SignOutAsync("Cookies");
+            await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("oidc");
             var homeUrl = Url.Action(nameof(EventController.Index), "Event");
             return new SignOutResult("oidc",
