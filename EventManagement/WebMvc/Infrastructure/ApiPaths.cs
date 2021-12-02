@@ -25,14 +25,20 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}Location/Locations";
             }
 
+            public static string GetAllTicketsForEvent(string baseUri, int eventId)
+            {
+                return $"{baseUri}Ticket/TicketsForEvent?eventId={eventId}";
+            }
+
+
             public static string GetAllEvent(string baseUri , int PageIndex, int PageSize,
                                               DateTime? startDate,
                                               DateTime? endDate,
-                                             int? locationId,
-                                             int? formatId,
-                                             int? categoryId,
-                                             bool? ispaid,
-                                             bool? isonline)
+                                              int? locationId,
+                                              int? formatId,
+                                              int? categoryId,
+                                              bool? ispaid,
+                                              bool? isonline)
             {
                 var filterQs = string.Empty;
               
