@@ -37,7 +37,7 @@ services:
       dockerfile: Dockerfile
     environment:
       DatabaseServer: mssqlserver
-      DatabaseName: EventCatalogDb
+      DatabaseName: EventCatalogDb1
       DatabaseUser: sa
       DatabasePassword: Sa!Event
       ExternalCatalogUrl: http://localhost:7000

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace EventAPI.Domain
 {
-    public class Format
+    public class TicketCategory
     {
-        public int FormatId { get; set; }
-        public string FormatName { get; set; }
-        
+        public int TicketCategoryId { get; set; }
+        public string TicketCategoryName { get; set; }
     }
 }

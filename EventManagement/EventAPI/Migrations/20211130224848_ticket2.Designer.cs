@@ -4,14 +4,16 @@ using EventAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventAPI.Migrations
 {
     [DbContext(typeof(EventCatalogContext))]
-    partial class EventCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20211130224848_ticket2")]
+    partial class ticket2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace EventAPI.Migrations
                     b.Property<bool>("IsPaidEvent")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxOccupancy")
@@ -237,7 +239,7 @@ namespace EventAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("TicketCategoryName")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -291,7 +293,9 @@ namespace EventAPI.Migrations
 
                     b.HasOne("EventAPI.Domain.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EventAPI.Domain.SubCategory", "SubCategory")
                         .WithMany()
