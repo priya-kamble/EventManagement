@@ -16,12 +16,16 @@ namespace WebMvc.Controllers
         {
             _eventService = eventservice;
         }
-        public async Task<IActionResult> Index(int id , string dateSelected)
+        public async Task<IActionResult> Index(int id)
         {
 
 
            var EventDetail = await _eventService.GetEventDetails(id);
-          
+            // code to fetch Event Details from id.
+
+
+
+
             var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
@@ -30,14 +34,19 @@ namespace WebMvc.Controllers
                 StartDate = EventDetail.StartDate,
                 EndDate = EventDetail.EndDate,
                 AvailableDates = availableDates,
-                EventImageUrl = EventDetail.EventImageUrl ,
-                MaxOccupancy = EventDetail.MaxOccupancy ,
-                MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
-                Address= EventDetail.Address,
-                Location = EventDetail.Location,
-                Description=EventDetail.Description ,
                 Title = EventDetail.Title,
-                DateSelected = dateSelected
+                Description = EventDetail.Description,
+                EventImageUrl = EventDetail.EventImageUrl,
+                MaxOccupancy = EventDetail.MaxOccupancy,
+                IsOnlineEvent = EventDetail.IsOnlineEvent,
+                IsCancelled = EventDetail.IsCancelled,
+                EventLinkUrl = EventDetail.EventLinkUrl,
+                Address = EventDetail.Address,
+                LocationId = EventDetail.LocationId,
+                SubCategoryId = EventDetail.SubCategoryId,
+                FormatId = EventDetail.FormatId
+                // MaxTicketsPerUser
+                // DateSelected = dateSelected
             };
 
             return View(eventDetail);
