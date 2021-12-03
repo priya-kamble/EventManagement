@@ -21,12 +21,7 @@ namespace WebMvc.Controllers
 
 
            var EventDetail = await _eventService.GetEventDetails(id);
-            // code to fetch Event Details from id.
-
-
-
-
-            var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
+           var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
             {

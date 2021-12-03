@@ -186,5 +186,14 @@ namespace WebMvc.Services
             });
             return price;
         }
+
+        public async Task<List<Ticket>> GetTicketsPerEvent(int EventId) 
+        {
+            var TicketsUri = ApiPaths.Event.GetAllTicketsForEvent(_baseUrl, EventId);
+            var dataString = await _client.GetStringAsync(TicketsUri);
+            return JsonConvert.DeserializeObject<List<Ticket>>(dataString);
+        }
+
+
     }
 }
