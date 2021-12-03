@@ -1,18 +1,43 @@
 ﻿
 @model WebMvc.ViewModels.EventDetail
 
-
-
-
 <form class="img_spacer" asp-controller="EventDetails" asp-action="Index" method="post">
 
-    <label> This is an Event Details Page!!! </label>
-    <label> EventId  is @Model.Id </label>
-    <label> Start Date is @Model.StartDate </label>
-    <label> End Date is @Model.EndDate </label>
+
+    <img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
+
+    <div class="event_name">
+        <span>@Model.Title</span>
+    </div>
+
+    <div class="event_intro">
+        <span>@Model.Description</span>
+    </div>
+    <div class="event_intro">
+        Address : <span>@Model.Address</span>
+    </div>
+    <div class="event_name">
+        <span>@Model.EventImageUrl</span>
+    </div>
+    @*<div class="event_intro">
+            City and State : <span>@Model.Location</span>
+        </div>*@
+    <div class="event_intro">
+        Starting time for this event : <span>@Model.StartDate</span>
+    </div>
+    <div class="event_intro">
+        Ending time for this event : <span>@Model.EndDate</span>
+    </div>
+    <div class="event_intro">
+        Event capacity : <span>@Model.MaxOccupancy</span> people
+    </div>
+    <div class="event_intro">
+        For more information : <a href="@Model.EventLinkUrl">@Model.EventLinkUrl</a>
+    </div>
+
 
     <label class="esh-event-label" data-title="Date">
-        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" ></select>
+        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates"></select>
     </label>
     <input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
     <label>The selected date is: "@Model.DateSelected" </label>

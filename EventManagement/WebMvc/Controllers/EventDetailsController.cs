@@ -16,7 +16,7 @@ namespace WebMvc.Controllers
         {
             _eventService = eventservice;
         }
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id , Datetime Selescteddate)
         {
 
 
@@ -34,6 +34,10 @@ namespace WebMvc.Controllers
                 StartDate = EventDetail.StartDate,
                 EndDate = EventDetail.EndDate,
                 AvailableDates = availableDates,
+                EventImageUrl = EventDetail.EventImageUrl ,
+                MaxOccupancy = EventDetail.MaxOccupancy ,
+                MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
+                Address= EventDetail.Address 
                 //DateSelected = dateSelected
             };
 
