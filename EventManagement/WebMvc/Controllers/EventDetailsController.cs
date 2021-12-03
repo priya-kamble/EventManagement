@@ -21,11 +21,7 @@ namespace WebMvc.Controllers
 
 
            var EventDetail = await _eventService.GetEventDetails(id);
-            // code to fetch Event Details from id.
-
-
-
-
+          
             var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
@@ -39,6 +35,8 @@ namespace WebMvc.Controllers
                 MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
                 Address= EventDetail.Address,
                 Location = EventDetail.Location,
+                Description=EventDetail.Description ,
+                Title = EventDetail.Title,
                 DateSelected = dateSelected
             };
 

@@ -137,17 +137,54 @@ namespace EventAPI.Controllers
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventDetailById(int EventId)
         {
-            
-            
-            var EventDetail = await _context.EventCatalog.Where( e => e.Id == EventId).FirstOrDefaultAsync() ;
+
+
+            var EventDetail = await _context.EventCatalog.Where(e => e.Id == EventId).FirstOrDefaultAsync();
             if (EventDetail != null)
             {
-               EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
-               
+                EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
+
 
             }
 
-             return Ok(EventDetail);
+            //var EventDetail = await (from E in _context.EventCatalog join L in _context.Locations 
+            //           on  E.LocationId  equals  L.LocationId  where (E.Id == EventId)
+            //           select new
+            //           {
+            //               E.Address,
+            //               E.Description,
+            //               E.EndDate,
+            //               E.EventImageUrl,
+            //               E.EventLinkUrl,
+            //               E.Format,
+            //               E.Id,
+            //               E.IsCancelled,
+            //               E.IsOnlineEvent,
+            //               E.IsPaidEvent,
+            //               E.Location,
+            //               E.LocationId,
+            //               E.MaxOccupancy,
+            //               E.MaxTicketsPerUser,
+            //               E.StartDate,
+            //               E.SubCategory,
+            //               E.SubCategoryId,
+            //               E.Title,
+            //               E.User,
+            //               E.UserId,
+            //               L.State,
+            //               L.City,
+            //                }) .FirstOrDefaultAsync() ;
+
+            //if (EventDetail != null)
+            //{
+            //    EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
+
+
+            //}
+
+
+
+            return Ok(EventDetail);
         }
 
 

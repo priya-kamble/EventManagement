@@ -26,9 +26,7 @@ namespace WebMvc.Services
         Task<IEnumerable<SelectListItem>> GetCategoriesAsync();
         IEnumerable<SelectListItem> GetDates();
         IEnumerable<SelectListItem> GetPrice();
-
-        // Temporary method for development only:
-        Task<Event> GetEventDetails(int EventId);
+         Task<Event> GetEventDetails(int EventId);
 
     }
 }
