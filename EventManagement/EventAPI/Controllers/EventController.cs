@@ -137,11 +137,16 @@ namespace EventAPI.Controllers
         [HttpGet("[Action]")]
         public async Task<IActionResult> EventDetailById(int EventId)
         {
-            var EventDetail = await _context.EventCatalog.Where(predicate: e => e.Id == EventId).FirstOrDefaultAsync() ;
+            
+            
+            var EventDetail = await _context.EventCatalog.Where( e => e.Id == EventId).FirstOrDefaultAsync() ;
             if (EventDetail != null)
             {
-                EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
+               EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
+               
+
             }
+
              return Ok(EventDetail);
         }
 

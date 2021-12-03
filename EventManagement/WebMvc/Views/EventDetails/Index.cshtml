@@ -4,7 +4,7 @@
 <form class="img_spacer" asp-controller="EventDetails" asp-action="Index" method="post">
 
 
-    <img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
+    <img class="event_big_img" src="@Model.EventImageUrl" />
 
     <div class="event_name">
         <span>@Model.Title</span>
@@ -16,12 +16,10 @@
     <div class="event_intro">
         Address : <span>@Model.Address</span>
     </div>
-    <div class="event_name">
-        <span>@Model.EventImageUrl</span>
-    </div>
+
     @*<div class="event_intro">
-            City and State : <span>@Model.Location</span>
-        </div>*@
+        City and State : <span>@Model.Location</span>
+    </div>*@
     <div class="event_intro">
         Starting time for this event : <span>@Model.StartDate</span>
     </div>
@@ -36,25 +34,11 @@
     </div>
 
 
-    <label class="esh-event-label" data-title="Date">
+    <label  data-title="Event Date">
         <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates"></select>
     </label>
     <input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
-    <label>The selected date is: "@Model.DateSelected" </label>
+    
+    <input class="custom_button" type="submit" value="TICKETS" />
 
-    @*<img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
-
-
-        <div class="event_name">
-            <span>@Model.Title</span>
-        </div>
-        <div class="event_intro">
-            <span>@Model.Description</span>
-        </div>
-        <input type="hidden" asp-for="@Model.Address" name="Address" />
-        <input type="hidden" asp-for="@Model.MaxOccupancy" name="MaxOccupancy" />
-        <input type="hidden" asp-for="@Model.MaxTicketsPerUser" name="MaxTicketsPerUser" />
-        <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
-        <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
-        <input type="hidden" asp-for="@Model.EventLinkUrl" name="EventLinkUrl" />*@
 </form>

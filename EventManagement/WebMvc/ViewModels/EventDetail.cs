@@ -25,7 +25,7 @@ namespace WebMvc.ViewModels
         public int UserId { get; set; }
         public int FormatId { get; set; }
         public int? LocationId { get; set; }
-
+        public string Location { get; set; }
         public IEnumerable<SelectListItem> AvailableDates { get; set; }
         public string DateSelected { get; set; }
 
