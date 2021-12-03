@@ -56,27 +56,15 @@ textarea {
 }
 
 .event_big_img {
-    width: 720px;
-    height: 360px;
+    width: 100%;
+    height: 100%;
+    max-width: 720px;
+    max-height: 360px;
     margin: auto;
 }
 
-.event_box {
-
-}
-
-.event_name {
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.event_intro {
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
-}
-
 .main_title {
-    font-family: Impact, Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Impact, Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 34px;
     font-weight: 100;
     font-style: italic;
@@ -94,7 +82,7 @@ textarea {
 
 .new_nav_link {
     margin-left: 15px;
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 17px;
     color: white;
     font-weight: 500;
@@ -107,14 +95,14 @@ textarea {
 
 .hello_user {
     margin: 10px 15px 0 0;
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 17px;
     color: #00a69c;
     font-weight: 500;
 }
 
 .view_link {
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
 }
 
 ul.fix_nav {
@@ -126,18 +114,18 @@ ul.fix_nav {
 }
 
 .filter_container {
-    padding-top: .5rem;
+    padding-top: 0.5rem;
     padding-right: 0;
 }
 
 .subtitle {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-left: 20px;
     margin-bottom: 0;
     padding-top: 7px;
     padding-bottom: 0;
     font-size: 17px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.42857143;
 }
 
@@ -160,7 +148,7 @@ footer.footer {
 
 .footer_content {
     padding: 10px;
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     color: white;
     font-weight: 500;
 }
@@ -172,20 +160,21 @@ footer.footer {
 }
 
 .pager_item {
-    font-family: Verdana, Roboto,"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     font-size: 17px;
     color: green;
     font-weight: 500;
     margin: 0 5px 0 5px;
 }
 
-.lighter, .lighter2 {
+.lighter,
+.lighter2 {
     color: lightseagreen;
 }
 
-.lighter:hover {
-    color: darkgreen;
-}
+    .lighter:hover {
+        color: darkgreen;
+    }
 
 .pager_box {
     border: 1px blue solid;
@@ -207,9 +196,11 @@ footer.footer {
 .new_hover:hover {
     color: darkgreen;
 }
+
 .img_spacer {
     margin-bottom: 12px;
 }
+
 .img_spacer2 {
     margin-bottom: 12px;
     margin-right: auto;
@@ -222,8 +213,7 @@ footer.footer {
     margin-left: auto;
 }
 
-.custom_button {
-    background-color: #83d01b;
+.custom_btn {
     border: none;
     color: #ffffff;
     cursor: pointer;
@@ -232,23 +222,140 @@ footer.footer {
     height: 48px;
     margin-top: 1rem;
     transition: all 0.35s;
-    width: 80%;
+    width: 260px;
     border-radius: 4px;
 }
 
-    .custom_button:hover {
-        background-color: #4a760f;
+    .custom_btn:hover {
         transition: all 0.35s;
     }
 
+.ticket_btn {
+    background-color: #83d01b;
+    margin-left: 40px;
+}
+
+.info_btn {
+    background-color: #83d01b;
+    text-align: center;
+    text-justify: auto;
+    margin-left: 10px;
+    line-height: 48px;
+}
+
+.ticket_btn:hover {
+    background-color: #4a760f;
+    color: #ffffff;
+}
+
+.info_btn:hover {
+    background-color: #4a760f;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.event_name {
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 20px;
+}
+
+.date_num {
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.event_intro,
+.zone_A,
+.zone_B,
+.zone_C,
+.zone_D,
+.zone_1,
+.zone_2 {
+    font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    padding-top: 5px;
+}
+
+.zone_A {
+    font-size: 18px;
+}
+
+.zone_B {
+    font-size: 16px;
+}
+
+.zone_C {
+    font-size: 14px;
+}
+
+.zone_D {
+    font-size: 12px;
+}
+
+.zone_1 {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.zone_2 {
+    font-size: 15px;
+}
+
+.spacer {
+    padding-left: 15px;
+}
+
+.banner_row {
+    padding: 0;
+    background-color: #ecf3eb;
+    padding-right: 0;
+    margin-right: 0;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.ticket_row {
+    border-top: 1px solid #dbdae3;
+    border-bottom: 1px solid #dbdae3;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.photo_box {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.title_box {
+    display: grid;
+    grid-template-rows: 105px 80px 60px 40px;
+    padding-right: 0;
+    height: 100%;
+    padding-left: 35px;
+    padding-top: 25px;
+    line-height: normal;
+}
+
+.details_box {
+    display: grid;
+    grid-template-rows: 15px 60px 25px 40px 25px 40px 25px 40px 25px 40px 40px;
+    padding-left: 85px;
+}
+
+.core_box {
+    display: grid;
+    grid-template-rows: 15px 40px 30px 30px 25px 40px 30px 30px 25px 85px;
+    padding-left: 35px;
+}
+
 .esh-event-title {
     position: relative;
-    top: 74.28571px
+    top: 74.28571px;
 }
 
 .esh-event-filters {
     background-color: #00a69c;
-    min-height: 90px
+    min-height: 90px;
 }
 
 .esh-event-filter {
@@ -257,59 +364,59 @@ footer.footer {
     color: #fff;
     cursor: pointer;
     margin-right: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     outline-color: #83d01b;
     padding-bottom: 0;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     padding-top: 1.5rem;
     min-width: 140px;
-    -webkit-appearance: none
+    -webkit-appearance: none;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
     background-color: rgb(0, 166, 156);
     cursor: pointer;
     margin-right: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     outline-color: #83d01b;
     padding-bottom: 0;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     padding-top: 1.5rem;
     outline: 1.1px solid #00d9cc;
     height: 28px;
     width: 28px;
 }
 
-input[type=checkbox]:checked {
-    background-color: rgb(0, 166, 156);
-    cursor: pointer;
-    margin-right: 1rem;
-    margin-top: .5rem;
-    outline-color: #83d01b;
-    padding-bottom: 0;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    padding-top: 1.5rem;
-    outline: 1.1px solid #00d9cc;
-    height: 28px;
-    width: 28px;
-}
+    input[type="checkbox"]:checked {
+        background-color: rgb(0, 166, 156);
+        cursor: pointer;
+        margin-right: 1rem;
+        margin-top: 0.5rem;
+        outline-color: #83d01b;
+        padding-bottom: 0;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 1.5rem;
+        outline: 1.1px solid #00d9cc;
+        height: 28px;
+        width: 28px;
+    }
 
 .esh-event-filter option {
-    background-color: #00a69c
+    background-color: #00a69c;
 }
 
 .esh-event-label {
     display: inline-block;
     position: relative;
-    z-index: 0
+    z-index: 0;
 }
 
 .online_label {
-    color: rgba(255,255,255,.8);
-    font-size: 1.0rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
     text-transform: uppercase;
     font-size: 1.2rem;
     padding-left: 15px;
@@ -319,63 +426,52 @@ input[type=checkbox]:checked {
 }
 
 .esh-event-label::before {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, 0.8);
     content: attr(data-title);
-    font-size: 1.0rem;
-    margin-top: .65rem;
-    margin-left: .5rem;
+    font-size: 1rem;
+    margin-top: 0.65rem;
+    margin-left: 0.5rem;
     position: absolute;
     text-transform: uppercase;
-    z-index: 1
-}
-
-.esh-event-label::after {
-    background-image: url("../images/arrow-down.png");
-    height: 7px;
-    content: '';
-    position: absolute;
-    right: 1.5rem;
-    top: 2.5rem;
-    width: 10px;
-    z-index: 1
+    z-index: 1;
 }
 
 .esh-event-label2 {
     display: inline-block;
     position: relative;
-    z-index: 0
+    z-index: 0;
 }
 
 .esh-event-label2::before {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, 0.8);
     content: attr(data-title);
-    font-size: 1.0rem;
-    margin-top: .65rem;
-    margin-left: .5rem;
+    font-size: 1rem;
+    margin-top: 0.65rem;
+    margin-left: 0.5rem;
     position: absolute;
     text-transform: uppercase;
-    z-index: 1
-}
+    z-index: 1;
+    }
 
 .esh-event-send {
     background-color: #83d01b;
     color: #fff;
     cursor: pointer;
     font-size: 1rem;
-    transform: translateY(.5rem);
-    padding: .5rem;
+    transform: translateY(0.5rem);
+    padding: 0.5rem;
     height: 33px;
     width: 33px;
-    transition: all .35s
+    transition: all 0.35s;
 }
 
-.esh-event-send:hover {
-    background-color: #4a760f;
-    transition: all .35s
-}
+    .esh-event-send:hover {
+        background-color: #4a760f;
+        transition: all 0.35s;
+    }
 
 .esh-event-items {
-    margin-top: 1rem
+    margin-top: 1rem;
 }
 
 .esh-event-item {
@@ -383,24 +479,24 @@ input[type=checkbox]:checked {
     margin-bottom: 1.5rem;
     width: 33%;
     display: inline-block;
-    float: none !important
+    float: none !important;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width: 1024px) {
     .esh-event-item {
-        width: 50%
+        width: 50%;
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
     .esh-event-item {
-        width: 100%
+        width: 100%;
     }
 }
 
 .esh-event-thumbnail {
     max-width: 370px;
-    width: 100%
+    width: 100%;
 }
 
 .esh-event-button {
@@ -411,37 +507,37 @@ input[type=checkbox]:checked {
     font-size: 1rem;
     height: 3rem;
     margin-top: 1rem;
-    transition: all .35s;
-    width: 80%
+    transition: all 0.35s;
+    width: 80%;
 }
 
-.esh-event-button.is-disabled {
-    opacity: .5;
-    pointer-events: none
-}
+    .esh-event-button.is-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
-.esh-event-button:hover {
-    background-color: #4a760f;
-    transition: all .35s
-}
+    .esh-event-button:hover {
+        background-color: #4a760f;
+        transition: all 0.35s;
+    }
 
 .esh-event-name {
     font-size: 1rem;
     font-weight: 300;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     text-align: center;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .esh-event-price {
     text-align: center;
     font-weight: 900;
-    font-size: 28px
+    font-size: 28px;
 }
 
-.esh-event-price::before {
-    content: '$'
-}
+    .esh-event-price::before {
+        content: "$";
+    }
 
 section.esh-identity-section {
     max-width: 200px;

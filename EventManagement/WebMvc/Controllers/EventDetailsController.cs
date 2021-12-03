@@ -34,7 +34,19 @@ namespace WebMvc.Controllers
                 StartDate = EventDetail.StartDate,
                 EndDate = EventDetail.EndDate,
                 AvailableDates = availableDates,
-                //DateSelected = dateSelected
+                Title = EventDetail.Title,
+                Description = EventDetail.Description,
+                EventImageUrl = EventDetail.EventImageUrl,
+                MaxOccupancy = EventDetail.MaxOccupancy,
+                IsOnlineEvent = EventDetail.IsOnlineEvent,
+                IsCancelled = EventDetail.IsCancelled,
+                EventLinkUrl = EventDetail.EventLinkUrl,
+                Address = EventDetail.Address,
+                LocationId = EventDetail.LocationId,
+                SubCategoryId = EventDetail.SubCategoryId,
+                FormatId = EventDetail.FormatId
+                // MaxTicketsPerUser
+                // DateSelected = dateSelected
             };
 
             return View(eventDetail);

@@ -1,7 +1,77 @@
 ﻿
-@model WebMvc.ViewModels.EventDetail
+@{
+    ViewData["Title"] = "Event details";
 
+    @model WebMvc.ViewModels.EventDetail
+}
 
+<div class="row banner_row">
+    <div class="photo_box col-md-7">
+        <img class="event_big_img" src="@Model.EventImageUrl" />
+    </div>
+
+    <div class="title_box col-md-5">
+        <div class="zone_1">
+            <div>Monday<br />Dec<br /><span class="date_num">20</span></div>
+        </div>
+        <div class="event_name">
+            <span>@Model.Title</span>
+        </div>
+        <div></div>
+        <div class="zone_1">$10</div>
+    </div>
+</div>
+<div class="row ticket_row">
+    <div class="col-md-7"></div>
+
+    <div class="col-md-5">
+        <form class="img_spacer2"
+              asp-controller="Event"
+              asp-action="EventDetails">
+            <input class="custom_btn ticket_btn"
+                   type="submit"
+                   value="TICKETS" />
+            <label class="esh-event-label">
+                <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates"></select>
+            </label>
+            <input class="arrow_button" type="image" src="~/images/arrow-right.svg" />
+            <label>The selected date is: "@Model.DateSelected" </label>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="details_box col-md-7">
+        <div></div>
+        <div class="zone_A">
+            <span>@Model.Title</span>
+        </div>
+        <div class="zone_C">About this event</div>
+        <div class="zone_B spacer">@Model.Description</div>
+        <div class="zone_C">Event Format</div>
+        <div class="zone_B spacer">@Model.FormatId</div>
+        <div class="zone_C">Event Category</div>
+        <div class="zone_B spacer">@Model.SubCategoryId</div>
+        <div class="zone_C">Event capacity</div>
+        <div class="zone_B spacer">@Model.MaxOccupancy people</div>
+    </div>
+
+    <div class="core_box col-md-5">
+        <div></div>
+        <div class="zone_B">Date and time</div>
+        <div class="zone_C spacer">@Model.StartDate to @Model.EndDate</div>
+        <div class="zone_C spacer">5:00 PM - 9:00 PM</div>
+        <div></div>
+        <div class="zone_B">Location</div>
+        <div class="zone_C spacer">@Model.Address</div>
+        <div class="zone_C spacer">Seattle WA</div>
+        <div></div>
+        <a href="https://google.com"
+           class="custom_btn info_btn"
+           type="submit"
+           value="More Information">MORE INFO</a>
+    </div>
+</div>
 
 
 <form class="img_spacer" asp-controller="EventDetails" asp-action="Index" method="post">
@@ -11,25 +81,10 @@
     <label> Start Date is @Model.StartDate </label>
     <label> End Date is @Model.EndDate </label>
 
-    <label class="esh-event-label" data-title="Date">
-        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" ></select>
+    <label class="esh-event-label">
+        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates"></select>
     </label>
-    <input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
+    <input class="arrow_button" type="image" src="~/images/arrow-right.svg" />
     <label>The selected date is: "@Model.DateSelected" </label>
 
-    @*<img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl" />
-
-
-        <div class="event_name">
-            <span>@Model.Title</span>
-        </div>
-        <div class="event_intro">
-            <span>@Model.Description</span>
-        </div>
-        <input type="hidden" asp-for="@Model.Address" name="Address" />
-        <input type="hidden" asp-for="@Model.MaxOccupancy" name="MaxOccupancy" />
-        <input type="hidden" asp-for="@Model.MaxTicketsPerUser" name="MaxTicketsPerUser" />
-        <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
-        <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
-        <input type="hidden" asp-for="@Model.EventLinkUrl" name="EventLinkUrl" />*@
 </form>
