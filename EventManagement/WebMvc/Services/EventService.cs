@@ -103,29 +103,14 @@ namespace WebMvc.Services
             return JsonConvert.DeserializeObject<PaginatedEvents>(dataString);
         }
 
-        // Temporary method for development only:
-        public Event GetEvent() // public async Task<Event> GetEventAsync(int eventId)
+        
+         public async Task<Event> GetEventDetails(int eventId)
         {
-            return new Event
-            {
-                Id = 25,
-                Title = "Build a Monster House",
-                Description = "Extreme Homebuilder Workshop",
-                EventImageUrl = "https://picsum.photos/720/360",
-                MaxOccupancy = 10,
-                MaxTicketsPerUser = 2,
-                StartDate = new DateTime(2021, 11, 17),
-                EndDate = new DateTime(2021, 11, 17),
-                IsPaidEvent = true,
-                IsOnlineEvent = false,
-                IsCancelled = false,
-                EventLinkUrl = "https://google.com",
-                LocationId = 5,
-                Address = "111 Jackson St",
-                SubCategoryId = 2,
-                UserId = 3,
-                FormatId = 6
-            };
+
+            var eventsUri = ApiPaths.Event.GetEventByID(_baseUrl, eventId);
+            var dataString = await _client.GetStringAsync(eventsUri);
+            return JsonConvert.DeserializeObject<Event>(dataString); 
+         
         }
         public async Task<IEnumerable<SelectListItem>> GetFormatAsync()
         {

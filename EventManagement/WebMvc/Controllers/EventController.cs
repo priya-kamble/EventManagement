@@ -125,13 +125,6 @@ namespace WebMvc.Controllers
 
             return View();
         }
-        // Temporary method for development only:
-        public async Task<IActionResult> EventDetails()
-        {
-            var currentEvent = _eventService.GetEvent();
-            
-
-            return View(currentEvent);
-        }
+      
     }
 }
