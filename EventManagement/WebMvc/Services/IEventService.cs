@@ -28,7 +28,7 @@ namespace WebMvc.Services
         IEnumerable<SelectListItem> GetPrice();
 
         // Temporary method for development only:
-        Event GetEvent();
+        Task<Event> GetEventDetails(int EventId);
 
     }
 }

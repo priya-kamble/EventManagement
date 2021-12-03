@@ -56,12 +56,12 @@ namespace EventAPI.Controllers
 
         [HttpGet("[Action]")]
         public async Task<IActionResult> Events(
-            [FromQuery] DateTime? startDate, 
+            [FromQuery] DateTime? startDate,
             [FromQuery] DateTime? endDate,
             [FromQuery] int? locationId,
             [FromQuery] int? formatId,
             [FromQuery] int? categoryId,
-            [FromQuery] bool? ispaid, 
+            [FromQuery] bool? ispaid,
             [FromQuery] bool? isonline,
             [FromQuery] int pageIndex = 0,
             [FromQuery] int pageSize = 6)
@@ -133,6 +133,19 @@ namespace EventAPI.Controllers
                 eventItem.EventImageUrl = eventItem.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
             return events;
         }
+
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> EventDetailById(int EventId)
+        {
+            var EventDetail = await _context.EventCatalog.Where(predicate: e => e.Id == EventId).FirstOrDefaultAsync() ;
+            if (EventDetail != null)
+            {
+                EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
+            }
+             return Ok(EventDetail);
+        }
+
+
     }
 }
 

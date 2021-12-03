@@ -6,7 +6,7 @@
 
 <form class="img_spacer" asp-controller="Event" asp-action="">
 
-    <a href="@Url.Action("Index", "EventDetails",new {id = @Model.Id, startDate = @Model.StartDate, endDate = @Model.EndDate})">
+    <a href="@Url.Action("Index", "EventDetails",new {id = @Model.Id})">
         <img class="esh-event-thumbnail event_image" src="@Model.EventImageUrl"  />
     </a>
 

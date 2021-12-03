@@ -4,29 +4,41 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMvc.Services;
 using WebMvc.ViewModels;
 
 namespace WebMvc.Controllers
 {
     public class EventDetailsController : Controller
     {
-        public IActionResult Index(int id, DateTime startDate, DateTime endDate, string dateSelected)
+        private readonly IEventService _eventService;
+        public EventDetailsController(IEventService eventservice)
+        {
+            _eventService = eventservice;
+        }
+        public async Task<IActionResult> Index(int id)
         {
 
+
+           var EventDetail = await _eventService.GetEventDetails(id);
             // code to fetch Event Details from id.
 
-            var availableDates = GetAvailableDates(startDate, endDate);
+
+
+
+            var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
             {
                 Id = id,
-                StartDate = startDate,
-                EndDate = endDate,
+                StartDate = EventDetail.StartDate,
+                EndDate = EventDetail.EndDate,
                 AvailableDates = availableDates,
-                DateSelected = dateSelected
+                //DateSelected = dateSelected
             };
 
             return View(eventDetail);
+
         }
 
         public IEnumerable<SelectListItem> GetAvailableDates(DateTime startDate, DateTime endDate)
