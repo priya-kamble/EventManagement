@@ -23,7 +23,7 @@ namespace WebMvc.Controllers
            var EventDetail = await _eventService.GetEventDetails(id);
            var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
-            var eventDetail = new EventDetail
+            var eventDetailinfo = new EventDetails
             {
                 Id = id,
                 StartDate = EventDetail.StartDate,
@@ -37,14 +37,12 @@ namespace WebMvc.Controllers
                 IsCancelled = EventDetail.IsCancelled,
                 EventLinkUrl = EventDetail.EventLinkUrl,
                 Address = EventDetail.Address,
-                LocationId = EventDetail.LocationId,
-                SubCategoryId = EventDetail.SubCategoryId,
-                FormatId = EventDetail.FormatId
-                // MaxTicketsPerUser
-                // DateSelected = dateSelected
+                City = EventDetail.City  ,
+                SubCategoryName= EventDetail.SubCategoryId,
+                FormatName = EventDetail.FormatId
             };
 
-            return View(eventDetail);
+            return View(eventDetailinfo);
 
         }
 

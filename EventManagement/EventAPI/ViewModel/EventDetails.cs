@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebMvc.ViewModels
+namespace EventAPI.Domain
 {
     public class EventDetails
     {
@@ -21,13 +20,13 @@ namespace WebMvc.ViewModels
         public bool IsCancelled { get; set; }
         public string EventLinkUrl { get; set; }
         public string Address { get; set; }
-        public int SubCategoryName { get; set; }
-        public string FormatName { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public string SubCategoryName { get; set; }
         public string CategoryName { get; set; }
-        public IEnumerable<SelectListItem> AvailableDates { get; set; }
-        public string DateSelected { get; set; }
+        public string FormatName{ get; set; }
+        public string LocationName { get; set; }
+
 
     }
 }

@@ -26,8 +26,7 @@ namespace WebMvc.ViewModels
         public string City { get; set; }
         public string State { get; set; }
         public string CategoryName { get; set; }
-        public IEnumerable<SelectListItem> AvailableDates { get; set; }
-        public string DateSelected { get; set; }
+     
 
     }
 }

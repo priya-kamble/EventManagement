@@ -104,12 +104,12 @@ namespace WebMvc.Services
         }
 
         
-         public async Task<Event> GetEventDetails(int eventId)
+         public async Task<EventDe> GetEventDetails(int eventId)
         {
 
             var eventsUri = ApiPaths.Event.GetEventByID(_baseUrl, eventId);
             var dataString = await _client.GetStringAsync(eventsUri);
-            return JsonConvert.DeserializeObject<Event>(dataString); 
+            return JsonConvert.DeserializeObject<EventDetails>(dataString); 
          
         }
         public async Task<IEnumerable<SelectListItem>> GetFormatAsync()
