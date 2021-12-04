@@ -34,9 +34,15 @@ namespace WebMvc.Controllers
                 MaxOccupancy = EventDetail.MaxOccupancy ,
                 MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
                 Address= EventDetail.Address,
-                Location = EventDetail.Location,
                 Description=EventDetail.Description ,
                 Title = EventDetail.Title,
+                FormatName= EventDetail.FormatName,
+                SubCategoryName=EventDetail.SubCategoryName ,
+                CategoryName= EventDetail.CategoryName,
+                City= EventDetail.City,
+                State= EventDetail.State,
+                MinPrice=EventDetail.MinPrice,
+                MaxPrice=EventDetail.MaxPrice,
                 DateSelected = dateSelected
             };
 

@@ -25,8 +25,8 @@ namespace EventAPI.Domain
         public string SubCategoryName { get; set; }
         public string CategoryName { get; set; }
         public string FormatName{ get; set; }
-        public string LocationName { get; set; }
-
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
 
     }
 }

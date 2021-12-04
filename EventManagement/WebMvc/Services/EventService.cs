@@ -104,7 +104,7 @@ namespace WebMvc.Services
         }
 
         
-         public async Task<EventDe> GetEventDetails(int eventId)
+         public async Task<EventDetails> GetEventDetails(int eventId)
         {
 
             var eventsUri = ApiPaths.Event.GetEventByID(_baseUrl, eventId);

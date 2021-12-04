@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebMvc.ViewModels
+namespace WebMvc.Models
 {
     public class EventDetails
     {
@@ -21,12 +21,14 @@ namespace WebMvc.ViewModels
         public bool IsCancelled { get; set; }
         public string EventLinkUrl { get; set; }
         public string Address { get; set; }
-        public int SubCategoryName { get; set; }
-        public string FormatName { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public string SubCategoryName { get; set; }
         public string CategoryName { get; set; }
-     
+        public string FormatName { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
+
 
     }
 }

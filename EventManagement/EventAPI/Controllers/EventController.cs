@@ -139,6 +139,13 @@ namespace EventAPI.Controllers
         public async Task<IActionResult> EventDetailById(int EventId)
         {
 
+            var EventTicketprice = _context.Tickets.Where(t => t.EventId == EventId);
+            // Retrieve Minimum price
+            var MinPrice = (from T in _context.Tickets where T.EventId == EventId select T.Price ).Min();
+
+            //Retrieve Maximum price
+            var MaxPrice = (from T in _context.Tickets where T.EventId == EventId select T.Price).Max();
+
 
             var EventDetailInfo = await (from E in _context.EventCatalog
                                          join C in _context.Categories
@@ -164,7 +171,9 @@ namespace EventAPI.Controllers
                                              State = E.Location.State,
                                              City = E.Location.City,
                                              FormatName = E.Format.FormatName,
-                                             CategoryName = C.CategoryName
+                                             CategoryName = C.CategoryName,
+                                             MinPrice= MinPrice,
+                                             MaxPrice= MaxPrice
                                          }).FirstOrDefaultAsync();
 
 
