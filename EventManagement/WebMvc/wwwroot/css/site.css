@@ -4,7 +4,7 @@
 }
 
 /* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+/* Basic padding to keep content away from edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -49,7 +49,6 @@ textarea {
     }
 }
 
-/* set image size for main panel */
 .event_image {
     height: 220px;
     width: 293px;
@@ -172,9 +171,9 @@ footer.footer {
     color: lightseagreen;
 }
 
-    .lighter:hover {
-        color: darkgreen;
-    }
+.lighter:hover {
+    color: darkgreen;
+}
 
 .pager_box {
     border: 1px blue solid;
@@ -226,9 +225,9 @@ footer.footer {
     border-radius: 4px;
 }
 
-    .custom_btn:hover {
-        transition: all 0.35s;
-    }
+.custom_btn:hover {
+    transition: all 0.35s;
+}
 
 .ticket_btn {
     background-color: #83d01b;
@@ -301,7 +300,8 @@ footer.footer {
     font-size: 15px;
 }
 
-.spacer {
+.accent {
+    color: #018a81;
     padding-left: 15px;
 }
 
@@ -389,20 +389,20 @@ input[type="checkbox"] {
     width: 28px;
 }
 
-    input[type="checkbox"]:checked {
-        background-color: rgb(0, 166, 156);
-        cursor: pointer;
-        margin-right: 1rem;
-        margin-top: 0.5rem;
-        outline-color: #83d01b;
-        padding-bottom: 0;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        padding-top: 1.5rem;
-        outline: 1.1px solid #00d9cc;
-        height: 28px;
-        width: 28px;
-    }
+input[type="checkbox"]:checked {
+    background-color: rgb(0, 166, 156);
+    cursor: pointer;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    outline-color: #83d01b;
+    padding-bottom: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1.5rem;
+    outline: 1.1px solid #00d9cc;
+    height: 28px;
+    width: 28px;
+}
 
 .esh-event-filter option {
     background-color: #00a69c;
@@ -465,10 +465,10 @@ input[type="checkbox"] {
     transition: all 0.35s;
 }
 
-    .esh-event-send:hover {
-        background-color: #4a760f;
-        transition: all 0.35s;
-    }
+.esh-event-send:hover {
+    background-color: #4a760f;
+    transition: all 0.35s;
+}
 
 .esh-event-items {
     margin-top: 1rem;
@@ -511,15 +511,15 @@ input[type="checkbox"] {
     width: 80%;
 }
 
-    .esh-event-button.is-disabled {
-        opacity: 0.5;
-        pointer-events: none;
-    }
+.esh-event-button.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
 
-    .esh-event-button:hover {
-        background-color: #4a760f;
-        transition: all 0.35s;
-    }
+.esh-event-button:hover {
+    background-color: #4a760f;
+    transition: all 0.35s;
+}
 
 .esh-event-name {
     font-size: 1rem;
@@ -535,9 +535,9 @@ input[type="checkbox"] {
     font-size: 28px;
 }
 
-    .esh-event-price::before {
-        content: "$";
-    }
+.esh-event-price::before {
+    content: "$";
+}
 
 section.esh-identity-section {
     max-width: 200px;

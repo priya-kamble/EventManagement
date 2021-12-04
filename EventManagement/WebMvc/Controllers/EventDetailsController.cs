@@ -18,10 +18,9 @@ namespace WebMvc.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
+            var EventDetail = await _eventService.GetEventDetails(id);
 
-
-           var EventDetail = await _eventService.GetEventDetails(id);
-           var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
+            var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
             {
@@ -40,12 +39,9 @@ namespace WebMvc.Controllers
                 LocationId = EventDetail.LocationId,
                 SubCategoryId = EventDetail.SubCategoryId,
                 FormatId = EventDetail.FormatId
-                // MaxTicketsPerUser
-                // DateSelected = dateSelected
             };
 
             return View(eventDetail);
-
         }
 
         public IEnumerable<SelectListItem> GetAvailableDates(DateTime startDate, DateTime endDate)
