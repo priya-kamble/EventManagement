@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebMvc.ViewModels
+namespace WebMvc.Models
 {
-    public class EventDetail
+    public class EventDetails
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -28,8 +28,7 @@ namespace WebMvc.ViewModels
         public string FormatName { get; set; }
         public decimal MinPrice { get; set; }
         public decimal MaxPrice { get; set; }
-        public IEnumerable<SelectListItem> AvailableDates { get; set; }
-        public string DateSelected { get; set; }
+
 
     }
 }

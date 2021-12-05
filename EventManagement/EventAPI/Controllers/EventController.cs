@@ -135,56 +135,63 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[Action]")]
+     
         public async Task<IActionResult> EventDetailById(int EventId)
         {
 
+            var EventTicketprice = _context.Tickets.Where(t => t.EventId == EventId);
+            // Retrieve Minimum price
+            var MinPrice = (from T in _context.Tickets where T.EventId == EventId select T.Price ).Min();
 
-            var EventDetail = await _context.EventCatalog.Where(e => e.Id == EventId).FirstOrDefaultAsync();
-            if (EventDetail != null)
+            //Retrieve Maximum price
+            var MaxPrice = (from T in _context.Tickets where T.EventId == EventId select T.Price).Max();
+
+
+            var EventDetailInfo = await (from E in _context.EventCatalog
+                                         join C in _context.Categories
+                                         on E.SubCategory.CategoryId equals C.CategoryId
+
+                                         where (E.Id == EventId)
+                                         select new EventDetails
+                                         {
+                                             Address = E.Address,
+                                             Description = E.Description,
+                                             EndDate = E.EndDate,
+                                             EventImageUrl = E.EventImageUrl,
+                                             EventLinkUrl = E.EventLinkUrl,
+                                             Id = E.Id,
+                                             IsCancelled = E.IsCancelled,
+                                             IsOnlineEvent = E.IsOnlineEvent,
+                                             IsPaidEvent = E.IsPaidEvent,
+                                             MaxOccupancy = E.MaxOccupancy,
+                                             MaxTicketsPerUser = E.MaxTicketsPerUser,
+                                             StartDate = E.StartDate,
+                                             SubCategoryName = E.SubCategory.SubCategoryName,
+                                             Title = E.Title,
+                                             State = E.Location.State,
+                                             City = E.Location.City,
+                                             FormatName = E.Format.FormatName,
+                                             CategoryName = C.CategoryName,
+                                             MinPrice= MinPrice,
+                                             MaxPrice= MaxPrice
+                                         }).FirstOrDefaultAsync();
+
+
+
+
+            if (EventDetailInfo != null)
             {
-                EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
-
-
+                EventDetailInfo.EventImageUrl = EventDetailInfo.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
             }
 
-            //var EventDetail = await (from E in _context.EventCatalog join L in _context.Locations 
-            //           on  E.LocationId  equals  L.LocationId  where (E.Id == EventId)
-            //           select new
-            //           {
-            //               E.Address,
-            //               E.Description,
-            //               E.EndDate,
-            //               E.EventImageUrl,
-            //               E.EventLinkUrl,
-            //               E.Format,
-            //               E.Id,
-            //               E.IsCancelled,
-            //               E.IsOnlineEvent,
-            //               E.IsPaidEvent,
-            //               E.Location,
-            //               E.LocationId,
-            //               E.MaxOccupancy,
-            //               E.MaxTicketsPerUser,
-            //               E.StartDate,
-            //               E.SubCategory,
-            //               E.SubCategoryId,
-            //               E.Title,
-            //               E.User,
-            //               E.UserId,
-            //               L.State,
-            //               L.City,
-            //                }) .FirstOrDefaultAsync() ;
+            return Ok(EventDetailInfo);
 
+            //var EventDetail = await _context.EventCatalog.Where(e => e.Id == EventId).FirstOrDefaultAsync();
             //if (EventDetail != null)
             //{
             //    EventDetail.EventImageUrl = EventDetail.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]);
-
-
             //}
-
-
-
-            return Ok(EventDetail);
+          //  return Ok(EventDetail);
         }
 
 

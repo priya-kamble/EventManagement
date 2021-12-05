@@ -16,10 +16,12 @@ namespace WebMvc.Controllers
         {
             _eventService = eventservice;
         }
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id , string dateSelected)
         {
-            var EventDetail = await _eventService.GetEventDetails(id);
 
+
+           var EventDetail = await _eventService.GetEventDetails(id);
+          
             var availableDates = GetAvailableDates(EventDetail.StartDate, EventDetail.EndDate);
 
             var eventDetail = new EventDetail
@@ -28,20 +30,24 @@ namespace WebMvc.Controllers
                 StartDate = EventDetail.StartDate,
                 EndDate = EventDetail.EndDate,
                 AvailableDates = availableDates,
+                EventImageUrl = EventDetail.EventImageUrl ,
+                MaxOccupancy = EventDetail.MaxOccupancy ,
+                MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
+                Address= EventDetail.Address,
+                Description=EventDetail.Description ,
                 Title = EventDetail.Title,
-                Description = EventDetail.Description,
-                EventImageUrl = EventDetail.EventImageUrl,
-                MaxOccupancy = EventDetail.MaxOccupancy,
-                IsOnlineEvent = EventDetail.IsOnlineEvent,
-                IsCancelled = EventDetail.IsCancelled,
-                EventLinkUrl = EventDetail.EventLinkUrl,
-                Address = EventDetail.Address,
-                LocationId = EventDetail.LocationId,
-                SubCategoryId = EventDetail.SubCategoryId,
-                FormatId = EventDetail.FormatId
+                FormatName= EventDetail.FormatName,
+                SubCategoryName=EventDetail.SubCategoryName ,
+                CategoryName= EventDetail.CategoryName,
+                City= EventDetail.City,
+                State= EventDetail.State,
+                MinPrice=EventDetail.MinPrice,
+                MaxPrice=EventDetail.MaxPrice,
+                DateSelected = dateSelected
             };
 
             return View(eventDetail);
+
         }
 
         public IEnumerable<SelectListItem> GetAvailableDates(DateTime startDate, DateTime endDate)

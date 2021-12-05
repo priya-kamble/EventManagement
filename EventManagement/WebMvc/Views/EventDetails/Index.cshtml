@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Event details";
 
     @model WebMvc.ViewModels.EventDetail
@@ -19,8 +18,17 @@
             <span>@Model.Title</span>
         </div>
         <div></div>
-        <div class="zone_1">$10</div>
-    </div>
+        <div class="zone_1">
+            @if (@Model.MinPrice == 0)
+            {
+             <lable>Free Event</lable>   
+            }
+            else
+            {
+
+           <div>$ @Model.MinPrice - @Model.MaxPrice</div>
+            }
+       </div>
 </div>
 
 <div class="row ticket_row">
@@ -45,9 +53,9 @@
         <div class="zone_C">About this event</div>
         <div class="zone_B accent">@Model.Description</div>
         <div class="zone_C">Event Format</div>
-        <div class="zone_B accent">@Model.FormatId</div>
+        <div class="zone_B accent">@Model.FormatName</div>
         <div class="zone_C">Event Category</div>
-        <div class="zone_B accent">@Model.SubCategoryId</div>
+        <div class="zone_B accent">@Model.SubCategoryName</div>
         <div class="zone_C">Event capacity</div>
         <div class="zone_B accent">@Model.MaxOccupancy people</div>
     </div>
@@ -62,7 +70,7 @@
         <div></div>
         <div class="zone_B">Location</div>
         <div class="zone_C accent">@Model.Address</div>
-        <div class="zone_C accent">Seattle WA</div>
+        <div class="zone_C accent">@Model.City @Model.State</div>
         <div></div>
         <a href="https://google.com"
            class="custom_btn info_btn"

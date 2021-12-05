@@ -424,12 +424,12 @@ namespace EventAPI.Data
 
 
                 //Paid  Ticket Based on Event Data- Description = "Learn-Grow-Fulfill your Potential"
-                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 22), SalesEndDate= new DateTime(2022, 2, 26), Price =20, TicketCategoryId = 2 ,Quantity=14},
-                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =10, TicketCategoryId = 6 ,Quantity=6},
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 22), SalesEndDate= new DateTime(2022, 2, 26), Price =0, TicketCategoryId = 2 ,Quantity=14},
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =0, TicketCategoryId = 6 ,Quantity=6},
 
 
                  //Paid  Ticket Based on Event Data- Description = "S.T.E.M"
-                new Ticket { EventId=14, SalesStartDate= new DateTime(2021, 12, 22), SalesEndDate= new DateTime(2021, 12, 26), Price =10, TicketCategoryId = 1 ,Quantity=15},
+                new Ticket { EventId=14, SalesStartDate= new DateTime(2021, 12, 22), SalesEndDate= new DateTime(2021, 12, 26), Price =0, TicketCategoryId = 1 ,Quantity=15},
                
                 //Paid  Ticket Based on Event Data- Description = "Seattle Career Fair"
                 new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 22), SalesEndDate= new DateTime(2022, 1, 26), Price =22, TicketCategoryId = 2 ,Quantity=25},
