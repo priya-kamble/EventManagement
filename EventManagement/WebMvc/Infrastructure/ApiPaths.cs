@@ -29,6 +29,7 @@ namespace WebMvc.Infrastructure
             {
                 return $"{baseUri}Ticket/TicketsForEvent?eventId={eventId}";
             }
+
             public static string GetEventByID(string baseUri, int eventId)
             {
                 return $"{baseUri}Event/EventDetailById?eventId={eventId}";

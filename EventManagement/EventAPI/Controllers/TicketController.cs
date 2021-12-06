@@ -1,11 +1,14 @@
 ﻿using EventAPI.Data;
+using EventAPI.Domain;
+using EventAPI.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Linq;
-using EventAPI.Domain;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EventAPI.Controllers
 {
@@ -13,25 +16,37 @@ namespace EventAPI.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
-        private readonly EventCatalogContext _context;
-
-        public TicketController(EventCatalogContext context)
+        public readonly EventCatalogContext _context;
+        public readonly IConfiguration _config;
+        public TicketController(EventCatalogContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> TicketsForEvent([FromQuery] int eventId)
         {
             var returnData = await (from ticket in _context.Tickets
-                    join ticketcategory in _context.TicketCategories
-                    on ticket.TicketCategoryId equals ticketcategory.TicketCategoryId
-                    join eventCatalog in _context.EventCatalog
-                    on ticket.EventId equals eventCatalog.Id
-                    where eventCatalog.Id == eventId
-                    select new { Ticket = ticket, TicketCategory = ticketcategory, EventCatalog = eventCatalog }).ToListAsync();
+                                    where ticket.EventId == eventId
+                                    && ticket.SalesStartDate <= DateTime.Today.Date
+                                    && ticket.SalesEndDate >= DateTime.Today.Date
+                                    select new TicketDetailViewModel
+                                    {
+                                        Event = ticket.Event,
+                                        EventId = ticket.EventId,
+                                        Price = ticket.Price,
+                                        Quantity = ticket.Quantity,
+                                        SalesEndDate = ticket.SalesEndDate,
+                                        SalesStartDate = ticket.SalesStartDate,
+                                        TicketCategory = ticket.TicketCategory,
+                                        TicketCategoryId = ticket.TicketCategoryId,
+                                        TicketId = ticket.TicketId,
+                                    }).ToListAsync();
 
-            return this.Ok(returnData.Select(x => x.Ticket));
+            returnData.ForEach(ticket => ticket.Event.EventImageUrl = ticket.Event.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
+
+            return this.Ok(returnData);
         }
 
 

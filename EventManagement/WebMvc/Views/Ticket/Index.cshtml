@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Ticket details";
+
+    @model WebMvc.ViewModels.TicketIndexViewModel
+
+}
+<label>This is a ticket page</label>
+<div>
+    <div>
+        <label>The Number of tickets for date selected by user:</label>
+        <span>@Model.Tickets.Count()</span>
+    </div>
+
+    <div>
+        <label>The tickets for date selected by user:</label>
+        <span>@Model.DateSelected</span>
+    </div>
+
+</div>
