@@ -29,8 +29,8 @@ namespace EventAPI.Controllers
         {
             var returnData = await (from ticket in _context.Tickets
                                     where ticket.EventId == eventId
-                                    && ticket.SalesStartDate <= dateSelected
-                                    && ticket.SalesEndDate >= dateSelected
+                                    && ticket.SalesStartDate <= DateTime.Today.Date
+                                    && ticket.SalesEndDate >= DateTime.Today.Date
                                     select new TicketDetailViewModel
                                     {
                                         Event = ticket.Event,
@@ -41,7 +41,8 @@ namespace EventAPI.Controllers
                                         SalesStartDate = ticket.SalesStartDate,
                                         TicketCategory = ticket.TicketCategory,
                                         TicketCategoryId = ticket.TicketCategoryId,
-                                        TicketId = ticket.TicketId
+                                        TicketId = ticket.TicketId,
+                                        SelectedEventDate = dateSelected
                                     }).ToListAsync();
 
             returnData.ForEach(ticket => ticket.Event.EventImageUrl = ticket.Event.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
