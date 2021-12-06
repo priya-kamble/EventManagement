@@ -9,24 +9,22 @@ namespace WebMvc.Controllers
 {
     public class TicketController : Controller
     {
-        private readonly ITicketService _ticketService;
-
-        public TicketController(ITicketService ticketservice)
+        private readonly IEventService _eventService;
+        public TicketController(IEventService eventservice)
         {
-            _ticketService = ticketservice;
+            _eventService = eventservice;
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(EventDetail eventDetail)
         {
             var selectedDate = DateTime.Parse(eventDetail.DateSelected);
-            var ticketCollection = await _ticketService.GetTicketsForEventAsync(eventDetail.Id, selectedDate);
+            var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
             var ticketsviewmodel = new TicketIndexViewModel
             {
                 DateSelected = eventDetail.DateSelected,
                 Tickets = ticketCollection
             };
-
             return View(ticketsviewmodel);
         }
     }

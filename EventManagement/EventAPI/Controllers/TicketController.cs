@@ -25,7 +25,7 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> TicketsForEvent([FromQuery] int eventId, [FromQuery] DateTime dateSelected)
+        public async Task<IActionResult> TicketsForEvent([FromQuery] int eventId)
         {
             var returnData = await (from ticket in _context.Tickets
                                     where ticket.EventId == eventId
@@ -42,7 +42,6 @@ namespace EventAPI.Controllers
                                         TicketCategory = ticket.TicketCategory,
                                         TicketCategoryId = ticket.TicketCategoryId,
                                         TicketId = ticket.TicketId,
-                                        SelectedEventDate = dateSelected
                                     }).ToListAsync();
 
             returnData.ForEach(ticket => ticket.Event.EventImageUrl = ticket.Event.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
