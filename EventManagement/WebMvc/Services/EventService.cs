@@ -104,12 +104,12 @@ namespace WebMvc.Services
         }
 
         
-         public async Task<Event> GetEventDetails(int eventId)
+         public async Task<EventDetails> GetEventDetails(int eventId)
         {
 
             var eventsUri = ApiPaths.Event.GetEventByID(_baseUrl, eventId);
             var dataString = await _client.GetStringAsync(eventsUri);
-            return JsonConvert.DeserializeObject<Event>(dataString); 
+            return JsonConvert.DeserializeObject<EventDetails>(dataString); 
          
         }
         public async Task<IEnumerable<SelectListItem>> GetFormatAsync()
@@ -186,5 +186,14 @@ namespace WebMvc.Services
             });
             return price;
         }
+
+        public async Task<List<Ticket>> GetTicketsPerEvent(int EventId) 
+        {
+            var TicketsUri = ApiPaths.Event.GetAllTicketsForEvent(_baseUrl, EventId);
+            var dataString = await _client.GetStringAsync(TicketsUri);
+            return JsonConvert.DeserializeObject<List<Ticket>>(dataString);
+        }
+
+
     }
 }
