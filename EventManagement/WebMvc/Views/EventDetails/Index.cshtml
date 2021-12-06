@@ -18,21 +18,19 @@
         <div class="event_name">
             <span>@Model.Title</span>
         </div>
-        <div class="event_id">
-            <span>@Model.Id</span>
-        </div>
-        <div></div>
+
         <div class="zone_1">
             @if (@Model.MinPrice == 0)
             {
-             <lable>Free Event</lable>   
+                <lable>Free Event</lable>
             }
             else
             {
 
-           <div>$ @Model.MinPrice - @Model.MaxPrice</div>
+                <div>$ @Model.MinPrice - @Model.MaxPrice</div>
             }
-       </div>
+        </div>
+    </div>
 </div>
 
 
@@ -98,16 +96,16 @@
 </div>
 
 
-//ToDo:Checking how to disable the ticket button if value selected is null. 
+@*ToDo:Checking how to disable the ticket button if value selected is null.*@
 @*<script type="text/javascript">
 
     $('#datesdropdown').change(function(){
-        var disabled = this.value == null;
-        alert("message" + disabled);
-        $('#ticketbutton').prop('disabled', disabled);
+    var disabled = this.value == null;
+    alert("message" + disabled);
+    $('#ticketbutton').prop('disabled', disabled);
     });
 
-</script>*@
+    </script>*@
 
 
 
