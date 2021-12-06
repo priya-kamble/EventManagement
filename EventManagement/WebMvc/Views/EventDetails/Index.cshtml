@@ -2,6 +2,7 @@
     ViewData["Title"] = "Event details";
 
     @model WebMvc.ViewModels.EventDetail
+
 }
 
 <div class="row banner_row">
@@ -17,29 +18,44 @@
         <div class="event_name">
             <span>@Model.Title</span>
         </div>
-        <div></div>
+
         <div class="zone_1">
             @if (@Model.MinPrice == 0)
             {
-             <lable>Free Event</lable>   
+                <lable>Free Event</lable>
             }
             else
             {
 
-           <div>$ @Model.MinPrice - @Model.MaxPrice</div>
+                <div>$ @Model.MinPrice - @Model.MaxPrice</div>
             }
-       </div>
+        </div>
+    </div>
 </div>
+
 
 <div class="row ticket_row">
     <div class="col-md-7"></div>
     <div class="col-md-5">
-        <form class="img_spacer2"
-              asp-controller="Event"
-              asp-action="EventDetails">
-            <input class="custom_btn ticket_btn"
-                   type="submit"
-                   value="TICKETS" />
+        <form class="img_spacer2" asp-controller="Ticket" asp-action="Index" method="post">
+            <div>
+                <div>
+                    <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="TICKETS" href="@Url.Action("Index", "Ticket")" />
+                    <input type="hidden" asp-for="@Model.Id" name="Id" />
+                    <input type="hidden" asp-for="@Model.Description" name="Description" />
+                    <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
+                    <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
+                    <input type="hidden" asp-for="@Model.Address" name="Address" />
+                    <input type="hidden" asp-for="@Model.Title" name="Title" />
+                    <input type="hidden" asp-for="@Model.EventImageUrl" name="EventImageUrl" />
+                </div>
+                <div>
+                    <label class="esh-event-label">
+                        <select asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
+                    </label>
+                </div>
+
+            </div>
         </form>
     </div>
 </div>
@@ -78,3 +94,18 @@
            value="More Information">MORE INFO</a>
     </div>
 </div>
+
+
+@*ToDo:Checking how to disable the ticket button if value selected is null.*@
+@*<script type="text/javascript">
+
+    $('#datesdropdown').change(function(){
+    var disabled = this.value == null;
+    alert("message" + disabled);
+    $('#ticketbutton').prop('disabled', disabled);
+    });
+
+    </script>*@
+
+
+
