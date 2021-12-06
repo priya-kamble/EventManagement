@@ -25,10 +25,11 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}Location/Locations";
             }
 
-            public static string GetAllTicketsForEvent(string baseUri, int eventId)
+            public static string GetAllTicketsForEvent(string baseUri, int eventId, DateTime selectedDateTicket)
             {
-                return $"{baseUri}Ticket/TicketsForEvent?eventId={eventId}";
+                return $"{baseUri}Ticket/TicketsForEvent?eventId={eventId}&dateSelected={selectedDateTicket}";
             }
+
             public static string GetEventByID(string baseUri, int eventId)
             {
                 return $"{baseUri}Event/EventDetailById?eventId={eventId}";
