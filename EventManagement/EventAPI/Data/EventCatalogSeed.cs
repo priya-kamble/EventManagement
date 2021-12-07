@@ -244,97 +244,97 @@ namespace EventAPI.Data
             {
 
                 new Event { Title = "Diversity Career Group", Description = "Tech Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1",
-                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021,12,16), EndDate = new DateTime(2021,12,16) , IsPaidEvent = false ,
+                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,02,16,9,0,0), EndDate = new DateTime(2022,02,18,17,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Photowalk", Description = "Seattle Center with Nikon", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/2",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 18), EndDate = new DateTime(2021, 12, 18) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,01,31,10,30,0), EndDate = new DateTime(2022,02,01,2,30,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 3, Address = "1000 1st Ave",
                     SubCategoryId = 3, UserId = 3, FormatId = 9 },
 
                 new Event { Title = "Dream House", Description = "New Homebuyer Workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/3",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 12, 17), EndDate = new DateTime(2021, 12, 17) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2022,02,01,10,0,0), EndDate = new DateTime(2022,02,02,12,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 5, Address = "1000 1st Ave",
                     SubCategoryId = 2, UserId = 3, FormatId = 6 },
 
                 new Event { Title = "Tech Carrier Fair ", Description = "Exclusive Tech Hiring", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/4",
-                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 3, 3), EndDate = new DateTime(2021, 4, 4) , IsPaidEvent = false ,
+                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,03,03,9,0,0), EndDate = new DateTime(2022,04,04,17,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Taste Maker", Description = "Cooking Classes", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/5",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 12) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,01,15,14,15,0), EndDate = new DateTime(2022,01,17,15,45,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 9, Address = "1800 12th Ave",
                     SubCategoryId = 5, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "The Market Experience", Description = "Classic Italian Cuisine", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/6",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 12) , IsPaidEvent = false ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 4, StartDate = new DateTime(2022,03,03,10,30,0), EndDate = new DateTime(2022,03,03,18,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 11, Address = "8352 Marvon Dr.",
                     SubCategoryId = 5, UserId = 3, FormatId = 10 },
                 
                 new Event { Title = "Know your options", Description = "How to choose right insurance plan workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/7",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 1, 1) , IsPaidEvent = false ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 2, StartDate = new DateTime(2022,02,05,12,30,0), EndDate = new DateTime(2022,02,06,14,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = true, EventLinkUrl = null, LocationId = 13, Address = "8352 Marvon Dr.",
                     SubCategoryId = 6, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "Karaoke Event", Description = "A melodious night", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/8",
-                    MaxOccupancy = 40, MaxTicketsPerUser = 2, StartDate = new DateTime(2021, 11, 19), EndDate = new DateTime(2021, 11, 19) , IsPaidEvent = true ,
+                    MaxOccupancy = 40, MaxTicketsPerUser = 2, StartDate = new DateTime(2022,01,21,19,30,0), EndDate = new DateTime(2022,01,22,21,30,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 2, Address = "12 00 21st Ave",
                     SubCategoryId = 7, UserId = 3, FormatId = 7 },
 
                 new Event { Title = "Harmony", Description = "A musical workshop", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/9",
-                    MaxOccupancy = 15, MaxTicketsPerUser = 2, StartDate = new DateTime(2022, 11, 19), EndDate = new DateTime(2022, 11, 19) , IsPaidEvent = true ,
+                    MaxOccupancy = 15, MaxTicketsPerUser = 2, StartDate = new DateTime(2022,01,22,14,30,0), EndDate = new DateTime(2022,01,23,16,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 4, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 2 },
                 
                 new Event { Title = "Cruise Away", Description = "Exploring the sea together", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/10",
-                    MaxOccupancy = 150, MaxTicketsPerUser = 6, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = true,
+                    MaxOccupancy = 150, MaxTicketsPerUser = 6, StartDate = new DateTime(2022,02,22,8,30,0), EndDate = new DateTime(2022,03,22,22,30,0) , IsPaidEvent = true,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 6, Address = "1000 1st Ave",
                     SubCategoryId = 11, UserId = 3, FormatId = 11 },
 
                 new Event { Title = "Park & Hike Event", Description = "Hike in the woods", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/11",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2021, 12, 23), EndDate = new DateTime(2021, 12, 23) , IsPaidEvent = true,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 4, StartDate = new DateTime(2022,01,14,5,30,0), EndDate = new DateTime(2022,02,14,9,30,0) , IsPaidEvent = true,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "8352 Marvon Dr.",
                     SubCategoryId = 9, UserId = 3, FormatId = 6 },
 
                 new Event { Title = "Family.Life.Education", Description = "Learn-Grow-Fulfill your Potential", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/12",
-                    MaxOccupancy = 6, MaxTicketsPerUser = 4, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 3, 3) , IsPaidEvent = false ,
+                    MaxOccupancy = 6, MaxTicketsPerUser = 4, StartDate = new DateTime(2022,01,11,11,15,0), EndDate = new DateTime(2022,01,14,12,45,0) , IsPaidEvent = false ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", Address = null,
                     SubCategoryId = 4 , UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Education Foundation", Description = "Education for All", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/13",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 3, 3), EndDate = new DateTime(2022, 4, 4) , IsPaidEvent = false ,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,05,05,9,0,0), EndDate = new DateTime(2022,05,06,14,30,0) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 8, Address = "8352 Marvon Dr.",
                     SubCategoryId = 4, UserId = 3, FormatId = 3 },
 
                 new Event { Title = "After School Enrichment Programs", Description = "S.T.E.M", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/14",
-                    MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = false ,
+                    MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,01,12,3,50,0), EndDate = new DateTime(2022,04,12,6,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = "http://google.com", LocationId = 8, Address = "219 Madison Ave",
                     SubCategoryId = 8, UserId = 3, FormatId = 2 },
 
                 new Event { Title = "Seattle Job Fair", Description = "Seattle Career Fair", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/15",
-                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 2, 2), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = true ,
+                    MaxOccupancy = 30, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,2,2,9,0,0), EndDate = new DateTime(2022,2,3,17,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com", Address = null,
                     SubCategoryId = 1, UserId = 3, FormatId = 4 },
 
                 new Event { Title = "Meet us at the sky", Description = "Hot Air Balloon adventure ride", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/16",
-                    MaxOccupancy = 25, MaxTicketsPerUser = 4, StartDate = new DateTime(2022, 2, 2), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = true ,
+                    MaxOccupancy = 25, MaxTicketsPerUser = 4, StartDate = new DateTime(2022,2,5,10,0,0), EndDate = new DateTime(2022,2,6,13,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 3, Address = "park",
                     SubCategoryId = 11, UserId = 3, FormatId = 11 },
 
                 new Event { Title = "Vector Stock", Description = "A complete wellness guide", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/17",
-                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 2, 2), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = true ,
+                    MaxOccupancy = 10, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,2,5,12,0,0), EndDate = new DateTime(2022,2,5,15,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "219 Madison Ave",
                     SubCategoryId = 6, UserId = 3, FormatId = 3 },
 
                 new Event { Title = "Pro Club", Description = "A complete sports league", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/18",
-                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 3), EndDate = new DateTime(2022, 1, 3) , IsPaidEvent = true ,
+                    MaxOccupancy = 20, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,1,31,9,0,0), EndDate = new DateTime(2022,2,13,5,0,0) , IsPaidEvent = true ,
                     IsOnlineEvent = false, IsCancelled = false, EventLinkUrl = null, LocationId = 1, Address = "220 Madison Ave",
                     SubCategoryId = 10, UserId = 3, FormatId = 5 },
 
                 new Event { Title = "Mind, Heart & Soul", Description = "A complete You!!", EventImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/19",
-                    MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022, 1, 1), EndDate = new DateTime(2022, 2, 2) , IsPaidEvent = false ,
+                    MaxOccupancy = 15, MaxTicketsPerUser = 1, StartDate = new DateTime(2022,1,31,19,0,0), EndDate = new DateTime(2022,2,2,20,0,0) , IsPaidEvent = false ,
                     IsOnlineEvent = true, IsCancelled = false, EventLinkUrl = "http://google.com",  Address = null,
                     SubCategoryId = 6, UserId = 3, FormatId = 8 }
             };
