@@ -7,20 +7,29 @@
 
 <div class="row banner_row">
 
-    <div class="ticket_title_box col-md-7">
+    @if (@Model.Tickets.Any())
+    {
+        <div class="ticket_title_box col-md-7">
 
+            <div class="event_name">
+                <span>@Model.Tickets.First().Event.Title</span>
+            </div>
+            <div class="zone_1">
+                <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
+            </div>
+
+        </div>
+
+        <div class="photo_box col-md-5">
+            <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
+        </div>
+    }
+    else
+    {
         <div class="event_name">
-            <span>@Model.Tickets.First().Event.Title</span>
+            <span>There are no available tickets.</span>
         </div>
-        <div class="zone_1">
-            <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
-        </div>
-
-    </div>
-
-    <div class="photo_box col-md-5">
-        <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
-    </div>
+    }
 
 </div>
 

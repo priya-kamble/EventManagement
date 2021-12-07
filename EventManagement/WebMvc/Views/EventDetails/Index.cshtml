@@ -95,17 +95,32 @@
     </div>
 </div>
 
+@section Scripts {
 
-@*ToDo:Checking how to disable the ticket button if value selected is null.*@
-@*<script type="text/javascript">
+    <script type="text/javascript">
 
-    $('#datesdropdown').change(function(){
-    var disabled = this.value == null;
-    alert("message" + disabled);
-    $('#ticketbutton').prop('disabled', disabled);
-    });
+        function enabledisablebuttoncss(disabledBool){
+            if(disabledBool == true){
+                $('#ticketbutton').removeClass('ticket_btn');
+                $('#ticketbutton').addClass('ticket_btn_disabled');
+            }
+            else{
+                $('#ticketbutton').removeClass('ticket_btn_disabled');
+                $('#ticketbutton').addClass('ticket_btn');
+            }
+        };
 
-    </script>*@
+        $(document).ready(function () {
+            var disabledBool = $('#datesdropdown').val() == 'Available Dates';
+            $('#ticketbutton').prop('disabled', disabledBool);
+            enabledisablebuttoncss(disabledBool);
+        });
 
-
+        $('#datesdropdown').change(function() {
+            var disabledBool = this.value == 'Available Dates';
+            $('#ticketbutton').prop('disabled', disabledBool);
+            enabledisablebuttoncss(disabledBool);
+        });
+    </script>
+}
 
