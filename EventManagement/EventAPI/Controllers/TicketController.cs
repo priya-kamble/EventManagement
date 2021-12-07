@@ -29,7 +29,7 @@ namespace EventAPI.Controllers
         {
             var returnData = await (from ticket in _context.Tickets
                                     where ticket.EventId == eventId
-                                    && ticket.SalesStartDate <= DateTime.Today.Date
+                                    //&& ticket.SalesStartDate <= DateTime.Today.Date
                                     && ticket.SalesEndDate >= DateTime.Today.Date
                                     select new TicketDetailViewModel
                                     {
