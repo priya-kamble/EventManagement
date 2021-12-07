@@ -305,7 +305,14 @@ footer.footer {
     padding-left: 15px;
 }
 
-.banner_row {
+.ticket_row {
+    border-top: 1px solid #dbdae3;
+    border-bottom: 1px solid #dbdae3;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.banner_row, .ticket_banner_row {
     padding: 0;
     background-color: #ecf3eb;
     padding-right: 0;
@@ -314,11 +321,29 @@ footer.footer {
     margin-left: 0;
 }
 
-.ticket_row {
-    border-top: 1px solid #dbdae3;
-    border-bottom: 1px solid #dbdae3;
-    margin-left: 0;
-    margin-right: 0;
+.ticket_banner_row {
+    max-height: 237px;
+}
+.ticket_showcase {
+    display: grid;
+    grid-template-columns
+}
+
+.ticket_info_row {
+    margin-top: 1px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 380px 100px;
+}
+
+.sub_row {
+    display: grid;
+    grid-template-columns: 105px 200px;
+    margin-left: 100px;
+}
+
+select.num_box {
+    width: 75px;
 }
 
 .photo_box {
@@ -332,6 +357,16 @@ footer.footer {
     padding-right: 0;
     height: 100%;
     padding-left: 35px;
+    padding-top: 25px;
+    line-height: normal;
+}
+
+.ticket_title_box {
+    display: grid;
+    grid-template-rows: 50px 80px;
+    padding-right: 0;
+    height: 100%;
+    padding-left: 100px;
     padding-top: 25px;
     line-height: normal;
 }
