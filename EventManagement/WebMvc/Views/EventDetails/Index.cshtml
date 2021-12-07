@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <label class="esh-event-label">
-                        <select class="custom_btn ticket_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
+                        <select class="custom_btn ticket_btn dates_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
                     </label>
                 </div>
 
@@ -111,13 +111,13 @@
         };
 
         $(document).ready(function () {
-            var disabledBool = $('#datesdropdown').val() == 'Available Dates';
+            var disabledBool = $('#datesdropdown').val() == 'AVAILABLE DATES';
             $('#ticketbutton').prop('disabled', disabledBool);
             enabledisablebuttoncss(disabledBool);
         });
 
         $('#datesdropdown').change(function() {
-            var disabledBool = this.value == 'Available Dates';
+            var disabledBool = this.value == 'AVAILABLE DATES';
             $('#ticketbutton').prop('disabled', disabledBool);
             enabledisablebuttoncss(disabledBool);
         });
