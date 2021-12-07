@@ -22,7 +22,7 @@ namespace WebMvc.Controllers
             var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
             var ticketsviewmodel = new TicketIndexViewModel
             {
-                DateSelected = eventDetail.DateSelected,
+                DateSelected = selectedDate,
                 Tickets = ticketCollection
             };
             return View(ticketsviewmodel);
