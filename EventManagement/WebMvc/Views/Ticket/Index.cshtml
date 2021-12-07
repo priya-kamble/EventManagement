@@ -34,42 +34,35 @@
 </div>
 
 <div class="ticket_showcase">
-    <form class="img_spacer2" asp-controller="Ticket" asp-action="GetQuantitySelected" method="post">
+    <form>
         @foreach (var item in Model.Tickets)
         {
-            <div class="ticket_info_row">
-                <div>
-                    <p class="sub_row">
-                        <span class="zone_C">Type of Ticket</span>
-                        <span class="zone_B accent">@item.TicketCategory.TicketCategoryName</span>
-                    </p>
-                    <p class="sub_row">
-                        <span class="zone_C">Price</span>
-                        <span class="zone_B accent">$@item.Price</span>
-                    </p>
-                    <p class="sub_row">
-                        <span class="zone_C"> Sales end on</span>
-                        <span class="zone_B accent">@item.SalesEndDate.ToString("MMM dd, yyyy")</span>
-                    </p>
-                    <p class="sub_row">
-                        <span class="zone_C"> Tickets Available</span>
-                        <span class="zone_B accent">@item.Quantity</span>
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label class="esh-event-label">
-                        <select class="custom_btn ticket_btn" asp-for="@item.QuantitySelected" asp-items="@item.AvailableTicketsQuantity" id="quantitydropdown"></select>
-                    </label>
-
-                    @*<input class="esh-event-send arrow_button" type="image" src="~/images/arrow-right.svg" />
-                    <label>The selected date is: "@item.QuantitySelected" </label>*@
-
-
-                </div>
+        <div class="ticket_info_row">
+            <div>
+                <p class="sub_row">
+                    <span class="zone_C">Type of Ticket</span>
+                    <span class="zone_B accent">@item.TicketCategory.TicketCategoryName</span>
+                </p>
+                <p class="sub_row">
+                    <span class="zone_C">Price</span>
+                    <span class="zone_B accent">$@item.Price</span>
+                </p>
+                <p class="sub_row">
+                    <span class="zone_C"> Sales end on</span>
+                    <span class="zone_B accent">@item.SalesEndDate.ToString("MMM dd, yyyy")</span>
+                </p>
+                <p class="sub_row">
+                    <span class="zone_C"> Tickets Available</span>
+                    <span class="zone_B accent">@item.Quantity</span>
+                </p>
             </div>
 
+            <div class="form-group">
+                <label class="esh-event-label">
+                    <select class="custom_btn ticket_btn" asp-for="@item.QuantitySelected" asp-items="@item.AvailableTicketsQuantity" id="quantitydropdown"></select>
+                </label>
+            </div>
+        </div>
         }
-        <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="Add to Cart" href="@Url.Action("GetQuantitySelected", "Ticket", Model)" />
     </form>
 </div>
