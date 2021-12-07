@@ -52,8 +52,14 @@ namespace WebMvc.Controllers
 
         public IEnumerable<SelectListItem> GetAvailableDates(DateTime startDate, DateTime endDate)
         {
-            int totalDays = (int)((endDate.Date - startDate.Date).TotalDays + 1);
 
+            if ((startDate < DateTime.Now))
+            {
+                startDate = DateTime.Now;
+            }
+
+            int totalDays = (int)((endDate.Date - startDate.Date).TotalDays + 1);
+            
             var dates = new List<SelectListItem>
             {
                 new SelectListItem
