@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,16 +17,41 @@ namespace WebMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(EventDetail eventDetail)
+        public async Task<IActionResult> Index(EventDetail eventDetail, string quantitySelected)
         {
             var selectedDate = DateTime.Parse(eventDetail.DateSelected);
             var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
+
+            foreach(var ticketCategory in ticketCollection)
+            {
+                ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
+                ticketCategory.QuantitySelected = quantitySelected;
+            }
+
             var ticketsviewmodel = new TicketIndexViewModel
             {
                 DateSelected = selectedDate,
                 Tickets = ticketCollection
             };
             return View(ticketsviewmodel);
+        }
+
+        public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
+        {
+
+            var qty = new List<SelectListItem>();
+            
+            for (int i = 0; i <= quantity; i++)
+            {
+                qty.Add(
+                    new SelectListItem
+                    {
+                        Value = i.ToString(),
+                        Text = i.ToString(),
+                    }); ;
+            }
+
+            return qty;
         }
     }
 }

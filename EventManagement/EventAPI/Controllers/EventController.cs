@@ -67,7 +67,7 @@ namespace EventAPI.Controllers
             [FromQuery] int pageSize = 6)
         {
             var query = (IQueryable<Event>)_context.EventCatalog;
-            query = query.Where(e => e.IsCancelled == false && e.StartDate >= DateTime.Today);
+            query = query.Where(e => e.IsCancelled == false && e.EndDate >= DateTime.Today);
 
             if (startDate.HasValue)
             {
