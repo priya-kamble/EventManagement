@@ -46,9 +46,35 @@ namespace EventAPI.Controllers
 
             returnData.ForEach(ticket => ticket.Event.EventImageUrl = ticket.Event.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
 
+          
+
+
+
+
             return this.Ok(returnData);
         }
 
+        
+        public  string TicketsStatus( int eventId)
+        {
+            
+            string StatusMessage="Tickets are available";
+
+            var returnData = _context.Tickets.Where(ticket => ticket.EventId == eventId);
+
+            if (returnData.Any(t => t.SalesStartDate > DateTime.Today.Date))
+            {
+
+                var MinsaleStartDate =(from c in  _context.Tickets where( c.EventId == eventId) select c.SalesStartDate).Min();
+                StatusMessage = "sale is goinig to be started on {MinsaleStartDate}";
+            }
+            else if (returnData.Any(t => t.SalesEndDate< DateTime.Today.Date))
+            {
+                var MaxsaleEndDate = (from c in _context.Tickets where (c.EventId == eventId) select c.SalesEndDate).Max();
+                StatusMessage = "sale was ended on  {MaxsaleEndDate}";
+            }
+            return (StatusMessage);
+        }
 
 
     }
