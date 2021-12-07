@@ -234,6 +234,12 @@ footer.footer {
     margin-left: 40px;
 }
 
+.ticket_btn_disabled {
+    margin-left: 40px;
+    background-color: #e9ecef;
+    color: #adb5bd;
+}
+
 .info_btn {
     background-color: #83d01b;
     text-align: center;
