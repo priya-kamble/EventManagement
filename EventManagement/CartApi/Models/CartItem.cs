@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CartApi.Models
+{
+    public class CartItem
+    {
+        public int CartItemId { get; set; }
+        public int TicketId { get; set; }
+        public string TicketCategoryName { get; set; }
+        public DateTime UserSelectedDate { get; set; }
+        public decimal TicketPrice { get; set; }
+        public int Quantity { get; set; }
+        public string EventTitle { get; set; }
+        public int EventId { get; set; }
+    }
+}
