@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace WebMvc.Models
         public int EventId { get; set; }
         public TicketCategory TicketCategory { get; set; }
         public Event Event { get; set; }
+
+        public IEnumerable<SelectListItem> AvailableTicketsQuantity { get; set; }
+        public string QuantitySelected { get; set; }
 
     }
 
