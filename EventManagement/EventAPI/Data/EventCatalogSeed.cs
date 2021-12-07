@@ -378,82 +378,82 @@ namespace EventAPI.Data
             TicketsData = new List<Ticket>
             {
                 //Free Ticket Based on Event Data - Description = "Tech Career Fair"
-                new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 13), SalesEndDate= new DateTime(2021, 12, 15), Price =0, TicketCategoryId = 2 ,Quantity=30},
+                new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 6), SalesEndDate= new DateTime(2022, 1, 20), Price =0, TicketCategoryId = 2 ,Quantity=30},
                 
                //Paid  Ticket Based on Event Data -Description = "Seattle Center with Nikon"
-                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =12, TicketCategoryId = 6 ,Quantity=3},
-                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =10, TicketCategoryId = 1 ,Quantity=3},
-                new Ticket { EventId=2, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 17), Price =15, TicketCategoryId = 2 ,Quantity=4},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2021, 12, 17), Price =10, TicketCategoryId = 6 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2021, 12, 20), Price =10, TicketCategoryId = 1 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 18), SalesEndDate= new DateTime(2021, 12, 31), Price =15, TicketCategoryId = 2 ,Quantity=4},
                
                 //Paid  Ticket Based on Event Data - Description = "New Homebuyer Workshop"
-                new Ticket { EventId=3, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 16), Price =15, TicketCategoryId = 2 ,Quantity=8},
-                new Ticket { EventId=3, SalesStartDate= new DateTime(2022, 12, 16), SalesEndDate= new DateTime(2022, 12, 16), Price =5, TicketCategoryId = 8 ,Quantity=2},
+                new Ticket { EventId=3, SalesStartDate= new DateTime(2021, 12, 16), SalesEndDate= new DateTime(2022, 1, 19), Price =15, TicketCategoryId = 2 ,Quantity=8},
+                new Ticket { EventId=3, SalesStartDate= new DateTime(2021, 12, 16), SalesEndDate= new DateTime(2022, 1, 19), Price =5, TicketCategoryId = 8 ,Quantity=2},
              
                 //Free Ticket Based on Event Data-Description = "Exclusive Tech Hiring"
-                new Ticket { EventId=4 , SalesStartDate= new DateTime(2021, 2, 28), SalesEndDate= new DateTime(2021, 3, 1), Price =0, TicketCategoryId = 2 ,Quantity=30},
+                new Ticket { EventId=4 , SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 2, 20), Price =0, TicketCategoryId = 2 ,Quantity=30},
 
                 //Paid-Cancelled  Ticket Based on Event Data - Description = "Cooking Classes"
-                new Ticket { EventId=5, SalesStartDate= new DateTime(2022, 12, 10), SalesEndDate= new DateTime(2022, 12, 11), Price =10, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=5, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 10), Price =10, TicketCategoryId = 2 ,Quantity=10},
                
                 //Free Ticket Based on Event Data-"Classic Italian Cuisine"
-                new Ticket { EventId=6, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2021, 12, 11), Price =0, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=6, SalesStartDate= new DateTime(2022, 2, 01), SalesEndDate= new DateTime(2022, 2, 15), Price =0, TicketCategoryId = 2 ,Quantity=10},
                
                 //Free-Cancelled  Ticket Based on Event Data-Description = "How to choose right insurance plan workshop"
-                new Ticket { EventId=7, SalesStartDate= new DateTime(2021, 12, 28), SalesEndDate= new DateTime(2021, 12, 29), Price =0, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=7, SalesStartDate= new DateTime(2022, 01, 10), SalesEndDate= new DateTime(2022, 01, 15), Price =0, TicketCategoryId = 2 ,Quantity=10},
  
                 //Paid  Ticket Based on Event Data-  Description =A melodious night
-                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 11, 16), SalesEndDate= new DateTime(2021, 11, 18), Price =20, TicketCategoryId = 2 ,Quantity=25},
-                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 11, 15), SalesEndDate= new DateTime(2021, 11, 16), Price =12, TicketCategoryId = 6 ,Quantity=15},
+                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2021, 12, 18), Price =20, TicketCategoryId = 2 ,Quantity=25},
+                new Ticket { EventId=8, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2021, 12, 16), Price =12, TicketCategoryId = 6 ,Quantity=15},
 
                 //Paid  Ticket Based on Event Data- Description = "A musical workshop"
-                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 11, 1), SalesEndDate= new DateTime(2022, 11, 6), Price =30, TicketCategoryId = 6 ,Quantity=5},
-                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 11, 6), SalesEndDate= new DateTime(2022, 1, 18), Price =50, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 1, 5), Price =30, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 1, 6), SalesEndDate= new DateTime(2022, 1, 18), Price =50, TicketCategoryId = 2 ,Quantity=10},
                 
                 //Paid  Ticket Based on Event Data- Description = "A musical workshop"
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 1), SalesEndDate= new DateTime(2022, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 10), SalesEndDate= new DateTime(2022, 12, 10), Price =120, TicketCategoryId = 6 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 20), SalesEndDate= new DateTime(2022, 12, 29), Price =120, TicketCategoryId = 4 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 12, 20), SalesEndDate= new DateTime(2022, 12, 29), Price =160, TicketCategoryId = 2 ,Quantity=60},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2022, 1, 25), Price =80, TicketCategoryId = 5 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2022, 1, 25), Price =120, TicketCategoryId = 6 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 1, 26), SalesEndDate= new DateTime(2022, 2, 26), Price =120, TicketCategoryId = 4 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 1, 26), SalesEndDate= new DateTime(2022, 2, 26), Price =160, TicketCategoryId = 2 ,Quantity=60},
 
                 //Paid  Ticket Based on Event Data- Description = "Hike in the woods"
-                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 12, 19), SalesEndDate= new DateTime(2022, 12, 22), Price =10, TicketCategoryId = 4 ,Quantity=10},
-                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 12, 19), SalesEndDate= new DateTime(2022, 12, 22), Price =20, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 1, 13), Price =10, TicketCategoryId = 4 ,Quantity=10},
+                new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 1, 13), Price =20, TicketCategoryId = 2 ,Quantity=10},
 
                 //Paid  Ticket Based on Event Data- Description = "Learn-Grow-Fulfill your Potential"
-                new Ticket { EventId=12, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =20, TicketCategoryId = 2 ,Quantity=6},
+                new Ticket { EventId=12, SalesStartDate= new DateTime(2022, 1, 6), SalesEndDate= new DateTime(2022, 1, 10), Price =20, TicketCategoryId = 2 ,Quantity=6},
 
 
                 //Paid  Ticket Based on Event Data- Description = "Learn-Grow-Fulfill your Potential"
-                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 22), SalesEndDate= new DateTime(2022, 2, 26), Price =0, TicketCategoryId = 2 ,Quantity=14},
-                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 2, 19), SalesEndDate= new DateTime(2022, 2, 22), Price =0, TicketCategoryId = 6 ,Quantity=6},
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2022, 4, 26), Price =0, TicketCategoryId = 2 ,Quantity=14},
+                new Ticket { EventId=13, SalesStartDate= new DateTime(2022, 4, 19), SalesEndDate= new DateTime(2022, 4, 22), Price =0, TicketCategoryId = 6 ,Quantity=6},
 
 
                  //Paid  Ticket Based on Event Data- Description = "S.T.E.M"
-                new Ticket { EventId=14, SalesStartDate= new DateTime(2021, 12, 22), SalesEndDate= new DateTime(2021, 12, 26), Price =0, TicketCategoryId = 1 ,Quantity=15},
+                new Ticket { EventId=14, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2022, 3, 12), Price =0, TicketCategoryId = 1 ,Quantity=15},
                
                 //Paid  Ticket Based on Event Data- Description = "Seattle Career Fair"
                 new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 22), SalesEndDate= new DateTime(2022, 1, 26), Price =22, TicketCategoryId = 2 ,Quantity=25},
                 new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=15},
 
                 //Paid  Ticket Based on Event Data- Description =  "Hot Air Balloon adventure ride"
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2021, 12, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 10), SalesEndDate= new DateTime(2021, 12, 10), Price =120, TicketCategoryId = 6 ,Quantity=5},
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =120, TicketCategoryId = 4 ,Quantity=7},
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2021, 12, 29), Price =160, TicketCategoryId = 2 ,Quantity=8},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 10), Price =120, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2022, 1, 20), SalesEndDate= new DateTime(2022, 1, 29), Price =120, TicketCategoryId = 4 ,Quantity=7},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2022, 1, 20), SalesEndDate= new DateTime(2022, 1, 29), Price =160, TicketCategoryId = 2 ,Quantity=8},
 
 
                  //Paid  Ticket Based on Event Data- Description = "A complete wellness guide"
                 new Ticket { EventId=17, SalesStartDate= new DateTime(2022, 1, 22), SalesEndDate= new DateTime(2022, 1, 26), Price =30, TicketCategoryId = 2 ,Quantity=5},
-                new Ticket { EventId=17, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=17, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=5},
 
  
                //Paid  Ticket Based on Event Data- Description = "A complete sports league"
-                new Ticket { EventId=18, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2021, 12, 17), Price =80, TicketCategoryId = 2 ,Quantity=13},
-                new Ticket { EventId=18, SalesStartDate= new DateTime(2021, 12, 12), SalesEndDate= new DateTime(2021, 12, 14), Price =50, TicketCategoryId = 6 ,Quantity=7},
+                new Ticket { EventId=18, SalesStartDate= new DateTime(2022, 1, 15), SalesEndDate= new DateTime(2022, 1, 17), Price =80, TicketCategoryId = 2 ,Quantity=13},
+                new Ticket { EventId=18, SalesStartDate= new DateTime(2021, 12, 1), SalesEndDate= new DateTime(2022, 1, 14), Price =50, TicketCategoryId = 6 ,Quantity=7},
 
                 //Paid  Ticket Based on Event Data- Description = "A complete You!!"
-                new Ticket { EventId=19, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2021, 12, 17), Price =50, TicketCategoryId = 2 ,Quantity=10},
-                new Ticket { EventId=19, SalesStartDate= new DateTime(2021, 12, 12), SalesEndDate= new DateTime(2021, 12, 14), Price =35, TicketCategoryId = 6 ,Quantity=5}
+                new Ticket { EventId=19, SalesStartDate= new DateTime(2022, 1, 15), SalesEndDate= new DateTime(2022, 1, 17), Price =50, TicketCategoryId = 2 ,Quantity=10},
+                new Ticket { EventId=19, SalesStartDate= new DateTime(2021, 12, 5), SalesEndDate= new DateTime(2022, 1, 14), Price =35, TicketCategoryId = 6 ,Quantity=5}
              };
             foreach (var data in TicketsData)
             {
