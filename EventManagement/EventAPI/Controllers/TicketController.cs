@@ -27,6 +27,9 @@ namespace EventAPI.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> TicketsForEvent([FromQuery] int eventId)
         {
+
+            var TicketStatus = TicketsStatus(eventId);
+
             var returnData = await (from ticket in _context.Tickets
                                     where ticket.EventId == eventId
                                     && ticket.SalesStartDate <= DateTime.Today.Date
@@ -42,36 +45,46 @@ namespace EventAPI.Controllers
                                         TicketCategory = ticket.TicketCategory,
                                         TicketCategoryId = ticket.TicketCategoryId,
                                         TicketId = ticket.TicketId,
+                                        TicketStatus = TicketStatus,
                                     }).ToListAsync();
 
             returnData.ForEach(ticket => ticket.Event.EventImageUrl = ticket.Event.EventImageUrl.Replace("http://externalcatalogbaseurltobereplaced", _config["ExternalCatalogUrl"]));
 
-          
 
 
+            if (returnData.Count <= 0)
+            {
+                List<TicketDetailViewModel> NotfoundObject;
 
+                NotfoundObject = new List<TicketDetailViewModel> { new TicketDetailViewModel { TicketId = 0, TicketStatus= TicketStatus  } };
+                 return this.Ok(NotfoundObject);
+            }
+               return this.Ok(returnData);
 
-            return this.Ok(returnData);
-        }
-
+    }
         
-        public  string TicketsStatus( int eventId)
+        private  string TicketsStatus( int eventId)
         {
             
-            string StatusMessage="Tickets are available";
+            string StatusMessage=" Ticket Availablity Status";
 
             var returnData = _context.Tickets.Where(ticket => ticket.EventId == eventId);
 
-            if (returnData.Any(t => t.SalesStartDate > DateTime.Today.Date))
+
+            if (returnData.Any(t => t.SalesStartDate <= DateTime.Today.Date && t.SalesEndDate >= DateTime.Today.Date))
+            {
+                StatusMessage = "Tickets are available";
+            }
+            else if (returnData.Any(t => t.SalesStartDate > DateTime.Today.Date))
             {
 
                 var MinsaleStartDate =(from c in  _context.Tickets where( c.EventId == eventId) select c.SalesStartDate).Min();
-                StatusMessage = "sale is goinig to be started on {MinsaleStartDate}";
+                StatusMessage = $"Ticket sale will be Started on {MinsaleStartDate.Month}/{MinsaleStartDate.Day}/{MinsaleStartDate.Year}";
             }
             else if (returnData.Any(t => t.SalesEndDate< DateTime.Today.Date))
             {
                 var MaxsaleEndDate = (from c in _context.Tickets where (c.EventId == eventId) select c.SalesEndDate).Max();
-                StatusMessage = "sale was ended on  {MaxsaleEndDate}";
+                StatusMessage = $"Ticket sale has been ended up on  {MaxsaleEndDate.Month}/{MaxsaleEndDate.Day}/{MaxsaleEndDate.Year}";
             }
             return (StatusMessage);
         }

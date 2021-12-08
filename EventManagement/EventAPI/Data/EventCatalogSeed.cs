@@ -381,8 +381,8 @@ namespace EventAPI.Data
                 new Ticket { EventId=1, SalesStartDate= new DateTime(2021, 12, 6), SalesEndDate= new DateTime(2022, 1, 20), Price =0, TicketCategoryId = 2 ,Quantity=30},
                 
                //Paid  Ticket Based on Event Data -Description = "Seattle Center with Nikon"
-                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2021, 12, 17), Price =10, TicketCategoryId = 6 ,Quantity=3},
-                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2021, 12, 20), Price =10, TicketCategoryId = 1 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 5), SalesEndDate= new DateTime(2021, 12, 9), Price =10, TicketCategoryId = 6 ,Quantity=3},
+                new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 9), SalesEndDate= new DateTime(2021, 12, 20), Price =10, TicketCategoryId = 1 ,Quantity=3},
                 new Ticket { EventId=2, SalesStartDate= new DateTime(2021, 12, 18), SalesEndDate= new DateTime(2021, 12, 31), Price =15, TicketCategoryId = 2 ,Quantity=4},
                
                 //Paid  Ticket Based on Event Data - Description = "New Homebuyer Workshop"
