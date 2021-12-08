@@ -7,7 +7,7 @@
 
 <div class="row banner_row">
 
-    @if (@Model.Tickets.Any())
+    @if (@Model.Tickets.First().TicketId!=0)
     {
         <div class="ticket_title_box col-md-7">
 
@@ -27,7 +27,7 @@
     else
     {
         <div class="event_name">
-            <span>There are no available tickets.</span>
+            <span>@Model.Tickets.First().TicketStatus</span>
         </div>
     }
 
@@ -35,8 +35,11 @@
 
 <div class="ticket_showcase">
     <form>
+     
         @foreach (var item in Model.Tickets)
-        {
+        { if (item.TicketId!=0 )
+            { 
+
         <div class="ticket_info_row">
             <div>
                 <p class="sub_row">
@@ -63,6 +66,7 @@
                 </label>
             </div>
         </div>
+            }
         }
     </form>
 </div>

@@ -14,5 +14,7 @@ namespace EventAPI.ViewModel
         public int EventId { get; set; }
         public TicketCategory TicketCategory { get; set; }
         public Event Event { get; set; }
+
+        public string  TicketStatus { get; set; }
     }
 }
