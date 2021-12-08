@@ -7,8 +7,8 @@ namespace CartApi.Models
 {
     public class CartItem
     {
-        public int CartItemId { get; set; }
-        public int TicketId { get; set; }
+        public string CartItemId { get; set; }
+        public string TicketId { get; set; }
         public string TicketCategoryName { get; set; }
         public DateTime UserSelectedDate { get; set; }
         public decimal TicketPrice { get; set; }
