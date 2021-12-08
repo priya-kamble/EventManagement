@@ -248,6 +248,11 @@ footer.footer {
     line-height: 48px;
 }
 
+.dates_btn {
+    text-align: center;
+    text-justify: auto;
+}
+
 .ticket_btn:hover {
     background-color: #4a760f;
     color: #ffffff;

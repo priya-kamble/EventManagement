@@ -65,7 +65,7 @@ namespace WebMvc.Controllers
                 new SelectListItem
                 {
                     Value = null,
-                    Text="Available Dates",
+                    Text="AVAILABLE DATES",
                     Selected = true
                 }
             };
