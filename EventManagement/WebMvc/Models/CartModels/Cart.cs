@@ -8,15 +8,12 @@ namespace CartApi.Models
     public class Cart
     {
         public string UserId { get; set; }
-        public List<CartItem> Tickets { get; set; }
-        public Cart()
+        public List<CartItem> CardTickets { get; set; } = new List<CartItem>();
+   
+        public decimal Total()
         {
+            return Math.Round(CardTickets.Sum(x => x.TicketPrice * x.Quantity), 2);
+        }
 
-        }
-        public Cart(string cartId)
-        {
-            UserId = cartId;
-            Tickets = new List<CartItem>();
-        }
     }
 }

@@ -14,6 +14,6 @@ namespace CartApi.Models
         public decimal TicketPrice { get; set; }
         public int Quantity { get; set; }
         public string EventTitle { get; set; }
-        public int EventId { get; set; }
+        public string EventId { get; set; }
     }
 }
