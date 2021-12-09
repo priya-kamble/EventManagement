@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["CartApi/CartApi.csproj", "CartApi/"]
-RUN dotnet restore "CartApi/CartApi.csproj"
+COPY ["NewCartAPI/NewCartAPI.csproj", "NewCartAPI/"]
+RUN dotnet restore "NewCartAPI/NewCartAPI.csproj"
 COPY . .
-WORKDIR "/src/CartApi"
-RUN dotnet build "CartApi.csproj" -c Release -o /app/build
+WORKDIR "/src/NewCartAPI"
+RUN dotnet build "NewCartAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CartApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "NewCartAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CartApi.dll"]
+ENTRYPOINT ["dotnet", "NewCartAPI.dll"]
