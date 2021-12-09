@@ -59,7 +59,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.0.141:7800
+      IdentityUrl: http://192.168.0.11:7801
       CallBackUrl: http://localhost:7500
       TZ: "America/Los_Angeles"
     ports:
@@ -70,6 +70,7 @@ services:
     depends_on:
       - event
       - tokenserver
+      - cart
 
   tokenserver:
     build:
@@ -85,7 +86,7 @@ services:
       DatabasePassword: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
-      - "7800:80"
+      - "7801:80"
     container_name: TokenServiceAPI
     networks:
       - backend
@@ -107,11 +108,11 @@ services:
       context: .\CartAPI
       dockerfile: Dockerfile
     environment:
-      ASPNET_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Development
       ConnectionString: cart.data
-      IdentityUrl: http://192.168.0.11:7800
+      IdentityUrl: http://192.168.0.11:7801
     ports:
-      - "7010:80"
+      - "7012:80"
     container_name: EventsCartAPI
     networks:
       - frontend
