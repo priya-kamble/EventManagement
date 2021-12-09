@@ -22,6 +22,7 @@ namespace WebMvc.Models
 
         public IEnumerable<SelectListItem> AvailableTicketsQuantity { get; set; }
         public string QuantitySelected { get; set; }
+        public DateTime DateSelected { get; set; }
 
     }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebMvc.Models;
 using WebMvc.Services;
 using WebMvc.ViewModels;
 
@@ -26,6 +27,7 @@ namespace WebMvc.Controllers
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
                 ticketCategory.QuantitySelected = quantitySelected;
+                ticketCategory.DateSelected = selectedDate;
             }
 
             var ticketsviewmodel = new TicketIndexViewModel
@@ -36,6 +38,47 @@ namespace WebMvc.Controllers
             return View(ticketsviewmodel);
         }
 
+
+        public IActionResult GetTicketId(int id)
+        {
+            return View(id);
+        }
+
+        //Adding Tickets in the cart one by one
+        [HttpPost]
+        public IActionResult OneTicketAtATime(Ticket ticket)
+        {
+            //try
+            //{
+            //    if (ticket.TicketId > 0)
+            //    {
+            //        var user = _identityService.Get(HttpContext.User);
+            //        var product = new CartItem()
+            //        {
+            //            Id = Guid.NewGuid().ToString(),
+            //            Quantity = 1,
+            //            TicketCategoryName = ticket.TicketCategoryName,
+            //            ------
+            //        };
+            //        await _cartService.AddItemToCart(user, product);
+            //    }
+            //    return RedirectToAction("Index", "Ticket");
+            //}
+            //catch (BrokenCircuitException)
+            //{
+            //    // Catch error when CartApi is in circuit-opened mode                 
+            //    HandleBrokenCircuitException();
+            //}
+
+            return RedirectToAction("Index", "Ticket");
+        }
+
+        //private void HandleBrokenCircuitException()
+        //{
+        //    TempData["BasketInoperativeMsg"] = "cart Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
+        //}
+
+       
         public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
         {
 

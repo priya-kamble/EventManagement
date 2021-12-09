@@ -33,36 +33,46 @@
 
 </div>
 
-<div class="ticket_showcase">
-    <form>
-        @foreach (var item in Model.Tickets)
-        {
-        <div class="ticket_info_row">
-            <div>
-                <p class="sub_row">
-                    <span class="zone_C">Type of Ticket</span>
-                    <span class="zone_B accent">@item.TicketCategory.TicketCategoryName</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C">Price</span>
-                    <span class="zone_B accent">$@item.Price</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C"> Sales end on</span>
-                    <span class="zone_B accent">@item.SalesEndDate.ToString("MMM dd, yyyy")</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C"> Tickets Available</span>
-                    <span class="zone_B accent">@item.Quantity</span>
-                </p>
-            </div>
+<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
 
-            <div class="form-group">
-                <label class="esh-event-label">
-                    <select class="custom_btn ticket_btn" asp-for="@item.QuantitySelected" asp-items="@item.AvailableTicketsQuantity" id="quantitydropdown"></select>
-                </label>
-            </div>
-        </div>
+    @foreach (var item in Model.Tickets)
+    {
+        <partial name="_TicketInfo" model="item" />
+
+
+    }
+
+    <partial name="_information" for="Ticket" />
+
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function showCart(qty, string)
+        {
+            // window.location.href = "/Ticket/Index?Value=" + val;
+            if (id == 27)
+            {
+                var input1 = document.getElementById('tickedId27');
+                input1.value = string;
+
+                var input2 = document.getElementById('quantityAdded27');
+                input2.value = qty;
+                
+            }
+
+            if (id == 28) {
+                var input1 = document.getElementById('tickedId28');
+                input1.value = id;
+
+                var input2 = document.getElementById('quantityAdded28');
+                input2.value = qty;
+            }
+            
         }
-    </form>
-</div>
+
+    </script>
+}
+
