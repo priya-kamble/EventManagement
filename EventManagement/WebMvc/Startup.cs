@@ -51,7 +51,7 @@ namespace WebMvc
                             options.Scope.Add("openid");
                             options.Scope.Add("profile");
                             options.Scope.Add("offline_access");
-                            //options.Scope.Add("basket");
+                            options.Scope.Add("basket");
                            // options.Scope.Add("order");
                             options.TokenValidationParameters = new TokenValidationParameters()
                             {
@@ -59,6 +59,7 @@ namespace WebMvc
                                 RoleClaimType = "role"
                             };
                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
