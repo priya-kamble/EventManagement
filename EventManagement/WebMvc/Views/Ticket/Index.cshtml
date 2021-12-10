@@ -61,79 +61,72 @@
 {
     <script type="text/javascript">
 
-        function showCart(qty, id, price, categoryId) {
-            // window.location.href = "/Ticket/Index?Value=" + val;
-
-
-            if (categoryId == 1) {
-                var categoryName = "Student";
+        function showCart(quantity, id, price, categoryId)
+        {
+            //Get CategoryName with the CategoryId
+            switch (categoryId)
+            {
+                case 1:
+                    var categoryName = "Student";
+                    break;
+                case 3:
+                    var categoryName = "Senior";
+                    break;
+                case 4:
+                    var categoryName = "Child";
+                    break;
+                case 5:
+                    var categoryName = "EarlyBird-Child";
+                    break;
+                case 6:
+                    var categoryName = "EarlyBird-Adult";
+                    break;
+                case 7:
+                    var categoryName = "EarlyBird-Senior";
+                    break;
+                case 8:
+                    var categoryName = "Military";
+                    break;
+                default:
+                    var categoryName = "General Admission";
+                    break;
             }
 
-            else if (categoryId == 2) {
-                var categoryName = "General Admission";
+            //Assign Values to the labels
+            var ticketQuantity = document.getElementById('quantity' + id);
+            ticketQuantity.value = quantity;
+
+            var ticketCategoryName = document.getElementById('category' + id);
+            ticketCategoryName.value = categoryName;
+
+            var ticketId = document.getElementById('id' + id);
+            ticketId.value = id;
+
+            var ticketPrice = document.getElementById('price' + id);
+            ticketPrice.value = price;
+
+            var totalPrice = document.getElementById('totalPrice' + id);
+            totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
+
+            //Check if visibility needs to be hidden
+            if (quantity != 0)
+            {
+                ticketQuantity.style.visibility = 'visible';
+                ticketCategoryName.style.visibility = 'visible';
+                ticketId.style.visibility = 'visible';
+                ticketPrice.style.visibility = 'visible';
+                totalPrice.style.visibility = 'visible';
+            }
+            else
+            {
+                ticketQuantity.style.visibility = 'hidden';
+                ticketCategoryName.style.visibility = 'hidden';
+                ticketId.style.visibility = 'hidden';
+                ticketPrice.style.visibility = 'hidden';
+                totalPrice.style.visibility = 'hidden';
             }
 
-            else if (categoryId == 5) {
-                var categoryName = "EarlyBird - Child";
-            }
-
-            else if (categoryId == 6) {
-                var categoryName = "EarlyBird - Adult";
-            }
-
-
-            if (qty != 0) {
-                var qtyText = document.getElementById('quantityFor' + id);
-                qtyText.value = qty;
-                qtyText.style.visibility = 'visible';
-
-                var categoryText = document.getElementById('category' + id);
-                categoryText.value = categoryName;
-                categoryText.style.visibility = 'visible';
-
-                var idText = document.getElementById('ticket' + id);
-                idText.value = id;
-                idText.style.visibility = 'visible';
-
-                var qtyPrice = document.getElementById('price' + id);
-                qtyPrice.value = price;
-                qtyPrice.style.visibility = 'visible';
-
-                var qtyTotalPrice = document.getElementById('totalPrice' + id);
-                qtyTotalPrice.value = (qtyText.value) * (qtyPrice.value) ;
-                qtyTotalPrice.style.visibility = 'visible';
-
-                var confirmButton = document.getElementById('confirmButton' + id);
-                confirmButton.style.visibility = 'visible';
-            }
-            else {
-                var qtyText = document.getElementById('quantityFor' + id);
-                qtyText.value = qty;
-                qtyText.style.visibility = 'hidden';
-
-                var categoryText = document.getElementById('category' + id);
-                categoryText.value = categoryName;
-                categoryText.style.visibility = 'hidden';
-
-                var idText = document.getElementById('ticket' + id);
-                idText.value = id;
-                idText.style.visibility = 'hidden';
-
-                var qtyPrice = document.getElementById('price' + id);
-                qtyPrice.value = price;
-                qtyPrice.style.visibility = 'hidden';
-
-                var qtyTotalPrice = document.getElementById('totalPrice' + id);
-                qtyTotalPrice.value = (qtyText.value) * (qtyPrice.value);
-                qtyTotalPrice.style.visibility = 'hidden';
-
-                var confirmButton = document.getElementById('confirmButton' + id);
-                confirmButton.style.visibility = 'hidden';
-            }
-
-                      
             //document.getElementById('theForm').submit();
-
             
         }
 

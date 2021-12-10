@@ -4,9 +4,9 @@
     <div class="container">
         <form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
             <div>
-                <input type="text" name="TicketQuantity" id="@("quantityFor" + Model.TicketId)" style="visibility:hidden; width:auto" />
+                <input type="text" name="TicketQuantity" id="@("quantity" + Model.TicketId)" style="visibility:hidden; width:auto" />
                 <input type="text" name="TicketCategory" id="@("category" + Model.TicketId)" style="visibility: hidden; width: auto" />
-                <input type="text" name="TicketInfo" id="@("ticket" + Model.TicketId)" style="visibility: hidden; width: auto" />
+                <input type="text" name="TicketInfo" id="@("id" + Model.TicketId)" style="visibility: hidden; width: auto" />
                 <input type="text" name="TicketPrice" id="@("price" + Model.TicketId)" style="visibility: hidden; width: auto" />
                 <input type="text" name="TicketTotalPrice" id="@("totalPrice" + Model.TicketId)" style="visibility: hidden; width: auto" />
             </div>
