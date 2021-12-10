@@ -26,7 +26,7 @@ services:
       TZ: "America/Los_Angeles"
     ports:
       - "5041:1433"
-    container_name: eventstokensqlserver
+    container_name: EventsTokenSqlServer
     networks:
       - backend
 
@@ -59,8 +59,9 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.0.141:7800
+      IdentityUrl: http://192.168.0.11:7801
       CallBackUrl: http://localhost:7500
+      CartUrl: http://cart
       TZ: "America/Los_Angeles"
     ports:
       - "7500:80"
@@ -70,6 +71,7 @@ services:
     depends_on:
       - event
       - tokenserver
+      - cart
 
   tokenserver:
     build:
@@ -85,10 +87,37 @@ services:
       DatabasePassword: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
-      - "7800:80"
-    container_name: tokenserviceapi
+      - "7801:80"
+    container_name: TokenServiceAPI
     networks:
       - backend
       - frontend
     depends_on:
       - tokensqlserver
+
+  cart.data:
+    image: redis
+    ports:
+      - "7050:6379"
+    container_name: CartData
+    networks:
+      - backend
+
+  cart:
+    image: events/cartapi
+    build:
+      context: .\CartAPI
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionString: cart.data
+      IdentityUrl: http://192.168.0.11:7801
+    ports:
+      - "7012:80"
+    container_name: EventsCartAPI
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - tokenserver
+      - cart.data
