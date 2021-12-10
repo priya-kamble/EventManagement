@@ -11,7 +11,6 @@ namespace WebMvc.ViewModels
     {
         public List<Ticket> Tickets{ get; set; }
         public DateTime DateSelected { get; set; }
-        public Ticket Ticket { get; set; }
-       
+               
     }
 }

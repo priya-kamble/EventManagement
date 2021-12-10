@@ -33,7 +33,7 @@
 
 </div>
 
-<form id="theForm" class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
     @foreach (var item in Model.Tickets)
     {
@@ -126,7 +126,7 @@
                 totalPrice.style.visibility = 'hidden';
             }
 
-            //document.getElementById('theForm').submit();
+            document.getElementById('theForm').submit();
             
         }
 

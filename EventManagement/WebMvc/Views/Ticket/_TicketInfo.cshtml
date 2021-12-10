@@ -1,6 +1,6 @@
 @model WebMvc.Models.Ticket
 
-<form id="theForm" class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
     <div class="ticket_info_row">
         <div>
@@ -38,5 +38,6 @@
         <input type="hidden" asp-for="@Model.TicketId" name="TicketId" />
         <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
         <input type="hidden" asp-for="@Model.QuantitySelected" name="QuantitySelected" />
+        <input type="hidden" asp-for="@Model.TicketCategory.TicketCategoryName" name="CategoryName" />
     </div>
 </form>
