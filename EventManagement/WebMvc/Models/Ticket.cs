@@ -19,11 +19,9 @@ namespace WebMvc.Models
         public int EventId { get; set; }
         public TicketCategory TicketCategory { get; set; }
         public Event Event { get; set; }
-
         public IEnumerable<SelectListItem> AvailableTicketsQuantity { get; set; }
         public string QuantitySelected { get; set; }
         public DateTime DateSelected { get; set; }
-
+        public string TicketStatus { get; set; }
     }
-
 }

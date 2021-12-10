@@ -79,6 +79,11 @@ textarea {
     border-radius: 5px 5px 0 0;
 }
 
+.quantity_dropdown{
+    height: 30px;
+    width : 60px;
+}
+
 .new_nav_link {
     margin-left: 15px;
     font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
@@ -248,6 +253,11 @@ footer.footer {
     line-height: 48px;
 }
 
+.dates_btn {
+    text-align: center;
+    text-justify: auto;
+}
+
 .ticket_btn:hover {
     background-color: #4a760f;
     color: #ffffff;
@@ -340,6 +350,7 @@ footer.footer {
     padding: 10px;
     display: grid;
     grid-template-columns: 380px 100px;
+    border-bottom: 2px solid #DBDAE3;
 }
 
 .sub_row {

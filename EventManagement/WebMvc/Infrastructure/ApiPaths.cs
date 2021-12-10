@@ -19,7 +19,6 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}Category/Category";
             }
 
-
             public static string GetAllLocation(string baseUri)
             {
                 return $"{baseUri}Location/Locations";
@@ -79,7 +78,23 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}Event/Events?"+ $"pageindex={PageIndex}&PageSize={PageSize}"+ filterQs;
             }
         }
+        public static class Basket
+        {
+            public static string GetBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
 
+            public static string UpdateBasket(string baseUri)
+            {
+                return baseUri;
+            }
+
+            public static string CleanBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
+        }
 
     }
 }

@@ -23,7 +23,7 @@ namespace WebMvc.Controllers
             var selectedDate = DateTime.Parse(eventDetail.DateSelected);
             var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
 
-            foreach(var ticketCategory in ticketCollection)
+            foreach (var ticketCategory in ticketCollection)
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
                 ticketCategory.QuantitySelected = quantitySelected;
@@ -88,9 +88,8 @@ namespace WebMvc.Controllers
        
         public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
         {
-
             var qty = new List<SelectListItem>();
-            
+
             for (int i = 0; i <= quantity; i++)
             {
                 qty.Add(
@@ -102,6 +101,12 @@ namespace WebMvc.Controllers
             }
 
             return qty;
+        }
+
+        [HttpPost]
+        public IActionResult Test(Ticket ticket)
+        {
+            return View();
         }
     }
 }
