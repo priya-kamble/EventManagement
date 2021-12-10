@@ -25,7 +25,7 @@
             <label class="esh-event-label">
                 <select class="quantity_dropdown ticket_btn" asp-for="@Model.QuantitySelected" 
                         asp-items="@Model.AvailableTicketsQuantity" id="quantitydropdown"  ></select>
-                @Html.DropDownList("dropdown1", @Model.AvailableTicketsQuantity, new { onchange = "this.form.submit()" })
+           
 
             </label>
         </div>
