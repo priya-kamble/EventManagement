@@ -51,9 +51,12 @@ namespace WebMvc.Services
             }
             else
             {
-                basketItem.Quantity += 1;
+                if (basketItem.Quantity != ticket.Quantity)
+                {
+                    basketItem.Quantity = ticket.Quantity;
+                }
+               
             }
-
 
             await UpdateCart(cart);
         }

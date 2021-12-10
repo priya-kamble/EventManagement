@@ -31,38 +31,35 @@ namespace WebMvc.Services
         }
         
         [HttpPost]
-        public async Task<IActionResult> AddToCart(TicketIndexViewModel SelectedTicketsDetail)
+        public async Task<IActionResult> AddToCart(Ticket SelectedTicketsDetail)
         {
             try
             {
-                if ( SelectedTicketsDetail.Tickets.Count() > 0)
+                if (SelectedTicketsDetail.QuantitySelected.Count() > 0)
                 { 
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
 
-                    foreach (var t in SelectedTicketsDetail.Tickets)
-                    {
-                        CartTicket.CartItemId = Guid.NewGuid().ToString();
-                        CartTicket.TicketId = t.TicketId.ToString() ;
-                        CartTicket.EventId = t.EventId.ToString();
-                        CartTicket.EventTitle = t.Event.Title;
-                        CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
-                        CartTicket.TicketPrice = t.Price;
-                        CartTicket.Quantity = Convert.ToInt32(t.QuantitySelected);
-                        CartTicket.TicketCategoryName = t.TicketCategory.TicketCategoryName; 
-                   
-                        await _cartService.AddItemToCart(user, CartTicket);
-                    }
                     
+                    CartTicket.CartItemId = Guid.NewGuid().ToString();
+                    CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
+                    CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
+                    CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
+                    CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+                    CartTicket.TicketPrice = SelectedTicketsDetail.Price;
+                    CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
+                    CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
+                    await _cartService.AddItemToCart(user, CartTicket);
+
                 }
-                return RedirectToAction("", "");
+                return RedirectToAction("Index", "Ticket");
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
             
             }
-            return RedirectToAction("", "");
+            return RedirectToAction("Index", "Ticket");
         }
 
         private void HandleBrokenCircuitException()

@@ -15,5 +15,7 @@ namespace WebMvc.Models.CartModels
         public int Quantity { get; set; }
         public string EventTitle { get; set; }
         public string EventId { get; set; }
+
+        
     }
 }
