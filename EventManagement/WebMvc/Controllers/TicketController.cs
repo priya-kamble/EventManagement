@@ -43,48 +43,7 @@ namespace WebMvc.Controllers
             return View(id);
         }
 
-        //Adding Tickets in the cart one by one
-        [HttpPost]
-        public IActionResult OneTicketAtATime(Ticket ticket)
-        {
-
-            return RedirectToAction("Index", "Ticket");
-            //return View(ticketsviewmodel);
-
-
-
-
-            //try
-            //{
-            //    if (ticket.TicketId > 0)
-            //    {
-            //        var user = _identityService.Get(HttpContext.User);
-            //        var product = new CartItem()
-            //        {
-            //            Id = Guid.NewGuid().ToString(),
-            //            Quantity = 1,
-            //            TicketCategoryName = ticket.TicketCategoryName,
-            //            ------
-            //        };
-            //        await _cartService.AddItemToCart(user, product);
-            //    }
-            //    return RedirectToAction("Index", "Ticket");
-            //}
-            //catch (BrokenCircuitException)
-            //{
-            //    // Catch error when CartApi is in circuit-opened mode                 
-            //    HandleBrokenCircuitException();
-            //}
-
-            //return RedirectToAction("Index", "Ticket");
-        }
-
-        //private void HandleBrokenCircuitException()
-        //{
-        //    TempData["BasketInoperativeMsg"] = "cart Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
-        //}
-
-       
+               
         public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
         {
             var qty = new List<SelectListItem>();
