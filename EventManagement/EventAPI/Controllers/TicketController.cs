@@ -69,22 +69,29 @@ namespace EventAPI.Controllers
             string StatusMessage=" Ticket Availablity Status";
 
             var returnData = _context.Tickets.Where(ticket => ticket.EventId == eventId);
+            
+            var NotSaleStartedTicket = returnData.Where(t => t.SalesStartDate > DateTime.Today.Date);
+
+            var ExpiredTicket = returnData.Where(t => t.SalesEndDate < DateTime.Today.Date);
 
 
             if (returnData.Any(t => t.SalesStartDate <= DateTime.Today.Date && t.SalesEndDate >= DateTime.Today.Date))
             {
                 StatusMessage = "Tickets are available";
             }
-            else if (returnData.Any(t => t.SalesStartDate > DateTime.Today.Date))
+            else if (NotSaleStartedTicket.Any())
             {
-
-                var MinsaleStartDate =(from c in  _context.Tickets where( c.EventId == eventId) select c.SalesStartDate).Min();
-                StatusMessage = $"Ticket sale will be Started on {MinsaleStartDate.Month}/{MinsaleStartDate.Day}/{MinsaleStartDate.Year}";
+                
+                var MinsaleStartDate =(from c in  _context.Tickets where( c.EventId == eventId) select c.SalesStartDate ).Min();
+                
+                
+                        StatusMessage = $"Ticket sale of  will be Started on {MinsaleStartDate.Month}/{MinsaleStartDate.Day}/{MinsaleStartDate.Year}";
             }
-            else if (returnData.Any(t => t.SalesEndDate< DateTime.Today.Date))
+            else if (ExpiredTicket.Any())
             {
                 var MaxsaleEndDate = (from c in _context.Tickets where (c.EventId == eventId) select c.SalesEndDate).Max();
-                StatusMessage = $"Ticket sale has been ended up on  {MaxsaleEndDate.Month}/{MaxsaleEndDate.Day}/{MaxsaleEndDate.Year}";
+                
+                    StatusMessage = $"Ticket sale of  has been ended up on  {MaxsaleEndDate.Month}/{MaxsaleEndDate.Day}/{MaxsaleEndDate.Year}";
             }
             return (StatusMessage);
         }
