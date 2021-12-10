@@ -33,36 +33,16 @@
 
 </div>
 
-<div class="ticket_showcase">
-    <form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
 
-                @foreach (var item in Model.Tickets)
-                {
-                    <partial name="_TicketInfo" model="item" />
-                }
+    <form class="img_spacer2" asp-controller="Ticket" asp-action="Test" method="post">
 
-                <partial name="_information" for="Ticket" />
+        @foreach (var item in Model.Tickets)
+        {
+            <partial name="_TicketInfo" model="item" />
+        }
+        
+        <partial name="_information" for="Ticket" />
 
     </form>
 
-@section Scripts
-    {
-         <script type="text/javascript">
 
-                function showCart(qty, string) {
-
-                    var input2 = document.getElementById('quantityAdded27');
-                    input2.value = qty;
-
-                }
-
-                if (id == 28) {
-                    var input1 = document.getElementById('tickedId28');
-                    input1.value = id;
-
-                    var input2 = document.getElementById('quantityAdded28');
-                    input2.value = qty;
-                }
-
-            </script>
-        }
