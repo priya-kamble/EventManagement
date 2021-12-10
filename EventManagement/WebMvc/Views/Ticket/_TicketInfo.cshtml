@@ -4,10 +4,10 @@
 
     <div class="ticket_info_row">
         <div>
-            <p class="sub_row">
+            @*<p class="sub_row">
                 <span class="zone_C">Type of Ticket</span>
                 <span class="zone_B accent">@Model.TicketCategory.TicketCategoryName</span>
-            </p>
+            </p>*@
             <p class="sub_row">
                 <span class="zone_C">Price</span>
                 <span class="zone_B accent">$@Model.Price</span>
@@ -24,7 +24,9 @@
         <div class="form-group">
             <label class="esh-event-label">
                 <select class="quantity_dropdown ticket_btn" asp-for="@Model.QuantitySelected" 
-                        asp-items="@Model.AvailableTicketsQuantity" id="quantitydropdown"></select>
+                        asp-items="@Model.AvailableTicketsQuantity" id="quantitydropdown"  ></select>
+           
+
             </label>
         </div>
 
