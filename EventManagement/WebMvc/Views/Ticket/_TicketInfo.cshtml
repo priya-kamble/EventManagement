@@ -1,8 +1,8 @@
 ﻿
 @model WebMvc.Models.Ticket
 
-<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
-    
+<form id="theForm" class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+
     <div class="ticket_info_row">
         <div>
             <p class="sub_row">
@@ -27,12 +27,12 @@
         <div class="form-group">
             <label class="esh-event-label">
                 <select class="custom_btn ticket_btn" asp-for="@Model.QuantitySelected" asp-items="@Model.AvailableTicketsQuantity"
-                        onchange="showCart(this.value, @Model.TicketCategory.TicketCategoryName)" id="quantitydropdown"></select>
-
-                
-
+                        onchange="showCart(this.value, @Model.TicketId, @Model.Price, @Model.TicketCategoryId)" id="quantitydropdown"></select>
                 @*<select class="custom_btn ticket_btn" asp-for="@Model.QuantitySelected"
-        asp-items="@Model.AvailableTicketsQuantity" id="quantitydropdown"></select>*@
+                    asp-items="@Model.AvailableTicketsQuantity" id="quantitydropdown"></select>*@
+
+                @*<select class="custom_btn ticket_btn" asp-for="@Model.QuantitySelected" asp-items="@Model.AvailableTicketsQuantity"
+                    onchange="this.form.submit()"  id="quantitydropdown"></select>*@
             </label>
         </div>
         @*<div><input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" /></div>*@
@@ -46,6 +46,8 @@
         <input type="hidden" asp-for="@Model.EventId" name="EventId" />
         <input type="hidden" asp-for="@Model.TicketId" name="TicketId" />
         <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
+        <input type="hidden" asp-for="@Model.QuantitySelected" name="QuantitySelected" />
 
     </div>
 </form>
+

@@ -48,6 +48,13 @@ namespace WebMvc.Controllers
         [HttpPost]
         public IActionResult OneTicketAtATime(Ticket ticket)
         {
+
+            return RedirectToAction("Index", "Ticket");
+            //return View(ticketsviewmodel);
+
+
+
+
             //try
             //{
             //    if (ticket.TicketId > 0)
@@ -70,7 +77,7 @@ namespace WebMvc.Controllers
             //    HandleBrokenCircuitException();
             //}
 
-            return RedirectToAction("Index", "Ticket");
+            //return RedirectToAction("Index", "Ticket");
         }
 
         //private void HandleBrokenCircuitException()

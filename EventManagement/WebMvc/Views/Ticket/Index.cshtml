@@ -33,46 +33,111 @@
 
 </div>
 
-<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+<form id="theForm" class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
 
     @foreach (var item in Model.Tickets)
     {
         <partial name="_TicketInfo" model="item" />
 
-
     }
+</form>
 
-    <partial name="_information" for="Ticket" />
+<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+    <fieldset>
+            <legend>Your Items</legend>
+            <div>
+                <label>Ticket Quantity</label><label>Ticket Id</label>
+            </div>
+           
+            @foreach (var item in Model.Tickets)
+            {
+                <partial name="_information" model="item" />
+            }
 
+    </fieldset>
 </form>
 
 @section Scripts
 {
     <script type="text/javascript">
 
-        function showCart(qty, string)
-        {
+        function showCart(qty, id, price, categoryId) {
             // window.location.href = "/Ticket/Index?Value=" + val;
-            if (id == 27)
-            {
-                var input1 = document.getElementById('tickedId27');
-                input1.value = string;
 
-                var input2 = document.getElementById('quantityAdded27');
-                input2.value = qty;
-                
+
+            if (categoryId == 1) {
+                var categoryName = "Student";
             }
 
-            if (id == 28) {
-                var input1 = document.getElementById('tickedId28');
-                input1.value = id;
-
-                var input2 = document.getElementById('quantityAdded28');
-                input2.value = qty;
+            else if (categoryId == 2) {
+                var categoryName = "General Admission";
             }
+
+            else if (categoryId == 5) {
+                var categoryName = "EarlyBird - Child";
+            }
+
+            else if (categoryId == 6) {
+                var categoryName = "EarlyBird - Adult";
+            }
+
+
+            if (qty != 0) {
+                var qtyText = document.getElementById('quantityFor' + id);
+                qtyText.value = qty;
+                qtyText.style.visibility = 'visible';
+
+                var categoryText = document.getElementById('category' + id);
+                categoryText.value = categoryName;
+                categoryText.style.visibility = 'visible';
+
+                var idText = document.getElementById('ticket' + id);
+                idText.value = id;
+                idText.style.visibility = 'visible';
+
+                var qtyPrice = document.getElementById('price' + id);
+                qtyPrice.value = price;
+                qtyPrice.style.visibility = 'visible';
+
+                var qtyTotalPrice = document.getElementById('totalPrice' + id);
+                qtyTotalPrice.value = (qtyText.value) * (qtyPrice.value) ;
+                qtyTotalPrice.style.visibility = 'visible';
+
+                var confirmButton = document.getElementById('confirmButton' + id);
+                confirmButton.style.visibility = 'visible';
+            }
+            else {
+                var qtyText = document.getElementById('quantityFor' + id);
+                qtyText.value = qty;
+                qtyText.style.visibility = 'hidden';
+
+                var categoryText = document.getElementById('category' + id);
+                categoryText.value = categoryName;
+                categoryText.style.visibility = 'hidden';
+
+                var idText = document.getElementById('ticket' + id);
+                idText.value = id;
+                idText.style.visibility = 'hidden';
+
+                var qtyPrice = document.getElementById('price' + id);
+                qtyPrice.value = price;
+                qtyPrice.style.visibility = 'hidden';
+
+                var qtyTotalPrice = document.getElementById('totalPrice' + id);
+                qtyTotalPrice.value = (qtyText.value) * (qtyPrice.value);
+                qtyTotalPrice.style.visibility = 'hidden';
+
+                var confirmButton = document.getElementById('confirmButton' + id);
+                confirmButton.style.visibility = 'hidden';
+            }
+
+                      
+            //document.getElementById('theForm').submit();
+
             
         }
 
     </script>
 }
+
 
