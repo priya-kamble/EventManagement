@@ -18,7 +18,7 @@ namespace WebMvc.ViewComponents
             try
             {
                 var cart = await _cartsvc.GetCart(user);
-                vm.ItemsInCart = cart.CartTickets.Count;
+                vm.TicketsInCart = cart.CartTickets.Count;
                 vm.TotalCost = cart.Total();
             }
 
