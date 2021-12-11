@@ -79,9 +79,18 @@ textarea {
     border-radius: 5px 5px 0 0;
 }
 
-.quantity_dropdown{
+.quantity_dropdown {
     height: 30px;
-    width : 60px;
+    width: 60px;
+    color: #ffffff;
+    background-color: #83d01b;
+    margin-left: 40px;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.35s;
+    border-radius: 4px;
 }
 
 .new_nav_link {

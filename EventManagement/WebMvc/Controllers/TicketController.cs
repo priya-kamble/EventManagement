@@ -18,7 +18,7 @@ namespace WebMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(EventDetail eventDetail, string quantitySelected)
+        public async Task<IActionResult> Index(EventDetail eventDetail)
         {
             var selectedDate = DateTime.Parse(eventDetail.DateSelected);
             var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
@@ -26,7 +26,7 @@ namespace WebMvc.Controllers
             foreach (var ticketCategory in ticketCollection)
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
-                ticketCategory.QuantitySelected = quantitySelected;
+                ticketCategory.DateSelected = selectedDate;
             }
 
             var ticketsviewmodel = new TicketIndexViewModel
@@ -37,6 +37,13 @@ namespace WebMvc.Controllers
             return View(ticketsviewmodel);
         }
 
+
+        public IActionResult GetTicketId(int id)
+        {
+            return View(id);
+        }
+
+               
         public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
         {
             var qty = new List<SelectListItem>();
