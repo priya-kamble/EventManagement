@@ -44,11 +44,8 @@
 
 <form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
     <fieldset>
-            <legend>Your Items</legend>
-            <div>
-                <label>Ticket Quantity</label><label>Ticket Id</label>
-            </div>
-           
+            <legend>Your items in cart</legend>
+                       
             @foreach (var item in Model.Tickets)
             {
                 <partial name="_information" model="item" />
