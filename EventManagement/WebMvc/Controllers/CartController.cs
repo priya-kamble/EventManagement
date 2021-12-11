@@ -44,11 +44,11 @@ namespace WebMvc.Services
                     CartTicket.CartItemId = Guid.NewGuid().ToString();
                     CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
                     CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
-                    CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
+                    //CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
                     CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
                     CartTicket.TicketPrice = SelectedTicketsDetail.Price;
                     CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
-                    CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
+                    //CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
                     await _cartService.AddItemToCart(user, CartTicket);
 
                 }
