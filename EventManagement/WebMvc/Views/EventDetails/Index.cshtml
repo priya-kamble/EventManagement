@@ -26,7 +26,6 @@
             }
             else
             {
-
                 <div>$ @Model.MinPrice - @Model.MaxPrice</div>
             }
         </div>
@@ -37,26 +36,20 @@
 <div class="row ticket_row">
     <div class="col-md-7"></div>
     <div class="col-md-5">
-        <form class="img_spacer2" asp-controller="Ticket" asp-action="Index" method="post">
+        <div>
             <div>
-                <div>
-                    <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="TICKETS" href="@Url.Action("Index", "Ticket")" />
-                    <input type="hidden" asp-for="@Model.Id" name="Id" />
-                    <input type="hidden" asp-for="@Model.Description" name="Description" />
-                    <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
-                    <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
-                    <input type="hidden" asp-for="@Model.Address" name="Address" />
-                    <input type="hidden" asp-for="@Model.Title" name="Title" />
-                    <input type="hidden" asp-for="@Model.EventImageUrl" name="EventImageUrl" />
-                </div>
-                <div>
-                    <label class="esh-event-label">
-                        <select class="custom_btn ticket_btn dates_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
-                    </label>
-                </div>
-
+                <a id="link" class="ticket_url">
+                    <input id="ticketbutton" class="custom_btn ticket_btn" value="TICKETS" type="button" />
+                </a>
+                <input id="baseurl" type="hidden" value="@Url.Action("Index","Ticket",new {id = @Model.Id})" />
             </div>
-        </form>
+            <div>
+                <label class="esh-event-label">
+                    <select class="custom_btn ticket_btn dates_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
+                </label>
+            </div>
+
+        </div>
     </div>
 </div>
 
@@ -97,30 +90,42 @@
 
 @section Scripts {
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        function enabledisablebuttoncss(disabledBool){
-            if(disabledBool == true){
-                $('#ticketbutton').removeClass('ticket_btn');
-                $('#ticketbutton').addClass('ticket_btn_disabled');
-            }
-            else{
-                $('#ticketbutton').removeClass('ticket_btn_disabled');
-                $('#ticketbutton').addClass('ticket_btn');
-            }
-        };
+    function enabledisablebuttoncss(disabledBool){
+        if(disabledBool == true){
+            $('#ticketbutton').removeClass('ticket_btn');
+            $('#ticketbutton').addClass('ticket_btn_disabled');
+        }
+        else{
+            $('#ticketbutton').removeClass('ticket_btn_disabled');
+            $('#ticketbutton').addClass('ticket_btn');
+        }
+    };
 
-        $(document).ready(function () {
-            var disabledBool = $('#datesdropdown').val() == 'AVAILABLE DATES';
-            $('#ticketbutton').prop('disabled', disabledBool);
-            enabledisablebuttoncss(disabledBool);
-        });
+    $(document).ready(function () {
+        var disabledBool = $('#datesdropdown').val() == 'AVAILABLE DATES';
+        $('#ticketbutton').prop('disabled', disabledBool);
+        enabledisablebuttoncss(disabledBool);
+    });
 
-        $('#datesdropdown').change(function() {
-            var disabledBool = this.value == 'AVAILABLE DATES';
-            $('#ticketbutton').prop('disabled', disabledBool);
-            enabledisablebuttoncss(disabledBool);
-        });
-    </script>
+    $('#datesdropdown').change(function() {
+        var disabledBool = this.value == 'AVAILABLE DATES';
+        if(disabledBool == false)
+        {
+            var baseUrl = $('#baseurl').val(); 
+            var olddate = this.value;
+            var newdate= olddate.replaceAll("/","-");
+            var newhref= baseUrl+"/"+newdate;
+            $('#link').attr('href', newhref);
+        }
+        else{
+            $('#link').attr('href', '#');
+        }
+
+        $('#ticketbutton').prop('disabled', disabledBool);
+        enabledisablebuttoncss(disabledBool);
+    });
+</script>
 }
 

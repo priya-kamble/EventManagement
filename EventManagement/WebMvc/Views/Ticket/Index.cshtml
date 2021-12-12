@@ -6,128 +6,141 @@
 }
 
 <div class="row banner_row">
-
-    @if (@Model.Tickets.First().TicketId!=0)
+    @if (@Model == null)
     {
-        <div class="ticket_title_box col-md-7">
-
-            <div class="event_name">
-                <span>@Model.Tickets.First().Event.Title</span>
-            </div>
-            <div class="zone_1">
-                <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
-            </div>
-
-        </div>
-
-        <div class="photo_box col-md-5">
-            <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
+        <div>
+            <span>You have selected an invalid date.<br></span>
+            <span>Please select a valid date in the previous page.</span>
         </div>
     }
     else
     {
-        <div class="event_name">
-            <span>@Model.Tickets.First().TicketStatus</span>
-        </div>
+
+        @if (@Model.Tickets.First().TicketId != 0)
+        {
+            <div class="ticket_title_box col-md-7">
+
+                <div class="event_name">
+                    <span>@Model.Tickets.First().Event.Title</span>
+                </div>
+                <div class="zone_1">
+                    <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
+                </div>
+
+            </div>
+
+            <div class="photo_box col-md-5">
+                <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
+            </div>
+        }
+        else
+        {
+            <div class="event_name">
+                <span>@Model.Tickets.First().TicketStatus</span>
+            </div>
+        }
     }
 
 </div>
 
-<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
+@if (@Model != null)
+{
+    <form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
-    @foreach (var item in Model.Tickets)
-    {
-        <partial name="_TicketInfo" model="item" />
+        @foreach (var item in Model.Tickets)
+        {
+            <partial name="_TicketInfo" model="item" />
 
-    }
-</form>
+        }
+    </form>
 
-<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
-    <fieldset>
+    <form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
+        <fieldset>
             <legend>Your items in cart</legend>
-                       
+
             @foreach (var item in Model.Tickets)
             {
                 <partial name="_information" model="item" />
             }
 
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+}
 
 @section Scripts
 {
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        function showCart(quantity, id, price, categoryId)
+    function showCart(quantity, id, price, categoryId)
+    {
+        //Get CategoryName with the CategoryId
+        switch (categoryId)
         {
-            //Get CategoryName with the CategoryId
-            switch (categoryId)
-            {
-                case 1:
-                    var categoryName = "Student";
-                    break;
-                case 3:
-                    var categoryName = "Senior";
-                    break;
-                case 4:
-                    var categoryName = "Child";
-                    break;
-                case 5:
-                    var categoryName = "EarlyBird-Child";
-                    break;
-                case 6:
-                    var categoryName = "EarlyBird-Adult";
-                    break;
-                case 7:
-                    var categoryName = "EarlyBird-Senior";
-                    break;
-                case 8:
-                    var categoryName = "Military";
-                    break;
-                default:
-                    var categoryName = "General Admission";
-                    break;
-            }
-
-            //Assign Values to the labels
-            var ticketQuantity = document.getElementById('quantity' + id);
-            ticketQuantity.value = quantity;
-
-            var ticketCategoryName = document.getElementById('category' + id);
-            ticketCategoryName.value = categoryName;
-
-            var ticketId = document.getElementById('id' + id);
-            ticketId.value = id;
-
-            var ticketPrice = document.getElementById('price' + id);
-            ticketPrice.value = price;
-
-            var totalPrice = document.getElementById('totalPrice' + id);
-            totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
-
-            //Check if visibility needs to be hidden
-            if (quantity != 0)
-            {
-                ticketQuantity.style.visibility = 'visible';
-                ticketCategoryName.style.visibility = 'visible';
-                ticketId.style.visibility = 'visible';
-                ticketPrice.style.visibility = 'visible';
-                totalPrice.style.visibility = 'visible';
-            }
-            else
-            {
-                ticketQuantity.style.visibility = 'hidden';
-                ticketCategoryName.style.visibility = 'hidden';
-                ticketId.style.visibility = 'hidden';
-                ticketPrice.style.visibility = 'hidden';
-                totalPrice.style.visibility = 'hidden';
-            }
-
-            document.getElementById('theForm').submit();
-            
+            case 1:
+                var categoryName = "Student";
+                break;
+            case 3:
+                var categoryName = "Senior";
+                break;
+            case 4:
+                var categoryName = "Child";
+                break;
+            case 5:
+                var categoryName = "EarlyBird-Child";
+                break;
+            case 6:
+                var categoryName = "EarlyBird-Adult";
+                break;
+            case 7:
+                var categoryName = "EarlyBird-Senior";
+                break;
+            case 8:
+                var categoryName = "Military";
+                break;
+            default:
+                var categoryName = "General Admission";
+                break;
         }
 
-    </script>
+        //Assign Values to the labels
+        var ticketQuantity = document.getElementById('quantity' + id);
+        ticketQuantity.value = quantity;
+
+        var ticketCategoryName = document.getElementById('category' + id);
+        ticketCategoryName.value = categoryName;
+
+        var ticketId = document.getElementById('id' + id);
+        ticketId.value = id;
+
+        var ticketPrice = document.getElementById('price' + id);
+        ticketPrice.value = price;
+
+        var totalPrice = document.getElementById('totalPrice' + id);
+        totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
+
+        //Check if visibility needs to be hidden
+        if (quantity != 0)
+        {
+            ticketQuantity.style.visibility = 'visible';
+            ticketCategoryName.style.visibility = 'visible';
+            ticketId.style.visibility = 'visible';
+            ticketPrice.style.visibility = 'visible';
+            totalPrice.style.visibility = 'visible';
+        }
+        else
+        {
+            ticketQuantity.style.visibility = 'hidden';
+            ticketCategoryName.style.visibility = 'hidden';
+            ticketId.style.visibility = 'hidden';
+            ticketPrice.style.visibility = 'hidden';
+            totalPrice.style.visibility = 'hidden';
+        }
+
+        document.getElementById('theForm').submit();
+
+    }
+
+</script>
 }
 
 

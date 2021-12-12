@@ -237,6 +237,7 @@ footer.footer {
     transition: all 0.35s;
     width: 260px;
     border-radius: 4px;
+    text-align:center;
 }
 
 .custom_btn:hover {
@@ -245,13 +246,15 @@ footer.footer {
 
 .ticket_btn {
     background-color: #83d01b;
-    margin-left: 40px;
 }
 
 .ticket_btn_disabled {
-    margin-left: 40px;
     background-color: #e9ecef;
     color: #adb5bd;
+}
+
+.ticket_url{
+    margin-left:40px;
 }
 
 .info_btn {
@@ -265,6 +268,7 @@ footer.footer {
 .dates_btn {
     text-align: center;
     text-justify: auto;
+    margin-left:40px;
 }
 
 .ticket_btn:hover {
