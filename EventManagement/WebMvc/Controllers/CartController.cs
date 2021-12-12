@@ -33,13 +33,13 @@ namespace WebMvc.Services
         [HttpPost]
         public async Task<IActionResult> AddToCart(Ticket SelectedTicketsDetail)
         {
+            var dateSelected = SelectedTicketsDetail.DateSelected.ToString("MM-dd-yyyy");
             try
             {
                 if (SelectedTicketsDetail.QuantitySelected.Count() > 0)
                 { 
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
-
                     
                     CartTicket.CartItemId = Guid.NewGuid().ToString();
                     CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
@@ -50,16 +50,15 @@ namespace WebMvc.Services
                     CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
                     //CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
                     await _cartService.AddItemToCart(user, CartTicket);
-
                 }
-                return RedirectToAction("Index", "Ticket");
+                return RedirectToAction("Index", "Ticket", new { eventId = SelectedTicketsDetail.EventId, dateselected= dateSelected });
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
             
             }
-            return RedirectToAction("Index", "Ticket");
+            return RedirectToAction("Index", "Ticket", new { eventId = SelectedTicketsDetail.EventId, dateselected = dateSelected });
         }
 
         private void HandleBrokenCircuitException()
@@ -88,7 +87,7 @@ namespace WebMvc.Services
             }
             catch (BrokenCircuitException)
             {
-                // Catch error when CartApi is in open circuit  mode                 
+                // Catch error when CartApi is in open circuit  mode               
                 HandleBrokenCircuitException();
             }
 
