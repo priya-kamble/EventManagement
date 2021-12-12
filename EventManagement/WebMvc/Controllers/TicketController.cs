@@ -17,11 +17,11 @@ namespace WebMvc.Controllers
             _eventService = eventservice;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(EventDetail eventDetail)
+       
+        public async Task<IActionResult> Index(int id, string dateSelected)
         {
-            var selectedDate = DateTime.Parse(eventDetail.DateSelected);
-            var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
+            var selectedDate = DateTime.Parse(dateSelected);
+            var ticketCollection = await _eventService.GetTicketsPerEvent(id);
 
             foreach (var ticketCategory in ticketCollection)
             {

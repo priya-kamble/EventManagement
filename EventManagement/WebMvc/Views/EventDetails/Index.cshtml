@@ -37,10 +37,10 @@
 <div class="row ticket_row">
     <div class="col-md-7"></div>
     <div class="col-md-5">
-        <form class="img_spacer2" asp-controller="Ticket" asp-action="Index" method="post">
+        <form class="img_spacer2" asp-controller="Ticket" asp-action="Index" >
             <div>
                 <div>
-                    <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="TICKETS" href="@Url.Action("Index", "Ticket")" />
+                    <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="TICKETS" href="@Url.Action("Index", "Ticket", new {id = @Model.Id, dateSelected = "02-05-2022" })" />
                     <input type="hidden" asp-for="@Model.Id" name="Id" />
                     <input type="hidden" asp-for="@Model.Description" name="Description" />
                     <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />

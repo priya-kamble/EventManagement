@@ -44,22 +44,22 @@ namespace WebMvc.Services
                     CartTicket.CartItemId = Guid.NewGuid().ToString();
                     CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
                     CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
-                    //CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
+                    CartTicket.EventTitle = "Fly with us";
                     CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
                     CartTicket.TicketPrice = SelectedTicketsDetail.Price;
                     CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
-                    //CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
+                    CartTicket.TicketCategoryName = "Early Bird - Adult"; 
                     await _cartService.AddItemToCart(user, CartTicket);
 
                 }
-                return RedirectToAction("Index", "Ticket");
+                return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
             
             }
-            return RedirectToAction("Index", "Ticket");
+            return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
         }
 
         private void HandleBrokenCircuitException()

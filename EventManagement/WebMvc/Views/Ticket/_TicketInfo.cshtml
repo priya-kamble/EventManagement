@@ -23,8 +23,10 @@
         </div>
         <div class="form-group">
             <label class="esh-event-label">
+                @*<select class="quantity_dropdown" asp-for="@Model.QuantitySelected" asp-items="@Model.AvailableTicketsQuantity"
+                        onchange="showCart(this.value, @Model.TicketId, @Model.Price, @Model.TicketCategoryId)" id="quantitydropdown"></select>*@
                 <select class="quantity_dropdown" asp-for="@Model.QuantitySelected" asp-items="@Model.AvailableTicketsQuantity"
-                        onchange="showCart(this.value, @Model.TicketId, @Model.Price, @Model.TicketCategoryId)" id="quantitydropdown"></select>
+                        onchange="this.form.submit()" id="quantitydropdown"></select>
             </label>
         </div>
         <input type="hidden" asp-for="@Model.TicketCategoryId" name="TicketCategoryId" />
