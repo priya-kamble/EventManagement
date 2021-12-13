@@ -29,38 +29,78 @@ namespace WebMvc.Services
         {
             return View();
         }
-        
+
+
+
         [HttpPost]
-        public async Task<IActionResult> AddToCart(Ticket SelectedTicketsDetail)
+        public async Task<IActionResult> AddToCart(TicketIndexViewModel SelectedTicketsDetail)
         {
             try
             {
-                if (SelectedTicketsDetail.QuantitySelected.Count() > 0)
-                { 
+                if (SelectedTicketsDetail.Tickets.Count() > 0)
+                {
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
-
-                    
-                    CartTicket.CartItemId = Guid.NewGuid().ToString();
-                    CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
-                    CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
-                    CartTicket.EventTitle = "Fly with us";
-                    CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
-                    CartTicket.TicketPrice = SelectedTicketsDetail.Price;
-                    CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
-                    CartTicket.TicketCategoryName = "Early Bird - Adult"; 
-                    await _cartService.AddItemToCart(user, CartTicket);
-
+                    foreach (var t in SelectedTicketsDetail.Tickets)
+                    {
+                        CartTicket.CartItemId = Guid.NewGuid().ToString();
+                        CartTicket.TicketId = t.TicketId.ToString();
+                        CartTicket.EventId = t.EventId.ToString();
+                        CartTicket.EventTitle = t.Event.Title;
+                        CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+                        CartTicket.TicketPrice = t.Price;
+                        CartTicket.Quantity = Convert.ToInt32(t.QuantitySelected);
+                        CartTicket.TicketCategoryName = t.TicketCategory.TicketCategoryName;
+                        await _cartService.AddItemToCart(user, CartTicket);
+                    }
                 }
-                return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
+                return RedirectToAction("Index", "Ticket", new { id = 16, dateSelected = "02-05-2022" }); 
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
-            
             }
-            return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
+            return RedirectToAction("Index", "Ticket", new { id = 16, dateSelected = "02-05-2022" });
         }
+
+
+
+
+
+
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddToCart(Ticket SelectedTicketsDetail)
+        //{
+        //    try
+        //    {
+        //        if (SelectedTicketsDetail.QuantitySelected.Count() > 0)
+        //        { 
+        //            var user = _identityService.Get(HttpContext.User);
+        //            var CartTicket = new CartItem();
+
+                    
+        //            CartTicket.CartItemId = Guid.NewGuid().ToString();
+        //            CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
+        //            CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
+        //            CartTicket.EventTitle = "Fly with us";
+        //            CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+        //            CartTicket.TicketPrice = SelectedTicketsDetail.Price;
+        //            CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
+        //            CartTicket.TicketCategoryName = "Early Bird - Adult"; 
+        //            await _cartService.AddItemToCart(user, CartTicket);
+
+        //        }
+        //        return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
+        //    }
+        //    catch (BrokenCircuitException)
+        //    {
+        //        HandleBrokenCircuitException();
+            
+        //    }
+        //    return RedirectToAction("Index", "Ticket", new { id = SelectedTicketsDetail.EventId, dateSelected = "02-05-2022" });
+        //}
 
         private void HandleBrokenCircuitException()
         {

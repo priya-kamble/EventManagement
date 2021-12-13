@@ -40,20 +40,102 @@
 
 </div>
 
-<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
-    @foreach (var item in Model.Tickets)
-    {
-        <partial name="_TicketInfo" model="item" />
+@*<form class="img_spacer2" asp-controller="Ticket" asp-action="GetQuantity" method="post">
+@foreach (var item in Model.Tickets)
+{
+    <div class="ticket_info_row">
+        <div>
+            <p class="sub_row">
+                <span class="zone_C">Type of Ticket</span>
+                <span class="zone_B accent">item.TicketCategory.TicketCategoryName</span>
+            </p>
+            <p class="sub_row">
+                <span class="zone_C">Price</span>
+                <span class="zone_B accent">$item.Price</span>
+            </p>
+            <p class="sub_row">
+                <span class="zone_C"> Sales end on</span>
+                <span class="zone_B accent">item.SalesEndDate.ToString("MMM dd, yyyy")</span>
+            </p>
+            <p class="sub_row">
+                <span class="zone_C"> Tickets Available</span>
+                <span class="zone_B accent">item.Quantity</span>
+            </p>
+        </div>
 
-    }
-</form>
-
-<form method="post" id="cartForm">
-    <div class="esh-basket">
-        @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
+        <div class="form-group">
+            <label class="esh-event-label">
+                <select class="custom_btn ticket_btn" asp-for="item.QuantitySelected" asp-items="item.AvailableTicketsQuantity" id="quantitydropdown"></select>
+            </label>
+        </div>
+<div>
+        <input type="hidden" asp-for="@item.TicketId" name="TicketId" />
+        <input type="hidden" asp-for="@item.TicketCategoryId" name="TicketCategoryId" />
+        <input type="hidden" asp-for="@item.TicketCategory" name="TicketCategory" />
+        <input type="hidden" asp-for="@item.EventId" name="EventId" />
     </div>
+</div>
+}
+</form>*@
+
+<form class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
+    @for (int i = 0; i < Model.Tickets.Count(); i++)
+    {
+        <p class="sub_row">
+            <span class="zone_C">Type of Ticket</span>
+            <span class="zone_B accent">@Model.Tickets[i].TicketCategory.TicketCategoryName</span>
+        </p>
+        <p class="sub_row">
+            <span class="zone_C">Price</span>
+            <span class="zone_B accent">$@Model.Tickets[i].Price</span>
+        </p>
+        <p class="sub_row">
+            <span class="zone_C"> Sales end on</span>
+            <span class="zone_B accent">@Model.Tickets[i].SalesEndDate.ToString("MMM dd, yyyy")</span>
+        </p>
+        <p class="sub_row">
+            <span class="zone_C"> Tickets Available</span>
+            <span class="zone_B accent">@Model.Tickets[i].Quantity</span>
+        </p>
+        <div class="form-group">
+            <label class="esh-event-label">
+                <select class="custom_btn ticket_btn" asp-for="@Model.Tickets[i].QuantitySelected" asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
+            </label>
+        </div>
+
+        <input type="hidden" asp-for="@Model.Tickets[i].TicketId" />
+        <input type="hidden" asp-for="@Model.Tickets[i].TicketCategoryId" />
+        <input type="hidden" asp-for="@Model.Tickets[i].Price" />
+        <input type="hidden" asp-for="@Model.Tickets[i].SalesStartDate" />
+        <input type="hidden" asp-for="@Model.Tickets[i].SalesEndDate" />
+        <input type="hidden" asp-for="@Model.Tickets[i].Quantity" />
+        <input type="hidden" asp-for="@Model.Tickets[i].EventId" />
+        <input type="hidden" asp-for="@Model.Tickets[i].Event.Title" />
+        <input type="hidden" asp-for="@Model.Tickets[i].TicketCategory.TicketCategoryName" />
+        <input type="hidden" asp-for="@Model.Tickets[i].QuantitySelected" />
+        <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
+    }
+
+    <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />   
+    <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="VERIFY" href="@Url.Action("GetQuantity", "Ticket")" />
+
 </form>
+
+@*<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
+
+        @foreach (var item in Model.Tickets)
+        {
+            <partial name="_TicketInfo" model="item" />
+
+        }
+    </form>*@
+
+@*<form method="post" id="cartForm">
+        <div class="esh-basket">
+            @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
+        </div>
+    </form>*@
 
 @*<form class="img_spacer2" asp-controller="Ticket" asp-action="OneTicketAtATime" method="post">
         <fieldset>
@@ -65,40 +147,51 @@
                 }
 
         </fieldset>
-    </form>*@
+</form>*@
+
+
+
+
+
+
+
+
+
+
+
 
 @section Scripts
 {
     <script type="text/javascript">
 
-        function showCart(quantity, id, price, categoryId) {
+        function showCart(quantity, id, price, categoryName) {
             //Get CategoryName with the CategoryId
-            switch (categoryId) {
-                case 1:
-                    var categoryName = "Student";
-                    break;
-                case 3:
-                    var categoryName = "Senior";
-                    break;
-                case 4:
-                    var categoryName = "Child";
-                    break;
-                case 5:
-                    var categoryName = "EarlyBird-Child";
-                    break;
-                case 6:
-                    var categoryName = "EarlyBird-Adult";
-                    break;
-                case 7:
-                    var categoryName = "EarlyBird-Senior";
-                    break;
-                case 8:
-                    var categoryName = "Military";
-                    break;
-                default:
-                    var categoryName = "General Admission";
-                    break;
-            }
+            //switch (categoryId) {
+            //    case 1:
+            //        var categoryName = "Student";
+            //        break;
+            //    case 3:
+            //        var categoryName = "Senior";
+            //        break;
+            //    case 4:
+            //        var categoryName = "Child";
+            //        break;
+            //    case 5:
+            //        var categoryName = "EarlyBird-Child";
+            //        break;
+            //    case 6:
+            //        var categoryName = "EarlyBird-Adult";
+            //        break;
+            //    case 7:
+            //        var categoryName = "EarlyBird-Senior";
+            //        break;
+            //    case 8:
+            //        var categoryName = "Military";
+            //        break;
+            //    default:
+            //        var categoryName = "General Admission";
+            //        break;
+            //}
 
             //Assign Values to the labels
             var ticketQuantity = document.getElementById('quantity' + id);
@@ -132,7 +225,6 @@
                 totalPrice.style.visibility = 'hidden';
             }
 
-            document.getElementById('theForm').submit();
 
         }
 
