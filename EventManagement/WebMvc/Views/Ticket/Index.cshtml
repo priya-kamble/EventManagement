@@ -58,8 +58,28 @@
 {
     <script type="text/javascript">
 
+
+        //var selectedquantity
+        //function ReturnSelectedvalue()
+        //{
+        //    selectedquantity=
+        //}
+
+        function selectElement(id, valueToSelect) {
+            let element = document.getElementById(id);
+            element.value = valueToSelect;
+        }
+
+      
+
+
         function showCart(quantity, id, price, categoryId)
         {
+
+
+
+
+
             //Get CategoryName with the CategoryId
             switch (categoryId)
             {
@@ -105,6 +125,8 @@
             var totalPrice = document.getElementById('totalPrice' + id);
             totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
 
+
+
             //Check if visibility needs to be hidden
             if (quantity != 0)
             {
@@ -124,7 +146,7 @@
             }
 
             document.getElementById('theForm').submit();
-            
+
         }
 
     </script>

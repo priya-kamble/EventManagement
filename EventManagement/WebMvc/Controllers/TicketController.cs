@@ -17,25 +17,66 @@ namespace WebMvc.Controllers
             _eventService = eventservice;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(EventDetail eventDetail)
+
+        //[HttpGet]
+        //public async Task<IActionResult> Index()
+
+        //{
+        //    await Task.CompletedTask;
+        //    return Ok(1);
+        //}
+
+
+
+        //    [HttpPost]
+        //public async Task<IActionResult> Index(EventDetail eventDetail)
+
+        //{
+
+
+        //    var selectedDate = DateTime.Parse(eventDetail.DateSelected);
+        //    var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
+
+        //    foreach (var ticketCategory in ticketCollection)
+        //    {
+        //        ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
+        //        ticketCategory.DateSelected = selectedDate;
+        //    }
+
+        //    var ticketsviewmodel = new TicketIndexViewModel
+        //    {
+        //        DateSelected = selectedDate,
+        //        Tickets = ticketCollection
+        //    };
+        //    return View(ticketsviewmodel);
+        //}
+
+        //[HttpPost]
+        public async Task<IActionResult> Index(int EventId, string Dateselected)
+
         {
-            var selectedDate = DateTime.Parse(eventDetail.DateSelected);
-            var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
+
+            var a="";
+            var ticketCollection = await _eventService.GetTicketsPerEvent(EventId);
 
             foreach (var ticketCategory in ticketCollection)
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
-                ticketCategory.DateSelected = selectedDate;
+                // ticketCategory.DateSelected = Dateselected;
+                a = ticketCategory.QuantitySelected;
+
             }
 
             var ticketsviewmodel = new TicketIndexViewModel
             {
-                DateSelected = selectedDate,
+              //  DateSelected = Dateselected,
                 Tickets = ticketCollection
             };
+
+           
             return View(ticketsviewmodel);
         }
+
 
 
         public IActionResult GetTicketId(int id)

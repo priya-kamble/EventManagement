@@ -52,14 +52,16 @@ namespace WebMvc.Services
                     await _cartService.AddItemToCart(user, CartTicket);
 
                 }
-                return RedirectToAction("Index", "Ticket");
+
+                return RedirectToAction("Index", "Ticket", new { EventId = SelectedTicketsDetail.EventId, Dateselected= SelectedTicketsDetail.DateSelected });
+                
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
             
             }
-            return RedirectToAction("Index", "Ticket");
+            return RedirectToAction("Index", "Ticket", new { EventId = SelectedTicketsDetail.EventId, Dateselected = SelectedTicketsDetail.DateSelected });
         }
 
         private void HandleBrokenCircuitException()

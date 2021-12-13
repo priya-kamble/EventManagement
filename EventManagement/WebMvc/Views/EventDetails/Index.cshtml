@@ -37,11 +37,16 @@
 <div class="row ticket_row">
     <div class="col-md-7"></div>
     <div class="col-md-5">
-        <form class="img_spacer2" asp-controller="Ticket" asp-action="Index" method="post">
+        @*<form class="img_spacer2" asp-controller="Ticket" asp-action="Index" method="post">*@
+        
+        <form class="img_spacer2" >
             <div>
                 <div>
-                    <input id="ticketbutton" class="custom_btn ticket_btn" type="submit" value="TICKETS" href="@Url.Action("Index", "Ticket")" />
-                    <input type="hidden" asp-for="@Model.Id" name="Id" />
+                  
+
+                    <input id="ticketbutton" class="custom_btn ticket_btn" type="button" value="TICKETS" onclick="location.href='@Url.Action("Index", "Ticket" )?EventId=' +@Model.Id +'&Dateselected=' + selecteddate  "/>
+
+                    <input type="hidden" asp-for="@Model.Id" name="selecteddate1" />
                     <input type="hidden" asp-for="@Model.Description" name="Description" />
                     <input type="hidden" asp-for="@Model.StartDate" name="StartDate" />
                     <input type="hidden" asp-for="@Model.EndDate" name="EndDate" />
@@ -51,7 +56,7 @@
                 </div>
                 <div>
                     <label class="esh-event-label">
-                        <select class="custom_btn ticket_btn dates_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown"></select>
+                        <select class="custom_btn ticket_btn dates_btn" asp-for="@Model.DateSelected" asp-items="@Model.AvailableDates" id="datesdropdown" onchange="getComboA(this)"></select>
                     </label>
                 </div>
 
@@ -98,6 +103,7 @@
 @section Scripts {
 
     <script type="text/javascript">
+        var selecteddate = ""
 
         function enabledisablebuttoncss(disabledBool){
             if(disabledBool == true){
@@ -121,6 +127,10 @@
             $('#ticketbutton').prop('disabled', disabledBool);
             enabledisablebuttoncss(disabledBool);
         });
+
+        function getComboA(selectObject) {
+            selecteddate = selectObject.value;
+          }
     </script>
 }
 

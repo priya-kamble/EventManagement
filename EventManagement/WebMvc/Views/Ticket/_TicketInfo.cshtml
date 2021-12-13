@@ -1,6 +1,15 @@
 @model WebMvc.Models.Ticket
 
 <form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
+   
+    @if (Convert.ToInt32(@Model.QuantitySelected) > 0)
+    {
+        <script>selectElement(quantitydropdown, @Model.QuantitySelected)</script>
+        <script>showCart(@Model.QuantitySelected, @Model.TicketId, @Model.Price, @Model.TicketCategoryId);</script>
+
+
+    }
+
 
     <div class="ticket_info_row">
         <div>
@@ -21,12 +30,17 @@
                 <span class="zone_B accent">@Model.Quantity</span>
             </p>
         </div>
+
+
         <div class="form-group">
             <label class="esh-event-label">
                 <select class="quantity_dropdown" asp-for="@Model.QuantitySelected" asp-items="@Model.AvailableTicketsQuantity"
-                        onchange="showCart(this.value, @Model.TicketId, @Model.Price, @Model.TicketCategoryId)" id="quantitydropdown"></select>
+                        onchange="showCart(this.value, @Model.TicketId, @Model.Price, @Model.TicketCategoryId)" id="quantitydropdown" selected=@Model.QuantitySelected>
+                </select>
             </label>
         </div>
+
+
         <input type="hidden" asp-for="@Model.TicketCategoryId" name="TicketCategoryId" />
         <input type="hidden" asp-for="@Model.Price" name="Price" />
         <input type="hidden" asp-for="@Model.AvailableTicketsQuantity" name="AvailableTicketsQuantity" />
