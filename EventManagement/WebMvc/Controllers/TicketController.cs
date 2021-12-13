@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using WebMvc.Models;
 using WebMvc.Services;
@@ -17,16 +18,23 @@ namespace WebMvc.Controllers
             _eventService = eventservice;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(EventDetail eventDetail, string quantitySelected)
+     
+        [Route("[controller]/[action]/{eventId}/{dateselected}")]
+        public async Task<IActionResult> Index(int eventId, string dateselected)
         {
-            var selectedDate = DateTime.Parse(eventDetail.DateSelected);
-            var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
+            CultureInfo enUS = new CultureInfo("en-US");
+            DateTime selectedDate;
+            if (!DateTime.TryParseExact(dateselected, "MM-dd-yyyy", enUS, DateTimeStyles.None, out selectedDate))
+            {
+                return View();
+            }
+
+            var ticketCollection = await _eventService.GetTicketsPerEvent(eventId);
 
             foreach (var ticketCategory in ticketCollection)
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
-                ticketCategory.QuantitySelected = quantitySelected;
+                ticketCategory.DateSelected = selectedDate;
             }
 
             var ticketsviewmodel = new TicketIndexViewModel
@@ -37,6 +45,13 @@ namespace WebMvc.Controllers
             return View(ticketsviewmodel);
         }
 
+
+        public IActionResult GetTicketId(int id)
+        {
+            return View(id);
+        }
+
+               
         public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
         {
             var qty = new List<SelectListItem>();

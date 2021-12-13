@@ -9,9 +9,8 @@ namespace WebMvc.ViewModels
 {
     public class TicketIndexViewModel
     {
-        public IEnumerable<Ticket> Tickets { get; set; }
+        public List<Ticket> Tickets{ get; set; }
         public DateTime DateSelected { get; set; }
-        public Ticket Ticket { get; set; }
-
+               
     }
 }
