@@ -115,6 +115,22 @@ namespace WebMvc.Services
             var response = await _apiClient.PostAsync(updateBasketUri, cart, token);
             response.EnsureSuccessStatusCode();
 
+
+            //extra code
+            var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, cart.UserId);
+            _logger.LogInformation(getBasketUri);
+            var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
+            _logger.LogInformation(dataString);
+
+            var response1 = JsonConvert.DeserializeObject<Cart>(dataString.ToString()) ??
+               new Cart()
+               {
+                   UserId = cart.UserId
+               };
+            //return response1;
+
+            //extra code
+
             return cart;
         }
     }
