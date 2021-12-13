@@ -19,7 +19,7 @@ namespace WebMvc.Services
         private readonly IIdentityService<ApplicationUser> _identityService;
 
         public CartController(IIdentityService<ApplicationUser> identityService, 
-                                ICartService cartService,IEventService eventService  )
+                              ICartService cartService,IEventService eventService)
         {
             _identityService = identityService;
             _cartService = cartService;
@@ -29,40 +29,41 @@ namespace WebMvc.Services
         {
             return View();
         }
-        
+
         [HttpPost]
-        public async Task<IActionResult> AddToCart(Ticket SelectedTicketsDetail)
+        public async Task<IActionResult> AddToCart(TicketIndexViewModel SelectedTicketsDetail)
         {
+            var dateSelected = SelectedTicketsDetail.DateSelected.ToString("MM-dd-yyyy");
+            var ticketsEventId = SelectedTicketsDetail.Tickets.FirstOrDefault().EventId;
             try
             {
-                if (SelectedTicketsDetail.QuantitySelected.Count() > 0)
-                { 
+                if (SelectedTicketsDetail.Tickets.Count() > 0)
+                {
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
-
                     
-                    CartTicket.CartItemId = Guid.NewGuid().ToString();
-                    CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
-                    CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
-                    //CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
-                    CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
-                    CartTicket.TicketPrice = SelectedTicketsDetail.Price;
-                    CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
-                    //CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
-                    await _cartService.AddItemToCart(user, CartTicket);
-
+                    foreach (var t in SelectedTicketsDetail.Tickets)
+                    {
+                        CartTicket.CartItemId = Guid.NewGuid().ToString();
+                        CartTicket.TicketId = t.TicketId.ToString();
+                        CartTicket.EventId = t.EventId.ToString();
+                        CartTicket.EventTitle = t.Event.Title;
+                        CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+                        CartTicket.TicketPrice = t.Price;
+                        CartTicket.Quantity = Convert.ToInt32(t.QuantitySelected);
+                        CartTicket.TicketCategoryName = t.TicketCategory.TicketCategoryName;
+                        await _cartService.AddItemToCart(user, CartTicket);
+                    }
                 }
-
-                return RedirectToAction("Index", "Ticket", new { EventId = SelectedTicketsDetail.EventId, Dateselected= SelectedTicketsDetail.DateSelected });
-                
+                return RedirectToAction("Index", "Ticket", new { eventId = ticketsEventId, dateselected = dateSelected });
             }
             catch (BrokenCircuitException)
             {
                 HandleBrokenCircuitException();
-            
             }
-            return RedirectToAction("Index", "Ticket", new { EventId = SelectedTicketsDetail.EventId, Dateselected = SelectedTicketsDetail.DateSelected });
+            return RedirectToAction("Index", "Ticket", new { eventId = ticketsEventId, dateselected = dateSelected });
         }
+
 
         private void HandleBrokenCircuitException()
         {
@@ -90,7 +91,7 @@ namespace WebMvc.Services
             }
             catch (BrokenCircuitException)
             {
-                // Catch error when CartApi is in open circuit  mode                 
+                // Catch error when CartApi is in open circuit  mode               
                 HandleBrokenCircuitException();
             }
 

@@ -23,8 +23,6 @@ namespace WebMvc.Models
         public string QuantitySelected { get; set; }
         public DateTime DateSelected { get; set; }
         public string TicketStatus { get; set; }
-        public string CategoryName { get; set; }
-
 
     }
 }

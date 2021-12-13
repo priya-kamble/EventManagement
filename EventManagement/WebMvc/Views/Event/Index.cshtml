@@ -85,22 +85,22 @@
 <div class="container event_container">
     @if (Model.Events.Count() > 0)
     {
-        @Html.Partial("_pagination", Model.PaginationInfo)
-        @*<partial name="_pagination" for="PaginationInfo" />*@
+        @*@Html.Partial("_pagination", Model.PaginationInfo)*@
+        <partial name="_pagination" for="PaginationInfo" />
 
         <div class="esh-Event-items row event_zone">
             @foreach (var eventItem in Model.Events)
             {
                 <div class="esh-Event-item col-md-4">
 
-                    @Html.Partial("_EventInfo", eventItem)
-                    @*<partial name="_EventInfo" model="eventItem" />*@
+                    @*@Html.Partial("_EventInfo", eventItem)*@
+                    <partial name="_EventInfo" model="eventItem" />
 
                 </div>
             }
         </div>
-        @Html.Partial("_pagination", Model.PaginationInfo)
-        @*<partial name="_pagination" for="PaginationInfo" />*@
+        @*@Html.Partial("_pagination", Model.PaginationInfo)*@
+        <partial name="_pagination" for="PaginationInfo" />
     }
     else
     {

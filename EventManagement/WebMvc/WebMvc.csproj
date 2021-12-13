@@ -17,4 +17,8 @@
     <ProjectReference Include="..\CartAPI\CartAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\" />
+  </ItemGroup>
+
 </Project>

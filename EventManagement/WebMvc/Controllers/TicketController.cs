@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using WebMvc.Models;
 using WebMvc.Services;
@@ -17,66 +18,32 @@ namespace WebMvc.Controllers
             _eventService = eventservice;
         }
 
-
-        //[HttpGet]
-        //public async Task<IActionResult> Index()
-
-        //{
-        //    await Task.CompletedTask;
-        //    return Ok(1);
-        //}
-
-
-
-        //    [HttpPost]
-        //public async Task<IActionResult> Index(EventDetail eventDetail)
-
-        //{
-
-
-        //    var selectedDate = DateTime.Parse(eventDetail.DateSelected);
-        //    var ticketCollection = await _eventService.GetTicketsPerEvent(eventDetail.Id);
-
-        //    foreach (var ticketCategory in ticketCollection)
-        //    {
-        //        ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
-        //        ticketCategory.DateSelected = selectedDate;
-        //    }
-
-        //    var ticketsviewmodel = new TicketIndexViewModel
-        //    {
-        //        DateSelected = selectedDate,
-        //        Tickets = ticketCollection
-        //    };
-        //    return View(ticketsviewmodel);
-        //}
-
-        //[HttpPost]
-        public async Task<IActionResult> Index(int EventId, string Dateselected)
-
+     
+        [Route("[controller]/[action]/{eventId}/{dateselected}")]
+        public async Task<IActionResult> Index(int eventId, string dateselected)
         {
+            CultureInfo enUS = new CultureInfo("en-US");
+            DateTime selectedDate;
+            if (!DateTime.TryParseExact(dateselected, "MM-dd-yyyy", enUS, DateTimeStyles.None, out selectedDate))
+            {
+                return View();
+            }
 
-            var a="";
-            var ticketCollection = await _eventService.GetTicketsPerEvent(EventId);
+            var ticketCollection = await _eventService.GetTicketsPerEvent(eventId);
 
             foreach (var ticketCategory in ticketCollection)
             {
                 ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
-                // ticketCategory.DateSelected = Dateselected;
-                a = ticketCategory.QuantitySelected;
-
+                ticketCategory.DateSelected = selectedDate;
             }
 
             var ticketsviewmodel = new TicketIndexViewModel
             {
-              //  DateSelected = Dateselected,
+                DateSelected = selectedDate,
                 Tickets = ticketCollection
             };
-
-           
             return View(ticketsviewmodel);
         }
-
 
 
         public IActionResult GetTicketId(int id)
