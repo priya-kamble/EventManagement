@@ -22,7 +22,7 @@ services:
     image: "mcr.microsoft.com/mssql/server:latest"
     environment:
       ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: Sa!Event
+      SA_PASSWORD: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
       - "5041:1433"
