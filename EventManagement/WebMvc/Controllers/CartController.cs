@@ -35,12 +35,26 @@ namespace WebMvc.Services
         [HttpPost]
         public async Task<IActionResult> AddToCart(TicketIndexViewModel SelectedTicketsDetail)
         {
+            var dateSelected = SelectedTicketsDetail.DateSelected.ToString("MM-dd-yyyy");
             try
             {
                 if (SelectedTicketsDetail.Tickets.Count() > 0)
                 {
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
+                    
+                    CartTicket.CartItemId = Guid.NewGuid().ToString();
+                    CartTicket.TicketId = SelectedTicketsDetail.TicketId.ToString() ;
+                    CartTicket.EventId = SelectedTicketsDetail.EventId.ToString();
+                    //CartTicket.EventTitle = SelectedTicketsDetail.Event.Title;
+                    CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+                    CartTicket.TicketPrice = SelectedTicketsDetail.Price;
+                    CartTicket.Quantity = Convert.ToInt32(SelectedTicketsDetail.QuantitySelected);
+                    //CartTicket.TicketCategoryName = SelectedTicketsDetail.TicketCategory.TicketCategoryName; 
+                    await _cartService.AddItemToCart(user, CartTicket);
+                }
+                return RedirectToAction("Index", "Ticket", new { eventId = SelectedTicketsDetail.EventId, dateselected= dateSelected });
+            }
                     foreach (var t in SelectedTicketsDetail.Tickets)
                     {
                         CartTicket.CartItemId = Guid.NewGuid().ToString();
@@ -60,7 +74,7 @@ namespace WebMvc.Services
             {
                 HandleBrokenCircuitException();
             }
-            return RedirectToAction("Index", "Ticket", new { id = 16, dateSelected = "02-05-2022" });
+            return RedirectToAction("Index", "Ticket", new { eventId = SelectedTicketsDetail.EventId, dateselected = dateSelected });
         }
 
 
@@ -128,7 +142,7 @@ namespace WebMvc.Services
             }
             catch (BrokenCircuitException)
             {
-                // Catch error when CartApi is in open circuit  mode                 
+                // Catch error when CartApi is in open circuit  mode               
                 HandleBrokenCircuitException();
             }
 

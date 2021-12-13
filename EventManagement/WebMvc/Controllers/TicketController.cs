@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using WebMvc.Models;
 using WebMvc.Services;
@@ -17,11 +18,18 @@ namespace WebMvc.Controllers
             _eventService = eventservice;
         }
 
-       
-        public async Task<IActionResult> Index(int id, string dateSelected)
+     
+        [Route("[controller]/[action]/{eventId}/{dateselected}")]
+        public async Task<IActionResult> Index(int eventId, string dateselected)
         {
-            var selectedDate = DateTime.Parse(dateSelected);
-            var ticketCollection = await _eventService.GetTicketsPerEvent(id);
+            CultureInfo enUS = new CultureInfo("en-US");
+            DateTime selectedDate;
+            if (!DateTime.TryParseExact(dateselected, "MM-dd-yyyy", enUS, DateTimeStyles.None, out selectedDate))
+            {
+                return View();
+            }
+
+            var ticketCollection = await _eventService.GetTicketsPerEvent(eventId);
 
             foreach (var ticketCategory in ticketCollection)
             {

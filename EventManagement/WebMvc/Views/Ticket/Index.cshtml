@@ -13,19 +13,28 @@
 }
 
 <div class="row banner_row">
-
-    @if (@Model.Tickets.First().TicketId != 0)
+    @if (@Model == null)
     {
-        <div class="ticket_title_box col-md-7">
-
-            <div class="event_name">
-                <span>@Model.Tickets.First().Event.Title</span>
-            </div>
-            <div class="zone_1">
-                <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
-            </div>
-
+        <div>
+            <span>You have selected an invalid date.<br></span>
+            <span>Please select a valid date in the previous page.</span>
         </div>
+    }
+    else
+    {
+
+        @if (@Model.Tickets.First().TicketId != 0)
+        {
+            <div class="ticket_title_box col-md-7">
+
+                <div class="event_name">
+                    <span>@Model.Tickets.First().Event.Title</span>
+                </div>
+                <div class="zone_1">
+                    <div>@Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span></div>
+                </div>
+
+            </div>
 
         <div class="photo_box col-md-5">
             <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
@@ -104,23 +113,9 @@
             </label>
         </div>
 
-        <input type="hidden" asp-for="@Model.Tickets[i].TicketId" />
-        <input type="hidden" asp-for="@Model.Tickets[i].TicketCategoryId" />
-        <input type="hidden" asp-for="@Model.Tickets[i].Price" />
-        <input type="hidden" asp-for="@Model.Tickets[i].SalesStartDate" />
-        <input type="hidden" asp-for="@Model.Tickets[i].SalesEndDate" />
-        <input type="hidden" asp-for="@Model.Tickets[i].Quantity" />
-        <input type="hidden" asp-for="@Model.Tickets[i].EventId" />
-        <input type="hidden" asp-for="@Model.Tickets[i].Event.Title" />
-        <input type="hidden" asp-for="@Model.Tickets[i].TicketCategory.TicketCategoryName" />
-        <input type="hidden" asp-for="@Model.Tickets[i].QuantitySelected" />
-        <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
-    }
-
-    <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />   
-    <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="VERIFY" href="@Url.Action("GetQuantity", "Ticket")" />
-
-</form>
+@if (@Model != null)
+{
+    <form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
 @*<form id="theForm" class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
@@ -162,7 +157,7 @@
 
 @section Scripts
 {
-    <script type="text/javascript">
+<script type="text/javascript">
 
         function showCart(quantity, id, price, categoryName) {
             //Get CategoryName with the CategoryId
@@ -193,21 +188,21 @@
             //        break;
             //}
 
-            //Assign Values to the labels
-            var ticketQuantity = document.getElementById('quantity' + id);
-            ticketQuantity.value = quantity;
+        //Assign Values to the labels
+        var ticketQuantity = document.getElementById('quantity' + id);
+        ticketQuantity.value = quantity;
 
-            var ticketCategoryName = document.getElementById('category' + id);
-            ticketCategoryName.value = categoryName;
+        var ticketCategoryName = document.getElementById('category' + id);
+        ticketCategoryName.value = categoryName;
 
-            var ticketId = document.getElementById('id' + id);
-            ticketId.value = id;
+        var ticketId = document.getElementById('id' + id);
+        ticketId.value = id;
 
-            var ticketPrice = document.getElementById('price' + id);
-            ticketPrice.value = price;
+        var ticketPrice = document.getElementById('price' + id);
+        ticketPrice.value = price;
 
-            var totalPrice = document.getElementById('totalPrice' + id);
-            totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
+        var totalPrice = document.getElementById('totalPrice' + id);
+        totalPrice.value = (ticketQuantity.value) * (ticketPrice.value);
 
             //Check if visibility needs to be hidden
             if (quantity != 0) {
@@ -228,7 +223,7 @@
 
         }
 
-    </script>
+</script>
 }
 
 
