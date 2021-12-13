@@ -44,6 +44,8 @@
 
 @if (@Model != null)
     {
+     @if (@Model.Tickets.First().TicketId != 0)
+        {
         <form class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
         
             @for (int i = 0; i < Model.Tickets.Count(); i++)
@@ -85,7 +87,7 @@
                      <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
                      <input type="hidden" asp-for="@Model.Tickets[i].DateSelected" />
                  }
-
+            }
              <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
              <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
 
