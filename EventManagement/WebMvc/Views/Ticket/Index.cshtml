@@ -45,11 +45,11 @@
 @if (@Model != null)
     {
      @if (@Model.Tickets.First().TicketId != 0)
-        {
+     {
         <form class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
         
             @for (int i = 0; i < Model.Tickets.Count(); i++)
-                {
+            {
                     <p class="sub_row">
                         <span class="zone_C">Type of Ticket</span>
                         <span class="zone_B accent">@Model.Tickets[i].TicketCategory.TicketCategoryName</span>
@@ -86,12 +86,13 @@
                      <input type="hidden" asp-for="@Model.Tickets[i].QuantitySelected" />
                      <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
                      <input type="hidden" asp-for="@Model.Tickets[i].DateSelected" />
-                 }
             }
+            
              <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
              <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
 
         </form>
-    }
+         }
+     }
 
 
