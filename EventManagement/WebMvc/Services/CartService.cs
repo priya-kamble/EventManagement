@@ -47,6 +47,7 @@ namespace WebMvc.Services
                 var basketItem = cart.Tickets
                     .Where(p => p.TicketId == ticket.TicketId)
                     .FirstOrDefault();
+                
                 if (basketItem == null)
                 {
                     cart.Tickets.Add(ticket);
