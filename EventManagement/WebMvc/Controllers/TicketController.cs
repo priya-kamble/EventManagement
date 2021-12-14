@@ -33,7 +33,7 @@ namespace WebMvc.Controllers
 
             foreach (var ticketCategory in ticketCollection)
             {
-                ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.Quantity);
+                ticketCategory.AvailableTicketsQuantity = GetAvailableQuantity(ticketCategory.TicketId,ticketCategory.Quantity);
                 ticketCategory.DateSelected = selectedDate;
             }
 
@@ -52,7 +52,7 @@ namespace WebMvc.Controllers
         }
 
                
-        public IEnumerable<SelectListItem> GetAvailableQuantity(int quantity)
+        public IEnumerable<SelectListItem> GetAvailableQuantity(int Ticketid, int quantity)
         {
             var qty = new List<SelectListItem>();
 
@@ -63,11 +63,41 @@ namespace WebMvc.Controllers
                     {
                         Value = i.ToString(),
                         Text = i.ToString(),
-                    }); ;
+                        Selected = IsSelected(Ticketid, i),
+                    }) ; 
             }
 
             return qty;
         }
+
+        private bool IsSelected(int Ticketid, int quantity)
+        {
+
+            if (TempData.ContainsKey("QantitySelected"))
+            {
+                string ticketid = Convert.ToString(Ticketid);
+                string Quantity = Convert.ToString(quantity);
+
+                var myArray = TempData.Get<string[,]>("QantitySelected");
+
+                int j = 0;
+                for (j = 0; j < 6; j++)
+                {
+                    if (ticketid == myArray[j, 0])
+                    {
+                        if (Quantity == myArray[j, 1])  return true;
+                    }
+                }
+
+            }
+            return false;
+
+        }
+
+
+
+
+
 
         [HttpPost]
         public IActionResult Test(Ticket ticket)

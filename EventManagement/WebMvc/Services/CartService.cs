@@ -57,10 +57,8 @@ namespace WebMvc.Services
                     {
                         basketItem.Quantity = ticket.Quantity;
                     }
-
                 }
             }
-            
             await UpdateCart(cart);
         }
 
@@ -99,8 +97,6 @@ namespace WebMvc.Services
             basket.Tickets.ForEach(x =>
 
             {
-                // Simplify this logic by using the
-                // new out variable initializer.
                 if (quantities.TryGetValue(x.CartItemId, out var quantity))
                 {
                     x.Quantity = quantity;
