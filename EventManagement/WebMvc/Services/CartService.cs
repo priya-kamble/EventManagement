@@ -41,27 +41,26 @@ namespace WebMvc.Services
         {
             var cart = await GetCart(user);
             _logger.LogDebug("User Name: " + user.Email);
-            if(cart.Tickets == null)
+           
+            if (cart.Tickets != null)
             {
-                cart.Tickets = new List<CartItem>();
-            }
-
-            var basketItem = cart.Tickets
-                .Where(p => p.TicketId == ticket.TicketId)
-                .FirstOrDefault();
-            if (basketItem == null)
-            {
-                cart.Tickets.Add(ticket);
-            }
-            else
-            {
-                if (basketItem.Quantity != ticket.Quantity)
+                var basketItem = cart.Tickets
+                    .Where(p => p.TicketId == ticket.TicketId)
+                    .FirstOrDefault();
+                if (basketItem == null)
                 {
-                    basketItem.Quantity = ticket.Quantity;
+                    cart.Tickets.Add(ticket);
                 }
-               
-            }
+                else
+                {
+                    if (basketItem.Quantity != ticket.Quantity)
+                    {
+                        basketItem.Quantity = ticket.Quantity;
+                    }
 
+                }
+            }
+            
             await UpdateCart(cart);
         }
 
@@ -80,7 +79,6 @@ namespace WebMvc.Services
                new Cart()
                {
                    UserId = user.Email,
-                   //Tickets = new List<CartItem>()
                };
             return response;
         }
