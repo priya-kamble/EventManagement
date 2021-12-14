@@ -1,5 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Ticket details";
+﻿@{ ViewData["Title"] = "Ticket details";
 
     @model WebMvc.ViewModels.TicketIndexViewModel
 }
@@ -26,11 +25,11 @@
                         @Model.DateSelected.DayOfWeek<br /><span class="date_num">@Model.DateSelected.ToString("MMM")</span><br /><span class="date_num">@Model.DateSelected.Day</span>
                     </div>
                 </div>
-
-                <div class="photo_box col-md-5">
-                    <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
-                </div>
             </div>
+            <div class="photo_box col-md-5">
+                <img class="event_big_img" src="@Model.Tickets.First().Event.EventImageUrl" />
+            </div>
+            
         }
         else
         {
@@ -47,55 +46,75 @@
 {
     @if (@Model.Tickets.First().TicketId != 0)
     {
-        <form class="img_spacer2" asp-controller="Cart" asp-action="AddToCart" method="post">
 
-            @for (int i = 0; i < Model.Tickets.Count(); i++)
-            {
-                <p class="sub_row">
-                    <span class="zone_C">Type of Ticket</span>
-                    <span class="zone_B accent">@Model.Tickets[i].TicketCategory.TicketCategoryName</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C">Price</span>
-                    <span class="zone_B accent">$@Model.Tickets[i].Price</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C"> Sales end on</span>
-                    <span class="zone_B accent">@Model.Tickets[i].SalesEndDate.ToString("MMM dd, yyyy")</span>
-                </p>
-                <p class="sub_row">
-                    <span class="zone_C"> Tickets Available</span>
-                    <span class="zone_B accent">@Model.Tickets[i].Quantity</span>
-                </p>
-                <div class="form-group">
-                    <label class="esh-event-label">
-                       
+        <div class="row ticket_showcase">
 
-                        <select class="quantity_dropdown" asp-for="@Model.Tickets[i].QuantitySelected"
-                                asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown" ></select>
-                        
+             <form class="img_spacer2 select_tickets_box col-md-7" asp-controller="Cart" asp-action="AddToCart" method="post">
+                 <div class="items_wrapper">
+                     @for (int i = 0; i < Model.Tickets.Count(); i++)
+                     {
+                         <div class="item_box">
+                             <div class="items_col_left">
+                                 <p class="sub_row">
+                                     <span class="zone_C">Type of Ticket</span>
+                                     <span class="zone_B accent">@Model.Tickets[i].TicketCategory.TicketCategoryName</span>
+                                 </p>
+                                 <p class="sub_row">
+                                     <span class="zone_C">Price</span>
+                                     <span class="zone_B accent">$@Model.Tickets[i].Price</span>
+                                 </p>
+                                 <p class="sub_row">
+                                     <span class="zone_C"> Sales end on</span>
+                                     <span class="zone_B accent">@Model.Tickets[i].SalesEndDate.ToString("MMM dd, yyyy")</span>
+                                 </p>
+                                 <p class="sub_row">
+                                     <span class="zone_C"> Tickets Available</span>
+                                     <span class="zone_B accent">@Model.Tickets[i].Quantity</span>
+                                 </p>
+                             </div>
+                             <div class="form-group items_col_right">
+                                 <label class="esh-event-label">
+                                     <select class="quantity_dropdown" asp-for="@Model.Tickets[i].QuantitySelected"
+                                             asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
+                                 </label>
+                             </div>
 
-                    </label>
-                </div>
+                             <input type="hidden" asp-for="@Model.Tickets[i].TicketId" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].TicketCategoryId" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].Price" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].SalesStartDate" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].SalesEndDate" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].Quantity" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].EventId" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].Event.Title" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].Event.Address" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].TicketCategory.TicketCategoryName" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].QuantitySelected" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
+                             <input type="hidden" asp-for="@Model.Tickets[i].DateSelected" />
+                         </div>
+                     }
 
-                <input type="hidden" asp-for="@Model.Tickets[i].TicketId" />
-                <input type="hidden" asp-for="@Model.Tickets[i].TicketCategoryId" />
-                <input type="hidden" asp-for="@Model.Tickets[i].Price" />
-                <input type="hidden" asp-for="@Model.Tickets[i].SalesStartDate" />
-                <input type="hidden" asp-for="@Model.Tickets[i].SalesEndDate" />
-                <input type="hidden" asp-for="@Model.Tickets[i].Quantity" />
-                <input type="hidden" asp-for="@Model.Tickets[i].EventId" />
-                <input type="hidden" asp-for="@Model.Tickets[i].Event.Title" />
-                <input type="hidden" asp-for="@Model.Tickets[i].Event.Address" />
-                <input type="hidden" asp-for="@Model.Tickets[i].TicketCategory.TicketCategoryName" />
-                <input type="hidden" asp-for="@Model.Tickets[i].QuantitySelected" />
-                <input type="hidden" asp-for="@Model.Tickets[i].TicketStatus" />
-                <input type="hidden" asp-for="@Model.Tickets[i].DateSelected" />
-            }
+                     <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
+                 </div>   
+                       <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
 
-            <input type="hidden" asp-for="@Model.DateSelected" name="DateSelected" />
-            <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
+            </form>
+            <div class="cart_summary_box col-md-5">
+                <form class="img_spacer2" asp-controller="" asp-action="" method="post">
+               <fieldset>
+                   <div>Your items in cart</div>
 
-        </form>
-    }
+                   @foreach (var item in Model.Tickets)
+                   {
+                       <div>hello</div>
+                   }
+
+               </fieldset>
+               </form>
+            </div>
+        </div>
+     }
 }
+
+
