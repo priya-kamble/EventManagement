@@ -8,11 +8,11 @@ namespace WebMvc.Models.CartModels
     public class Cart
     {
         public string UserId { get; set; }
-        public List<CartItem> CartTickets { get; set; } = new List<CartItem>();
+        public List<CartItem> Tickets { get; set; } = new List<CartItem>();
    
         public decimal Total()
         {
-            return Math.Round(CartTickets.Sum(x => x.TicketPrice * x.Quantity), 2);
+            return Math.Round(Tickets.Sum(x => x.TicketPrice * x.Quantity), 2);
         }
 
     }
