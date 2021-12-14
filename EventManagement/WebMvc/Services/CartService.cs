@@ -41,13 +41,17 @@ namespace WebMvc.Services
         {
             var cart = await GetCart(user);
             _logger.LogDebug("User Name: " + user.Email);
+            if(cart.Tickets == null)
+            {
+                cart.Tickets = new List<CartItem>();
+            }
 
-            var basketItem = cart.CartTickets
+            var basketItem = cart.Tickets
                 .Where(p => p.TicketId == ticket.TicketId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
-                cart.CartTickets.Add(ticket);
+                cart.Tickets.Add(ticket);
             }
             else
             {
@@ -75,7 +79,8 @@ namespace WebMvc.Services
             var response = JsonConvert.DeserializeObject<Cart>(dataString.ToString()) ??
                new Cart()
                {
-                   UserId = user.Email
+                   UserId = user.Email,
+                   //Tickets = new List<CartItem>()
                };
             return response;
         }
@@ -93,7 +98,8 @@ namespace WebMvc.Services
         {
             var basket = await GetCart(user);
 
-            basket.CartTickets.ForEach(x =>
+            basket.Tickets.ForEach(x =>
+
             {
                 // Simplify this logic by using the
                 // new out variable initializer.
@@ -114,22 +120,6 @@ namespace WebMvc.Services
             _logger.LogDebug("Update Basket url: " + updateBasketUri);
             var response = await _apiClient.PostAsync(updateBasketUri, cart, token);
             response.EnsureSuccessStatusCode();
-
-
-            //extra code
-            var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, cart.UserId);
-            _logger.LogInformation(getBasketUri);
-            var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
-            _logger.LogInformation(dataString);
-
-            var response1 = JsonConvert.DeserializeObject<Cart>(dataString.ToString()) ??
-               new Cart()
-               {
-                   UserId = cart.UserId
-               };
-            //return response1;
-
-            //extra code
 
             return cart;
         }
