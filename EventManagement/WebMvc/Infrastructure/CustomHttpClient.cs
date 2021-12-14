@@ -16,7 +16,6 @@ namespace WebMvc.Infrastructure
         {
             _client = new HttpClient() ;
         }
-        
         public async Task<HttpResponseMessage> DeleteAsync(string uri, string authorizationToken = null, string authorizationMethod = "Bearer")
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Delete, uri);
@@ -38,15 +37,15 @@ namespace WebMvc.Infrastructure
                     authorizationToken);
             }
 
-            try
-            {
+            //try
+            //{
                 var response = await _client.SendAsync(requestMessage);
                 return await response.Content.ReadAsStringAsync();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
         }
 
         public async Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")
