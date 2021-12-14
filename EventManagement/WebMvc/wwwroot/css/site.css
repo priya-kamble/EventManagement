@@ -84,8 +84,8 @@ textarea {
     width: 60px;
     color: #ffffff;
     background-color: #83d01b;
-    margin-left: 40px;
-    margin-top: 1rem;
+    margin-left: 20px;
+    margin-top: 55px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
@@ -353,23 +353,59 @@ footer.footer {
 .ticket_banner_row {
     max-height: 237px;
 }
-.ticket_showcase {
-    display: grid;
-    grid-template-columns
-}
 
 .ticket_info_row {
+    margin-left: 15px;
     margin-top: 1px;
     padding: 10px;
     display: grid;
     grid-template-columns: 380px 100px;
-    border-bottom: 2px solid #DBDAE3;
+    border-bottom: 2px solid #dbdae3;
+}
+
+.ticket_showcase {
+    padding: 10px 25px 25px 25px;
+}
+
+.ticket_showcase::before {
+    content: none;
+}
+
+.select_tickets_box {
+    display: grid;
+    grid-template-rows: auto 50px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.items_wrapper {
+    display: grid;
+}
+
+.item_box {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    border-bottom: solid 1px gray;
+    padding-top: 10px;
+}
+
+item_col_left {
+    display: grid;
+}
+
+item_col_right {
+    display: grid;
 }
 
 .sub_row {
     display: grid;
-    grid-template-columns: 105px 200px;
+    grid-template-columns: 125px 200px;
     margin-left: 100px;
+}
+
+#verifybutton {
+    margin: 22px auto auto auto;
+    justify-content: center;
 }
 
 select.num_box {
@@ -393,11 +429,11 @@ select.num_box {
 
 .ticket_title_box {
     display: grid;
-    grid-template-rows: 50px 80px;
+    grid-template-rows: 65px 85px;
     padding-right: 0;
     height: 100%;
     padding-left: 100px;
-    padding-top: 25px;
+    padding-top: 55px;
     line-height: normal;
 }
 
