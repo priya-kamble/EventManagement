@@ -4,6 +4,7 @@ networks:
   frontend:
   backend:
 
+
 services:
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server:latest"
@@ -21,7 +22,7 @@ services:
     image: "mcr.microsoft.com/mssql/server:latest"
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Sa!Event
+      MSSQL_SA_PASSWORD: Sa!Event
       TZ: "America/Los_Angeles"
     ports:
       - "5041:1433"
@@ -58,7 +59,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       TZ: "America/Los_Angeles"
@@ -110,7 +111,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionString: cart.data
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
     ports:
       - "7012:80"
     container_name: EventsCartAPI
