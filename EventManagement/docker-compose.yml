@@ -63,8 +63,8 @@ services:
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       #OrderUrl: http://order
-      #StripePublicKey: pk_test_jZlpubvlPmcV6QJPReImelQy
-      #StripePrivateKey: sk_test_bSHT9qxwjpyCOP0qdAvHLfAA
+      #StripePublicKey: pk_test_
+      #StripePrivateKey: sk_test_
       TZ: "America/Los_Angeles"
     ports:
       - "7500:80"
