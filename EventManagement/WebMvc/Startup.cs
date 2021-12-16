@@ -29,6 +29,7 @@ namespace WebMvc
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICartService, CartService>();
+            //services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             
             IdentityModelEventSource.ShowPII = true;
