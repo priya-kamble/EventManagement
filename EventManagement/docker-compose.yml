@@ -4,6 +4,7 @@ networks:
   frontend:
   backend:
 
+
 services:
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server:latest"
@@ -58,7 +59,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       TZ: "America/Los_Angeles"
@@ -71,7 +72,6 @@ services:
       - event
       - tokenserver
       - cart
-      - order
 
   tokenserver:
     build:
@@ -111,7 +111,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionString: cart.data
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
     ports:
       - "7012:80"
     container_name: EventsCartAPI
@@ -121,31 +121,3 @@ services:
     depends_on:
       - tokenserver
       - cart.data
-
-  order:
-    image: events/orderapi  
-    build:
-      context: .\OrderAPI
-      dockerfile: Dockerfile
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      IdentityUrl: http://192.168.0.141:7801
-      DatabaseServer: mssqlserver
-      DatabaseName: OrdersDb
-      DatabaseUser: sa
-      DatabasePassword: Sa!Event
-      TZ: "America/Los_Angeles"
-    ports:
-      - "7020:80"
-    container_name: EventOrderAPIContainer
-    networks:
-      - backend
-      - frontend
-    depends_on:
-      - mssqlserver
-      - tokenserver
