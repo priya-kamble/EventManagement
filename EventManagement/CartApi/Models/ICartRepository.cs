@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CartApi.Models
+namespace CartAPI.Models
 {
     public interface ICartRepository
     {
