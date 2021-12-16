@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OrderApi.Data;
+using OrderAPI.Data;
 using OrderAPI.Models;
 using System.Net;
 using System;

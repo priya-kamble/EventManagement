@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderApi.Data
+namespace OrderAPI.Data
 {
     public class OrdersContext : DbContext
     {

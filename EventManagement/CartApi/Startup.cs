@@ -1,4 +1,4 @@
-using CartApi.Models;
+using CartAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NewCartAPI
+namespace CartAPI
 {
     public class Startup
     {

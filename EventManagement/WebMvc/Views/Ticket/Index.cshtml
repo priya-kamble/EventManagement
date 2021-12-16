@@ -1,12 +1,11 @@
 ﻿@using WebMvc.Services
 @using WebMvc.ViewModels
+
 @inject IIdentityService<ApplicationUser> identityService
 
 @{
     ViewData["Title"] = "Ticket details";
-
     @model WebMvc.ViewModels.TicketIndexViewModel
-
 }
 
 <div class="row banner_row">
@@ -106,6 +105,7 @@
                 <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
 
             </form>
+
             <div class="col-md-5">
                 <div class="cartfont row">Cart Summary</div>
                 <div>

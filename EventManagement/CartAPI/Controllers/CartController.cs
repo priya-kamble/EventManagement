@@ -1,4 +1,4 @@
-﻿using CartApi.Models;
+﻿using CartAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace CartApi.Controller
+namespace CartAPI.Controller
 {
     [Authorize]
     [Route("api/[controller]")]
