@@ -3,8 +3,8 @@
 
 @inject IIdentityService<ApplicationUser> identityService
 
-@{ ViewData["Title"] = "Ticket details";
-
+@{
+    ViewData["Title"] = "Ticket details";
     @model WebMvc.ViewModels.TicketIndexViewModel
 }
 
@@ -80,7 +80,7 @@
                             <div class="form-group items_col_right">
                                 <label class="esh-event-label">
                                     <select class="quantity_dropdown" asp-for="@Model.Tickets[i].QuantitySelected"
-                                            asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
+                                asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
                                 </label>
                             </div>
 
@@ -105,17 +105,12 @@
                 <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value="ADD TO CART" />
 
             </form>
-            <div class="cart_summary_box col-md-5">
-                <form class="img_spacer2" asp-controller="" asp-action="" method="post">
-                    <fieldset>
-                        <div>Your items in cart</div>
 
-                        <div>hello</div>
-                        @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
-
-
-                    </fieldset>
-                </form>
+            <div class="col-md-5">
+                <div class="cartfont row">Cart Summary</div>
+                <div>
+                    @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
+                </div>
             </div>
         </div>
     }

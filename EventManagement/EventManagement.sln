@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAPI", "OrderAPI\OrderAPI.csproj", "{350AE52D-9097-4B3C-BB5D-D35F373E95F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{32FC0C12-6D8B-4A83-BC11-D31CE53C51D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32FC0C12-6D8B-4A83-BC11-D31CE53C51D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32FC0C12-6D8B-4A83-BC11-D31CE53C51D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350AE52D-9097-4B3C-BB5D-D35F373E95F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350AE52D-9097-4B3C-BB5D-D35F373E95F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350AE52D-9097-4B3C-BB5D-D35F373E95F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350AE52D-9097-4B3C-BB5D-D35F373E95F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{242AF7F7-17FE-4842-AD4C-98139A70798E} = {87B6837C-00A2-46DA-B7DB-6247E6B655DC}
 		{F75131C4-C87A-4A15-89A4-732A23702AFA} = {7848EECF-3710-4910-862D-5C388A204E4C}
 		{32FC0C12-6D8B-4A83-BC11-D31CE53C51D0} = {7848EECF-3710-4910-862D-5C388A204E4C}
+		{350AE52D-9097-4B3C-BB5D-D35F373E95F8} = {7848EECF-3710-4910-862D-5C388A204E4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0A3258A-4D46-4D07-B898-AFBEBAB6F778}
