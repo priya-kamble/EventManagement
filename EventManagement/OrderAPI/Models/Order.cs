@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace OrderAPI.Models
 {
     public enum OrderStatus
-    {  Preparing=1,
-        Shipped=2 ,
-        Delivered=3 ,
+    {   Preparing=1,
+        Shipped=2,
+        Delivered=3,
     }
 
     public class Order
@@ -30,7 +30,7 @@ namespace OrderAPI.Models
 
         public string UserName { get; set; }
 
-        public string OrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
 
         public string  Address { get; set; }
 
