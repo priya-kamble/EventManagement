@@ -99,6 +99,12 @@ namespace OrderAPI
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderAPI V1");
+                });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
