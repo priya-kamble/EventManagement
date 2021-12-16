@@ -9,9 +9,9 @@ namespace WebMvc.Infrastructure
     {
         public static class Event
         {
-            public static string  GetAllFormat(string baseUri)
+            public static string GetAllFormat(string baseUri)
             {
-                return $"{baseUri}Format/Format";          
+                return $"{baseUri}Format/Format";
             }
 
             public static string GetAllCategory(string baseUri)
@@ -34,7 +34,7 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}Event/EventDetailById?eventId={eventId}";
             }
 
-            public static string GetAllEvent(string baseUri , int PageIndex, int PageSize,
+            public static string GetAllEvent(string baseUri, int PageIndex, int PageSize,
                                               DateTime? startDate,
                                               DateTime? endDate,
                                               int? locationId,
@@ -44,28 +44,28 @@ namespace WebMvc.Infrastructure
                                               bool? isonline)
             {
                 var filterQs = string.Empty;
-              
+
                 if (locationId.HasValue)
-                    {
-                        filterQs = $"&locationid={locationId}";
-                    }
+                {
+                    filterQs = $"&locationid={locationId}";
+                }
 
                 if (formatId.HasValue)
-                    {
-                        filterQs = filterQs + $"&Formatid={formatId}";
-                    }
+                {
+                    filterQs = filterQs + $"&Formatid={formatId}";
+                }
                 if (categoryId.HasValue)
-                    {
-                        filterQs = filterQs + $"&Categoryid={categoryId}";
-                    }
+                {
+                    filterQs = filterQs + $"&Categoryid={categoryId}";
+                }
                 if (ispaid.HasValue)
-                    {
-                        filterQs = filterQs + $"&ispaid={ispaid}";
-                    }
+                {
+                    filterQs = filterQs + $"&ispaid={ispaid}";
+                }
                 if (isonline.HasValue)
-                    {
-                        filterQs = filterQs + $"&isonline={isonline}";
-                    }
+                {
+                    filterQs = filterQs + $"&isonline={isonline}";
+                }
                 if (startDate.HasValue)
                 {
                     filterQs = filterQs + $"&startDate={startDate}";
@@ -75,7 +75,7 @@ namespace WebMvc.Infrastructure
                     filterQs = filterQs + $"&endDate={endDate}";
                 }
 
-                return $"{baseUri}Event/Events?"+ $"pageindex={PageIndex}&PageSize={PageSize}"+ filterQs;
+                return $"{baseUri}Event/Events?" + $"pageindex={PageIndex}&PageSize={PageSize}" + filterQs;
             }
         }
         public static class Basket
@@ -96,5 +96,20 @@ namespace WebMvc.Infrastructure
             }
         }
 
+        public static class Order
+        {
+            public static string GetOrder(string baseUri, string orderId)
+            {
+                return $"{baseUri}/{orderId}";
+            }
+            public static string GetOrders(string baseUri)
+            {
+                return baseUri;
+            }
+            public static string AddNewOrder(string baseUri)
+            {
+                return $"{baseUri}/new";
+            }
+        }
     }
 }
