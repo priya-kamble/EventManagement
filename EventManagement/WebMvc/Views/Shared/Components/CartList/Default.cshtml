@@ -5,67 +5,68 @@
 }
 
 <div class="row">
-    @if (TempData.ContainsKey("BasketInoperativeMsg"))
-    {
-        <br />
-        <div class="alert alert-warning" role="alert">
-            &nbsp;@TempData["BasketInoperativeMsg"]
-        </div>
-    }
-    else
-    {
-        <article class="esh-basket-titles">
+    <form method="get" asp-controller="Order" asp-action="Create">
+        @if (TempData.ContainsKey("BasketInoperativeMsg"))
+        {
             <br />
-            @if (TempData.ContainsKey("BasketInoperativeMsg"))
-            {
-                <div class="alert alert-warning" role="alert">
-                    &nbsp;@TempData["BasketInoperativeMsg"]
+            <div class="alert alert-warning" role="alert">
+                &nbsp;@TempData["BasketInoperativeMsg"]
+            </div>
+        }
+        else
+        {
+            <article class="esh-basket-titles">
+                <br />
+                @if (TempData.ContainsKey("BasketInoperativeMsg"))
+                {
+                    <div class="alert alert-warning" role="alert">
+                        &nbsp;@TempData["BasketInoperativeMsg"]
+                    </div>
+                }
+
+                <div class="row">
+                    <section class="zone_C accent esh-basket-item--middle col-md-8">Ticket Category name</section>
+                    <section class="zone_C accent esh-basket-item esh-basket-item--middle col-md-4">Cost</section>
                 </div>
+            </article>
+
+            @for (int i = 0; i < Model.Tickets.Count; i++)
+            {
+                var item = Model.Tickets[i];
+
+                <article class="esh-basket-items row">
+                    <div>
+                        <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.EventTitle</section>
+                        <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.Quantity X @item.TicketCategoryName</section>
+                        <section class="esh-basket-item esh-basket-item--middle col-xs-2">
+                            <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.CartItemId" />
+                            <span name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
+                        </section>
+                        <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-md-4">$ @Math.Round(item.Quantity * item.TicketPrice, 2).ToString("N2")</section>
+                    </div>
+                </article>
             }
 
             <div class="row">
-                <section class="zone_C accent esh-basket-item--middle col-md-8">Ticket Category name</section>
-                <section class="zone_C accent esh-basket-item esh-basket-item--middle col-md-4">Cost</section>
-            </div>
-         </article>
+                <article class="esh-basket-items row">
+                    <section class="esh-basket-title col-md-8"></section>
+                    <section class="zone_C accent esh-basket-title col-md-4">Total</section>
+                </article>
 
-        @for(int i = 0; i < Model.Tickets.Count; i++)
-        {
-            var item = Model.Tickets[i];
+                <article class="esh-basket-items row">
+                    <section class="esh-basket-title col-md-8"></section>
+                    <section class="esh-basket-item esh-basket-item--mark col-md-4">$ @Model.Total()</section>
+                </article>
 
-            <article class="esh-basket-items row">
-                <div>
-                    <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.EventTitle</section>
-                    <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.Quantity X @item.TicketCategoryName</section>
-                    <section class="esh-basket-item esh-basket-item--middle col-xs-2">
-                        <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.CartItemId" />
-                        <span name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
+                <article class="esh-basket-items row">
+                    <section class="esh-basket-item col-md-7"></section>
+                    <section class="esh-basket-item col-md-5">
+                        <input type="submit"
+                               class="custom_btn ticket_btn esh-basket-checkout"
+                               value="[ Checkout ]" name="action" />
                     </section>
-                    <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-md-4">$ @Math.Round(item.Quantity * item.TicketPrice, 2).ToString("N2")</section>
-                </div>
-            </article>
+                </article>
+            </div>
         }
-
-        <div class="row">
-            <article class="esh-basket-items row">
-                <section class="esh-basket-title col-md-8"></section>
-                <section class="zone_C accent esh-basket-title col-md-4">Total</section>
-            </article>
-
-            <article class="esh-basket-items row">
-                <section class="esh-basket-title col-md-8"></section>
-                <section class="esh-basket-item esh-basket-item--mark col-md-4">$ @Model.Total()</section>
-            </article>
-
-            <article class="esh-basket-items row">
-                <section class="esh-basket-item col-md-7"></section>
-                <section class="esh-basket-item col-md-5">
-                    <input type="submit"
-                       class="custom_btn ticket_btn"
-                       value="Checkout" name="action" />
-                </section>
-            </article>
-        </div>
-    }
-
+    </form>
 </div>

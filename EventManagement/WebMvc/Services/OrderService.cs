@@ -12,7 +12,7 @@ using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private IHttpClient _apiClient;
         private readonly string _remoteServiceBaseUrl;

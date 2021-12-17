@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly.CircuitBreaker;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using WebMvc.Models;
 using WebMvc.Models.OrderModels;
 using WebMvc.Services;
+using Order = WebMvc.Models.OrderModels.Order;
 
 namespace WebMvc.Controllers
 {
@@ -21,7 +23,6 @@ namespace WebMvc.Controllers
         private readonly IIdentityService<ApplicationUser> _identitySvc;
         private readonly ILogger<OrderController> _logger;
         private readonly IConfiguration _config;
-
 
         public OrderController(IConfiguration config,
             ILogger<OrderController> logger,
@@ -36,7 +37,6 @@ namespace WebMvc.Controllers
             _config = config;
         }
 
-
         public async Task<IActionResult> Create()
         {
             var user = _identitySvc.Get(HttpContext.User);
@@ -46,95 +46,89 @@ namespace WebMvc.Controllers
             return View(order);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Order frmOrder)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = _identitySvc.Get(HttpContext.User);
+        [HttpPost]
+        public async Task<IActionResult> Create(Order frmOrder)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _identitySvc.Get(HttpContext.User);
 
-        //        Order order = frmOrder;
+                Order order = frmOrder;
 
-        //        order.UserName = user.Email;
-        //        order.BuyerId = user.Email;
+                order.UserName = user.Email;
+                order.BuyerId = user.Email;
 
-        //        var options = new RequestOptions
-        //        {
-        //            ApiKey = _config["StripePrivateKey"]
-        //        };
-        //        var chargeOptions = new ChargeCreateOptions()
+                var options = new RequestOptions
+                {
+                    ApiKey = _config["StripePrivateKey"]
+                };
+                var chargeOptions = new ChargeCreateOptions()
 
-        //        {
-        //            //required
-        //            Amount = (int)(order.OrderTotal * 100),
-        //            Currency = "usd",
-        //            Source = order.StripeToken,
-        //            //optional
-        //            Description = string.Format("Order Payment {0}", order.UserName),
-        //            ReceiptEmail = order.UserName,
+                {
+                    //required
+                    Amount = (int)(order.OrderTotal * 100),
+                    Currency = "usd",
+                    Source = order.StripeToken,
+                    //optional
+                    Description = string.Format("Event Finder Payment {0}", order.UserName),
+                    ReceiptEmail = order.UserName,
+                };
 
-        //        };
+                var chargeService = new ChargeService();
 
-        //        var chargeService = new ChargeService();
+                Charge stripeCharge = null;
+                try
+                {
+                    stripeCharge = chargeService.Create(chargeOptions, options);
+                    _logger.LogDebug("Stripe charge object creation" + stripeCharge.StripeResponse.ToString());
+                }
+                catch (StripeException stripeException)
+                {
+                    _logger.LogDebug("Stripe exception " + stripeException.Message);
+                    ModelState.AddModelError(string.Empty, stripeException.Message);
+                    return View(frmOrder);
+                }
 
-        //        Charge stripeCharge = null;
-        //        try
-        //        {
-        //            stripeCharge = chargeService.Create(chargeOptions, options);
-        //            _logger.LogDebug("Stripe charge object creation" + stripeCharge.StripeResponse.ToString());
-        //        }
-        //        catch (StripeException stripeException)
-        //        {
-        //            _logger.LogDebug("Stripe exception " + stripeException.Message);
-        //            ModelState.AddModelError(string.Empty, stripeException.Message);
-        //            return View(frmOrder);
-        //        }
+                try
+                {
+                    if (stripeCharge.Id != null)
+                    {
+                        //_logger.LogDebug("TransferID :" + stripeCharge.Id);
+                        order.PaymentAuthCode = stripeCharge.Id;
 
+                        //_logger.LogDebug("User {userName} started order processing", user.UserName);
+                        int orderId = await _orderSvc.CreateOrder(order);
+                        //_logger.LogDebug("User {userName} finished order processing  of {orderId}.", order.UserName, order.OrderId);
 
-        //        try
-        //        {
+                        //await _cartSvc.ClearCart(user);
+                        return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
+                    }
 
-        //            if (stripeCharge.Id != null)
-        //            {
-        //                //_logger.LogDebug("TransferID :" + stripeCharge.Id);
-        //                order.PaymentAuthCode = stripeCharge.Id;
+                    else
+                    {
+                        ViewData["message"] = "Payment cannot be processed, try again";
+                        return View(frmOrder);
+                    }
 
-        //                //_logger.LogDebug("User {userName} started order processing", user.UserName);
-        //                int orderId = await _orderSvc.CreateOrder(order);
-        //                //_logger.LogDebug("User {userName} finished order processing  of {orderId}.", order.UserName, order.OrderId);
-
-        //                //await _cartSvc.ClearCart(user);
-        //                return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
-        //            }
-
-        //            else
-        //            {
-        //                ViewData["message"] = "Payment cannot be processed, try again";
-        //                return View(frmOrder);
-        //            }
-
-        //        }
-        //        catch (BrokenCircuitException)
-        //        {
-        //            ModelState.AddModelError("Error", "It was not possible to create a new order, please try later on. (Business Msg Due to Circuit-Breaker)");
-        //            return View(frmOrder);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(frmOrder);
-        //    }
-        //}
-
+                }
+                catch (BrokenCircuitException)
+                {
+                    ModelState.AddModelError("Error", "It was not possible to create a new order, please try later on. (Business Msg Due to Circuit-Breaker)");
+                    return View(frmOrder);
+                }
+            }
+            else
+            {
+                return View(frmOrder);
+            }
+        }
 
         public IActionResult Complete(int id, string userName)
         {
 
             _logger.LogInformation("User {userName} completed checkout on order {orderId}.", userName, id);
             return View(id);
-
         }
-
 
         public async Task<IActionResult> Detail(string orderId)
         {
@@ -152,12 +146,9 @@ namespace WebMvc.Controllers
 
         //public async Task<IActionResult> Orders()
         //{
-
-
         //    var vm = await _orderSvc.GetOrders();
         //    return View(vm);
         //}
-
 
         private decimal GetTotal(List<Models.OrderModels.OrderItem> orderItems)
         {

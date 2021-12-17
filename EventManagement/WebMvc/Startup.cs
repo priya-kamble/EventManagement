@@ -29,6 +29,7 @@ namespace WebMvc
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
             //services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             
@@ -57,7 +58,7 @@ namespace WebMvc
                             options.Scope.Add("profile");
                             options.Scope.Add("offline_access");
                             options.Scope.Add("basket");
-                           // options.Scope.Add("order");
+                            options.Scope.Add("order");
                             options.TokenValidationParameters = new TokenValidationParameters()
                             {
                                 NameClaimType = "name",
