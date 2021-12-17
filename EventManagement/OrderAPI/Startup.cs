@@ -102,7 +102,7 @@ namespace OrderAPI
             app.UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderAPI V1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API version1");
                 });
 
             app.UseEndpoints(endpoints =>
