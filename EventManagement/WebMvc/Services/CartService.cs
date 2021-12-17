@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
 using WebMvc.Models.CartModels;
+using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
@@ -117,6 +118,28 @@ namespace WebMvc.Services
             response.EnsureSuccessStatusCode();
 
             return cart;
+        }
+
+        public Order MapCartToOrder(Cart cart)
+        {
+            var order = new Order();
+            order.OrderTotal = 0;
+
+            cart.Tickets.ForEach(x =>
+            {
+                order.OrderItems.Add(new OrderItem()
+                {
+                    TicketId = int.Parse(x.TicketId),
+                    TicketCategoryName = x.TicketCategoryName,
+                    TicketQuantity = x.Quantity,
+                    TicketPrice = x.TicketPrice,
+                    EventTitle = x.EventTitle,
+                    EventSelectedDate = x.UserSelectedDate
+                });
+                order.OrderTotal += (x.Quantity * x.TicketPrice);
+            });
+
+            return order;
         }
     }
 }
