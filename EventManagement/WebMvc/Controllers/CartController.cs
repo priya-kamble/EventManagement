@@ -37,7 +37,6 @@ namespace WebMvc.Services
             var ticketsEventId = SelectedTicketsDetail.Tickets.FirstOrDefault().EventId;
             try
             {
-
                 string[,] value = new string[6, 2];
 
                 if (SelectedTicketsDetail.Tickets.Count() > 0)
@@ -45,15 +44,9 @@ namespace WebMvc.Services
                     var user = _identityService.Get(HttpContext.User);
                     var CartTicket = new CartItem();
 
-
-                    
-                  
                     int I = 0;
                     foreach (var t in SelectedTicketsDetail.Tickets)
                     {
-
-
-                        
                         string a = Convert.ToString(t.TicketId);
 
                         value[I,0] = a ;
@@ -73,8 +66,6 @@ namespace WebMvc.Services
                     cart= await _cartService.GetCart(user);
                 }
 
-                
-
                 TempData.Put("QantitySelected", value);
                 return RedirectToAction("Index", "Ticket", new { eventId = ticketsEventId, dateselected = dateSelected });
             }
@@ -85,15 +76,11 @@ namespace WebMvc.Services
             return RedirectToAction("Index", "Ticket", new { eventId = ticketsEventId, dateselected = dateSelected });
         }
 
-
         private void HandleBrokenCircuitException()
         {
             TempData["BasketInoperativeMsg"] = "cart Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
         }
 
-
-       
-        
         [HttpPost]
         public async Task<IActionResult> Index(Dictionary<string, int> quantities, string action)
         {
@@ -101,7 +88,6 @@ namespace WebMvc.Services
             {
                 return RedirectToAction("Create", "Order");
             }
-
 
             try
             {
@@ -117,8 +103,6 @@ namespace WebMvc.Services
             }
 
             return View();
-
         }
-
     }
 }
