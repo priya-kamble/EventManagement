@@ -25,10 +25,23 @@ namespace WebMvc.Services
             _cartService = cartService;
             _eventService = eventService;
         }
-        public IActionResult Index()
+       
+
+       
+        [ActionName("AddToCart")]
+        public async Task<IActionResult> Index()
         {
+            if (TempData.ContainsKey("TicketPageParameters"))
+            {
+                var myArray = TempData.Get<string[,]>("TicketPageParameters");
+
+                var dateSelected = Convert.ToDateTime(myArray[0, 1]).ToString("MM-dd-yyyy");
+                return RedirectToAction("Index", "Ticket", new { eventId = Convert.ToInt32(myArray[0, 0]), dateselected = dateSelected });
+            }
             return View();
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(TicketIndexViewModel SelectedTicketsDetail)
@@ -47,22 +60,26 @@ namespace WebMvc.Services
                     int I = 0;
                     foreach (var t in SelectedTicketsDetail.Tickets)
                     {
-                        string a = Convert.ToString(t.TicketId);
+                       
+                            string a = Convert.ToString(t.TicketId);
 
-                        value[I,0] = a ;
-                        value[I, 1] = t.QuantitySelected;
-                        CartTicket.CartItemId = Guid.NewGuid().ToString();
-                        CartTicket.TicketId = t.TicketId.ToString();
-                        CartTicket.EventId = t.EventId.ToString();
-                        CartTicket.EventTitle = t.Event.Title;
-                        CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
-                        CartTicket.TicketPrice = t.Price;
-                        CartTicket.Quantity = Convert.ToInt32(t.QuantitySelected);
-                        CartTicket.TicketCategoryName = t.TicketCategory.TicketCategoryName;
-                        await _cartService.AddItemToCart(user, CartTicket);
-                        I++;
+                            value[I, 0] = a;
+                            value[I, 1] = t.QuantitySelected;
+                            CartTicket.CartItemId = Guid.NewGuid().ToString();
+                            CartTicket.TicketId = t.TicketId.ToString();
+                            CartTicket.EventId = t.EventId.ToString();
+                            CartTicket.EventTitle = t.Event.Title;
+                            CartTicket.UserSelectedDate = SelectedTicketsDetail.DateSelected;
+                            CartTicket.TicketPrice = t.Price;
+                            CartTicket.Quantity = Convert.ToInt32(t.QuantitySelected);
+                            CartTicket.TicketCategoryName = t.TicketCategory.TicketCategoryName;
+                            await _cartService.AddItemToCart(user, CartTicket);
+                            I++;
+                       
+
                     }
                     var cart = new Cart();
+                    
                     cart= await _cartService.GetCart(user);
                 }
 
@@ -73,6 +90,9 @@ namespace WebMvc.Services
             {
                 HandleBrokenCircuitException();
             }
+
+           
+
             return RedirectToAction("Index", "Ticket", new { eventId = ticketsEventId, dateselected = dateSelected });
         }
 

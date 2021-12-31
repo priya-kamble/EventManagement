@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebMvc.ViewModels;
 
 namespace WebMvc.Controllers
 {
@@ -35,6 +36,14 @@ namespace WebMvc.Controllers
             {
                 ViewData["id_token"] = idToken;
             }
+            if (TempData.ContainsKey("TicketPageParameters"))
+            {
+                var myArray = TempData.Get<string[,]>("TicketPageParameters");
+
+                var dateSelected = Convert.ToDateTime(myArray[0, 1]).ToString("MM-dd-yyyy");
+                return RedirectToAction("Index", "Ticket", new { eventId = Convert.ToInt32(myArray[0, 0]), dateselected = dateSelected });
+            }
+
 
             return RedirectToAction(nameof(EventController.Index), "Event");
 

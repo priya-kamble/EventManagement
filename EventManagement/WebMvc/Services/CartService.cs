@@ -48,21 +48,23 @@ namespace WebMvc.Services
                 var basketItem = cart.Tickets
                     .Where(p => p.TicketId == ticket.TicketId)
                     .FirstOrDefault();
-                
-                if (basketItem == null)
+
+                if (basketItem == null && ticket.Quantity > 0)
                 {
                     cart.Tickets.Add(ticket);
                 }
-                else
+                else if (basketItem != null && basketItem.Quantity != ticket.Quantity && ticket.Quantity != 0)
                 {
-                    if (basketItem.Quantity != ticket.Quantity)
-                    {
-                        basketItem.Quantity = ticket.Quantity;
-                    }
+                    basketItem.Quantity = ticket.Quantity;
+                }
+                else if (basketItem != null && ticket.Quantity == 0)
+                {
+                    cart.Tickets.Remove(basketItem);
                 }
             }
             await UpdateCart(cart);
         }
+
 
         public async Task<Cart> GetCart(ApplicationUser user)
         {
@@ -82,7 +84,8 @@ namespace WebMvc.Services
                };
             return response;
         }
-        public async Task ClearCart(ApplicationUser user)
+
+      public async Task ClearCart(ApplicationUser user)
         {
             var token = await GetUserTokenAsync();
             var cleanBasketUri = ApiPaths.Basket.CleanBasket(_remoteServiceBaseUrl, user.Email);
