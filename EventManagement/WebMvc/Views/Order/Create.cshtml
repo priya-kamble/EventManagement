@@ -9,8 +9,9 @@
     ViewData["Title"] = "New Order";
 }
 
-@Html.Partial("_Header", new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } })
-@*<partial name="_Header" model = "new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } }" />*@
+<partial name="_Header" 
+         model = 'new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } }' >
+
 <div class="container">
     <form method="post" asp-controller="Order" asp-action="Create" id="payment-form">
         <section class="esh-orders_new-section">
@@ -18,7 +19,7 @@
                 @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
                 {
                     <div class="alert alert-warning" role="alert">
-                        &nbsp;@error.ErrorMessage
+                        @error.ErrorMessage
                     </div>
                 }
             </div>
