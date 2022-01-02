@@ -1,44 +1,47 @@
 ﻿@model WebMvc.Models.OrderModels.Order
 
 
-<section class="esh-orders_new-section">
-    <article class="esh-orders_new-titles row">
-        <section class="esh-orders_new-title col-xs-12">Order details</section>
+<section class="order_items">
+
+    <article class="heading_row">
+        <div></div>
+        <section class="itemLeft">Order Details</section>
+    </article>
+
+    <article class="multi_row heading_font">
+        <div></div>
+        <section>Event / Type of Ticket</section>
+        <section class="align_stuff">Price</section>
+        <section>Quantity</section>
+        <section>Subtotal</section>
     </article>
 
     @for (int i = 0; i < Model.OrderItems.Count; i++)
     {
         var item = Model.OrderItems[i];
 
-        <article class="esh-orders_new-items esh-orders_new-items--border row">
-            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-4">
+        <article class="multi_row">
+            <div></div>
+            <section>
                 @item.TicketCategoryName
                 <input type="hidden" value="@item.TicketCategoryName" name=@("orderitems[" + i + "].ProductName") />
             </section>
-            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
+            <section>
                 $ @item.TicketPrice
                 <input type="hidden" value="@item.TicketPrice" name=@("orderitems[" + i + "].UnitPrice") />
             </section>
-            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
+            <section class="align_stuff">
                 @item.TicketQuantity
                 <input type="hidden" value="@item.TicketQuantity" name=@("orderitems[" + i + "].Units") />
             </section>
-            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-2">$ @Math.Round(item.TicketQuantity * item.TicketPrice, 2)</section>
+            <section class="">$ @Math.Round(item.TicketQuantity * item.TicketPrice, 2)</section>
         </article>
     }
-</section>
 
-<section class="esh-orders_new-section esh-orders_new-section--right">
-    <article class="esh-orders_new-titles row">
-        <section class="esh-orders_new-title col-xs-9"></section>
-        <section class="esh-orders_new-title col-xs-2">Total</section>
-    </article>
-
-    <article class="esh-orders_new-items row">
-        <section class="esh-orders_new-item col-xs-9"></section>
-        <section class="esh-orders_new-item esh-orders_new-item--mark col-xs-2">
-            $ @Model.OrderTotal
-            <input type="hidden" value="@Model.OrderTotal" name="Total"/>
-        </section>
+    <article class="rowE">
+        <div></div>
+        <section class="itemLeft">TOTAL</section>
+        <section class="itemRight">$ @Model.OrderTotal</section>
+        <div><input type="hidden" value="@Model.OrderTotal" name="Total" /></div>
     </article>
 </section>

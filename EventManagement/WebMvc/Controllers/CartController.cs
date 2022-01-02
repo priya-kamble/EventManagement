@@ -84,7 +84,7 @@ namespace WebMvc.Services
         [HttpPost]
         public async Task<IActionResult> Index(Dictionary<string, int> quantities, string action)
         {
-            if (action == "[ Checkout ]")
+            if (action == "CHECKOUT")
             {
                 return RedirectToAction("Create", "Order");
             }
