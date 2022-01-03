@@ -13,9 +13,14 @@ namespace WebMvc.Controllers
     public class EventController : Controller
     {
         private readonly IEventService _eventService;
-        public EventController(IEventService eventservice)
+        private readonly ICartService _cartSvc;
+        private readonly IIdentityService<ApplicationUser> _identitySvc;
+        public EventController(IEventService eventservice, ICartService cartSvc,
+            IIdentityService<ApplicationUser> identitySvc)
         {
             _eventService = eventservice;
+            _cartSvc = cartSvc;
+            _identitySvc = identitySvc;
         }
 
         public async Task<IActionResult> Index(
@@ -27,6 +32,9 @@ namespace WebMvc.Controllers
             bool onlineFilterApplied,
             string priceFilterApplied)
         {
+            var user = _identitySvc.Get(HttpContext.User);
+            await _cartSvc.ClearCart(user); 
+
             var eventsOnPage = 6;
             DateTime? startDate = null, endDate = null;
             if (!string.IsNullOrWhiteSpace(dateFilterApplied))
