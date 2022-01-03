@@ -28,6 +28,11 @@ namespace WebMvc.Controllers
             {
                 return View();
             }
+            string[,] TicketPageParameters = new string [1, 2];
+            TicketPageParameters[0, 0] = Convert.ToString(eventId) ;
+            TicketPageParameters[0, 1] = Convert.ToString(selectedDate);
+
+            TempData.Put("TicketPageParameters", TicketPageParameters);
 
             var ticketCollection = await _eventService.GetTicketsPerEvent(eventId);
 
