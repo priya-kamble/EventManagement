@@ -9,118 +9,129 @@
     ViewData["Title"] = "New Order";
 }
 
-<partial name="_Header"
-         model='new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } }'>
+<div class="complete override1">
+    <div class="override2">
+        <div class="override4">
+            <div class="title_blue">Checkout</div>
 
-    <div class="container">
-        <form method="post" asp-controller="Order" asp-action="Create" id="payment-form" onsubmit="setFormSubmitting()">
-            <section class="esh-orders_new-section">
-                <div class="row">
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
-                    {
-                        <div class="alert alert-warning" role="alert">
-                            @error.ErrorMessage
-                        </div>
-                    }
-                </div>
-                <h4 class="esh-orders_new-title">Shipping address</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="@Model.FirstName" class="esh-orders_new-title">First Name</label>
-                            <input asp-for="@Model.FirstName" class="form-control form-input" type="text" placeholder="FirstName" />
-                            <span asp-validation-for="@Model.FirstName" class="alert alert-danger" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="@Model.LastName" class="esh-orders_new-title">Last Name</label>
-                            <input asp-for="@Model.LastName" class="form-control form-input" type="text" placeholder="LastName" />
-                            <span asp-validation-for="@Model.LastName" class="alert alert-danger" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="@Model.Address" class="esh-orders_new-title">Address</label>
-                            <input asp-for="@Model.Address" class="form-control form-input" type="text" placeholder="Address" />
-                            <span asp-validation-for="@Model.Address" class="alert alert-danger" />
-                        </div>
-                    </div>
-                    @*<div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Country" class="esh-orders_new-title">Country</label>
-                                <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
-                                <span asp-validation-for="Country" class="alert alert-danger" />
-                            </div>
-                        </div>*@
-                </div>
-            </section>
-
-            @await Html.PartialAsync("_OrderItems")
-
-            <section class="esh-orders_new-section esh-orders_new-section--right">
-                <div class="form-group">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-8">
-                        <div id="payment-form-container" class="col-md-8 well" style="width:480px;margin:20px auto;">
-                            <div class="form-group">
-                                <label class="control-label">Accepted</label>
-                                <div class="row">
-                                    <div class="col-md-10 card-images">
-                                        <img src="~/images/creditcards/visa.png" alt="visa" />
-                                        <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
-                                        <img src="~/images/creditcards/amex.png" alt="amex" />
-                                        <img src="~/images/creditcards/discover.png" alt="discover" />
+                <form class="form_wrapper" method="post" asp-controller="Order" asp-action="Create" id="payment-form">
+                    <section class="rowQ">
+                        <div class="col_Q1">
+                            <div></div>
+                            <h5 class="please">Please Enter Shipping Address:</h5>
+                                <div class="payment_input">
+                                    <label asp-for="@Model.FirstName" class="esh-orders_new-title align_stuff heading_font">First Name</label>
+                                    <input asp-for="@Model.FirstName" class="form-control form-input" type="text" placeholder="First Name" />
+                                        <span asp-validation-for="@Model.FirstName" class="alert alert-danger" />
+                                </div>
+                                <div class="payment_input">
+                                    <label asp-for="@Model.LastName" class="esh-orders_new-title align_stuff heading_font">Last Name</label>
+                                    <input asp-for="@Model.LastName" class="form-control form-input" type="text" placeholder="Last Name" />
+                                        <span asp-validation-for="@Model.LastName" class="alert alert-danger" />
+                                </div>
+                                <div class="payment_input">
+                                    <label asp-for="@Model.Address" class="esh-orders_new-title align_stuff heading_font">Address</label>
+                                    <input asp-for="@Model.Address" class="form-control form-input" type="text" placeholder="Address" />
+                                        <span asp-validation-for="@Model.Address" class="alert alert-danger" />
+                                </div>
+                                @*<div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Country" class="esh-orders_new-title">Country</label>
+                                        <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
+                                        <span asp-validation-for="Country" class="alert alert-danger" />
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="card-element">Credit or debit card</label>
-                                <div id="card-element" class="field">
-
-                                    <!-- a stripe Element will be inserted here. --->
-                                </div>
-
-                            </div>
-
-                            <div id="card-errors" role="alert"></div>
-
-                            <h3 class="validation"></h3>
-                            <p class="alert alert-danger payment-errors" style="display:none; "></p>
+                                </div>*@
 
                         </div>
-                    </div>
-                </div>
-            </section>
+                        <div class="col_Q2">
+                            <div class="img_wrapper">
+                                <img src="~/images/secure_payment.gif" alt="Secure payment icon" class="secure_payment" />
+                            </div>
 
+                            <div class="btn_wrapper">
+                                <div class="row_errors">
+                                    @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
+                                    {
+                                        <div class="alert alert-danger error_format" role="alert">
+                                            &nbsp;@error.ErrorMessage
+                                        </div>
+                                    }
+                                </div>
+                                <a asp-controller="Cart" asp-action="Index">
+                                    <input class="custom_btn ticket_btn cart_btn" value="BACK TO CART" type="button" />
+                                </a>
+                            </div>
+                        </div>
+                    </section>
 
-            <section class="esh-orders_new-section">
-                <div class="form-group">
-                    <div class="col-md-9">
-                        <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
+                    <div class="rowR">
+                        @await Html.PartialAsync("_OrderItems")
                     </div>
-                    <div class="col-md-2">
-                        <input id="pay-button" type="submit" value="[ Pay And Place Order ]" name="action" class="btn esh-orders_new-placeOrder" />
-                    </div>
-                </div>
-            </section>
 
-            @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
+                    <section class="rowS">
+                        <div class="form-group">
+                            <div></div>
+                            <div>
+                                <div id="payment-form-container" class="well" style="width:480px;margin:20px auto;">
+                                    <div class="form-group">
+                                        <label class="control-label">We accept these payment methods:</label>
+                                        <div class="row">
+                                            <div class="col-md-11 card-images">
+                                                <img src="~/images/creditcards/visa.png" alt="visa" />
+                                                <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
+                                                <img src="~/images/creditcards/amex.png" alt="amex" />
+                                                <img src="~/images/creditcards/paypa.png" alt="paypal" />
+                                                <img src="~/images/creditcards/discover.png" alt="discover" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="card-element">Please Enter Card Number:</label>
+                                        <div id="card-element" class="field">
+
+                                            <!-- a stripe Element will be inserted here. --->
+                                        </div>
+
+                                    </div>
+
+                                    <div id="card-errors" role="alert"></div>
+
+                                    <h3 class="validation"></h3>
+                                    <p class="alert alert-danger payment-errors" style="display:none; "></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="rowT">
+                        <div>
+                            <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
+                        </div>
+                        <div class="pay_btn_box">
+                            <input id="pay-button" type="submit" value="PAY AND PLACE ORDER"
+                                       name="action" class="custom_btn ticket_btn esh-orders_new-placeOrder" />
+                        </div>
+                        <div></div>
+                    </section>
+
+                    @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
                 <input asp-for="OrderGuid" type="hidden" />
                 <input asp-for="Buyer" type="hidden" />*@
 
-        </form>
+                </form>
 
+        </div>
+        </div>
     </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-        <script src="https://js.stripe.com/v3/"></script>
+                <script src="https://js.stripe.com/v3/"></script>
 
-        <script type="text/javascript">
+                <script type="text/javascript">
 
         jQuery(function ($) {
 
@@ -193,18 +204,5 @@
             });
         });
 
-        </script>
-
-        <script>
-            var formSubmitting = false;
-            var setFormSubmitting = function () { formSubmitting = true; };
-
-            window.addEventListener("beforeunload", function (e) {
-                if (formSubmitting) {
-                    return undefined;
-                }
-
-                e.preventDefault();
-            });
-        </script>
-    }
+                </script>
+            }

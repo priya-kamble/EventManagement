@@ -1,11 +1,51 @@
+@using WebMvc.Services
+@using WebMvc.ViewModels
+@using WebMvc.Models.OrderModels
 @model int
 
 @{
     ViewBag.Title = "Order Complete";
 }
-<h2>Order Complete</h2>
-<p>Thanks for your order! Your order number is: @Model</p>
-<p>
-    How about shopping for some more goods in our
-    <a asp-controller="Catalog" asp-action="Index">Store</a>
-</p>
+<div class="complete override1">
+    <div class="override2">
+        <div class="override3">
+            <div class="glyphicon glyphicon-check rowA"></div>
+            <div class="rowB">Thank You For Your Order!</div>
+            <div class="rowC">
+                <div></div>
+                <div class="itemLeft">Order Confirmation #</div>
+                <div class="itemRight">@Model</div>
+                <div></div>
+            </div>
+            <div class="rowD">
+                <!--Name of Event Price Quantity Subtotal-->
+            </div>
+            <div class="rowE">
+                <div></div>
+                <div class="itemLeft">TOTAL</div>
+                <div class="itemRight">$ @Model</div>
+                <div></div>
+            </div>
+            <div class="rowNew"></div>
+            <div class="rowF">
+                <div class="rowF1">Check for more of your favorite events!</div>
+                <div class="rowF2">
+                    <a asp-controller="Event" asp-action="Index">
+                        <input class="custom_btn ticket_btn" value="BROWSE EVENTS" type="button" />
+                    </a>
+                </div>
+            </div>
+            <div class="rowG">
+                <div></div>
+                <div class="team1_box">
+                    <div></div>
+                    <div class="team1Name">Team One</div>
+                    <div class="team1Location">Redmond WA</div>
+                    <div></div>
+                    <div class="tagline">Crushing Ecommerce Since 2022</div>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
