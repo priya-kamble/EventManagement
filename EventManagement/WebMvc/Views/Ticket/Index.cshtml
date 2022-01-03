@@ -54,7 +54,7 @@
 
         <div class="row ticket_showcase">
 
-            <form class="img_spacer2 select_tickets_box col-md-7" asp-controller="Cart" asp-action="AddToCart" method="post">
+            <form class="img_spacer2 select_tickets_box col-md-7" asp-controller="Cart" asp-action="AddToCart" method="post" onsubmit="setFormSubmitting()">
                 <div class="items_wrapper">
                     @for (int i = 0; i < Model.Tickets.Count(); i++)
                     {
@@ -115,5 +115,18 @@
         </div>
     }
 }
+
+<script>
+    var formSubmitting = false;
+    var setFormSubmitting = function () { formSubmitting = true; };
+
+    window.addEventListener("beforeunload", function (e) {
+            if (formSubmitting) {
+                return undefined;
+            }
+
+            e.preventDefault();
+        });
+</script>
 
 
