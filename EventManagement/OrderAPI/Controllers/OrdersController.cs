@@ -9,26 +9,29 @@ using OrderAPI.Models;
 using System.Net;
 using System;
 using System.Threading.Tasks;
+using MassTransit;
+using Common.Messaging;
 
 namespace OrderAPI.Controllers
 {
-  [Route("api/[controller]")]
-  [ApiController]
-  [Authorize]
-  public class OrdersController : ControllerBase
-  {
-    private readonly OrdersContext _ordersContext;
-    private readonly IConfiguration _config;
-    private readonly ILogger<OrdersController> _logger;
-
-    public OrdersController(OrdersContext ordersContext, ILogger<OrdersController> logger, IConfiguration config
-        //IPublishEndPoint bus
-        )
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class OrdersController : ControllerBase
     {
-      _ordersContext = ordersContext;
-      _config = config;
-      _logger = logger;
-    }
+        private readonly OrdersContext _ordersContext;
+        private readonly IConfiguration _config;
+        private readonly ILogger<OrdersController> _logger;
+        private IPublishEndpoint _bus;
+
+        public OrdersController(OrdersContext ordersContext, ILogger<OrdersController> logger, IConfiguration config,
+             IPublishEndpoint bus  )
+        {
+            _ordersContext = ordersContext;
+            _config = config;
+            _logger = logger;
+            _bus = bus;
+        }
 
     [HttpGet("{id}", Name = "GetOrder")]
     [ProducesResponseType((int)HttpStatusCode.Accepted)]
@@ -75,17 +78,17 @@ namespace OrderAPI.Controllers
       _logger.LogInformation(" Order added to context");
       _logger.LogInformation(" Saving Order........");
 
-      try
-      {
-        await _ordersContext.SaveChangesAsync();
-        //_bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
-        return Ok(new { order.OrderId });
-      }
-      catch (DbUpdateException ex)
-      {
-        _logger.LogError("An error occurred while saving Order ..." + ex.Message);
-        return BadRequest();
-      }
+            try
+            {
+                await _ordersContext.SaveChangesAsync();
+                _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
+                return Ok(new { order.OrderId });
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("An error occurred while saving Order ..." + ex.Message);
+                return BadRequest();
+            }
+        }
     }
-  }
 }

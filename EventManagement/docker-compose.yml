@@ -29,6 +29,19 @@ services:
     networks:
       - backend
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: myrabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+    volumes:
+      - ~/rabbitmq:/var/lib/rabbitmq/mnesia   
+    networks:
+      - backend
+
   event:
     image: eventmanagement/eventapi
     build:
@@ -144,6 +157,10 @@ services:
     depends_on:
       - tokenserver
       - cart.data
+      - rabbitmq
+
+  
+
 
   order:
     image: events/orderapi  
@@ -172,3 +189,4 @@ services:
     depends_on:
       - mssqlserver
       - tokenserver
+      - rabbitmq
