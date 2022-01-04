@@ -9,6 +9,8 @@ using OrderAPI.Models;
 using System.Net;
 using System;
 using System.Threading.Tasks;
+using MassTransit;
+using Common.Messaging;
 
 namespace OrderAPI.Controllers
 {
@@ -20,14 +22,15 @@ namespace OrderAPI.Controllers
         private readonly OrdersContext _ordersContext;
         private readonly IConfiguration _config;
         private readonly ILogger<OrdersController> _logger;
+        private IPublishEndpoint _bus;
 
-        public OrdersController(OrdersContext ordersContext, ILogger<OrdersController> logger, IConfiguration config
-            //IPublishEndPoint bus
-            )
+        public OrdersController(OrdersContext ordersContext, ILogger<OrdersController> logger, IConfiguration config,
+             IPublishEndpoint bus  )
         {
             _ordersContext = ordersContext;
             _config = config;
             _logger = logger;
+            _bus = bus;
         }
 
         [HttpGet("{id}", Name = "GetOrder")]
@@ -78,7 +81,7 @@ namespace OrderAPI.Controllers
             try
             {
                 await _ordersContext.SaveChangesAsync();
-                //_bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
+                _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
                 return Ok(new { order.OrderId });
             }
             catch (DbUpdateException ex)
