@@ -69,13 +69,14 @@ namespace WebMvc.Services
         public async Task<Cart> GetCart(ApplicationUser user)
         {
             var token = await GetUserTokenAsync();
-            _logger.LogInformation(" We are in get basket and user id " + user.Email);
-            _logger.LogInformation(_remoteServiceBaseUrl);
+            _logger.LogInformation(" Now in GetCart() and user is " + user.Email);
+            _logger.LogInformation("remoteServiceBaseUrl : " + _remoteServiceBaseUrl);
+
 
             var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, user.Email);
-            _logger.LogInformation(getBasketUri);
+            _logger.LogInformation(" getBasketUri : " + getBasketUri);
             var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
-            _logger.LogInformation(dataString);
+            _logger.LogInformation("This basket contains : " + dataString);
 
             var response = JsonConvert.DeserializeObject<Cart>(dataString.ToString()) ??
                new Cart()
@@ -89,9 +90,9 @@ namespace WebMvc.Services
         {
             var token = await GetUserTokenAsync();
             var cleanBasketUri = ApiPaths.Basket.CleanBasket(_remoteServiceBaseUrl, user.Email);
-            _logger.LogDebug("Clean Basket uri : " + cleanBasketUri);
+            _logger.LogDebug("Now cleaning this basket URI : " + cleanBasketUri);
             var response = await _apiClient.DeleteAsync(cleanBasketUri, token);
-            _logger.LogDebug("Basket cleaned");
+            _logger.LogDebug(" Basket/Cart is now clean");
         }
 
 
@@ -127,7 +128,7 @@ namespace WebMvc.Services
         {
             var order = new Order();
             order.OrderTotal = 0;
-
+            _logger.LogInformation(" Now in MapCartToOrder");
             cart.Tickets.ForEach(x =>
             {
                 order.OrderItems.Add(new OrderItem()
@@ -141,7 +142,7 @@ namespace WebMvc.Services
                 });
                 order.OrderTotal += (x.Quantity * x.TicketPrice);
             });
-
+            _logger.LogInformation(" Completed MapCartToOrder");
             return order;
         }
     }

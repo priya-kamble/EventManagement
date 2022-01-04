@@ -33,50 +33,50 @@ namespace OrderAPI.Controllers
             _bus = bus;
         }
 
-        [HttpGet("{id}", Name = "GetOrder")]
-        [ProducesResponseType((int)HttpStatusCode.Accepted)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetOrder(int id)
-        {
+    [HttpGet("{id}", Name = "GetOrder")]
+    [ProducesResponseType((int)HttpStatusCode.Accepted)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> GetOrder(int id)
+    {
 
-            var item = await _ordersContext.Orders
-                .Include(x => x.OrderItems)
-                .SingleOrDefaultAsync(ci => ci.OrderId == id);
-            if (item != null)
-            {
-                return Ok(item);
-            }
+      var item = await _ordersContext.Orders
+          .Include(x => x.OrderItems)
+          .SingleOrDefaultAsync(ci => ci.OrderId == id);
+      if (item != null)
+      {
+        return Ok(item);
+      }
 
-            return NotFound();
+      return NotFound();
 
-        }
+    }
 
-        [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.Accepted)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetOrders()
-        {
-            var orders = await _ordersContext.Orders.ToListAsync();
+    [HttpGet]
+    [ProducesResponseType((int)HttpStatusCode.Accepted)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> GetOrders()
+    {
+      var orders = await _ordersContext.Orders.ToListAsync();
 
 
-            return Ok(orders);
-        }
+      return Ok(orders);
+    }
 
-        [Route("new")]
-        [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.Accepted)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> CreateOrder([FromBody] Order order)
-        {
-            order.OrderStatus = OrderStatus.Preparing;
-            order.OrderDate = DateTime.UtcNow;
+    [Route("new")]
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.Accepted)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> CreateOrder([FromBody] Order order)
+    {
+      order.OrderStatus = OrderStatus.Preparing;
+      order.OrderDate = DateTime.UtcNow;
 
-            _logger.LogInformation(" In Create Order");
-            _logger.LogInformation(" Order" + order.UserName);
-            _ordersContext.Orders.Add(order);
-            _ordersContext.OrderItems.AddRange(order.OrderItems);
-            _logger.LogInformation(" Order added to context");
-            _logger.LogInformation(" Saving........");
+      _logger.LogInformation(" Now in CreateOrder()");
+      _logger.LogInformation(" Order belongs to : " + order.UserName);
+      _ordersContext.Orders.Add(order);
+      _ordersContext.OrderItems.AddRange(order.OrderItems);
+      _logger.LogInformation(" Order added to context");
+      _logger.LogInformation(" Saving Order........");
 
             try
             {
@@ -86,7 +86,7 @@ namespace OrderAPI.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("An error occored during Order saving .." + ex.Message);
+                _logger.LogError("An error occurred while saving Order ..." + ex.Message);
                 return BadRequest();
             }
         }
