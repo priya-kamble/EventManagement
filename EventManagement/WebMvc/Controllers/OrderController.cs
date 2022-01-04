@@ -88,32 +88,29 @@ namespace WebMvc.Controllers
                     ModelState.AddModelError(string.Empty, stripeException.Message);
                     return View(frmOrder);
                 }
-
                 try
                 {
                     if (stripeCharge.Id != null)
                     {
-                        //_logger.LogDebug("TransferID :" + stripeCharge.Id);
+                        _logger.LogDebug("TransferID :" + stripeCharge.Id);
                         order.PaymentAuthCode = stripeCharge.Id;
 
-                        //_logger.LogDebug("User {userName} started order processing", user.UserName);
+                        _logger.LogDebug("User {userName} started order processing", user.UserName);
                         int orderId = await _orderSvc.CreateOrder(order);
-                        //_logger.LogDebug("User {userName} finished order processing  of {orderId}.", order.UserName, order.OrderId);
+                        _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
 
                         await _cartSvc.ClearCart(user);
                         return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                     }
-
                     else
                     {
                         ViewData["message"] = "Payment cannot be processed, try again";
                         return View(frmOrder);
                     }
-
                 }
                 catch (BrokenCircuitException)
                 {
-                    ModelState.AddModelError("Error", "It was not possible to create a new order, please try later on. (Business Msg Due to Circuit-Breaker)");
+                    ModelState.AddModelError("Error", "It was not possible to create a new order, please try later. (Business Msg Due to Circuit-Breaker)");
                     return View(frmOrder);
                 }
             }
@@ -153,7 +150,6 @@ namespace WebMvc.Controllers
         private decimal GetTotal(List<Models.OrderModels.OrderItem> orderItems)
         {
             return orderItems.Select(p => p.TicketPrice * p.TicketQuantity).Sum();
-
         }
     }
 }

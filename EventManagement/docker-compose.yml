@@ -34,6 +34,11 @@ services:
     build:
       context: .\EventAPI
       dockerfile: Dockerfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     environment:
       DatabaseServer: mssqlserver
       DatabaseName: EventCatalogDb
@@ -55,10 +60,15 @@ services:
     build:
       context: .\WebMvc
       dockerfile: Dockerfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://172.27.16.1:7801
+      IdentityUrl: http://172.27.32.1:7801
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       OrderUrl: http://order
@@ -81,6 +91,11 @@ services:
       context: .\TokenServiceApi
       dockerfile: Dockerfile
     image: events/tokenapi
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       MvcClient: http://localhost:7500
@@ -111,10 +126,15 @@ services:
     build:
       context: .\CartAPI
       dockerfile: Dockerfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionString: cart.data
-      IdentityUrl: http://172.27.16.1:7801
+      IdentityUrl: http://172.27.32.1:7801
     ports:
       - "7012:80"
     container_name: EventsCartAPI
@@ -137,7 +157,7 @@ services:
         max-file: "10"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      IdentityUrl: http://172.27.16.1:7801
+      IdentityUrl: http://172.27.32.1:7801
       DatabaseServer: mssqlserver
       DatabaseName: OrdersDb
       DatabaseUser: sa
