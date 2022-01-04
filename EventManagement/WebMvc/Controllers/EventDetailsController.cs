@@ -33,6 +33,8 @@ namespace WebMvc.Controllers
                 EventImageUrl = EventDetail.EventImageUrl ,
                 MaxOccupancy = EventDetail.MaxOccupancy ,
                 MaxTicketsPerUser= EventDetail.MaxTicketsPerUser,
+                IsOnlineEvent = EventDetail.IsOnlineEvent ,
+                IsPaidEvent = EventDetail.IsPaidEvent ,
                 Address= EventDetail.Address,
                 Description=EventDetail.Description ,
                 Title = EventDetail.Title,
