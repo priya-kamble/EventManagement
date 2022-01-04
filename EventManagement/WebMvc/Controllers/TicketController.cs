@@ -100,14 +100,5 @@ namespace WebMvc.Controllers
         }
 
 
-
-
-
-
-        [HttpPost]
-        public IActionResult Test(Ticket ticket)
-        {
-            return View();
-        }
     }
 }
