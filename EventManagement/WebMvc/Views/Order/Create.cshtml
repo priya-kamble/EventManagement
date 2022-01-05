@@ -14,39 +14,39 @@
         <div class="override4">
             <div class="title_blue">Checkout</div>
 
-                <form class="form_wrapper" method="post" asp-controller="Order" asp-action="Create" id="payment-form" onsubmit="setFormSubmitting()">
-                    <section class="rowQ">
-                        <div class="col_Q1">
-                            <div></div>
-                            <h5 class="please">Please Enter Shipping Address:</h5>
-                            <div class="payment_input">
-                                <label asp-for="@Model.FirstName" class="esh-orders_new-title align_stuff heading_font">First Name</label>
-                                <input asp-for="@Model.FirstName" class="form-control form-input" type="text" placeholder="First Name" />
-                                    <span asp-validation-for="@Model.FirstName" class="alert alert-danger" />
-                            </div>
-                            <div class="payment_input">
-                                <label asp-for="@Model.LastName" class="esh-orders_new-title align_stuff heading_font">Last Name</label>
-                                <input asp-for="@Model.LastName" class="form-control form-input" type="text" placeholder="Last Name" />
-                                    <span asp-validation-for="@Model.LastName" class="alert alert-danger" />
-                            </div>
-                            <div class="payment_input">
-                                <label asp-for="@Model.Address" class="esh-orders_new-title align_stuff heading_font">Address</label>
-                                <input asp-for="@Model.Address" class="form-control form-input" type="text" placeholder="Address" />
-                                    <span asp-validation-for="@Model.Address" class="alert alert-danger" />
-                            </div>
-                            @*<div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="Country" class="esh-orders_new-title">Country</label>
-                                    <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
-                                    <span asp-validation-for="Country" class="alert alert-danger" />
-                                </div>
-                            </div>*@
-
+            <form class="form_wrapper" method="post" asp-controller="Order" asp-action="Create" id="payment-form" onsubmit="setFormSubmitting()">
+                <section class="rowQ">
+                    <div class="col_Q1">
+                        <div></div>
+                        <h5 class="please">Please Enter Shipping Address:</h5>
+                        <div class="payment_input">
+                            <label asp-for="@Model.FirstName" class="esh-orders_new-title align_stuff heading_font">First Name</label>
+                            <input asp-for="@Model.FirstName" class="form-control form-input" type="text" placeholder="First Name" />
+                            <span asp-validation-for="@Model.FirstName" class="alert alert-danger" />
                         </div>
-                        <div class="col_Q2">
-                            <div class="img_wrapper">
-                                <img src="~/images/secure_payment.gif" alt="Secure payment icon" class="secure_payment" />
-                            </div>
+                        <div class="payment_input">
+                            <label asp-for="@Model.LastName" class="esh-orders_new-title align_stuff heading_font">Last Name</label>
+                            <input asp-for="@Model.LastName" class="form-control form-input" type="text" placeholder="Last Name" />
+                            <span asp-validation-for="@Model.LastName" class="alert alert-danger" />
+                        </div>
+                        <div class="payment_input">
+                            <label asp-for="@Model.Address" class="esh-orders_new-title align_stuff heading_font">Address</label>
+                            <input asp-for="@Model.Address" class="form-control form-input" type="text" placeholder="Address" />
+                            <span asp-validation-for="@Model.Address" class="alert alert-danger" />
+                        </div>
+                        @*<div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Country" class="esh-orders_new-title">Country</label>
+                        <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
+                        <span asp-validation-for="Country" class="alert alert-danger" />
+                    </div>
+                </div>*@
+
+                    </div>
+                    <div class="col_Q2">
+                        <div class="img_wrapper">
+                            <img src="~/images/secure_payment.gif" alt="Secure payment icon" class="secure_payment" />
+                        </div>
 
                             <div class="btn_wrapper">
                                 <div class="row_errors">
@@ -66,79 +66,111 @@
                         </div>
                     </section>
 
-                    <div class="rowR">
-                        @await Html.PartialAsync("_OrderItems")
-                    </div>
+                <div class="rowR">
+                    @await Html.PartialAsync("_OrderItems")
+                </div>
 
-                    <section class="rowS">
-                        <div class="form-group">
-                            <div></div>
-                            <div>
-                                <div id="payment-form-container" class="well" style="width:480px;margin:20px auto;">
-                                    <div class="form-group">
-                                        <label class="control-label">We accept these payment methods:</label>
-                                        <div class="row">
-                                            <div class="col-md-11 card-images">
-                                                <img src="~/images/creditcards/visa.png" alt="visa" />
-                                                <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
-                                                <img src="~/images/creditcards/amex.png" alt="amex" />
-                                                <img src="~/images/creditcards/paypa.png" alt="paypal" />
-                                                <img src="~/images/creditcards/discover.png" alt="discover" />
-                                            </div>
+                @{var ShowCreditCardSection = "block";
+                    bool IsPaidEvent = true;
+                    if (Model.OrderItems.Any(O => O.TicketPrice == 0))
+                    {
+                        IsPaidEvent = false;
+                        ShowCreditCardSection = "none";
+                    }
+                   } 
+
+                <section class="rowS">
+                    <div class="form-group" style="display: @ShowCreditCardSection;">
+                        <div></div>
+                        <div>
+                            <div id="payment-form-container" class="well" style="width:480px;margin:20px auto;">
+                                <div class="form-group">
+                                    <label class="control-label">We accept these payment methods:</label>
+                                    <div class="row">
+                                        <div class="col-md-11 card-images">
+                                            <img src="~/images/creditcards/visa.png" alt="visa" />
+                                            <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
+                                            <img src="~/images/creditcards/amex.png" alt="amex" />
+                                            <img src="~/images/creditcards/paypa.png" alt="paypal" />
+                                            <img src="~/images/creditcards/discover.png" alt="discover" />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="card-element">Please Enter Card Number:</label>
-                                        <div id="card-element" class="field">
+                                <div class="form-group">
+                                    <label for="card-element">Please Enter Card Number:</label>
+                                    <div id="card-element" class="field">
 
-                                            <!-- a stripe Element will be inserted here. --->
-                                        </div>
-
+                                        <!-- a stripe Element will be inserted here. --->
                                     </div>
-
-                                    <div id="card-errors" role="alert"></div>
-
-                                    <h3 class="validation"></h3>
-                                    <p class="alert alert-danger payment-errors" style="display:none; "></p>
 
                                 </div>
+
+                                <div id="card-errors" role="alert"></div>
+
+                                <h3 class="validation"></h3>
+                                <p class="alert alert-danger payment-errors" style="display:none; "></p>
+
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    <section class="rowT">
-                        <div>
-                            <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
-                        </div>
-                        <div class="pay_btn_box">
-                            <input id="pay-button" type="submit" value="PAY AND PLACE ORDER"
-                                       name="action" class="custom_btn ticket_btn esh-orders_new-placeOrder" />
-                        </div>
-                        <div></div>
-                    </section>
+                <section class="rowT">
+                    <div>
+                        <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
+                    </div>
+                    <div class="pay_btn_box" style="display: @ShowCreditCardSection;">
+                        <input id="pay-button" type="submit" value="PAY AND PLACE ORDER"
+                               name="action" class="custom_btn ticket_btn esh-orders_new-placeOrder" />
+                    </div>
+                    @{var ShowFreeEventbutton = "none";
+                        if (!IsPaidEvent)
+                        {
+                            ShowFreeEventbutton = "block";
+                        }
 
-                    @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
-                <input asp-for="OrderGuid" type="hidden" />
-                <input asp-for="Buyer" type="hidden" />*@
+                    }
+                    <div class="pay_btn_box" style="display: @ShowFreeEventbutton;">
+                        <input id="pay-button1" type="submit" value="PLACE ORDER"
+                               name="action1" class="custom_btn ticket_btn" />
+                    </div>
+                    <div></div>
+                </section>
 
-                </form>
+
+                @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
+        <input asp-for="OrderGuid" type="hidden" />
+        <input asp-for="Buyer" type="hidden" />*@
+
+            </form>
 
         </div>
         </div>
     </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   
 
+    @{if (!Model.OrderItems.Any(O => O.TicketPrice == 0))
+        {
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
     <script src="https://js.stripe.com/v3/"></script>
-    
+
     <script type="text/javascript">
-    
+
+
         jQuery(function ($) {
-    
+            @{if (Model.OrderItems.Any(O => O.TicketPrice == 0))
+                {
+                    return ;
+                }
+             }
+
             var stripe = Stripe('@ViewBag.StripePublishableKey');
-    
+
             var elements = stripe.elements();
             var card = elements.create('card', {
                 iconStyle: 'solid',
@@ -150,7 +182,7 @@
                         fontWeight: 300,
                         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                         fontSize: '16px',
-    
+
                         '::placeholder': {
                             color: '#8898AA',
                         },
@@ -166,7 +198,7 @@
                 },
             });
             card.mount('#card-element');
-    
+
             function stripeTokenHandler(token) {
                 var  form = document.getElementById('payment-form');
                 var hiddenInput = document.createElement('input');
@@ -176,18 +208,18 @@
                 form.appendChild(hiddenInput);
                 form.submit();
             }
-    
+
             function createToken() {
                 stripe.createToken(card).then(function (result) {
                     if (result.error) {
                         var errorElement = document.getElementById('card-errors');
                         errorElement.textContent = result.error.message;
-    
+
                     }
                     else {
                         stripeTokenHandler(result.token);
                     }
-    
+
                 });
             };
             var form = document.getElementById('payment-form');
@@ -205,9 +237,9 @@
                 }
             });
         });
-    
+
     </script>
-    
+
     <script>
         var formSubmitting = false;
         var setFormSubmitting = function () { formSubmitting = true; };
@@ -220,4 +252,5 @@
             e.preventDefault();
         });
     </script>
-}
+            }
+        
