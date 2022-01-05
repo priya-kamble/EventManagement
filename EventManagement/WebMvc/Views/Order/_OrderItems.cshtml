@@ -36,6 +36,14 @@
             </section>
             <section class="">$ @Math.Round(item.TicketQuantity * item.TicketPrice, 2)</section>
         </article>
+
+        <input type="hidden" asp-for="@Model.OrderItems[i].TicketId" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].TicketCategoryName" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].TicketQuantity" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].TicketPrice" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].Id" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].EventTitle" />
+        <input type="hidden" asp-for="@Model.OrderItems[i].EventSelectedDate" />
     }
 
     <article class="rowE">
@@ -43,5 +51,7 @@
         <section class="itemLeft">TOTAL</section>
         <section class="itemRight">$ @Model.OrderTotal</section>
         <div><input type="hidden" value="@Model.OrderTotal" name="Total" /></div>
+
+
     </article>
 </section>

@@ -2,6 +2,7 @@
 @using WebMvc.ViewModels
 
 @inject IIdentityService<ApplicationUser> identityService
+@inject ICartService cartService
 
 @{
     ViewData["Title"] = "Ticket details";
@@ -80,7 +81,7 @@
                             <div class="form-group items_col_right">
                                 <label class="esh-event-label">
                                     <select class="quantity_dropdown" asp-for="@Model.Tickets[i].QuantitySelected"
-                                asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
+                                            asp-items="@Model.Tickets[i].AvailableTicketsQuantity" id="quantitydropdown"></select>
                                 </label>
                             </div>
 
@@ -105,9 +106,17 @@
 
                 @{
                     var buttontext = "ADD TO CART";
-                    if (Model.Tickets.First().Event.IsOnlineEvent ==true || Model.Tickets.First().Event.IsPaidEvent == false)
+                    var user = identityService.Get(User);
+                    var cart = await cartService.GetCart(user);
+                    
+                    if (Model.Tickets.First().Event.IsOnlineEvent == true || Model.Tickets.First().Event.IsPaidEvent == false)
                     {
                         buttontext = "REGISTER";
+                    }
+
+                    if (cart.Tickets.Count() > 0)
+                    {
+                        buttontext = "UPDATE CART";
                     }
                 }
                 <input id="verifybutton" class="custom_btn ticket_btn" type="submit" value='@buttontext' />
@@ -120,6 +129,8 @@
                     @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
                 </div>
             </div>
+
+
         </div>
     }
 }
