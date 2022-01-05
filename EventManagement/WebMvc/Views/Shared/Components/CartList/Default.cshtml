@@ -61,12 +61,17 @@
                 <article class="esh-basket-items row">
                     <section class="esh-basket-item col-md-7"></section>
                     <section class="esh-basket-item col-md-5">
-                        <input type="submit"
-                               class="custom_btn ticket_btn esh-basket-checkout"
-                               value="CHECKOUT" name="action" />
+                        <input type="submit" class="custom_btn ticket_btn esh-basket-checkout" value="CHECKOUT"
+                           @{ if(@Model.Tickets.Count == 0) 
+                               { 
+                                   @:disabled="disabled" 
+                                   @:style="background-color: #e9ecef; color: #adb5bd;"
+                                }
+                            }
+                        />
                     </section>
                 </article>
-            </div>
+            </div> 
         }
     </form>
 </div>

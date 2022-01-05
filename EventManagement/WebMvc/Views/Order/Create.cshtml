@@ -48,21 +48,23 @@
                             <img src="~/images/secure_payment.gif" alt="Secure payment icon" class="secure_payment" />
                         </div>
 
-                        <div class="btn_wrapper">
-                            <div class="row_errors">
-                                @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
-                                {
-                                    <div class="alert alert-danger error_format" role="alert">
-                                        &nbsp;@error.ErrorMessage
-                                    </div>
-                                }
+                            <div class="btn_wrapper">
+                                <div class="row_errors">
+                                    @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
+                                    {
+                                        <div class="alert alert-danger error_format" role="alert">
+                                            &nbsp;@error.ErrorMessage
+                                        </div>
+                                    }
+                                </div>
+                                                               
+                                <a href='javascript:history.go(-1)'>
+                                    <input class="custom_btn ticket_btn cart_btn" value="BACK TO CART" type="button" />
+                                </a>
+
                             </div>
-                            <a asp-controller="Cart" asp-action="Index">
-                                <input class="custom_btn ticket_btn cart_btn" value="BACK TO CART" type="button" />
-                            </a>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
                 <div class="rowR">
                     @await Html.PartialAsync("_OrderItems")
