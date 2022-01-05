@@ -516,7 +516,7 @@ section.itemRight {
 .multi_row {
     margin-bottom: 5px;
     display: grid;
-    grid-template-columns: 70px 1fr 95px 75px 150px;
+    grid-template-columns: 1fr 165px 95px 105px 75px 1fr;
 }
 .heading_row {
     margin: auto;
@@ -601,6 +601,23 @@ div.override1 div.override2 div.override4 {
     border-bottom: 2px solid lightgray;
     font-size: 18px;
 }
+.rowE2 {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 440px 1fr;
+    width: 92%;
+    line-height: 2;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    font-weight: normal;
+    font-size: 16px;
+}
+.rowE3 {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 400px 1fr;
+    width: 92%;
+}
 
 div.override3 div.itemLeft {
     margin: auto auto auto 5px;
@@ -628,6 +645,19 @@ div.rowF2 {
 div.rowG {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+}
+.evt_title {
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00a69c;
+}
+.text_position {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.row_format {
+    margin-top: 10px;
 }
 div.team1_box {
     font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
