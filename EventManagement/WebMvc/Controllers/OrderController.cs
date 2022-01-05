@@ -18,7 +18,9 @@ namespace WebMvc.Controllers
     [Authorize]
     public class OrderController : Controller
     {
+        
         private readonly ICartService _cartSvc;
+        private readonly IEventService _eventSvc;
         private readonly IOrderService _orderSvc;
         private readonly IIdentityService<ApplicationUser> _identitySvc;
         private readonly ILogger<OrderController> _logger;
@@ -26,6 +28,7 @@ namespace WebMvc.Controllers
 
         public OrderController(IConfiguration config,
             ILogger<OrderController> logger,
+            IEventService eventSvc,
             IOrderService orderSvc,
             ICartService cartSvc,
             IIdentityService<ApplicationUser> identitySvc)
@@ -33,6 +36,7 @@ namespace WebMvc.Controllers
             _identitySvc = identitySvc;
             _orderSvc = orderSvc;
             _cartSvc = cartSvc;
+            _eventSvc = eventSvc;
             _logger = logger;
             _config = config;
         }
@@ -100,6 +104,7 @@ namespace WebMvc.Controllers
                         _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
 
                         //await _cartSvc.ClearCart(user);
+                        await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
                         return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                     }
                     else

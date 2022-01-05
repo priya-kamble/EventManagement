@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OrderAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,20 @@ namespace EventAPI.Controllers
             return (StatusMessage);
         }
 
-
+        [HttpPut]
+        public async Task<IActionResult> UpdateTicketsQuantity(List<OrderItem> orderItems)
+        {
+            foreach (var orderItem in orderItems)
+            {
+                var query = _context.Tickets.Where(ticket => ticket.TicketId == orderItem.TicketId);
+                foreach (var item in query)
+                {
+                    item.Quantity = item.Quantity - orderItem.TicketQuantity;
+                }
+                    
+            }
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
