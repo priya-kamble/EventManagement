@@ -25,7 +25,7 @@ namespace OrderAPI.Models
 
         public OrderItem(int ticketId,string eventTitle,string ticketCategoryName,DateTime eventSelectedDate,decimal ticketPrice, int ticketQuantity=1)
         {
-            if (TicketQuantity <= 0)
+            if (ticketQuantity <= 0)
             {
                 throw new OrderingDomainException("Invalid number Of tickets");
             }
