@@ -1,16 +1,36 @@
 ﻿@model WebMvc.Models.OrderModels.Order
 
-
 <section class="order_items">
 
-    <article class="heading_row">
+    <article class="rowE">
         <div></div>
         <section class="itemLeft">Order Details</section>
     </article>
 
-    <article class="multi_row heading_font">
+    <article class="rowE3 multi_row">
         <div></div>
-        <section>Event / Type of Ticket</section>
+        @{
+            if (Model.PaymentAuthCode == null)
+            {
+                <section class="text_position">Tickets added to cart for:</section>
+            }
+            else
+            {
+                <section class="text_position">We received your payment for tickets to:</section>
+            }
+        }
+    </article>
+
+    <article class="rowE2">
+        <div></div>
+        <section class="itemLeft">
+            <span class="evt_title">@Model.OrderItems[0].EventTitle</span> on @Model.OrderItems[0].EventSelectedDate.DayOfWeek @Model.OrderItems[0].EventSelectedDate.Month/@Model.OrderItems[0].EventSelectedDate.Day/@Model.OrderItems[0].EventSelectedDate.Year
+        </section>
+    </article>
+
+    <article class="multi_row heading_font row_format">
+        <div></div>
+        <section>Type of Ticket</section>
         <section class="align_stuff">Price</section>
         <section>Quantity</section>
         <section>Subtotal</section>
@@ -34,7 +54,7 @@
                 @item.TicketQuantity
                 <input type="hidden" value="@item.TicketQuantity" name=@("orderitems[" + i + "].Units") />
             </section>
-            <section class="">$ @Math.Round(item.TicketQuantity * item.TicketPrice, 2)</section>
+            <section>$ @Math.Round(item.TicketQuantity * item.TicketPrice, 2)</section>
         </article>
 
         <input type="hidden" asp-for="@Model.OrderItems[i].TicketId" />
@@ -51,7 +71,6 @@
         <section class="itemLeft">TOTAL</section>
         <section class="itemRight">$ @Model.OrderTotal</section>
         <div><input type="hidden" value="@Model.OrderTotal" name="Total" /></div>
-
 
     </article>
 </section>

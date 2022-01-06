@@ -23,7 +23,6 @@ textarea {
     line-height: 1.4;
 }
 
-
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
@@ -225,7 +224,7 @@ footer.footer {
     justify-content: center;
 }
 
-/*  Event page */
+/*  Event page  */
 .event_big_img {
     width: 100%;
     height: 100%;
@@ -267,7 +266,7 @@ footer.footer {
     padding-top: 5px;
 }
 
-/* _EventInfo css */
+/* _EventInfo.cshtml  */
 .event_image {
     height: 220px;
     width: 293px;
@@ -423,7 +422,7 @@ footer.footer {
 .override4 {
     background-color: white;
     display: grid;
-    grid-template-rows: 75px auto);
+    grid-template-rows: 75px auto;
     margin-left: auto;
     margin-right: auto;
     max-width: 650px;
@@ -516,7 +515,7 @@ section.itemRight {
 .multi_row {
     margin-bottom: 5px;
     display: grid;
-    grid-template-columns: 70px 1fr 95px 75px 150px;
+    grid-template-columns: 1fr 165px 95px 105px 75px 1fr;
 }
 .heading_row {
     margin: auto;
@@ -553,7 +552,7 @@ div.override1 div.override2 div.override4 {
 .override3 {
     background-color: white;
     display: grid;
-    grid-template-rows: 190px 75px 42px 32px 48px 85px 135px 145px;
+    grid-template-rows: 190px 75px 42px auto 15px 135px 145px;
     margin-left: auto;
     margin-right: auto;
     max-width: 650px;
@@ -578,7 +577,7 @@ div.override1 div.override2 div.override4 {
     -webkit-text-stroke-color: #09b5fb;
 }
 
-.rowC, .rowD, .rowE {
+.rowC, .rowE {
     margin: auto;
     display: grid;
     width: 92%;
@@ -591,15 +590,29 @@ div.override1 div.override2 div.override4 {
     font-size: 20px;
 }
 
-.rowD {
-    font-size: 14px;
-}
 .rowE {
     grid-template-columns: 1fr 220px 220px 1fr;
     line-height: 2;
     border-top: 2px solid lightgray;
     border-bottom: 2px solid lightgray;
     font-size: 18px;
+}
+.rowE2 {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 440px 1fr;
+    width: 92%;
+    line-height: 2;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    font-weight: normal;
+    font-size: 16px;
+}
+.rowE3 {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 400px 1fr;
+    width: 92%;
 }
 
 div.override3 div.itemLeft {
@@ -628,6 +641,19 @@ div.rowF2 {
 div.rowG {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+}
+.evt_title {
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00a69c;
+}
+.text_position {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.row_format {
+    margin-top: 10px;
 }
 div.team1_box {
     font-family: Verdana, Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;

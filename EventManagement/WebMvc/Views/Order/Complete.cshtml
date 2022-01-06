@@ -1,7 +1,8 @@
 @using WebMvc.Services
 @using WebMvc.ViewModels
 @using WebMvc.Models.OrderModels
-@model int
+
+@model WebMvc.Models.OrderModels.Order
 
 @{
     ViewBag.Title = "Order Complete";
@@ -14,19 +15,13 @@
             <div class="rowC">
                 <div></div>
                 <div class="itemLeft">Order Confirmation #</div>
-                <div class="itemRight">@Model</div>
+                <div class="itemRight">@Model.OrderId</div>
                 <div></div>
             </div>
-            <div class="rowD">
-                <!--Name of Event Price Quantity Subtotal-->
+            <div class="rowR">
+                @await Html.PartialAsync("_OrderItems")
             </div>
-            <div class="rowE">
-                <div></div>
-                <div class="itemLeft">TOTAL</div>
-                <div class="itemRight">$ @Model</div>
-                <div></div>
-            </div>
-            <div class="rowNew"></div>
+            <div class="rowD"></div>
             <div class="rowF">
                 <div class="rowF1">Check for more of your favorite events!</div>
                 <div class="rowF2">
