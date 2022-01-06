@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
+using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
@@ -28,6 +29,6 @@ namespace WebMvc.Services
         IEnumerable<SelectListItem> GetPrice();
         Task<EventDetails> GetEventDetails(int EventId);
         Task<List<Ticket>> GetTicketsPerEvent(int EventId);
-
+        Task UpdateTicketsQuantity(List<OrderItem> orderItem);
     }
 }

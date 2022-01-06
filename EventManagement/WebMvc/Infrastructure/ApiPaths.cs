@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,11 @@ namespace WebMvc.Infrastructure
     {
         public static class Event
         {
+            public static string UpdateTicketQty(string baseUri)
+            {
+                return $"{baseUri}Ticket";
+            }
+
             public static string GetAllFormat(string baseUri)
             {
                 return $"{baseUri}Format/Format";

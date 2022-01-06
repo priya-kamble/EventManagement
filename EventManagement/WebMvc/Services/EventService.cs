@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
+using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
@@ -17,7 +18,6 @@ namespace WebMvc.Services
         private readonly IHttpClient _client;
         public EventService(IConfiguration config, IHttpClient client)
         {
-            
             _baseUrl = $"{config["CatalogUrl"]}/api/";
             _client = client;
         }
@@ -194,6 +194,15 @@ namespace WebMvc.Services
             return JsonConvert.DeserializeObject<List<Ticket>>(dataString);
         }
 
+        public async Task UpdateTicketsQuantity(List<OrderItem> orderItem)
+        {
+            var updateQty = ApiPaths.Event.UpdateTicketQty(_baseUrl);
+            var response = await _client.PutAsync(updateQty, orderItem);
 
+            if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+            {
+                throw new Exception("Error creating order, try later.");
+            }
+        }
     }
 }
