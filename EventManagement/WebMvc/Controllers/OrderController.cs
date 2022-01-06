@@ -100,12 +100,11 @@ namespace WebMvc.Controllers
                         {
                             _logger.LogDebug("TransferID :" + stripeCharge.Id);
                             order.PaymentAuthCode = stripeCharge.Id;
-
                             _logger.LogDebug("User {userName} started order processing", user.UserName);
                             int orderId = await _orderSvc.CreateOrder(order);
                             _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
-
-
+                            
+                            await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
                             return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                         }
                         else
@@ -125,6 +124,7 @@ namespace WebMvc.Controllers
                     _logger.LogDebug("User {userName} started order processing", user.UserName);
                     int orderId = await _orderSvc.CreateOrder(order);
                     _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
+                    await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
                     return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                 }
             }
