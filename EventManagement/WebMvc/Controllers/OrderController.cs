@@ -132,11 +132,11 @@ namespace WebMvc.Controllers
 
         }
 
-        public IActionResult Complete(int id, string userName)
+        public async Task<IActionResult> Complete(int id, string userName)
         {
-
+            var order = await _orderSvc.GetOrder(id.ToString());
             _logger.LogInformation("User {userName} completed checkout on order {orderId}.", userName, id);
-            return View(id);
+            return View(order);
         }
 
         public async Task<IActionResult> Detail(string orderId)

@@ -19,9 +19,7 @@ namespace OrderAPI.Models
         public DateTime EventSelectedDate { get; set; }
         public decimal TicketPrice { get; set; }
         public int TicketQuantity { get; set; }
-        public Order Order { get; set; }
         public int OrderId { get; set; }
-
 
         public OrderItem(int ticketId,string eventTitle,string ticketCategoryName,DateTime eventSelectedDate,decimal ticketPrice, int ticketQuantity=1)
         {
@@ -48,10 +46,5 @@ namespace OrderAPI.Models
             ticketQuantity += ticketQuantity;
 
         }
-
-
-
-
-
     }
 }

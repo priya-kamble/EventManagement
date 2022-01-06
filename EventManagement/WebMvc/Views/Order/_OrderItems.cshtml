@@ -1,6 +1,5 @@
 ﻿@model WebMvc.Models.OrderModels.Order
 
-
 <section class="order_items">
 
     <article class="rowE">
@@ -10,7 +9,16 @@
 
     <article class="rowE3 multi_row">
         <div></div>
-        <section class="text_position">Tickets added to cart for:</section>
+        @{
+            if (Model.PaymentAuthCode == null)
+            {
+                <section class="text_position">Tickets added to cart for:</section>
+            }
+            else
+            {
+                <section class="text_position">We received your payment for tickets to:</section>
+            }
+        }
     </article>
 
     <article class="rowE2">
@@ -63,7 +71,6 @@
         <section class="itemLeft">TOTAL</section>
         <section class="itemRight">$ @Model.OrderTotal</section>
         <div><input type="hidden" value="@Model.OrderTotal" name="Total" /></div>
-
 
     </article>
 </section>
