@@ -15,7 +15,7 @@
         }
         else
         {
-            <article class="esh-basket-titles">
+            <article>
                 <br />
                 @if (TempData.ContainsKey("BasketInoperativeMsg"))
                 {
@@ -24,9 +24,10 @@
                     </div>
                 }
 
-                <div class="row">
-                    <section class="zone_C accent esh-basket-item--middle col-md-8">Ticket Category name</section>
-                    <section class="zone_C accent esh-basket-item esh-basket-item--middle col-md-4">Cost</section>
+                <div class="row nice_row">
+                    <section class="zone_C col-md-1"></section>
+                    <section class="zone_C accent col-md-7">Ticket Category name</section>
+                    <section class="zone_C accent col-md-4">Cost</section>
                 </div>
             </article>
 
@@ -34,44 +35,47 @@
             {
                 var item = Model.Tickets[i];
 
-                <article class="esh-basket-items row">
+                <article class="row">
                     <div>
-                        <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.EventTitle</section>
-                        <section class="esh-basket-item esh-basket-item--middle col-md-8">@item.Quantity X @item.TicketCategoryName</section>
-                        <section class="esh-basket-item esh-basket-item--middle col-xs-2">
-                            <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.CartItemId" />
-                            <span name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
-                        </section>
-                        <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-md-4">$ @Math.Round(item.Quantity * item.TicketPrice, 2).ToString("N2")</section>
+                        <div class="row nice_row">
+                            <section class="col-md-1"></section>
+                            <section class="col-md-7">@item.EventTitle</section>
+                        </div>
+
+                        <div class="row nice_row">
+                            <section class="col-md-1"></section>
+                            <section class="col-md-7">@item.Quantity X @item.TicketCategoryName</section>
+                            <section class="col-xs-2">
+                                <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.CartItemId" />
+                                <span name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
+                            </section>
+                            <section class="col-md-3">$ @Math.Round(item.Quantity * item.TicketPrice, 2).ToString("N2")</section>
+                        </div>
+
                     </div>
                 </article>
             }
 
-            <div class="row">
-                <article class="esh-basket-items row">
-                    <section class="esh-basket-title col-md-8"></section>
-                    <section class="zone_C accent esh-basket-title col-md-4">Total</section>
+            <div class="row nice_row">
+                <article class="row">
+                    <section class="col-md-8"></section>
+                    <section class="zone_C accent col-md-4">Total</section>
                 </article>
 
-                <article class="esh-basket-items row">
-                    <section class="esh-basket-title col-md-8"></section>
-                    <section class="esh-basket-item esh-basket-item--mark col-md-4">$ @Model.Total()</section>
+                <article class="row little_bit">
+                    <section class="col-md-8"></section>
+                    <section class="col-md-4">$ @Model.Total()</section>
                 </article>
 
-                <article class="esh-basket-items row">
-                    <section class="esh-basket-item col-md-7"></section>
-                    <section class="esh-basket-item col-md-5">
-                        <input type="submit" class="custom_btn ticket_btn esh-basket-checkout" value="CHECKOUT"
-                           @{ if(@Model.Tickets.Count == 0) 
-                               { 
-                                   @:disabled="disabled" 
-                                   @:style="background-color: #e9ecef; color: #adb5bd;"
-                                }
-                            }
-                        />
+                <article class="row">
+                    <section class="col-md-11 checkout_box">
+                        <input type="submit" class="custom_btn ticket_btn checkout_btn esh-basket-checkout" value="CHECKOUT"
+                               @{ if (@Model.Tickets.Count == 0) { @: disabled="disabled"
+                                @: style="background-color: #e9ecef; color: #adb5bd;"
+                               } } />
                     </section>
                 </article>
-            </div> 
+            </div>
         }
     </form>
 </div>
