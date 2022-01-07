@@ -409,11 +409,12 @@ namespace EventAPI.Data
                 new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 1, 5), Price =30, TicketCategoryId = 6 ,Quantity=5},
                 new Ticket { EventId=9, SalesStartDate= new DateTime(2022, 1, 6), SalesEndDate= new DateTime(2022, 1, 18), Price =50, TicketCategoryId = 2 ,Quantity=10},
                 
-                //Paid  Ticket Based on Event Data- Description = "A musical workshop"
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2022, 1, 25), Price =80, TicketCategoryId = 5 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 15), SalesEndDate= new DateTime(2022, 1, 25), Price =120, TicketCategoryId = 6 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 1, 26), SalesEndDate= new DateTime(2022, 2, 26), Price =120, TicketCategoryId = 4 ,Quantity=30},
-                new Ticket { EventId=10, SalesStartDate= new DateTime(2022, 1, 26), SalesEndDate= new DateTime(2022, 2, 26), Price =160, TicketCategoryId = 2 ,Quantity=60},
+                //Paid  Ticket Based on Event Data- Description = "Exploring the sea together"
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2022, 1, 25), Price =200, TicketCategoryId = 2 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2022, 1, 25), Price =150, TicketCategoryId = 3 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2022, 1, 25), Price =100, TicketCategoryId = 4 ,Quantity=30},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2022, 1, 25), Price =150, TicketCategoryId = 1 ,Quantity=60},
+                new Ticket { EventId=10, SalesStartDate= new DateTime(2021, 12, 20), SalesEndDate= new DateTime(2022, 1, 25), Price =100, TicketCategoryId = 8 ,Quantity=0},
 
                 //Paid  Ticket Based on Event Data- Description = "Hike in the woods"
                 new Ticket { EventId=11, SalesStartDate= new DateTime(2022, 1, 1), SalesEndDate= new DateTime(2022, 1, 13), Price =10, TicketCategoryId = 4 ,Quantity=10},
@@ -436,9 +437,9 @@ namespace EventAPI.Data
                 new Ticket { EventId=15, SalesStartDate= new DateTime(2022, 1, 19), SalesEndDate= new DateTime(2022, 1, 22), Price =15, TicketCategoryId = 6 ,Quantity=15},
 
                 //Paid  Ticket Based on Event Data- Description =  "Hot Air Balloon adventure ride"
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 10), Price =80, TicketCategoryId = 5 ,Quantity=5},
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 12, 7), SalesEndDate= new DateTime(2022, 1, 10), Price =120, TicketCategoryId = 6 ,Quantity=5},
-                new Ticket { EventId=16, SalesStartDate= new DateTime(2022, 1, 20), SalesEndDate= new DateTime(2022, 1, 29), Price =120, TicketCategoryId = 4 ,Quantity=7},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 1, 5), SalesEndDate= new DateTime(2022, 1, 20), Price =80, TicketCategoryId = 5 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2021, 1, 5), SalesEndDate= new DateTime(2022, 1, 20), Price =120, TicketCategoryId = 6 ,Quantity=5},
+                new Ticket { EventId=16, SalesStartDate= new DateTime(2022, 1, 5), SalesEndDate= new DateTime(2022, 1, 20), Price =80, TicketCategoryId = 7 ,Quantity=7},
                 new Ticket { EventId=16, SalesStartDate= new DateTime(2022, 1, 20), SalesEndDate= new DateTime(2022, 1, 29), Price =160, TicketCategoryId = 2 ,Quantity=8},
 
 
