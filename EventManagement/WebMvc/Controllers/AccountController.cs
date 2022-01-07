@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebMvc.Models;
+using WebMvc.Services;
 using WebMvc.ViewModels;
 
 namespace WebMvc.Controllers
@@ -16,6 +18,14 @@ namespace WebMvc.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly ICartService _cartSvc;
+        private readonly IIdentityService<ApplicationUser> _identitySvc;
+        public AccountController(ICartService cartSvc,
+            IIdentityService<ApplicationUser> identitySvc)
+        {
+            _cartSvc = cartSvc;
+            _identitySvc = identitySvc;
+        }
         public async Task<IActionResult> SignIn(string returnUrl)
         {
             var user = User as ClaimsPrincipal;
@@ -51,6 +61,8 @@ namespace WebMvc.Controllers
 
         public async Task<IActionResult> Signout()
         {
+            var user = _identitySvc.Get(HttpContext.User);
+            await _cartSvc.ClearCart(user);
             await HttpContext.SignOutAsync("Cookies");
             await HttpContext.SignOutAsync("oidc");
             var homeUrl = Url.Action(nameof(EventController.Index), "Event");
