@@ -1,11 +1,9 @@
 ﻿using EventAPI.Data;
 using EventAPI.Domain;
 using EventAPI.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OrderAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,16 +89,15 @@ namespace EventAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateTicketsQuantity(List<OrderItem> orderItems)
+        public async Task<IActionResult> UpdateTicketsQuantity(List<Ticket> tickets)
         {
-            foreach (var orderItem in orderItems)
+            foreach (var ticket in tickets)
             {
-                var query = _context.Tickets.Where(ticket => ticket.TicketId == orderItem.TicketId);
+                var query = _context.Tickets.Where(t => t.TicketId == ticket.TicketId);
                 foreach (var item in query)
                 {
-                    item.Quantity = item.Quantity - orderItem.TicketQuantity;
+                    item.Quantity = item.Quantity - ticket.Quantity;
                 }
-                    
             }
             await _context.SaveChangesAsync();
             return Ok();

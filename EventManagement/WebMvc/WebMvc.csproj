@@ -15,11 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CartAPI\CartAPI.csproj" />
-    <ProjectReference Include="..\OrderAPI\OrderAPI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Views\Shared\Components\CartList\" />
   </ItemGroup>
 
