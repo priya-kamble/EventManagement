@@ -16,7 +16,6 @@ namespace WebMvc.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        
         private readonly ICartService _cartSvc;
         private readonly IEventService _eventSvc;
         private readonly IOrderService _orderSvc;
@@ -101,8 +100,9 @@ namespace WebMvc.Controllers
                             _logger.LogDebug("User {userName} started order processing", user.UserName);
                             int orderId = await _orderSvc.CreateOrder(order);
                             _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
-                            
+
                             // await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
+
                             List<Ticket> tickets = new List<Ticket>();
                             foreach (var orderItem in order.OrderItems)
                             {
@@ -152,8 +152,6 @@ namespace WebMvc.Controllers
                 {
                     return View(frmOrder);
                 }
-            
-
         }
 
         public async Task<IActionResult> Complete(int id, string userName)
@@ -176,12 +174,6 @@ namespace WebMvc.Controllers
             var vm = await _orderSvc.GetOrders();
             return View(vm);
         }
-
-        //public async Task<IActionResult> Orders()
-        //{
-        //    var vm = await _orderSvc.GetOrders();
-        //    return View(vm);
-        //}
 
         private decimal GetTotal(List<Models.OrderModels.OrderItem> orderItems)
         {
