@@ -82,20 +82,6 @@ namespace OrderAPI.Controllers
             {
                 await _ordersContext.SaveChangesAsync();
                 _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
-
-                //6 is for ticketCategoryNumber
-                int[,] ticketlist=new int[6,2] ;
-                int i= 0;
-                foreach ( var Item in order.OrderItems)
-                {
-                    ticketlist[i, 0] = Item.TicketId;
-                    ticketlist[i, 1] = Item.TicketQuantity;
-
-                }
-
-                _bus.Publish(new OrderCompletedEvent(ticketlist)).Wait();
-
-
                 return Ok(new { order.OrderId });
             }
             catch (DbUpdateException ex)
