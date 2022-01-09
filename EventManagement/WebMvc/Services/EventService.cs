@@ -192,15 +192,15 @@ namespace WebMvc.Services
             return JsonConvert.DeserializeObject<List<Ticket>>(dataString);
         }
 
-        public async Task UpdateTicketsQuantity(List<Ticket> tickets)
-        {
-            var updateQty = ApiPaths.Event.UpdateTicketQty(_baseUrl);
-            var response = await _client.PutAsync(updateQty, tickets);
+        //public async Task UpdateTicketsQuantity(List<Ticket> tickets)
+        //{
+        //    var updateQty = ApiPaths.Event.UpdateTicketQty(_baseUrl);
+        //    var response = await _client.PutAsync(updateQty, tickets);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-            {
-                throw new Exception("Error creating order, try later.");
-            }
-        }
+        //    if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+        //    {
+        //        throw new Exception("Error creating order, try later.");
+        //    }
+        //}
     }
 }

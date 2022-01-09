@@ -88,19 +88,19 @@ namespace EventAPI.Controllers
             return (StatusMessage);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateTicketsQuantity(List<Ticket> tickets)
-        {
-            foreach (var ticket in tickets)
-            {
-                var query = _context.Tickets.Where(t => t.TicketId == ticket.TicketId);
-                foreach (var item in query)
-                {
-                    item.Quantity = item.Quantity - ticket.Quantity;
-                }
-            }
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
+       // [HttpPut]
+        //  public async Task<IActionResult> UpdateTicketsQuantity(List<Ticket> tickets)
+        //public async Task UpdateTicketsQuantity(int[,] tickets)
+        //{
+            
+            //foreach (var ticket in tickets)
+           
+           // return Ok();
+       // }
+
+
+
+
+
     }
 }
