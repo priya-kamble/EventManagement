@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebMvc.Infrastructure
 {
@@ -6,11 +9,6 @@ namespace WebMvc.Infrastructure
     {
         public static class Event
         {
-            public static string UpdateTicketQty(string baseUri)
-            {
-                return $"{baseUri}Ticket";
-            }
-
             public static string GetAllFormat(string baseUri)
             {
                 return $"{baseUri}Format/Format";
@@ -78,6 +76,11 @@ namespace WebMvc.Infrastructure
                 }
 
                 return $"{baseUri}Event/Events?" + $"pageindex={PageIndex}&PageSize={PageSize}" + filterQs;
+            }
+
+            public static string UpdateTicketQty(string baseUri)
+            {
+                return $"{baseUri}Ticket";
             }
         }
         public static class Basket
