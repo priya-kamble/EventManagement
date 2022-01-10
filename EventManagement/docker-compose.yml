@@ -71,7 +71,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.1.13:7801
+      IdentityUrl: http://192.168.0.13:7801
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       OrderUrl: http://order
@@ -139,7 +139,6 @@ services:
       - cart.data
       - rabbitmq
 
-  
 
 
   order:

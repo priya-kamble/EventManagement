@@ -4,11 +4,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
-using WebMvc.Models.OrderModels;
 
 namespace WebMvc.Services
 {
@@ -194,10 +192,10 @@ namespace WebMvc.Services
             return JsonConvert.DeserializeObject<List<Ticket>>(dataString);
         }
 
-        public async Task UpdateTicketsQuantity(List<OrderItem> orderItem)
+        public async Task UpdateTicketsQuantity(List<Ticket> tickets)
         {
             var updateQty = ApiPaths.Event.UpdateTicketQty(_baseUrl);
-            var response = await _client.PutAsync(updateQty, orderItem);
+            var response = await _client.PutAsync(updateQty, tickets);
 
             if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
             {
