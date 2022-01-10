@@ -6,6 +6,7 @@
 - Microsoft Entity Framework Core 3.1 
 - Docker
 - Microsoft SQL Server
+- Redis Database
 - ASP.Net Core MVC
 
 ### Details of EventManagement project:
@@ -48,6 +49,7 @@ As part of this assignment:
   - User has to be authorized before accessing his cart.
   - Messaging between OrderAPI & CartAPI.
   - Messaging between OrderAPI & EventAPI.
+  - Integration of Stripe Payment system with the application.
   - Logging
   - 3 additional Docker containers for CartAPI microservice, Redis Database and OrderAPI microservice respectively.
   - Configured the docker containers for WebMVC client to integrate the same with CartAPI and OrderAPI.
