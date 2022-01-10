@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 using MassTransit;
 using Common.Messaging;
 
-using System.Collections.Generic;
-
 namespace OrderAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -96,7 +94,8 @@ namespace OrderAPI.Controllers
 
                     ticketlist.Add(RegTicket);
                 }
-                _bus.Publish(new OrderTicketmessage(ticketlist)).Wait();
+
+                _bus.Publish(new OrderCompletedEvent(ticketlist)).Wait();
 
 
                 return Ok(new { order.OrderId });
