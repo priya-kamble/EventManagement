@@ -1,4 +1,6 @@
 using EventAPI.Data;
+//using EventAPI.Massaging.Consumers;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,6 +46,32 @@ namespace EventAPI
                                     Description = "Event API Microservice"
                                 });
                             });
+
+
+            //services.AddMassTransit(cfg =>
+            //{
+            //    cfg.AddConsumer<OrderCompletedEventConsumer>();
+            //    cfg.AddBus(provider =>
+            //    {
+            //        return Bus.Factory.CreateUsingRabbitMq(rmq =>
+            //        {
+            //            rmq.Host(new Uri("rabbitmq://rabbitmq"), "/", h =>
+            //            {
+            //                h.Username("guest");
+            //                h.Password("guest");
+            //            });
+            //            rmq.ReceiveEndpoint("EventBrite", e =>
+            //            {
+            //                e.ConfigureConsumer<OrderCompletedEventConsumer>(provider);
+
+            //            });
+            //        });
+
+            //    });
+            //});
+
+            //services.AddMassTransitHostedService();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

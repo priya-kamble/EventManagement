@@ -4,12 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polly.CircuitBreaker;
 using Stripe;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
-using WebMvc.Models.OrderModels;
 using WebMvc.Services;
 using Order = WebMvc.Models.OrderModels.Order;
 
@@ -18,7 +16,6 @@ namespace WebMvc.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        
         private readonly ICartService _cartSvc;
         private readonly IEventService _eventSvc;
         private readonly IOrderService _orderSvc;
@@ -103,8 +100,16 @@ namespace WebMvc.Controllers
                             _logger.LogDebug("User {userName} started order processing", user.UserName);
                             int orderId = await _orderSvc.CreateOrder(order);
                             _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
-                            
-                            await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
+                           
+                            List<Ticket> tickets = new List<Ticket>();
+                            foreach (var orderItem in order.OrderItems)
+                            {
+                                Ticket ticket = new Ticket();
+                                ticket.TicketId = orderItem.TicketId;
+                                ticket.Quantity = orderItem.TicketQuantity;
+                                tickets.Add(ticket);
+                            }
+                            await _eventSvc.UpdateTicketsQuantity(tickets);
                             return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                         }
                         else
@@ -124,7 +129,15 @@ namespace WebMvc.Controllers
                     _logger.LogDebug("User {userName} started order processing", user.UserName);
                     int orderId = await _orderSvc.CreateOrder(order);
                     _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
-                    await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
+                    List<Ticket> tickets = new List<Ticket>();
+                    foreach (var orderItem in order.OrderItems)
+                    {
+                        Ticket ticket = new Ticket();
+                        ticket.TicketId = orderItem.TicketId;
+                        ticket.Quantity = orderItem.TicketQuantity;
+                        tickets.Add(ticket);
+                    }
+                    await _eventSvc.UpdateTicketsQuantity(tickets);
                     return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                 }
             }
@@ -132,8 +145,6 @@ namespace WebMvc.Controllers
                 {
                     return View(frmOrder);
                 }
-            
-
         }
 
         public async Task<IActionResult> Complete(int id, string userName)
@@ -156,12 +167,6 @@ namespace WebMvc.Controllers
             var vm = await _orderSvc.GetOrders();
             return View(vm);
         }
-
-        //public async Task<IActionResult> Orders()
-        //{
-        //    var vm = await _orderSvc.GetOrders();
-        //    return View(vm);
-        //}
 
         private decimal GetTotal(List<Models.OrderModels.OrderItem> orderItems)
         {
