@@ -45,11 +45,11 @@ namespace EventAPI.Massaging.Consumers
 
                     _Eventcontext.Entry(Item).State = EntityState.Modified;
                     _Eventcontext.Update(Item);
-                    await _Eventcontext.SaveChangesAsync();
+                  //  await _Eventcontext.SaveChangesAsync();
                 }
           
 
-            //    await _Eventcontext.SaveChangesAsync();
+                await _Eventcontext.SaveChangesAsync();
             }
             
 
