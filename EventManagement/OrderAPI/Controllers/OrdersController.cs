@@ -90,7 +90,7 @@ namespace OrderAPI.Controllers
                 {
                     ticketlist[i, 0] = Item.TicketId;
                     ticketlist[i, 1] = Item.TicketQuantity;
-
+                    i++;
                 }
 
                 _bus.Publish(new OrderTicketmessage(ticketlist)).Wait();
