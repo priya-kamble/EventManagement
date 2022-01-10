@@ -44,40 +44,13 @@ namespace EventAPI.Massaging.Consumers
                 { 
                     matchedTicket.Quantity -= Item.QuantitySelected;
 
-                   // _Eventcontext.Entry(Item).State = EntityState.Modified;
+                  
                     _Eventcontext.Update(matchedTicket);
                    
                 }
             }
 
             await _Eventcontext.SaveChangesAsync();
-
-
-
-            //for (int i = 0; i <=Ticketlist.Length - 1; i++)
-            //{
-            //    if (Ticketlist.GetValue(i, 0)!=null && Convert.ToInt32(Ticketlist.GetValue(i, 0)) != 0)
-            //    {
-            //        var query = _Eventcontext.Tickets.Where(t => t.TicketId == Convert.ToInt32(Ticketlist.GetValue(i, 0)));
-
-
-            //        foreach (Ticket Item in query)
-            //        {
-            //            Item.Quantity -= Convert.ToInt32(Ticketlist.GetValue(i, 1));
-
-            //         //   _Eventcontext.Entry(Item).State = EntityState.Modified;
-            //            _Eventcontext.Update(Item);
-            //            //  await _Eventcontext.SaveChangesAsync();
-            //        }
-
-            //    }
-
-            //}
-
-
-            //await _Eventcontext.SaveChangesAsync();
-
-
 
 
            
