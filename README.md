@@ -37,7 +37,7 @@ As part of this assignment:
 - We have added 2 additional Docker containers for TokenService API microservice and its MSSQL Database respectively.
 - We have also configured the docker container for WebMVC client to integrate the same with TokenService API.
 
-[See a demo of Assignment 3b](https://youtu.be/YwbV9ZY5AGs) 
+[See a demo of Assignment 3c](https://youtu.be/YwbV9ZY5AGs) 
 ---
 ### Assignment 3c: 
 As part of this assignment:
