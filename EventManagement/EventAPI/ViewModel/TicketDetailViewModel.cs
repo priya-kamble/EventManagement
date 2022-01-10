@@ -16,5 +16,7 @@ namespace EventAPI.ViewModel
         public Event Event { get; set; }
 
         public string  TicketStatus { get; set; }
+
+       
     }
 }
