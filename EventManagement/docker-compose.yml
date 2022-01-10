@@ -71,7 +71,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://event
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.0.13:7801
       CallBackUrl: http://localhost:7500
       CartUrl: http://cart
       OrderUrl: http://order
@@ -127,7 +127,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionString: cart.data
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
     ports:
       - "7012:80"
     container_name: EventsCartAPI
@@ -138,6 +138,8 @@ services:
       - tokenserver
       - cart.data
       - rabbitmq
+
+
 
   order:
     image: events/orderapi  
@@ -151,7 +153,7 @@ services:
         max-file: "10"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      IdentityUrl: http://192.168.0.141:7801
+      IdentityUrl: http://192.168.1.13:7801
       DatabaseServer: mssqlserver
       DatabaseName: OrdersDb
       DatabaseUser: sa
