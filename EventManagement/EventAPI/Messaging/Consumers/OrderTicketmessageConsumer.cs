@@ -38,15 +38,10 @@ namespace EventAPI.Massaging.Consumers
             foreach (var Item in Ticketlist)
             {
                 var query = _Eventcontext.Tickets.Where(t => t.TicketId == Item.TicketId);
-
-
                 foreach (Ticket matchedTicket in query)
                 { 
                     matchedTicket.Quantity -= Item.QuantitySelected;
-
-                  
-                    _Eventcontext.Update(matchedTicket);
-                   
+                   _Eventcontext.Update(matchedTicket);
                 }
             }
 

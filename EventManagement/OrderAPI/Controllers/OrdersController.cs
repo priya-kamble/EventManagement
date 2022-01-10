@@ -96,10 +96,8 @@ namespace OrderAPI.Controllers
                     ticketlist.Add(RegTicket);
                 }
 
-                _bus.Publish(new OrderCompletedEvent(ticketlist)).Wait();
-
-
-                return Ok(new { order.OrderId });
+                _bus.Publish(new OrderTicketmessage(ticketlist)).Wait();
+                 return Ok(new { order.OrderId });
             }
             catch (DbUpdateException ex)
             {
