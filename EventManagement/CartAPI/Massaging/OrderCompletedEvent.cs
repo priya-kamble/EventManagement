@@ -15,11 +15,11 @@ namespace Common.Messaging
         {
             BuyerId = buyerId;
         }
-        //public int[,] Tickets { get; set; }
-        //public OrderCompletedEvent(int[,] tickets)
-        //{
-        //    Tickets = tickets;
-        //}
+        public int[,] Tickets { get; set; }
+        public OrderCompletedEvent(int[,] tickets)
+        {
+            Tickets = tickets;
+        }
 
 
     }

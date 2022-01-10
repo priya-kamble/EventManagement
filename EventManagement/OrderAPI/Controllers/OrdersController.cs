@@ -93,7 +93,7 @@ namespace OrderAPI.Controllers
 
                 }
 
-                _bus.Publish(new OrderTicketmessage(ticketlist)).Wait();
+                _bus.Publish(new OrderCompletedEvent(ticketlist)).Wait();
 
 
                 return Ok(new { order.OrderId });
