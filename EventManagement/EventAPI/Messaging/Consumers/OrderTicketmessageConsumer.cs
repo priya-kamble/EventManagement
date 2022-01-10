@@ -10,6 +10,7 @@ using EventAPI.Data;
 using Microsoft.Extensions.Configuration;
 using EventAPI.Controllers;
 using Microsoft.EntityFrameworkCore;
+using EventAPI.ViewModel;
 
 namespace EventAPI.Massaging.Consumers
 {
@@ -26,38 +27,60 @@ namespace EventAPI.Massaging.Consumers
         }
 
 
-       
+
         public async Task Consume(ConsumeContext<OrderTicketmessage> context)
         {
             _logger.LogWarning("We are in consume ticket quantity method now...");
-            _logger.LogWarning("Tickets:" + context.Message.Tickets);
+            //_logger.LogWarning("Tickets:" + context.Message.Tickets.);
 
-            int[,] Ticketlist= context.Message.Tickets;
-                       
-            for (int i = 0; i <= Ticketlist.Length - 1; i++)
+            List<RegisteredTicket> Ticketlist = context.Message.RegisteredTickets;
+
+            foreach (var Item in Ticketlist)
             {
-                var query = _Eventcontext.Tickets.Where(t => t.TicketId == Convert.ToInt32(Ticketlist.GetValue(i, 0)));
-                
+                var query = _Eventcontext.Tickets.Where(t => t.TicketId == Item.TicketId);
 
-                foreach (Ticket Item in query)
-                {
-                    Item.Quantity -= Convert.ToInt32(Ticketlist.GetValue(i, 1));
 
-                    _Eventcontext.Entry(Item).State = EntityState.Modified;
-                    _Eventcontext.Update(Item);
-                  //  await _Eventcontext.SaveChangesAsync();
+                foreach (Ticket matchedTicket in query)
+                { 
+                    matchedTicket.Quantity -= Item.QuantitySelected;
+
+                   // _Eventcontext.Entry(Item).State = EntityState.Modified;
+                    _Eventcontext.Update(matchedTicket);
+                   
                 }
-          
-
-                await _Eventcontext.SaveChangesAsync();
             }
-            
+
+            await _Eventcontext.SaveChangesAsync();
+
+
+
+            //for (int i = 0; i <=Ticketlist.Length - 1; i++)
+            //{
+            //    if (Ticketlist.GetValue(i, 0)!=null && Convert.ToInt32(Ticketlist.GetValue(i, 0)) != 0)
+            //    {
+            //        var query = _Eventcontext.Tickets.Where(t => t.TicketId == Convert.ToInt32(Ticketlist.GetValue(i, 0)));
+
+
+            //        foreach (Ticket Item in query)
+            //        {
+            //            Item.Quantity -= Convert.ToInt32(Ticketlist.GetValue(i, 1));
+
+            //         //   _Eventcontext.Entry(Item).State = EntityState.Modified;
+            //            _Eventcontext.Update(Item);
+            //            //  await _Eventcontext.SaveChangesAsync();
+            //        }
+
+            //    }
+
+            //}
+
+
+            //await _Eventcontext.SaveChangesAsync();
 
 
 
 
-
-
+           
         }
     }
 }
