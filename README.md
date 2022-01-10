@@ -54,6 +54,8 @@ As part of this assignment:
   - 3 additional Docker containers for CartAPI microservice, Redis Database and OrderAPI microservice respectively.
   - Configured the docker containers for WebMVC client to integrate the same with CartAPI and OrderAPI.
 
+[See a demo of Assignment 3b](https://www.youtube.com/watch?v=nzRd_yhs6-s)
+
 Swagger document for Event API Microservice is available at: http://localhost:7000/swagger/index.html
 
 Link for the website: http://localhost:7500/
