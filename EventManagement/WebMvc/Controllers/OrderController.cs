@@ -100,16 +100,20 @@ namespace WebMvc.Controllers
                             _logger.LogDebug("User {userName} started order processing", user.UserName);
                             int orderId = await _orderSvc.CreateOrder(order);
                             _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
-                           
+
+                            // await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
+
                             List<Ticket> tickets = new List<Ticket>();
-                            foreach (var orderItem in order.OrderItems)
-                            {
-                                Ticket ticket = new Ticket();
-                                ticket.TicketId = orderItem.TicketId;
-                                ticket.Quantity = orderItem.TicketQuantity;
-                                tickets.Add(ticket);
-                            }
-                            await _eventSvc.UpdateTicketsQuantity(tickets);
+                            //foreach (var orderItem in order.OrderItems)
+                            //{
+                            //    Ticket ticket = new Ticket();
+                            //    ticket.TicketId = orderItem.TicketId;
+                            //    ticket.Quantity = orderItem.TicketQuantity;
+                            //    tickets.Add(ticket);
+                            //}
+
+                            // await _eventSvc.UpdateTicketsQuantity(tickets);
+
                             return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                         }
                         else
@@ -129,15 +133,18 @@ namespace WebMvc.Controllers
                     _logger.LogDebug("User {userName} started order processing", user.UserName);
                     int orderId = await _orderSvc.CreateOrder(order);
                     _logger.LogDebug("User {userName} finished order processing of {orderId}.", order.UserName, order.OrderId);
+                    //await _eventSvc.UpdateTicketsQuantity(order.OrderItems);
                     List<Ticket> tickets = new List<Ticket>();
-                    foreach (var orderItem in order.OrderItems)
-                    {
-                        Ticket ticket = new Ticket();
-                        ticket.TicketId = orderItem.TicketId;
-                        ticket.Quantity = orderItem.TicketQuantity;
-                        tickets.Add(ticket);
-                    }
-                    await _eventSvc.UpdateTicketsQuantity(tickets);
+                    //foreach (var orderItem in order.OrderItems)
+                    //{
+                    //    Ticket ticket = new Ticket();
+                    //    ticket.TicketId = orderItem.TicketId;
+                    //    ticket.Quantity = orderItem.TicketQuantity;
+                    //    tickets.Add(ticket);
+                    //}
+
+                   // await _eventSvc.UpdateTicketsQuantity(tickets);
+
                     return RedirectToAction("Complete", new { id = orderId, userName = user.UserName });
                 }
             }

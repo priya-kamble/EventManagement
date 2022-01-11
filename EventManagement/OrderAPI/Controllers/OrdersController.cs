@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using MassTransit;
 using Common.Messaging;
 
+using System.Collections.Generic;
+
 namespace OrderAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -83,17 +85,18 @@ namespace OrderAPI.Controllers
                 await _ordersContext.SaveChangesAsync();
                 _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
 
-                //6 is for ticketCategoryNumber
-                int[,] ticketlist=new int[6,2] ;
-                int i= 0;
-                foreach ( var Item in order.OrderItems)
+                List<RegisteredTicket> ticketlist= new List<RegisteredTicket>() ;
+
+                RegisteredTicket RegTicket;
+                foreach (var Item in order.OrderItems)
                 {
-                    ticketlist[i, 0] = Item.TicketId;
-                    ticketlist[i, 1] = Item.TicketQuantity;
+                    RegTicket = new RegisteredTicket();
+                    RegTicket.TicketId = Item.TicketId;
+                    RegTicket.QuantitySelected= Item.TicketQuantity;
 
+                    ticketlist.Add(RegTicket);
                 }
-
-                _bus.Publish(new OrderCompletedEvent(ticketlist)).Wait();
+                _bus.Publish(new OrderTicketmessage(ticketlist)).Wait();
 
 
                 return Ok(new { order.OrderId });

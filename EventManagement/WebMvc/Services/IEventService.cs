@@ -26,6 +26,6 @@ namespace WebMvc.Services
         IEnumerable<SelectListItem> GetPrice();
         Task<EventDetails> GetEventDetails(int EventId);
         Task<List<Ticket>> GetTicketsPerEvent(int EventId);
-        Task UpdateTicketsQuantity(List<Ticket> tickets);
+     //   Task UpdateTicketsQuantity(List<Ticket> tickets);
     }
 }
